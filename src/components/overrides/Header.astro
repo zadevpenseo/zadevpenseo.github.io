@@ -1,0 +1,249 @@
+---
+/**
+ * src/components/overrides/Header.astro
+ * TasteSkill brand-consistent navigation header for all Starlight pages.
+ * Matches the homepage nav exactly: ZADIT logo, 4-pillar links, CTA, hamburger mobile.
+ */
+import Search from 'virtual:starlight/components/Search';
+import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
+---
+
+<div class="header sl-flex">
+  <!-- Left: Wordmark -->
+  <div class="title-wrapper sl-flex">
+    <a href="/" class="zd-logo" aria-label="Zadit - Home">
+      ZADIT
+      <span class="zd-logo-badge">SYSTEMS &amp; BLUEPRINTS</span>
+    </a>
+  </div>
+
+  <!-- Center: Search (Starlight built-in Pagefind) -->
+  <div class="sl-flex zd-search-wrap print:hidden">
+    <Search />
+  </div>
+
+  <!-- Right: Nav links + CTA + ThemeSelect -->
+  <div class="sl-hidden md:sl-flex print:hidden zd-right-group" id="zdNavLinks">
+    <nav class="zd-nav-links" aria-label="Main navigation">
+      <a href="/case-studies/">Hub</a>
+      <a href="/case-studies/web-dev-design/">Web Dev</a>
+      <a href="/case-studies/seo/">SEO</a>
+      <a href="/case-studies/writer/">Writer</a>
+      <a href="/case-studies/data-analysis/">Data Analysis</a>
+    </nav>
+    <a href="/#inquiry" class="zd-btn-nav">Initiate Project</a>
+    <ThemeSelect />
+  </div>
+
+  <!-- Mobile hamburger toggle -->
+  <button
+    class="zd-nav-toggle md:sl-hidden print:hidden"
+    id="zdNavToggle"
+    aria-label="Toggle navigation"
+    aria-expanded="false"
+    aria-controls="zdMobileNav"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</div>
+
+<!-- Mobile nav dropdown (injected after header row) -->
+<div id="zdMobileNav" class="zd-mobile-nav" hidden>
+  <a href="/case-studies/">Case Studies Hub</a>
+  <a href="/case-studies/web-dev-design/">Web Dev Design</a>
+  <a href="/case-studies/seo/">SEO</a>
+  <a href="/case-studies/writer/">Writer</a>
+  <a href="/case-studies/data-analysis/">Data Analysis</a>
+  <a href="/#inquiry" class="zd-mobile-cta">Initiate Project →</a>
+</div>
+
+<script>
+  const toggle = document.getElementById('zdNavToggle');
+  const mobileNav = document.getElementById('zdMobileNav');
+  if (toggle && mobileNav) {
+    toggle.addEventListener('click', () => {
+      const isOpen = mobileNav.hasAttribute('hidden') ? false : true;
+      if (isOpen) {
+        mobileNav.setAttribute('hidden', '');
+        toggle.setAttribute('aria-expanded', 'false');
+      } else {
+        mobileNav.removeAttribute('hidden');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+    });
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.setAttribute('hidden', '');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+</script>
+
+<style>
+  /* ─── Header layout (mirrors Starlight internals) ─── */
+  .header {
+    gap: var(--sl-nav-gap);
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+  }
+
+  .title-wrapper {
+    overflow: clip;
+    padding: 0.25rem;
+    margin: -0.25rem;
+    min-width: 0;
+    flex-shrink: 0;
+  }
+
+  /* ─── Wordmark ─── */
+  .zd-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: 0.05em;
+    color: #c5a059;
+    text-decoration: none;
+    white-space: nowrap;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  .zd-logo:hover { color: #f5e4be; }
+
+  .zd-logo-badge {
+    font-size: 0.62rem;
+    padding: 0.16rem 0.5rem;
+    border-radius: 4px;
+    background: rgba(197, 160, 89, 0.12);
+    border: 1px solid rgba(197, 160, 89, 0.28);
+    color: #b8a07a;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+
+  /* ─── Search wrap ─── */
+  .zd-search-wrap {
+    flex: 1;
+    max-width: 340px;
+  }
+
+  /* ─── Right nav group ─── */
+  .zd-right-group {
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .zd-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+  }
+  .zd-nav-links a {
+    font-size: 0.87rem;
+    font-weight: 600;
+    color: var(--sl-color-white);
+    text-decoration: none;
+    transition: color 0.18s;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  .zd-nav-links a:hover,
+  .zd-nav-links a[aria-current="page"] {
+    color: #c5a059;
+  }
+
+  /* ─── CTA Button ─── */
+  .zd-btn-nav {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.45rem 1rem;
+    border-radius: 6px;
+    background: #c5a059;
+    color: #0d0b10 !important;
+    font-weight: 700;
+    font-size: 0.84rem;
+    text-decoration: none !important;
+    transition: all 0.2s;
+    white-space: nowrap;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  .zd-btn-nav:hover {
+    background: #f5e4be;
+    transform: translateY(-1px);
+  }
+
+  /* ─── Hamburger ─── */
+  .zd-nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+  }
+  .zd-nav-toggle span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: #c5a059;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  /* ─── Mobile nav dropdown ─── */
+  .zd-mobile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: fixed;
+    top: var(--sl-nav-height);
+    left: 0;
+    right: 0;
+    background: rgba(22, 13, 26, 0.99);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(197, 160, 89, 0.22);
+    padding: 1rem 1.5rem;
+    z-index: 200;
+  }
+  .zd-mobile-nav[hidden] { display: none; }
+  .zd-mobile-nav a {
+    padding: 0.7rem 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--sl-color-white);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(197, 160, 89, 0.1);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    transition: color 0.18s;
+  }
+  .zd-mobile-nav a:hover { color: #c5a059; }
+  .zd-mobile-nav a:last-child { border-bottom: none; }
+  .zd-mobile-cta {
+    color: #c5a059 !important;
+    font-weight: 700 !important;
+    margin-top: 0.5rem;
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 50rem) {
+    .zd-nav-toggle { display: flex !important; }
+    .zd-search-wrap { max-width: 200px; }
+  }
+
+  @media (min-width: 50rem) {
+    .header {
+      --__sidebar-pad: calc(2 * var(--sl-nav-pad-x));
+      display: grid;
+      grid-template-columns:
+        minmax(auto, calc(var(--sl-content-inline-start, 0rem) - var(--sl-nav-pad-x)))
+        1fr
+        auto;
+      align-content: center;
+    }
+  }
+</style>

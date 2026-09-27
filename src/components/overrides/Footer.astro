@@ -1,0 +1,128 @@
+---
+/**
+ * src/components/overrides/Footer.astro
+ * TasteSkill brand-consistent footer for all Starlight pages.
+ * Matches homepage footer: dark obsidian, Bronze Gold links, PT PRISMA attribution.
+ */
+---
+
+<footer class="zd-footer">
+  <div class="zd-footer-inner">
+    <div class="zd-footer-brand">
+      <a href="/" class="zd-footer-logo">ZADIT</a>
+      <span class="zd-footer-sep">·</span>
+      <span class="zd-footer-tagline">Web Dev Design · SEO · Writer · Data Analysis</span>
+    </div>
+    <div class="zd-footer-links">
+      <a href="/case-studies/">Case Studies Hub</a>
+      <a href="/case-studies/web-dev-design/">Web Dev</a>
+      <a href="/case-studies/seo/">SEO</a>
+      <a href="/case-studies/writer/">Writer</a>
+      <a href="/case-studies/data-analysis/">Data Analysis</a>
+      <a href="/#inquiry">Initiate Project</a>
+    </div>
+    <div class="zd-footer-legal">
+      <p>
+        &copy; 2026 <strong>Muhammad Khoiruzzadittaqwa (Zadit)</strong>. Published under <strong>PT PRISMA DIGITAL KREATIF</strong>.
+      </p>
+      <p class="zd-footer-meta">
+        NIB: 1801250039976 &middot; TDPSE Kominfo: 017014.01/DJAI.PSE/01/2025 &middot; Cirebon, Indonesia
+        &middot; <a href="https://orcid.org/0000-0002-1594-9548" target="_blank" rel="noopener">ORCID</a>
+        &middot; <a href="https://www.wikidata.org/wiki/Q141474900" target="_blank" rel="noopener">Wikidata Q141474900</a>
+        &middot; <a href="https://github.com/zadevpenseo" target="_blank" rel="noopener">GitHub</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .zd-footer {
+    border-top: 1px solid rgba(197, 160, 89, 0.18);
+    background: #0d0b10;
+    padding: 3rem 0 2rem 0;
+    margin-top: 4rem;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .zd-footer-inner {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .zd-footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .zd-footer-logo {
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    color: #c5a059;
+    text-decoration: none;
+  }
+  .zd-footer-logo:hover { color: #f5e4be; }
+
+  .zd-footer-sep {
+    color: rgba(197, 160, 89, 0.4);
+    font-size: 0.9rem;
+  }
+
+  .zd-footer-tagline {
+    font-size: 0.85rem;
+    color: #8a8578;
+    letter-spacing: 0.02em;
+  }
+
+  .zd-footer-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.3rem 1.25rem;
+  }
+
+  .zd-footer-links a {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #b8b4a8;
+    text-decoration: none;
+    transition: color 0.18s;
+  }
+  .zd-footer-links a:hover { color: #c5a059; }
+
+  .zd-footer-legal {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    border-top: 1px solid rgba(197, 160, 89, 0.1);
+    padding-top: 1.25rem;
+    width: 100%;
+  }
+
+  .zd-footer-legal p {
+    font-size: 0.82rem;
+    color: #6a665c;
+    margin: 0;
+  }
+  .zd-footer-legal strong { color: #8a8578; }
+
+  .zd-footer-meta {
+    font-size: 0.76rem !important;
+    color: #4a4840 !important;
+  }
+  .zd-footer-meta a {
+    color: #c5a059;
+    text-decoration: none;
+  }
+  .zd-footer-meta a:hover { text-decoration: underline; }
+</style>

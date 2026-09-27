@@ -247,3 +247,239 @@
   border: 1px solid rgba(197, 160, 89, 0.18);
   border-radius: 8px;
 }
+
+/* ======================================================
+   DESIGN CONSISTENCY LAYER — Homepage Parity for All Pages
+   Brand: TasteSkill Obsidian x Bronze Gold
+   ====================================================== */
+
+/* ── Global Typography Parity ── */
+body,
+.sl-markdown-content,
+.sidebar-content,
+nav {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+/* ── Starlight Main Content Area ── */
+.sl-markdown-content {
+  color: #e2ded5;
+  line-height: 1.72;
+  font-size: 1rem;
+}
+
+/* ── Heading Hierarchy (matches homepage h2/h3 rhythm) ── */
+.sl-markdown-content h1 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.022em;
+  line-height: 1.2;
+  color: #faf9f6;
+  margin-bottom: 1.25rem;
+}
+.sl-markdown-content h2 {
+  font-size: clamp(1.25rem, 2.5vw, 1.7rem);
+  font-weight: 700;
+  letter-spacing: -0.018em;
+  color: #faf9f6;
+  margin-top: 2.5rem;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(197, 160, 89, 0.15);
+}
+.sl-markdown-content h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #c5a059;
+  margin-top: 1.75rem;
+  margin-bottom: 0.6rem;
+}
+.sl-markdown-content h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #b8a07a;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Paragraph & Body Text ── */
+.sl-markdown-content p {
+  color: #c8c4bc;
+  margin-bottom: 1.1rem;
+}
+
+/* ── Links inside content ── */
+.sl-markdown-content a {
+  color: #c5a059;
+  text-decoration: underline;
+  text-decoration-color: rgba(197, 160, 89, 0.35);
+  text-underline-offset: 3px;
+  transition: color 0.18s, text-decoration-color 0.18s;
+}
+.sl-markdown-content a:hover {
+  color: #f5e4be;
+  text-decoration-color: rgba(245, 228, 190, 0.6);
+}
+
+/* ── Lists ── */
+.sl-markdown-content ul,
+.sl-markdown-content ol {
+  padding-left: 1.5rem;
+  color: #c8c4bc;
+  margin-bottom: 1.1rem;
+}
+.sl-markdown-content li {
+  margin-bottom: 0.4rem;
+  line-height: 1.65;
+}
+.sl-markdown-content li::marker {
+  color: #c5a059;
+}
+
+/* ── Horizontal Rule ── */
+.sl-markdown-content hr {
+  border: none;
+  border-top: 1px solid rgba(197, 160, 89, 0.2);
+  margin: 2.5rem 0;
+}
+
+/* ── Strong & Em ── */
+.sl-markdown-content strong { color: #faf9f6; font-weight: 700; }
+.sl-markdown-content em { color: #d4cfc6; }
+
+/* ── Blockquote ── */
+.sl-markdown-content blockquote {
+  border-left: 3px solid #c5a059;
+  margin: 1.5rem 0;
+  padding: 1rem 1.5rem;
+  background: rgba(22, 13, 26, 0.65);
+  border-radius: 0 8px 8px 0;
+  color: #b8b4a8;
+  font-style: italic;
+}
+.sl-markdown-content blockquote p { color: #b8b4a8; margin: 0; }
+
+/* ── Starlight Aside / Callout components ── */
+.starlight-aside {
+  border-radius: 8px !important;
+  border: 1px solid rgba(197, 160, 89, 0.22) !important;
+  background: rgba(22, 13, 26, 0.7) !important;
+}
+.starlight-aside--note { border-left: 4px solid #61afef !important; }
+.starlight-aside--tip { border-left: 4px solid #98c379 !important; }
+.starlight-aside--caution { border-left: 4px solid #e5c07b !important; }
+.starlight-aside--danger { border-left: 4px solid #e06c75 !important; }
+
+/* ── Sidebar Design Polish ── */
+:root {
+  --sl-sidebar-width: 17rem;
+  --sl-nav-height: 4rem;
+}
+
+/* Sidebar group headings */
+.sidebar-content summary,
+.sl-sidebar summary,
+details > summary {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #c5a059 !important;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.15rem;
+}
+
+/* Active page highlight */
+[aria-current='page'],
+[data-current-page='true'],
+.sl-sidebar a[aria-current='page'] {
+  background: rgba(197, 160, 89, 0.12) !important;
+  color: #c5a059 !important;
+  border-left: 2px solid #c5a059 !important;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+/* Sidebar links */
+.sl-sidebar a:not([aria-current='page']):hover {
+  color: #c5a059 !important;
+  background: rgba(197, 160, 89, 0.06) !important;
+  border-radius: 4px;
+}
+
+/* ── Table of Contents (right sidebar) ── */
+.right-sidebar-panel {
+  border-left: 1px solid rgba(197, 160, 89, 0.15) !important;
+}
+
+starlight-toc nav a {
+  color: #8a8578;
+  font-size: 0.83rem;
+  transition: color 0.18s;
+}
+starlight-toc nav a:hover,
+starlight-toc nav a[aria-current='true'] {
+  color: #c5a059;
+}
+
+/* ── Pagination (Prev/Next) ── */
+.pagination-links a {
+  border: 1px solid rgba(197, 160, 89, 0.22) !important;
+  background: rgba(22, 13, 26, 0.65) !important;
+  border-radius: 8px !important;
+  transition: all 0.2s !important;
+}
+.pagination-links a:hover {
+  border-color: #c5a059 !important;
+  background: rgba(22, 13, 26, 0.9) !important;
+  transform: translateY(-2px);
+}
+.pagination-links .link-title {
+  color: #faf9f6 !important;
+  font-weight: 700 !important;
+}
+.pagination-links .label {
+  color: #8a8578 !important;
+  font-size: 0.78rem !important;
+}
+
+/* ── Skip to content link (a11y) ── */
+.sl-skip-link:focus {
+  background: #c5a059 !important;
+  color: #0d0b10 !important;
+  font-weight: 700 !important;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+}
+
+/* ── Focus rings (a11y WCAG 2.1 AA) ── */
+*:focus-visible {
+  outline: 2px solid #c5a059 !important;
+  outline-offset: 3px !important;
+  border-radius: 3px;
+}
+
+/* ── Search modal styling ── */
+dialog[open] {
+  background: rgba(22, 13, 26, 0.98) !important;
+  border: 1px solid rgba(197, 160, 89, 0.3) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 24px rgba(197, 160, 89, 0.1) !important;
+}
+
+/* ── Last Updated text ── */
+.meta.sl-flex time {
+  font-size: 0.8rem;
+  color: #6a665c;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── Mobile: content padding fix ── */
+@media (max-width: 50rem) {
+  .main-frame {
+    padding-top: 0.5rem;
+  }
+  .sl-markdown-content {
+    font-size: 0.97rem;
+  }
+}

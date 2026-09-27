@@ -14,6 +14,11 @@ export default defineConfig({
         github: 'https://github.com/zadevpenseo/zadevpenseo.github.io',
       },
       customCss: ['./src/styles/custom.css'],
+      components: {
+        Header: './src/components/overrides/Header.astro',
+        Footer: './src/components/overrides/Footer.astro',
+        PageTitle: './src/components/overrides/PageTitle.astro',
+      },
       tableOfContents: {
         minHeadingLevel: 2,
         maxHeadingLevel: 4,
@@ -81,6 +86,22 @@ export default defineConfig({
           attrs: {
             name: 'theme-color',
             content: '#0d0b10',
+          },
+        },
+        // Google Fonts — Plus Jakarta Sans + JetBrains Mono (matches homepage)
+        {
+          tag: 'link',
+          attrs: { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        },
+        {
+          tag: 'link',
+          attrs: { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+        },
+        {
+          tag: 'link',
+          attrs: {
+            rel: 'stylesheet',
+            href: 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap',
           },
         },
       ],

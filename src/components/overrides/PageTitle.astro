@@ -1,0 +1,33 @@
+---
+/**
+ * src/components/overrides/PageTitle.astro
+ * Styled page title for Starlight docs pages.
+ * Renders the H1 with TasteSkill typography + optional pillar tag.
+ */
+const { title } = Astro.locals.starlightRoute.entry.data;
+---
+
+<div class="zd-page-title">
+  <h1 id="_top">{title}</h1>
+</div>
+
+<style>
+  .zd-page-title {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid rgba(197, 160, 89, 0.18);
+  }
+
+  .zd-page-title h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.022em;
+    line-height: 1.2;
+    color: #faf9f6;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, #faf9f6 55%, #c5a059 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+</style>
