@@ -17,7 +17,6 @@ export default defineConfig({
       components: {
         Header: './src/components/overrides/Header.astro',
         Footer: './src/components/overrides/Footer.astro',
-        PageTitle: './src/components/overrides/PageTitle.astro',
       },
       tableOfContents: {
         minHeadingLevel: 2,
