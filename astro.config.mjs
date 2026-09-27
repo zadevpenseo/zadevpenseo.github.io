@@ -16,6 +16,8 @@ export default defineConfig({
       components: {
         Header: './src/components/overrides/Header.astro',
         Footer: './src/components/overrides/Footer.astro',
+        PageTitle: './src/components/overrides/PageTitle.astro',
+        ThemeSelect: './src/components/overrides/ThemeSelect.astro',
       },
       tableOfContents: {
         minHeadingLevel: 2,
@@ -86,7 +88,7 @@ export default defineConfig({
             content: '#0d0b10',
           },
         },
-        // Google Fonts — Plus Jakarta Sans + JetBrains Mono (matches homepage)
+        // Google Fonts - Plus Jakarta Sans + JetBrains Mono (matches homepage)
         {
           tag: 'link',
           attrs: { rel: 'preconnect', href: 'https://fonts.googleapis.com' },

@@ -230,19 +230,19 @@ import '../styles/homepage.css';
         </p>
       </div>
 
-      <form action="mailto:devapenseo@gmail.com" method="post" enctype="text/plain">
+      <form id="inquiryForm" class="lead-form">
         <div class="lead-form-grid">
           <div class="form-group">
             <label for="client_name">Your Name / Organization</label>
-            <input type="text" id="client_name" name="client_name" class="form-control" placeholder="e.g. Alex Rivera (Venture Lead)" required />
+            <input type="text" id="client_name" name="client_name" class="form-control" placeholder="e.g. Alex Rivera (Venture Lead)" autocomplete="name" required />
           </div>
           <div class="form-group">
             <label for="contact_info">Email or Direct Channel</label>
-            <input type="email" id="contact_info" name="contact_info" class="form-control" placeholder="e.g. alex@company.com" required />
+            <input type="email" id="contact_info" name="contact_info" class="form-control" placeholder="e.g. alex@company.com" autocomplete="email" required />
           </div>
           <div class="form-group">
             <label for="project_domain">Primary Domain</label>
-            <select id="project_domain" name="project_domain" class="form-control">
+            <select id="project_domain" name="project_domain" class="form-control" autocomplete="off">
               <option value="web-dev-design">Web Dev Design (Performance, Full-Stack, UI/UX)</option>
               <option value="seo">SEO (Programmatic, Technical Audit, GEO/AEO)</option>
               <option value="writer">Writer (Pitch Decks, Business Feasibility, Research)</option>
@@ -263,21 +263,46 @@ import '../styles/homepage.css';
     </section>
   </main>
 
-  <!-- Mobile Nav Toggle Script -->
+  <!-- Client-side Scripts: Mobile Nav & Secure Inquiry Dispatch -->
   <script>
+    // Mobile Nav Toggle
     const toggle = document.getElementById('navToggle');
     const navLinks = document.querySelector('.nav-links');
-    toggle.addEventListener('click', () => {
-      const isOpen = navLinks.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-    // Close nav when link is clicked
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
+    if (toggle && navLinks) {
+      toggle.addEventListener('click', () => {
+        const isOpen = navLinks.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       });
-    });
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    // Secure Asynchronous Inquiry Dispatch (Zero Mixed-Content Warning)
+    const inquiryForm = document.getElementById('inquiryForm');
+    if (inquiryForm) {
+      inquiryForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const nameEl = document.getElementById('client_name');
+        const contactEl = document.getElementById('contact_info');
+        const domainEl = document.getElementById('project_domain');
+        const scopeEl = document.getElementById('project_scope');
+
+        const name = nameEl instanceof HTMLInputElement ? nameEl.value.trim() : '';
+        const contact = contactEl instanceof HTMLInputElement ? contactEl.value.trim() : '';
+        const domain = domainEl instanceof HTMLSelectElement ? domainEl.value : 'General';
+        const scope = scopeEl instanceof HTMLTextAreaElement ? scopeEl.value.trim() : '';
+
+        const subject = `[Architecture Review] ${domain.toUpperCase()} - ${name}`;
+        const body = `Name / Organization: ${name}\nContact / Channel: ${contact}\nPrimary Domain: ${domain}\n\nProject Scope & Bottlenecks:\n${scope}\n\n--- Transmitted via zadevpenseo.github.io`;
+
+        const mailtoUrl = `mailto:devapenseo@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailtoUrl;
+      });
+    }
   </script>
 
   <!-- Footer -->

@@ -1,44 +1,12 @@
 /**
- * tokens.css — TASTESKILL DESIGN TOKENS
- * Single source of truth. Imported by homepage.css AND starlight.css.
- * DO NOT add component styles here — tokens only.
+ * tokens.css - TASTESKILL DESIGN TOKENS
+ * Single source of truth. Dual-theme (Obsidian Dark + Warm Sand Luxury Light).
+ * WCAG 2.1 AA / AAA compliant in both themes.
  */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-  /* --- Palette --- */
-  --zd-obsidian:   #0d0b10;
-  --zd-plum-900:   #110815;
-  --zd-plum-800:   #160d1a;
-  --zd-plum-700:   #1e1424;
-  --zd-gold-500:   #c5a059;  /* AA: 5.4:1 on plum-800 */
-  --zd-gold-300:   #f5e4be;
-  --zd-gold-200:   #b8a07a;
-
-  /* --- Text (contrast vs #0d0b10) --- */
-  --zd-text-primary:   #faf9f6;  /* 18:1 AAA */
-  --zd-text-secondary: #d4cfc6;  /* 12:1 AAA */
-  --zd-text-muted:     #b8b4a8;  /* 7.2:1 AA */
-  --zd-text-subtle:    #8a8578;  /* 4.7:1 AA large */
-  --zd-text-ghost:     #6a665c;  /* decorative */
-
-  /* --- Borders --- */
-  --zd-border-hairline: rgba(197,160,89,0.18);
-  --zd-border-soft:     rgba(197,160,89,0.28);
-  --zd-border-glow:     rgba(197,160,89,0.5);
-
-  /* --- Surfaces --- */
-  --zd-glass-deep:   rgba(22,13,26,0.95);
-  --zd-glass-card:   rgba(22,13,26,0.70);
-  --zd-glass-subtle: rgba(22,13,26,0.45);
-
-  /* --- Status --- */
-  --zd-green:  #98c379;
-  --zd-red:    #e06c75;
-  --zd-yellow: #e5c07b;
-  --zd-blue:   #61afef;
-
   /* --- Fonts --- */
   --zd-font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --zd-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
@@ -71,13 +39,8 @@
   --zd-radius-lg: 12px;
   --zd-radius-xl: 16px;
 
-  /* --- Shadows --- */
-  --zd-shadow-card:  0 4px 16px rgba(0,0,0,0.35);
-  --zd-shadow-hover: 0 12px 32px rgba(0,0,0,0.5), 0 0 16px rgba(197,160,89,0.12);
-  --zd-shadow-glow:  0 0 24px rgba(197,160,89,0.18);
-
   /* --- Motion --- */
-  --zd-ease-spring:   cubic-bezier(0.16,1,0.3,1);
+  --zd-ease-spring:   cubic-bezier(0.16, 1, 0.3, 1);
   --zd-duration-fast: 150ms;
   --zd-duration-base: 220ms;
   --zd-duration-slow: 350ms;
@@ -85,4 +48,108 @@
   /* --- Layout --- */
   --zd-content-max: 72ch;
   --zd-nav-h:       4rem;
+
+  /* --- Status Accents --- */
+  --zd-green:  #98c379;
+  --zd-red:    #e06c75;
+  --zd-yellow: #e5c07b;
+  --zd-blue:   #61afef;
+
+  /* --- Static Primitive Colors (Backwards-compatibility) --- */
+  --zd-obsidian:   #0d0b10;
+  --zd-plum-900:   #110815;
+  --zd-plum-800:   #160d1a;
+  --zd-plum-700:   #1e1424;
+  --zd-gold-500:   #c5a059;
+  --zd-gold-300:   #f5e4be;
+  --zd-gold-200:   #b8a07a;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   DARK THEME (Default & :root[data-theme='dark'])
+   TasteSkill Deep Obsidian + Plum + Bronze Gold (WCAG AAA)
+   ══════════════════════════════════════════════════════════════════ */
+:root,
+:root[data-theme='dark'] {
+  --zd-theme: 'dark';
+
+  /* Surfaces & Canvas */
+  --zd-bg:             #0d0b10;
+  --zd-bg-surface:     #160d1a;
+  --zd-bg-elevated:    #1e1424;
+  --zd-bg-card:        rgba(22, 13, 26, 0.75);
+  --zd-bg-glass:       rgba(22, 13, 26, 0.95);
+  --zd-bg-nav:         rgba(22, 13, 26, 0.92);
+  --zd-code-bg:        #160d1a;
+
+  /* Text & Contrast (against #0d0b10 / #160d1a) */
+  --zd-text-primary:   #faf9f6;  /* 18:1 AAA */
+  --zd-text-secondary: #d4cfc6;  /* 12:1 AAA */
+  --zd-text-muted:     #b8b4a8;  /* 7.2:1 AA */
+  --zd-text-subtle:    #8a8578;  /* 4.7:1 AA large */
+  --zd-text-ghost:     #6a665c;
+
+  /* Brand Accents */
+  --zd-gold:           #c5a059;  /* 5.4:1 AA on plum-800 */
+  --zd-gold-hover:     #f5e4be;
+  --zd-gold-dim:       #b8a07a;
+
+  /* Borders */
+  --zd-border:         rgba(197, 160, 89, 0.22);
+  --zd-border-subtle:  rgba(197, 160, 89, 0.12);
+  --zd-border-soft:    rgba(197, 160, 89, 0.28);
+  --zd-border-glow:    rgba(197, 160, 89, 0.50);
+
+  /* Shadows */
+  --zd-shadow-card:    0 4px 16px rgba(0, 0, 0, 0.35);
+  --zd-shadow-hover:   0 12px 32px rgba(0, 0, 0, 0.5), 0 0 16px rgba(197, 160, 89, 0.12);
+  --zd-shadow-glow:    0 0 24px rgba(197, 160, 89, 0.18);
+
+  /* Gradients */
+  --zd-title-gradient: linear-gradient(135deg, #faf9f6 50%, #c5a059 100%);
+  --zd-card-gradient:  linear-gradient(145deg, rgba(30, 20, 36, 0.7), rgba(17, 8, 21, 0.7));
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   LIGHT THEME (:root[data-theme='light'])
+   TasteSkill Warm Luxury Sand + Deep Plum + Bronze Gold (WCAG AAA)
+   ══════════════════════════════════════════════════════════════════ */
+:root[data-theme='light'] {
+  --zd-theme: 'light';
+
+  /* Surfaces & Canvas */
+  --zd-bg:             #faf7f4;  /* Warm luxury sand/cream */
+  --zd-bg-surface:     #f2ebe3;  /* Warm almond surface */
+  --zd-bg-elevated:    #e8dfd5;
+  --zd-bg-card:        #ffffff;  /* Pure crisp white card surface */
+  --zd-bg-glass:       rgba(255, 255, 255, 0.94);
+  --zd-bg-nav:         rgba(250, 247, 244, 0.94);
+  --zd-code-bg:        #f0e8df;
+
+  /* Text & Contrast (against #faf7f4 / #ffffff) */
+  --zd-text-primary:   #231627;  /* Deep Plum Dark: 14.8:1 AAA vs #faf7f4, 15.2:1 AAA vs #fff */
+  --zd-text-secondary: #3e273f;  /* Plum Body: 10.5:1 AAA vs #faf7f4 */
+  --zd-text-muted:     #5a425b;  /* Plum Muted: 7.5:1 AAA vs #faf7f4 */
+  --zd-text-subtle:    #745975;  /* 5.2:1 AA vs #faf7f4 */
+  --zd-text-ghost:     #937b94;
+
+  /* Brand Accents */
+  --zd-gold:           #8f652e;  /* Bronze Gold: 5.2:1 AA on cream, 5.4:1 AA on white */
+  --zd-gold-hover:     #6f4b1d;
+  --zd-gold-dim:       #a67c43;
+
+  /* Borders */
+  --zd-border:         rgba(143, 101, 46, 0.24);
+  --zd-border-subtle:  rgba(143, 101, 46, 0.14);
+  --zd-border-soft:    rgba(143, 101, 46, 0.32);
+  --zd-border-glow:    rgba(143, 101, 46, 0.35);
+
+  /* Shadows */
+  --zd-shadow-card:    0 4px 16px rgba(70, 35, 65, 0.06);
+  --zd-shadow-hover:   0 12px 32px rgba(70, 35, 65, 0.12), 0 0 16px rgba(143, 101, 46, 0.1);
+  --zd-shadow-glow:    0 0 24px rgba(143, 101, 46, 0.12);
+
+  /* Gradients */
+  --zd-title-gradient: linear-gradient(135deg, #231627 55%, #8f652e 100%);
+  --zd-card-gradient:  linear-gradient(145deg, #ffffff, #faf5f0);
 }

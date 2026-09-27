@@ -107,20 +107,21 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
     font-weight: 800;
     font-size: 1.05rem;
     letter-spacing: 0.05em;
-    color: #c5a059;
+    color: var(--zd-gold);
     text-decoration: none;
     white-space: nowrap;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    transition: color var(--zd-duration-fast);
   }
-  .zd-logo:hover { color: #f5e4be; }
+  .zd-logo:hover { color: var(--zd-gold-hover); }
 
   .zd-logo-badge {
     font-size: 0.62rem;
     padding: 0.16rem 0.5rem;
     border-radius: 4px;
-    background: rgba(197, 160, 89, 0.12);
-    border: 1px solid rgba(197, 160, 89, 0.28);
-    color: #b8a07a;
+    background: var(--zd-border-subtle);
+    border: 1px solid var(--zd-border);
+    color: var(--zd-gold-dim);
     font-family: 'JetBrains Mono', monospace;
     letter-spacing: 0.06em;
     font-weight: 500;
@@ -135,25 +136,25 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
   /* ─── Right nav group ─── */
   .zd-right-group {
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
   .zd-nav-links {
     display: flex;
     align-items: center;
-    gap: 1.4rem;
+    gap: 1.25rem;
   }
   .zd-nav-links a {
     font-size: 0.87rem;
     font-weight: 600;
-    color: var(--sl-color-white);
+    color: var(--zd-text-secondary);
     text-decoration: none;
-    transition: color 0.18s;
+    transition: color var(--zd-duration-fast);
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   }
   .zd-nav-links a:hover,
   .zd-nav-links a[aria-current="page"] {
-    color: #c5a059;
+    color: var(--zd-gold);
   }
 
   /* ─── CTA Button ─── */
@@ -162,17 +163,17 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
     align-items: center;
     padding: 0.45rem 1rem;
     border-radius: 6px;
-    background: #c5a059;
-    color: #0d0b10 !important;
+    background: var(--zd-gold);
+    color: var(--zd-bg) !important;
     font-weight: 700;
     font-size: 0.84rem;
     text-decoration: none !important;
-    transition: all 0.2s;
+    transition: all var(--zd-duration-base);
     white-space: nowrap;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   }
   .zd-btn-nav:hover {
-    background: #f5e4be;
+    background: var(--zd-gold-hover);
     transform: translateY(-1px);
   }
 
@@ -190,9 +191,9 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
     display: block;
     width: 20px;
     height: 2px;
-    background: #c5a059;
+    background: var(--zd-gold);
     border-radius: 2px;
-    transition: all 0.2s;
+    transition: all var(--zd-duration-base);
   }
 
   /* ─── Mobile nav dropdown ─── */
@@ -204,9 +205,9 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
     top: var(--sl-nav-height);
     left: 0;
     right: 0;
-    background: rgba(22, 13, 26, 0.99);
+    background: var(--zd-bg-glass);
     backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(197, 160, 89, 0.22);
+    border-bottom: 1px solid var(--zd-border);
     padding: 1rem 1.5rem;
     z-index: 200;
   }
@@ -215,16 +216,16 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
     padding: 0.7rem 0;
     font-size: 0.95rem;
     font-weight: 600;
-    color: var(--sl-color-white);
+    color: var(--zd-text-secondary);
     text-decoration: none;
-    border-bottom: 1px solid rgba(197, 160, 89, 0.1);
+    border-bottom: 1px solid var(--zd-border-subtle);
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    transition: color 0.18s;
+    transition: color var(--zd-duration-fast);
   }
-  .zd-mobile-nav a:hover { color: #c5a059; }
+  .zd-mobile-nav a:hover { color: var(--zd-gold); }
   .zd-mobile-nav a:last-child { border-bottom: none; }
   .zd-mobile-cta {
-    color: #c5a059 !important;
+    color: var(--zd-gold) !important;
     font-weight: 700 !important;
     margin-top: 0.5rem;
   }

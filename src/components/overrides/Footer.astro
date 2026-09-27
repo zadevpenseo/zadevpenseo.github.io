@@ -37,11 +37,12 @@
 
 <style>
   .zd-footer {
-    border-top: 1px solid rgba(197, 160, 89, 0.18);
-    background: #0d0b10;
+    border-top: 1px solid var(--zd-border-subtle);
+    background: var(--zd-bg-surface);
     padding: 3rem 0 2rem 0;
     margin-top: 4rem;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    transition: background-color var(--zd-duration-base);
   }
 
   .zd-footer-inner {
@@ -67,19 +68,20 @@
     font-weight: 800;
     font-size: 1rem;
     letter-spacing: 0.05em;
-    color: #c5a059;
+    color: var(--zd-gold);
     text-decoration: none;
+    transition: color var(--zd-duration-fast);
   }
-  .zd-footer-logo:hover { color: #f5e4be; }
+  .zd-footer-logo:hover { color: var(--zd-gold-hover); }
 
   .zd-footer-sep {
-    color: rgba(197, 160, 89, 0.4);
+    color: var(--zd-border);
     font-size: 0.9rem;
   }
 
   .zd-footer-tagline {
     font-size: 0.85rem;
-    color: #8a8578;
+    color: var(--zd-text-subtle);
     letter-spacing: 0.02em;
   }
 
@@ -94,34 +96,34 @@
   .zd-footer-links a {
     font-size: 0.82rem;
     font-weight: 600;
-    color: #b8b4a8;
+    color: var(--zd-text-muted);
     text-decoration: none;
-    transition: color 0.18s;
+    transition: color var(--zd-duration-fast);
   }
-  .zd-footer-links a:hover { color: #c5a059; }
+  .zd-footer-links a:hover { color: var(--zd-gold); }
 
   .zd-footer-legal {
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
-    border-top: 1px solid rgba(197, 160, 89, 0.1);
+    border-top: 1px solid var(--zd-border-subtle);
     padding-top: 1.25rem;
     width: 100%;
   }
 
   .zd-footer-legal p {
     font-size: 0.82rem;
-    color: #6a665c;
+    color: var(--zd-text-muted);
     margin: 0;
   }
-  .zd-footer-legal strong { color: #8a8578; }
+  .zd-footer-legal strong { color: var(--zd-text-secondary); }
 
   .zd-footer-meta {
     font-size: 0.76rem !important;
-    color: #4a4840 !important;
+    color: var(--zd-text-ghost) !important;
   }
   .zd-footer-meta a {
-    color: #c5a059;
+    color: var(--zd-gold);
     text-decoration: none;
   }
   .zd-footer-meta a:hover { text-decoration: underline; }
