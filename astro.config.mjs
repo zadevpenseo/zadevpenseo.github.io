@@ -1,7 +1,6 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import sitemap from '@astrojs/sitemap';
-
 export default defineConfig({
   site: 'https://zadevpenseo.github.io',
   base: '/',
@@ -13,7 +12,7 @@ export default defineConfig({
       social: {
         github: 'https://github.com/zadevpenseo/zadevpenseo.github.io',
       },
-      customCss: ['./src/styles/custom.css'],
+      customCss: ['./src/styles/tokens.css', './src/styles/starlight.css'],
       components: {
         Header: './src/components/overrides/Header.astro',
         Footer: './src/components/overrides/Footer.astro',
