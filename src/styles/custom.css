@@ -189,3 +189,61 @@
   box-shadow: 0 4px 14px rgba(197, 160, 89, 0.4);
   transform: translateY(-1px);
 }
+
+/* ======================================================
+   STARLIGHT OVERRIDE PATCHES — TasteSkill Edition
+   ====================================================== */
+
+/* 1. Suppress color chip widget (inline swatch beside hex codes) */
+.sl-markdown-content span[style*="background-color"][style*="border-radius"],
+.sl-markdown-content .color-preview {
+  display: none !important;
+}
+
+/* 2. Sidebar item text overflow fix */
+.sidebar-content nav a,
+.sl-sidebar a {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+  line-height: 1.45;
+  font-size: 0.87rem;
+}
+
+/* 3. Breadcrumb styling */
+.sl-breadcrumbs ol {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  list-style: none;
+  padding: 0.5rem 0;
+  font-size: 0.82rem;
+  color: var(--text-muted-sand);
+}
+.sl-breadcrumbs li::after {
+  content: '/';
+  margin-left: 0.35rem;
+  color: rgba(197, 160, 89, 0.4);
+}
+.sl-breadcrumbs li:last-child::after { display: none; }
+.sl-breadcrumbs a {
+  color: var(--accent-bronze-gold);
+  text-decoration: none;
+}
+.sl-breadcrumbs a:hover { text-decoration: underline; }
+
+/* 4. Inline code refinement */
+.sl-markdown-content code:not(pre code) {
+  background: rgba(197, 160, 89, 0.1);
+  border: 1px solid rgba(197, 160, 89, 0.2);
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+  font-size: 0.88em;
+  color: var(--accent-champagne);
+}
+
+/* 5. Code block border */
+.sl-markdown-content pre {
+  border: 1px solid rgba(197, 160, 89, 0.18);
+  border-radius: 8px;
+}
