@@ -1,0 +1,83 @@
+---
+title: "Elementor JSON UI Architecture Engine"
+description: "Zero-bloat WordPress UI delivery through native Elementor JSON schema compilation without third-party plugin dependencies."
+---
+
+# Elementor JSON UI Architecture Engine
+
+| Parameter | Spesifikasi Teknis |
+| :--- | :--- |
+| **Domain** | WordPress Engineering, UI/UX Delivery, Zero-Bloat Systems |
+| **Pillar** | 1. Web Dev Design |
+| **Key Advantage** | Zero third-party addon plugins, pure native Elementor JSON templates |
+| **Target Metric** | Sub-1s page render, DOM depth reduction of 45% |
+
+---
+
+## 1. The Dilemma: Addon Bloat vs Native JSON
+
+Mayoritas agensi WordPress memasang puluhan plugin tambahan (Essential Addons, Ultimate Addons, dll.) untuk membuat komponen modern, mengakibatkan:
+- DOM tree yang sangat dalam (> 32 level).
+- Puluhan berkas CSS dan JavaScript yang dimuat secara bersamaan dan memblokir render browser.
+- Kerentanan keamanan dan risiko kerusakan antarmuka saat WordPress diperbarui.
+
+Solusi kami adalah merekayasa komponen langsung ke dalam struktur skema **Elementor Native JSON**:
+- Menggunakan widget inti WordPress/Elementor murni.
+- Menghasilkan berkas template JSON yang dapat diimpor langsung tanpa memerlukan plugin eksternal apa pun.
+- Keteraturan CSS menggunakan custom CSS selector scoped (`selector { ... }`).
+
+---
+
+## 2. Arsitektur Komponen JSON Murni
+
+```text
+[Figma / Web Design System]
+             │
+             ▼ (TasteSkill Luxury Design Rules)
+[Deterministic JSON Engine]
+             │
+             ├── Structure: Container / Flexbox / Grid
+             ├── Typography: Scoped Font Sizes & Line Heights
+             └── Clean CSS: Inline Custom Properties
+             │
+             ▼ (Import into WordPress Site)
+[Elementor Template Library: 100% Native, 0 Extra Plugins]
+```
+
+---
+
+## 3. Contoh Snippet Struktur JSON
+
+```json
+{
+  "version": "0.4",
+  "title": "Executive Hero Section",
+  "type": "container",
+  "content": [
+    {
+      "id": "hero_cnt_01",
+      "elType": "container",
+      "settings": {
+        "flex_direction": "column",
+        "align_items": "center",
+        "background_background": "classic",
+        "background_color": "#0d0b10",
+        "padding": {
+          "unit": "px",
+          "top": "80",
+          "bottom": "80",
+          "isLinked": false
+        }
+      },
+      "elements": []
+    }
+  ]
+}
+```
+
+---
+
+## 4. Hubungi Tim Engineering
+
+Ingin merombak situs WordPress Anda menjadi ringan dan cepat?
+- **Email:** `devapenseo@gmail.com`

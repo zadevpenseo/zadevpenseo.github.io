@@ -1,0 +1,50 @@
+---
+title: "Psychometric & Survey Validation (Rasch & Aiken)"
+description: "Empirical survey instrument validation and psychometric calibration using Aiken's V content validity and Rasch Rating Scale Model."
+---
+
+# Psychometric & Survey Instrument Validation
+
+| Parameter | Spesifikasi Pengujian |
+| :--- | :--- |
+| **Metode Validasi Konten** | Koefisien Validitas Isi Aiken's V (Penilaian Expert Judgment) |
+| **Model Pengukuran** | Rasch Rating Scale Model (Winsteps / Python Psychometrics) |
+| **Target Output** | Item Reliability, Person Reliability, Infit/Outfit MNSQ, Wright Map Person-Item |
+| **Pillar** | 4. Data Analysis |
+
+---
+
+## 1. Dilema Teori Tes Klasik (CTT) vs Model Rasch
+
+Banyak instrumen survei kepuasan pelanggan atau kuesioner riset perilaku hanya diuji menggunakan korelasi Pearson (Product Moment) dan Cronbach's Alpha. Teori Tes Klasik ini memiliki kelemahan mendasar:
+- Menganggap skor mentah berskala interval, padahal pilihan kuesioner (*Sangat Tidak Setuju* hingga *Sangat Setuju*) adalah data ordinal.
+- Pengukuran instrumen bergantung pada sampel (*sample-dependent*).
+
+---
+
+## 2. Rasch Measurement Model Framework
+
+Model Rasch mentransformasi skor ordinal menjadi data logit interval linear:
+
+```text
+ln(P_ni / (1 - P_ni)) = beta_n - delta_i
+```
+
+Di mana beta_n adalah tingkat kemampuan/persetujuan responden n, dan delta_i adalah tingkat kesulitan butir i.
+
+### Kriteria Kelayakan Butir:
+1. **Nilai Outfit MNSQ:** 0.5 hingga 1.5 (produktif untuk pengukuran).
+2. **Nilai ZSTD:** -2.0 hingga +2.0.
+3. **Pt-Measure Correlation:** Positif (0.4 hingga 0.85).
+
+---
+
+## 3. Hasil & Peta Wright (Person-Item Map)
+
+Melalui pemodelan Rasch, peneliti dan pengambil kebijakan dapat melihat secara transparan butir soal atau atribut layanan mana yang paling sulit dipenuhi oleh organisasi dan responden mana yang memiliki bias ekstrim.
+
+---
+
+## 4. Hubungi Konsultan Psikometrik
+
+- **Email:** `devapenseo@gmail.com`

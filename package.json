@@ -1,0 +1,19 @@
+{
+  "name": "zadevpenseo.github.io",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Architectural case studies, high-level designs, and interactive engineering blueprints by Muhammad Khoiruzzadittaqwa (zadevpenseo).",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "@astrojs/starlight": "^0.32.1",
+    "astro": "^5.4.1",
+    "sharp": "^0.33.5"
+  }
+}

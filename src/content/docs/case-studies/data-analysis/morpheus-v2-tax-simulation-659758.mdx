@@ -1,0 +1,100 @@
+---
+title: "Morpheus V2 Financial Simulation (#659758)"
+description: "High-precision statutory tax computation and simulation framework eliminating binary floating-point rounding errors."
+---
+
+# Morpheus V2 Statutory Financial & Tax Simulation
+
+| Parameter | Detail Penugasan |
+| :--- | :--- |
+| **Project Reference** | Truelancer Project #659758 |
+| **Domain** | Financial Mathematics, Statutory Tax Brackets, Precision Accounting |
+| **Deliverable** | Modul Komputasi Deterministik Python `Decimal`, Audit Log Rekonsiliasi, Test Harness |
+| **Pillar** | 4. Data Analysis |
+
+---
+
+## 1. Problem Space: Floating-Point Tax Hazards
+
+Dalam sistem penggajian dan akuntansi komersial, penggunaan tipe data `float` standar komputer adalah sebuah kesalahan fatal:
+
+```python
+# Bahaya binary floating point standar IEEE 754:
+0.1 + 0.2 == 0.3  # Menghasilkan False (0.30000000000000004)
+```
+
+Pada simulasi pajak penghasilan berjenjang (*graduated tax brackets*) atau kalkulasi PPh 21, selisih pecahan terkecil akan menumpuk menjadi selisih audit ribuan rupiah di akhir tahun buku.
+
+Cetak biru ini menyajikan mesin kalkulasi statutory Morpheus V2 yang beroperasi murni dengan aritmatika desimal dengan presisi yang dapat dikonfigurasi.
+
+---
+
+## 2. High-Level Design (HLD)
+
+```text
+[Input Data: Bruto, Tunjangan, Potongan, Status PTKP]
+                         │
+                         ▼ (Validasi Tipe Data Strict)
+[Morpheus V2 Engine: Decimal Type System (Rounding HALF_UP)]
+                         │
+                         ├── Layer 1: Penghasilan Neto Tahunan
+                         ├── Layer 2: Pengurangan PTKP Terkini
+                         └── Layer 3: Simulasi Progresif Lapisan Tarif Pajak
+                         │
+                         ▼
+[Output Terkonsolidasi: JSON Audit Log & Rincian Potongan Slip Gaji]
+```
+
+---
+
+## 3. Implementasi Kode Mandiri (morpheus_tax_engine.py)
+
+```python
+from decimal import Decimal, ROUND_HALF_UP
+
+class MorpheusTaxEngine:
+    def __init__(self, precision: str = "0.01"):
+        self.precision = Decimal(precision)
+
+    def round_currency(self, amount: Decimal) -> Decimal:
+        return amount.quantize(self.precision, rounding=ROUND_HALF_UP)
+
+    def calculate_progressive_tax(self, taxable_income: Decimal, brackets: list) -> dict:
+        total_tax = Decimal("0")
+        breakdown = []
+
+        remaining = taxable_income
+        for ceiling, rate in brackets:
+            if remaining <= 0:
+                break
+            taxable_in_bracket = min(remaining, ceiling)
+            tax_amount = taxable_in_bracket * rate
+            total_tax += tax_amount
+            remaining -= taxable_in_bracket
+
+            breakdown.append({
+                "taxable_amount": str(self.round_currency(taxable_in_bracket)),
+                "rate": str(rate),
+                "tax": str(self.round_currency(tax_amount))
+            })
+
+        return {
+            "taxable_income": str(self.round_currency(taxable_income)),
+            "total_tax": str(self.round_currency(total_tax)),
+            "breakdown": breakdown
+        }
+```
+
+---
+
+## 4. Rencana Kerja Terukur
+
+1. **Tahap 1:** Validasi tabel tarif dan PTKP terkini sesuai regulasi yang berlaku.
+2. **Tahap 2:** Eksekusi unit test dengan 50 kasus uji ekstrem (corner cases: penghasilan di batas persis tarif, nilai minus, nol).
+
+---
+
+## 5. Hubungi Rekayasawan Finansial
+
+- **Email:** `devapenseo@gmail.com`
+- **Proposal Truelancer:** Konfirmasi langsung pada portal penawaran.

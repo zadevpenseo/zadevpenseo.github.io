@@ -1,0 +1,24 @@
+User-agent: *
+Allow: /
+
+# Dedicated AI Search Bot Access (Permits Citability in Answers)
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Disallow Machine Learning Bulk Training Scrapers
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+Sitemap: https://zadevpenseo.github.io/sitemap-index.xml

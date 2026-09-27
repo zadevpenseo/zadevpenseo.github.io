@@ -1,0 +1,72 @@
+---
+title: "Gworky Edge Web App Flagship"
+description: "High-concurrency data platform on Next.js 15, Cloudflare Edge, and automated Python data pipelines by Muhammad Khoiruzzadittaqwa."
+---
+
+# Gworky: High-Concurrency Edge Web Application
+
+| Parameter | Spesifikasi Teknis |
+| :--- | :--- |
+| **Domain** | Full-Stack Web Development, Data Pipelines & Executive Decks |
+| **Tech Stack** | Next.js 15, React, TypeScript, Cloudflare Edge, PostgreSQL, Python |
+| **Measured Outcome** | 1.18s LCP on global nodes, zero DB statement timeouts, 1,800+ daily listings ingested |
+| **Proof Reference** | Production: `https://gworky.com` \| Pitch Deck 16:9 |
+
+---
+
+## 1. Problem & Architecture Dilemma
+
+Platform agregasi data modern seringkali mengalami degradasi performa ketika volume data tumbuh di atas ribuan record harian. Pendekatan konvensional yang mengandalkan server monolitik VPS sering menghadapi:
+- Latensi Time-to-First-Byte (TTFB) tinggi (> 1.2 detik) untuk pengguna global.
+- Bottleneck query database saat crawler paralel memasukkan ribuan listing baru.
+- Biaya sewa server bulanan yang membengkak seiring bertambahnya trafik.
+
+---
+
+## 2. High-Level Design (HLD)
+
+```text
+[Autonomous Python Ingestion Workers]
+               │ (1,800+ Daily Records via Headless Scrapers)
+               ▼
+[High-Concurrency PostgreSQL Cluster]
+               │ (Indexed Queries / Read-Replicas)
+               ▼
+[Next.js 15 Static & Incremental Edge Cache]
+               │ (Cloudflare Pages Edge Network)
+               ▼
+[Global Users: Sub-Second 1.18s LCP Delivery]
+```
+
+---
+
+## 3. Implementation Highlights
+
+1. **Edge Compilation:** Memisahkan lapisan data dinamis dari tampilan katalog statis, menghasilkan respon halaman instan di 300+ lokasi PoP global.
+2. **Database Ingestion Queue:** Skrip Python mandiri memproses batch upsert dengan transaksi atomik untuk mencegah deadlock pada tabel utama.
+3. **Executive Presentation Collateral:** Dilengkapi deck 16:9 PowerPoint native untuk presentasi investor dan pemangku kepentingan.
+
+---
+
+## 4. Verification & Source Inspection
+
+```typescript
+// Sample Edge Cache Header Verification
+export async function onRequestGet(context: EventContext<any, any, any>) {
+  const cacheControl = 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800';
+  return new Response(JSON.stringify({ status: 'healthy', node: 'edge-iad' }), {
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': cacheControl,
+      'X-Edge-Origin': 'Cloudflare-Pages',
+    },
+  });
+}
+```
+
+---
+
+## 5. Hubungi Tim Engineering
+
+Ingin membangun atau mempercepat platform web Anda dengan arsitektur edge serupa?
+- **Email Langsung:** `devapenseo@gmail.com`

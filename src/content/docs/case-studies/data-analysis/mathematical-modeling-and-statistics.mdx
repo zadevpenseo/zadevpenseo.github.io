@@ -1,0 +1,57 @@
+---
+title: "Mathematical Modeling & Statistical Computing"
+description: "Rigorous quantitative methodology grounded in 140 SKS Mathematics Education, GPA 3.71, and advanced statistical computation."
+---
+
+# Mathematical Modeling & Statistical Computing
+
+| Parameter | Kredensial Akademik & Kompetensi |
+| :--- | :--- |
+| **Pendidikan Formal** | STAI Al-Bahjah, Sarjana Pendidikan (S.Pd.), Tadris Matematika |
+| **Beban Studi & Indeks Prestasi** | 140 SKS, IPK 3.71 |
+| **Statistika Lanjutan** | Nilai Akhir: 89.8 (Predikat A-) |
+| **Pillar** | 4. Data Analysis |
+
+---
+
+## 1. Fondasi Matematika Terapan
+
+Banyak analisis data bisnis atau skripsi akademik mengalami kegagalan generalisasi karena mengabaikan pengujian asumsi fundamental. Peneliti sering kali langsung menjalankan uji regresi linier atau ANOVA tanpa terlebih dahulu memverifikasi apakah sebaran data memenuhi:
+1. Normalitas distribusi galat (Kolmogorov-Smirnov / Shapiro-Wilk).
+2. Homogenitas varians (Levene's Test).
+3. Bebas multikolinearitas (VIF < 5.0 dan nilai Tolerance > 0.10).
+4. Bebas autokorelasi (Durbin-Watson).
+
+Penguasaan teori matematika murni memungkinkan kami merancang prosedur koreksi data (seperti transformasi Box-Cox, Winsorizing outlier, atau beralih ke uji non-parametrik Mann-Whitney / Kruskal-Wallis) secara sah tanpa memanipulasi data riil.
+
+---
+
+## 2. Pemodelan Jalur & Persamaan Struktural (SEM-PLS)
+
+Untuk data laten dengan multi-indikator kompleks, kami menerapkan Structural Equation Modeling berbasis Partial Least Squares (SmartPLS / WarpPLS):
+- **Evaluasi Measurement Model (Outer Model):** Convergent validity (Outer Loadings > 0.70, AVE > 0.50), Discriminant validity (Fornell-Larcker criterion dan HTMT < 0.90), serta Composite Reliability (> 0.80).
+- **Evaluasi Structural Model (Inner Model):** Koefisien determinasi ($R^2$), efek ukuran ($f^2$), relevansi prediktif ($Q^2$), serta signifikansi jalur melalui prosedur *bootstrapping* 5.000 subsampel.
+
+---
+
+## 3. Komputasi Python Deterministik
+
+```python
+import numpy as np
+import scipy.stats as stats
+
+def evaluate_classical_assumptions(residuals: np.ndarray) -> dict:
+    """Uji asumsi normalitas residuals menggunakan Shapiro-Wilk."""
+    stat, p_val = stats.shapiro(residuals)
+    return {
+        "shapiro_statistic": float(stat),
+        "p_value": float(p_val),
+        "is_normal": bool(p_val > 0.05)
+    }
+```
+
+---
+
+## 4. Hubungi Tim Analitika Matematika
+
+- **Email:** `devapenseo@gmail.com`

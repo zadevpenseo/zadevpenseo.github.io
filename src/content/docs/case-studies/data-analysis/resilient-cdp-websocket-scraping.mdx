@@ -1,0 +1,68 @@
+---
+title: "Resilient CDP WebSocket Scraping Engine"
+description: "High-resilience headless web scraping and browser automation using Chrome DevTools Protocol (CDP) WebSocket sessions."
+---
+
+# Resilient CDP WebSocket Scraping Engine
+
+| Parameter | Spesifikasi Sistem |
+| :--- | :--- |
+| **Protokol Inti** | Chrome DevTools Protocol (CDP) via Raw WebSockets & NoDriver |
+| **Ketahanan Sesi** | Bypass dynamic JS hydration, Cloudflare turnstile awareness, infinite scroll |
+| **Keluaran Data** | Format JSON terstruktur, CSV, dan ingestion database atomik |
+| **Pillar** | 4. Data Analysis |
+
+---
+
+## 1. Problem: The Death of Basic HTTP Scraping
+
+Pengikisan data web modern menggunakan pustaka HTTP sederhana (`requests`, `urllib`, `curl`) kini hampir 90% selalu diblokir oleh platform target. Target modern menerapkan:
+- JavaScript Single-Page Application (SPA) di mana data baru dirender setelah eksekusi script browser.
+- Analisis sidik jari peramban (Canvas fingerprint, WebGL, WebRTC leaks).
+- Paginasi asinkron berbasis scroll tanpa nomor halaman URL statis.
+
+---
+
+## 2. Arsitektur CDP WebSocket Bridge
+
+Alih-alih menggunakan Puppeteer atau Selenium yang meninggalkan jejak `navigator.webdriver = true`, mesin kami menyambung langsung ke instance Google Chrome aktif melalui soket CDP:
+
+```text
+[Chrome Headless Browser Instance with Remote Debugging]
+                         │
+                         ▼ (Raw WebSocket: ws://localhost:9222/devtools/page/...)
+[CDP Bridge Controller: JSON-RPC 2.0 Commands]
+                         │
+                         ├── DOM.getDocument & DOM.querySelectorAll
+                         ├── Page.captureScreenshot (Vision Linting)
+                         └── Runtime.evaluate (Isolasi Eksekusi JS Klien)
+                         │
+                         ▼
+[Clean Structured JSON Pipeline -> PostgreSQL / Excel]
+```
+
+---
+
+## 3. Snippet Inisialisasi Soket CDP Mandiri
+
+```python
+import asyncio
+import json
+import websockets
+
+async def fetch_live_dom(ws_url: str):
+    async with websockets.connect(ws_url, max_size=10 * 1024 * 1024) as ws:
+        # Buka akses DOM tree
+        req = {"id": 1, "method": "DOM.getDocument", "params": {"depth": -1}}
+        await ws.send(json.dumps(req))
+        resp = await ws.recv()
+        data = json.loads(resp)
+        return data["result"]["root"]
+```
+
+---
+
+## 4. Hubungi Tim Ekstraksi Data
+
+Butuh ekstraksi dataset berskala jutaan record secara andal?
+- **Email:** `devapenseo@gmail.com`

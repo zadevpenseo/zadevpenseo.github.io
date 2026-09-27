@@ -1,0 +1,84 @@
+---
+title: "Modular Custom Web App Architecture (#659861)"
+description: "Architectural blueprint for building resilient, modular full-stack web applications with relational schemas and idempotent APIs."
+---
+
+# Modular Custom Web App Architecture
+
+| Parameter | Detail Penugasan |
+| :--- | :--- |
+| **Project Reference** | Truelancer Project #659861 |
+| **Deliverable** | Database Schema, Idempotent REST APIs, Responsive Frontend Boilerplate |
+| **Estimated Scope** | 2,000 INR / 2 Hari Kerja |
+| **Pillar** | 1. Web Dev Design |
+
+---
+
+## 1. Executive Dilemma
+
+Proyek pengembangan web kustom sering kali gagal mencapai stabilitas akibat dua ekstrem yang keliru:
+1. *Monolitik berlebihan:* Menggabungkan seluruh logika bisnis, perutean antarmuka, dan akses database langsung di satu berkas tanpa pemisahan lapisan layanan (*service layer*).
+2. *Over-engineering:* Mengadopsi arsitektur mikroservis kompleks yang tidak sebanding dengan kebutuhan awal proyek, mengakibatkan tagihan infrastruktur melambung.
+
+Pendekatan modular yang kami tawarkan menerapkan pola *Pragmatic Clean Architecture*: struktur folder berorientasi fitur, skema relasional dengan indeks ketat, serta kontrak API idempoten.
+
+---
+
+## 2. High-Level Design (HLD)
+
+```text
+[Client Layer: Responsive Web & Mobile Web (HTML5 / TypeScript / CSS)]
+                                │
+                                ▼ (HTTPS / Bearer JWT)
+[API Gateway & Middleware Layer (Validation & Rate Limiting)]
+                                │
+                                ▼
+[Service Domain: Business Rules & Idempotency Handlers]
+                                │
+                                ▼ (Pragmatic Query Layer)
+[Relational PostgreSQL / SQLite Storage with Migration Audits]
+```
+
+---
+
+## 3. Database Schema Blueprint (SQL DDL)
+
+Berikut fondasi tabel relasional bersih yang mendukung integritas data tingkat enterprise:
+
+```sql
+-- Core Accounts & Profiles Schema
+CREATE TABLE users (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    role VARCHAR(50) NOT NULL DEFAULT 'member',
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE user_profiles (
+    user_id UUID PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+    display_name VARCHAR(150) NOT NULL,
+    avatar_url TEXT,
+    bio TEXT,
+    preferences JSONB DEFAULT '{}'::jsonb
+);
+
+CREATE INDEX idx_users_email ON users(email);
+```
+
+---
+
+## 4. Rencana Kerja Terstruktur
+
+- **Tonggak 1 (Database & API Layer):** Finalisasi skema relasional, pembuatan migrasi database, dan pengujian unit endpoint autentikasi.
+- **Tonggak 2 (Frontend Integration & QA):** Pemasangan antarmuka responsif, penanganan state visual (loading, error, empty state), dan penyerahan dokumentasi rute API.
+
+---
+
+## 5. Hubungi Pengembang
+
+Konsultasikan spesifikasi aplikasi web kustom Anda:
+- **Email:** `devapenseo@gmail.com`
+- **Proposal Truelancer:** Konfirmasi langsung melalui portal tender.

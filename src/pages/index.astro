@@ -1,0 +1,647 @@
+---
+// src/pages/index.astro - Root Master Portfolio & Systems Hub
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zadit | Web Dev Design · SEO · Writer · Data Analysis</title>
+  <meta name="description" content="Official portfolio and engineering case studies of Muhammad Khoiruzzadittaqwa (Zadit) - Web Dev Design, SEO, Writer, and Data Analysis." />
+  <meta name="author" content="Muhammad Khoiruzzadittaqwa (Zadit) - zadevpenseo" />
+  <link rel="canonical" href="https://zadevpenseo.github.io/" />
+  
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://zadevpenseo.github.io/" />
+  <meta property="og:title" content="Zadit | Web Dev Design · SEO · Writer · Data Analysis" />
+  <meta property="og:description" content="Verifiable system designs, high-level architectures, and deterministic prototypes by Muhammad Khoiruzzadittaqwa (Zadit)." />
+  <meta property="og:site_name" content="zadevpenseo" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts & Stylesheet -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles/custom.css" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://zadevpenseo.github.io/#person",
+        "name": "Muhammad Khoiruzzadittaqwa",
+        "alternateName": "Zadit",
+        "identifier": "zadevpenseo",
+        "url": "https://zadevpenseo.github.io/",
+        "jobTitle": "Web Dev Design, SEO, Writer, & Data Analysis Specialist",
+        "email": "devapenseo@gmail.com",
+        "sameAs": [
+          "https://www.wikidata.org/wiki/Q141474900",
+          "https://orcid.org/0000-0002-1594-9548",
+          "https://scholar.google.com/citations?user=CbR250MAAAAJ",
+          "https://github.com/zadevpenseo"
+        ],
+        "worksFor": {
+          "@type": "Organization",
+          "name": "PT PRISMA DIGITAL KREATIF",
+          "sameAs": "https://www.wikidata.org/wiki/Q141474927"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://zadevpenseo.github.io/#website",
+        "url": "https://zadevpenseo.github.io/",
+        "name": "Zadit // Systems & Blueprints Hub",
+        "publisher": {
+          "@id": "https://zadevpenseo.github.io/#person"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #0d0b10;
+      color: #faf9f6;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    /* Header Navigation */
+    header {
+      border-bottom: 1px solid rgba(197, 160, 89, 0.18);
+      background: rgba(22, 13, 26, 0.9);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 74px;
+    }
+    .logo {
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: 0.04em;
+      color: #c5a059;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .logo-badge {
+      font-size: 0.72rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      background: rgba(197, 160, 89, 0.15);
+      border: 1px solid rgba(197, 160, 89, 0.35);
+      color: #f5e4be;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+    .nav-links a:hover {
+      color: #c5a059;
+    }
+    .btn-nav {
+      padding: 0.55rem 1.15rem;
+      border-radius: 6px;
+      background: #c5a059;
+      color: #0d0b10;
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+    .btn-nav:hover {
+      background: #f5e4be;
+      transform: translateY(-1px);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 5rem 0 3.5rem 0;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 1.1rem;
+      border-radius: 9999px;
+      background: rgba(22, 13, 26, 0.85);
+      border: 1px solid rgba(197, 160, 89, 0.35);
+      color: #c5a059;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.75rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.3rem, 5.2vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, #faf9f6 30%, #c5a059 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 2vw, 1.28rem);
+      color: #b8b4a8;
+      max-width: 780px;
+      margin: 0 auto 2.5rem auto;
+      line-height: 1.65;
+    }
+    .hero-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      padding: 0.95rem 2rem;
+      border-radius: 8px;
+      background: #c5a059;
+      color: #0d0b10;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+    .btn-primary:hover {
+      background: #f5e4be;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(197, 160, 89, 0.35);
+    }
+    .btn-ghost {
+      padding: 0.95rem 2rem;
+      border-radius: 8px;
+      background: rgba(22, 13, 26, 0.7);
+      border: 1px solid rgba(197, 160, 89, 0.3);
+      color: #faf9f6;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+    .btn-ghost:hover {
+      border-color: #c5a059;
+      transform: translateY(-2px);
+    }
+
+    /* Authority Badges Bar */
+    .authority-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin: 2.5rem auto 0 auto;
+      max-width: 900px;
+    }
+    .badge-pill {
+      font-size: 0.78rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      background: rgba(22, 13, 26, 0.7);
+      border: 1px solid rgba(197, 160, 89, 0.25);
+      color: #e2ded5;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .badge-pill strong {
+      color: #c5a059;
+    }
+
+    /* Key Statistics */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      padding: 2.25rem;
+      background: rgba(22, 13, 26, 0.75);
+      border: 1px solid rgba(197, 160, 89, 0.2);
+      border-radius: 14px;
+      backdrop-filter: blur(12px);
+      margin: 3.5rem 0 5rem 0;
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: #c5a059;
+      line-height: 1.1;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: #b8b4a8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 0.4rem;
+    }
+
+    /* Bento Grid Pillars */
+    .section-title {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+      color: #faf9f6;
+    }
+    .section-desc {
+      color: #b8b4a8;
+      max-width: 680px;
+      margin-bottom: 2.5rem;
+      font-size: 1.05rem;
+    }
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.75rem;
+      margin-bottom: 5rem;
+    }
+    .bento-card {
+      background: rgba(22, 13, 26, 0.65);
+      border: 1px solid rgba(197, 160, 89, 0.22);
+      border-radius: 14px;
+      padding: 2.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .bento-card:hover {
+      border-color: #c5a059;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(197, 160, 89, 0.15);
+    }
+    .bento-header {
+      margin-bottom: 1.25rem;
+    }
+    .bento-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: #c5a059;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+    .bento-card h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: #faf9f6;
+    }
+    .bento-card p {
+      color: #b8b4a8;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    .bento-metric {
+      padding: 0.75rem 1rem;
+      background: rgba(13, 11, 16, 0.75);
+      border-left: 3px solid #c5a059;
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+      color: #e2ded5;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .bento-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(197, 160, 89, 0.15);
+      padding-top: 1.25rem;
+    }
+    .case-count {
+      font-size: 0.8rem;
+      color: #b8b4a8;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .card-link {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #c5a059;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* Interactive Lead Form */
+    .lead-section {
+      background: linear-gradient(135deg, rgba(22, 13, 26, 0.95), rgba(13, 11, 16, 0.98));
+      border: 1px solid #c5a059;
+      border-radius: 16px;
+      padding: 3rem 2.5rem;
+      margin: 4rem 0 6rem 0;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(197, 160, 89, 0.12);
+    }
+    .lead-header {
+      max-width: 650px;
+      margin-bottom: 2rem;
+    }
+    .lead-header h2 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: #c5a059;
+      margin-bottom: 0.5rem;
+    }
+    .lead-header p {
+      color: #b8b4a8;
+      font-size: 1rem;
+    }
+    .lead-form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #faf9f6;
+      margin-bottom: 0.4rem;
+    }
+    .form-control {
+      width: 100%;
+      padding: 0.85rem 1.1rem;
+      background: rgba(13, 11, 16, 0.85);
+      border: 1px solid rgba(197, 160, 89, 0.3);
+      border-radius: 8px;
+      color: #faf9f6;
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: #c5a059;
+      box-shadow: 0 0 10px rgba(197, 160, 89, 0.3);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(197, 160, 89, 0.18);
+      background: #0d0b10;
+      padding: 3.5rem 0;
+      text-align: center;
+      color: #8a8578;
+      font-size: 0.88rem;
+    }
+    footer a {
+      color: #c5a059;
+    }
+    .footer-meta {
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: #6a665c;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <div class="container nav-inner">
+      <a href="/" class="logo">
+        ZADIT
+        <span class="logo-badge">SYSTEMS & BLUEPRINTS</span>
+      </a>
+      <nav class="nav-links">
+        <a href="/case-studies/">Case Studies Hub</a>
+        <a href="/case-studies/web-dev-design/">Web Dev</a>
+        <a href="/case-studies/seo/">SEO</a>
+        <a href="/case-studies/writer/">Writer</a>
+        <a href="/case-studies/data-analysis/">Data Analysis</a>
+        <a href="#inquiry" class="btn-nav">Initiate Project</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="container">
+    <section class="hero">
+      <div class="hero-badge">
+        ✦ PT PRISMA DIGITAL KREATIF · Ground Truth Systems & Verifiable Architecture
+      </div>
+      <h1>
+        Zadit // Web Dev Design<br />
+        <span>SEO · Writer · Data Analysis</span>
+      </h1>
+      <p class="hero-subtitle">
+        Engineering portfolio and case study vault of Muhammad Khoiruzzadittaqwa (Zadit). We diagnose failure modes, design high-level architectures, and build working prototypes before touching production systems.
+      </p>
+      <div class="hero-cta">
+        <a href="/case-studies/" class="btn-primary">Explore All Case Studies</a>
+        <a href="/case-studies/methodology/" class="btn-ghost">Read 3-Tier Proof Manifesto</a>
+      </div>
+
+      <!-- Authority Badges -->
+      <div class="authority-bar">
+        <span class="badge-pill"><strong>Entity:</strong> NIB 1801250039976</span>
+        <span class="badge-pill"><strong>Kominfo:</strong> TDPSE 017014.01</span>
+        <span class="badge-pill"><strong>Wikidata:</strong> <a href="https://www.wikidata.org/wiki/Q141474900" target="_blank" rel="noopener">Q141474900</a></span>
+        <span class="badge-pill"><strong>ORCID:</strong> <a href="https://orcid.org/0000-0002-1594-9548" target="_blank" rel="noopener">0000-0002-1594-9548</a></span>
+        <span class="badge-pill"><strong>Scholar:</strong> Peer-Reviewed Author</span>
+        <span class="badge-pill"><strong>SEO:</strong> 3rd Place National Award</span>
+      </div>
+    </section>
+
+    <!-- Key Statistics -->
+    <section class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-value">&lt; 1.0s</div>
+        <div class="stat-label">Core Web Vitals LCP</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">140 SKS</div>
+        <div class="stat-label">Math Education / GPA 3.71</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">40+</div>
+        <div class="stat-label">Bankable Financial Models</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">5.0 / 5.0</div>
+        <div class="stat-label">Client Satisfaction Rating</div>
+      </div>
+    </section>
+
+    <!-- Bento Grid Pillars -->
+    <section>
+      <h2 class="section-title">The Four Specialized Canonical Pillars</h2>
+      <p class="section-desc">
+        Explore structured High-Level Designs, Architecture Decision Records (ADRs), and live prototype walkthroughs across our core domains.
+      </p>
+
+      <div class="bento-grid">
+        
+        <!-- Pillar 1: Web Dev Design -->
+        <div class="bento-card">
+          <div class="bento-header">
+            <div class="bento-tag">Pillar 01 // Engineering</div>
+            <h3>Web Dev Design</h3>
+            <p>
+              High-performance edge architectures, responsive luxury UI/UX, and zero-server-cost deployments. Sub-second LCP, clean Elementor JSON, and WooCommerce rescue audits.
+            </p>
+          </div>
+          <div class="bento-metric">
+            STATUS: 1.18s LCP on Cloudflare Edge | Zero VPS Bloat
+          </div>
+          <div class="bento-footer">
+            <span class="case-count">4 Verified Blueprints</span>
+            <a href="/case-studies/web-dev-design/" class="card-link">Explore Pillar →</a>
+          </div>
+        </div>
+
+        <!-- Pillar 2: SEO -->
+        <div class="bento-card">
+          <div class="bento-header">
+            <div class="bento-tag">Pillar 02 // Organic Growth</div>
+            <h3>SEO</h3>
+            <p>
+              Programmatic SEO engines compiling dynamic JSON payloads at scale, deep GA4/GSC technical audits, Generative Engine Optimization (GEO/AEO), and semantic knowledge graphs.
+            </p>
+          </div>
+          <div class="bento-metric">
+            STATUS: 3rd Place National Award | 50+ Geo Hubs
+          </div>
+          <div class="bento-footer">
+            <span class="case-count">4 Verified Blueprints</span>
+            <a href="/case-studies/seo/" class="card-link">Explore Pillar →</a>
+          </div>
+        </div>
+
+        <!-- Pillar 3: Writer -->
+        <div class="bento-card">
+          <div class="bento-header">
+            <div class="bento-tag">Pillar 03 // Advisory & Literature</div>
+            <h3>Writer</h3>
+            <p>
+              High-stakes executive business proposals, bankable 5-year cash-flow models, 16:9 native PowerPoint pitch decks, peer-reviewed scientific papers (APA 7th), and multimedia scripts.
+            </p>
+          </div>
+          <div class="bento-metric">
+            STATUS: 40+ Feasibility Proposals | Zero Em-Dash
+          </div>
+          <div class="bento-footer">
+            <span class="case-count">4 Verified Blueprints</span>
+            <a href="/case-studies/writer/" class="card-link">Explore Pillar →</a>
+          </div>
+        </div>
+
+        <!-- Pillar 4: Data Analysis -->
+        <div class="bento-card">
+          <div class="bento-header">
+            <div class="bento-tag">Pillar 04 // Mathematics & Automation</div>
+            <h3>Data Analysis</h3>
+            <p>
+              Mathematical modeling, psychometric survey validation (Rasch & Aiken), stealth Chrome DevTools Protocol (CDP) scraping, and high-precision financial simulations.
+            </p>
+          </div>
+          <div class="bento-metric">
+            STATUS: Advanced Statistics (89.8 / A-) | Exact Decimal
+          </div>
+          <div class="bento-footer">
+            <span class="case-count">5 Verified Blueprints</span>
+            <a href="/case-studies/data-analysis/" class="card-link">Explore Pillar →</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Interactive Asynchronous Lead Form -->
+    <section id="inquiry" class="lead-section">
+      <div class="lead-header">
+        <h2>Initiate an Architecture Review or Project Scope</h2>
+        <p>
+          Submit your project requirements, API specifications, or system bottleneck details directly. We review every brief asynchronously and deliver an initial diagnosis within 24 hours.
+        </p>
+      </div>
+
+      <form action="mailto:devapenseo@gmail.com" method="post" enctype="text/plain">
+        <div class="lead-form-grid">
+          <div class="form-group">
+            <label for="client_name">Your Name / Organization</label>
+            <input type="text" id="client_name" name="client_name" class="form-control" placeholder="e.g. Alex Rivera (Venture Lead)" required />
+          </div>
+          <div class="form-group">
+            <label for="contact_info">Email or Direct Channel</label>
+            <input type="email" id="contact_info" name="contact_info" class="form-control" placeholder="e.g. alex@company.com" required />
+          </div>
+          <div class="form-group">
+            <label for="project_domain">Primary Domain</label>
+            <select id="project_domain" name="project_domain" class="form-control">
+              <option value="web-dev-design">Web Dev Design (Performance, Full-Stack, UI/UX)</option>
+              <option value="seo">SEO (Programmatic, Technical Audit, GEO/AEO)</option>
+              <option value="writer">Writer (Pitch Decks, Business Feasibility, Research)</option>
+              <option value="data-analysis">Data Analysis (Mathematical Modeling, Scraping, Stats)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label for="project_scope">Core Bottleneck, Deliverable Scope, or Link to Tender</label>
+          <textarea id="project_scope" name="project_scope" rows="4" class="form-control" placeholder="Describe the failure modes, current tech stack, target timeline, or paste your RFP / job post URL..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary" style="border: none; cursor: pointer;">
+          Transmit Project Brief Directly to Engineering Desk →
+        </button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>
+        © 2026 <strong>Muhammad Khoiruzzadittaqwa (Zadit)</strong>. Published under <strong>PT PRISMA DIGITAL KREATIF</strong>.
+      </p>
+      <p class="footer-meta">
+        NIB: 1801250039976 · TDPSE Kominfo: 017014.01/DJAI.PSE/01/2025 · Cirebon, Indonesia · <a href="/case-studies/">Explore Case Studies Vault</a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>

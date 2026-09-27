@@ -1,0 +1,11 @@
+# Dependencies
+node_modules
+node_modules.nosync/
+
+# Build outputs
+dist/
+.astro/
+
+# System files
+.DS_Store
+*.log
