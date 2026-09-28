@@ -18,18 +18,51 @@ description: "Turnkey creative agency landing page featuring pure Vanilla HTML5,
 
 Experience the complete live landing page below. Test the theme accent switcher (Bronze Gold, Cyber Cyan, Emerald), hover over the work cards for 3D perspective tilt and radial spotlighting, toggle the capabilities accordion, and test the reactive inquiry form:
 
-<div style="margin: 24px 0; display: flex; justify-content: center;">
-  <iframe 
-    src="/demos/animated-landing/" 
-    width="100%" 
-    height="700px" 
-    style="border: 1px solid rgba(197, 160, 89, 0.35); border-radius: 16px; background: #0d0b10; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);"
+<div style="margin: 24px 0; border: 1px solid rgba(197, 160, 89, 0.35); border-radius: 16px; overflow: hidden; background: #0d0b10; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);">
+  <div style="background: #1a1118; padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(197,160,89,0.2); font-family: -apple-system, sans-serif; font-size: 12px; color: #C5A059;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <span style="width: 10px; height: 10px; border-radius: 50%; background: #EF4444; display: inline-block;"></span>
+      <span style="width: 10px; height: 10px; border-radius: 50%; background: #F59E0B; display: inline-block;"></span>
+      <span style="width: 10px; height: 10px; border-radius: 50%; background: #10B981; display: inline-block;"></span>
+      <strong style="color: #F8FAFC; margin-left: 6px;">Aura Studio — Animated Landing Page Demo</strong>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <button
+        type="button"
+        onclick="const ifr = document.getElementById('animatedLandingIframe'); const isExpanded = ifr.style.height === '960px'; ifr.style.height = isExpanded ? '700px' : '960px'; this.textContent = isExpanded ? '⛶ Expand Viewer' : '⮌ Collapse Viewer';"
+        style="background: #C5A059; border: none; color: #0d0b10; padding: 5px 14px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer;"
+      >
+        ⛶ Expand Viewer
+      </button>
+      <button
+        type="button"
+        onclick="const ifr = document.getElementById('animatedLandingIframe'); if(ifr.requestFullscreen){ifr.requestFullscreen();}else if(ifr.webkitRequestFullscreen){ifr.webkitRequestFullscreen();}"
+        style="background: #10B981; border: none; color: #FFFFFF; padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer;"
+      >
+        Full Screen
+      </button>
+      <a
+        href="/demos/animated-landing/"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #E2E8F0; padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 600; text-decoration: none;"
+      >
+        Open Standalone ↗
+      </a>
+    </div>
+  </div>
+  <iframe
+    id="animatedLandingIframe"
+    src="/demos/animated-landing/"
+    width="100%"
+    height="700px"
+    style="border: none; background: #0d0b10; display: block; transition: height 0.3s cubic-bezier(0.16, 1, 0.3, 1);"
     loading="lazy"
     title="Aura Studio Live Animated Landing Page Demo"
+    allow="fullscreen"
   ></iframe>
 </div>
 
-* 🔗 **[Open Standalone Fullscreen Demo](/demos/animated-landing/)**
 * 📁 **[Download Raw Standalone Source Code (Single-file Portable HTML/CSS/JS)](/demos/animated-landing/index.html)**
 
 ---

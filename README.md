@@ -3,7 +3,7 @@
 <!-- HERO / HEADER SECTION -->
 <div align="center">
   <a href="https://zadevpenseo.github.io">
-    <img src="public/og/systems-blueprints-card.png" alt="Zadit Systems Architecture & Blueprints Vault" width="100%" style="border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);" />
+    <img src="https://raw.githubusercontent.com/zadevpenseo/zadevpenseo.github.io/main/public/og/systems-blueprints-card.png" alt="Zadit Systems Architecture & Blueprints Vault" width="100%" style="border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);" />
   </a>
 
   <br /><br />
