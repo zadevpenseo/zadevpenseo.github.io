@@ -1,0 +1,49 @@
+name: 🐛 Bug Report
+description: Report broken demo links, layout regressions, or build failures
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting an issue with the Zadit Systems Architecture repository!
+  - type: input
+    id: url
+    attributes:
+      label: Page or Demo URL
+      description: Where did you encounter the issue?
+      placeholder: "e.g. https://zadevpenseo.github.io/case-studies/data-analysis/jira-weekly-report-automation-40725359/"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Problem Description
+      description: A clear and concise description of the bug or regression.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this?
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: true
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Environment / Browser
+      options:
+        - Chrome / Chromium
+        - Safari / WebKit
+        - Firefox / Gecko
+        - Edge
+        - Mobile iOS
+        - Mobile Android
+    validations:
+      required: true

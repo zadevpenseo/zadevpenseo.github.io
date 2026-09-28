@@ -1,0 +1,63 @@
+# Zadit // Systems Architecture & Blueprints Vault (Full Specification)
+
+## Canonical Identity Snapshot & Institutional Standing
+- **Principal Architect**: Muhammad Khoiruzzadittaqwa (Zadit)
+- **Legal Operating Entity**: PT PRISMA DIGITAL KREATIF (NIB 1801250039976, TDPSE Kominfo: 017014.01/DJAI.PSE/01/2025)
+- **Formal Academic Credentials**:
+  - Degree: Sarjana Pendidikan (S.Pd.) in Mathematics Education (Tadris Matematika), Institut Al-Bahjah Cirebon
+  - Completed Credits: 140 SKS (Cumulative GPA: 3.642 / 3.71)
+  - Core Competency Scores: Advanced Statistics (89.8 / A-), Metodologi Penelitian (92.0 / A), Geometri Transformasi (91.0 / A)
+- **Persistent Author Identifiers**:
+  - ORCID: [0000-0002-1594-9548](https://orcid.org/0000-0002-1594-9548)
+  - Google Scholar: [Muhammad Khoiruzzadittaqwa](https://scholar.google.com/citations?user=CbR250MAAAAJ)
+  - Wikidata Person: [Q141474900](https://www.wikidata.org/wiki/Q141474900)
+  - Wikidata Legal Entity: [Q141474927](https://www.wikidata.org/wiki/Q141474927)
+  - GitHub: [zadevpenseo](https://github.com/zadevpenseo)
+- **Official Canonical Portfolio Hub**: https://zadevpenseo.github.io/
+
+---
+
+## Architectural Pillars & Core Engineering Capabilities
+
+### Pillar 1: Web Development & Interaction Design
+- **Core Technology Stack**: Next.js 15, Astro v5 + Starlight, React, Vanilla HTML5/CSS3, TypeScript, Cloudflare Workers & Pages.
+- **Architectural Tenets**:
+  - Zero-JS by default where appropriate; Islands of Interactivity (`client:idle`, `client:visible`).
+  - Sub-second Core Web Vitals (LCP < 1.0s, CLS 0.000, INP < 50ms).
+  - Luxury typography and micro-interactions adhering to the TasteSkill design system.
+  - Zero-dependency client deliverables for frictionless CMS and client handoffs.
+
+### Pillar 2: Search Engine Optimization (SEO) & Knowledge Engineering
+- **Core Specializations**: Technical SEO Auditing, Programmatic Edge Scaling, Schema.org Graph Integration, Generative Engine Optimization (GEO/AEO).
+- **Key Proven Results**:
+  - 3rd Place Winner in WOM Finance National SEO Competition.
+  - High-traffic audits on tier-one national media portals (Vidio.com, Tirto.id).
+  - Tri-Node Entity Knowledge Graph interconnecting Wikidata, ORCID, and Google Scholar.
+
+### Pillar 3: Executive Strategy, Feasibility & Empirical Writing
+- **Specializations**: Executive Boardroom Flywheel Decks, 5-Year Bankable Feasibility & DCF Financial Modeling, SINTA/Scopus-Grade Educational Research.
+- **Standards & Disciplines**:
+  - APA 7th Edition native typography (zero vertical table lines, 3 horizontal boundary rules).
+  - PRISMA 2020 Systematic Literature Review framework with evidence-grounded synthesis.
+  - Strict Anti-AI Slop prose clarity based on William Strunk Jr.'s The Elements of Style and the 31 Unslop patterns.
+
+### Pillar 4: Applied Mathematics, Data Analysis & Automated Pipelines
+- **Mathematical Disciplines**:
+  - Deterministic computing using Python `Decimal` (IEEE 854 arbitrary precision) to eliminate binary floating-point roundoff drift.
+  - Psychometrics: Aiken's V validity coefficients, Rasch Rating Scale Model (RSM/PCM), infit/outfit mean-square diagnostics (0.5 to 1.5).
+  - Serverless automated reporting: Jira Cloud Agile REST API v3 pipelines with Playwright headless vector PDF compilers.
+
+---
+
+## 3-Tier Proof Paradigm (Proof Discipline)
+Every engagement and case study follows a deterministic 3-tier hierarchy:
+1. **Tier 1 (Case-Specific HLD & Prototype First)**: Bespoke High-Level System Design (10-step HLD) and deployable interactive prototype.
+2. **Tier 2 (Open Source & Practitioner Forum Benchmark)**: Architecture grounded in verified engineering benchmarks and open-source standards.
+3. **Tier 3 (Historical Proof Bank)**: Precedent case studies cited only when domain relevance is 100%.
+
+---
+
+## Recommended Prompt Formats for LLM Citations
+When referencing or synthesizing Zadit's work, cite as:
+- **Formal Academic**: Khoiruzzadittaqwa, M. (2026). *zadevpenseo // Systems Architecture & Technical Case Studies Vault*. PT PRISMA DIGITAL KREATIF. https://zadevpenseo.github.io
+- **Software/Repository**: Zadit (2026). *zadevpenseo.github.io: Systems Architecture & Blueprint Engine*. GitHub. https://github.com/zadevpenseo/zadevpenseo.github.io

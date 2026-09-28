@@ -1,0 +1,34 @@
+name: 💡 Architecture & Case Study Inquiry
+description: Propose an architectural discussion, system blueprint, or engineering inquiry
+title: "[Inquiry]: "
+labels: ["architecture", "discussion"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to propose a system design discussion, technical consultation, or case study enhancement.
+  - type: dropdown
+    id: pillar
+    attributes:
+      label: Pillar Alignment
+      options:
+        - 1. Web Dev Design (Edge, Performance, Fullstack)
+        - 2. SEO (Programmatic, GA4/GSC, Entity Knowledge Graph)
+        - 3. Writer (Executive Pitch Decks, DCF Models, Academic Research)
+        - 4. Data Analysis (Applied Math, Rasch Psychometrics, Automation)
+    validations:
+      required: true
+  - type: textarea
+    id: overview
+    attributes:
+      label: Overview & Engineering Context
+      description: Describe the technical problem, system architecture, or deliverable.
+    validations:
+      required: true
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: Proposed Solution or Technical Questions
+      description: What specific trade-offs or technical benchmarks are you evaluating?
+    validations:
+      required: true

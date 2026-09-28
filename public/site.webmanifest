@@ -1,0 +1,17 @@
+{
+  "name": "Zadit // Systems & Blueprints Vault",
+  "short_name": "Zadit Systems",
+  "description": "Verified systems architecture, applied mathematics, and technical case studies vault by Muhammad Khoiruzzadittaqwa (Zadit) - PT PRISMA DIGITAL KREATIF.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#08060B",
+  "theme_color": "#0D0B12",
+  "icons": [
+    {
+      "src": "/og/systems-blueprints-card.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

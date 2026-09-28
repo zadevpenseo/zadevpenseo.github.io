@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🔒 Report a Security Vulnerability
+    url: mailto:devapenseo@gmail.com
+    about: Please report security vulnerabilities privately via email.
+  - name: 🌐 Live Production Systems Vault
+    url: https://zadevpenseo.github.io/
+    about: Explore the production case studies and interactive prototypes.

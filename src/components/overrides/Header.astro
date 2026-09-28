@@ -25,14 +25,27 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
   <!-- Right: Nav links + CTA + ThemeSelect -->
   <div class="sl-hidden md:sl-flex print:hidden zd-right-group" id="zdNavLinks">
     <nav class="zd-nav-links" aria-label="Main navigation">
-      <a href="/case-studies/">Hub</a>
-      <a href="/case-studies/web-dev-design/">Web Dev</a>
-      <a href="/case-studies/seo/">SEO</a>
-      <a href="/case-studies/writer/">Writer</a>
-      <a href="/case-studies/data-analysis/">Data Analysis</a>
+      <a href="/case-studies/" data-nav-route="/case-studies/">Hub</a>
+      <a href="/#demos" data-nav-route="/#demos">Live Demos</a>
+      <a href="/case-studies/web-dev-design/" data-nav-route="/case-studies/web-dev-design/">Web Dev</a>
+      <a href="/case-studies/seo/" data-nav-route="/case-studies/seo/">SEO</a>
+      <a href="/case-studies/writer/" data-nav-route="/case-studies/writer/">Writer</a>
+      <a href="/case-studies/data-analysis/" data-nav-route="/case-studies/data-analysis/">Data Analysis</a>
     </nav>
     <a href="/#inquiry" class="zd-btn-nav">Initiate Project</a>
     <ThemeSelect />
+    <a 
+      href="https://github.com/zadevpenseo/zadevpenseo.github.io" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      class="zd-github-btn" 
+      aria-label="View source repository on GitHub" 
+      title="GitHub Repository: zadevpenseo/zadevpenseo.github.io"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true" width="19" height="19" fill="currentColor">
+        <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+      </svg>
+    </a>
   </div>
 
   <!-- Mobile hamburger toggle -->
@@ -51,11 +64,13 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
 
 <!-- Mobile nav dropdown (injected after header row) -->
 <div id="zdMobileNav" class="zd-mobile-nav" hidden>
-  <a href="/case-studies/">Case Studies Hub</a>
-  <a href="/case-studies/web-dev-design/">Web Dev Design</a>
-  <a href="/case-studies/seo/">SEO</a>
-  <a href="/case-studies/writer/">Writer</a>
-  <a href="/case-studies/data-analysis/">Data Analysis</a>
+  <a href="/case-studies/" data-nav-route="/case-studies/">Case Studies Hub</a>
+  <a href="/#demos" data-nav-route="/#demos">Live Interactive Demos</a>
+  <a href="/case-studies/web-dev-design/" data-nav-route="/case-studies/web-dev-design/">Web Dev Design</a>
+  <a href="/case-studies/seo/" data-nav-route="/case-studies/seo/">SEO</a>
+  <a href="/case-studies/writer/" data-nav-route="/case-studies/writer/">Writer</a>
+  <a href="/case-studies/data-analysis/" data-nav-route="/case-studies/data-analysis/">Data Analysis</a>
+  <a href="https://github.com/zadevpenseo/zadevpenseo.github.io" target="_blank" rel="noopener noreferrer">GitHub Repository ↗</a>
   <a href="/#inquiry" class="zd-mobile-cta">Initiate Project →</a>
 </div>
 
@@ -64,7 +79,7 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
   const mobileNav = document.getElementById('zdMobileNav');
   if (toggle && mobileNav) {
     toggle.addEventListener('click', () => {
-      const isOpen = mobileNav.hasAttribute('hidden') ? false : true;
+      const isOpen = !mobileNav.hasAttribute('hidden');
       if (isOpen) {
         mobileNav.setAttribute('hidden', '');
         toggle.setAttribute('aria-expanded', 'false');
@@ -80,6 +95,19 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
       });
     });
   }
+
+  // Active route highlighting
+  const currentPath = window.location.pathname;
+  document.querySelectorAll('.zd-nav-links a, .zd-mobile-nav a').forEach(link => {
+    const route = link.getAttribute('data-nav-route');
+    if (route && route !== '/#demos') {
+      if (route === '/case-studies/' && currentPath === '/case-studies/') {
+        link.setAttribute('aria-current', 'page');
+      } else if (route !== '/case-studies/' && currentPath.startsWith(route)) {
+        link.setAttribute('aria-current', 'page');
+      }
+    }
+  });
 
   // Ensure dynamic search inputs from Pagefind have explicit id and name attributes
   const ensureInputAttrs = () => {
@@ -163,9 +191,23 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
     transition: color var(--zd-duration-fast);
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   }
-  .zd-nav-links a:hover,
+  .zd-nav-links a:hover {
+    color: var(--zd-gold);
+  }
   .zd-nav-links a[aria-current="page"] {
     color: var(--zd-gold);
+    position: relative;
+  }
+  .zd-nav-links a[aria-current="page"]::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 15%;
+    right: 15%;
+    height: 2px;
+    background: var(--zd-gold);
+    border-radius: 2px;
+    box-shadow: 0 0 8px rgba(197, 160, 89, 0.5);
   }
 
   /* ─── CTA Button ─── */
@@ -186,6 +228,28 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
   .zd-btn-nav:hover {
     background: var(--zd-gold-hover);
     transform: translateY(-1px);
+  }
+
+  /* ─── GitHub Icon Button ─── */
+  .zd-github-btn {
+    background: var(--zd-bg-card);
+    border: 1px solid var(--zd-border);
+    color: var(--zd-gold);
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none !important;
+    transition: all var(--zd-duration-fast);
+    flex-shrink: 0;
+  }
+  .zd-github-btn:hover {
+    border-color: var(--zd-gold);
+    color: var(--zd-gold-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(197, 160, 89, 0.2);
   }
 
   /* ─── Hamburger ─── */

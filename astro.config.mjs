@@ -5,6 +5,13 @@ export default defineConfig({
   site: 'https://zadevpenseo.github.io',
   base: '/',
   trailingSlash: 'always',
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'hover',
+  },
+  build: {
+    inlineStylesheets: 'auto',
+  },
   integrations: [
     starlight({
       title: 'Zadit // Systems & Blueprints',
@@ -101,7 +108,36 @@ export default defineConfig({
             content: '#0d0b10',
           },
         },
-        // Google Fonts - Plus Jakarta Sans + JetBrains Mono (matches homepage)
+        {
+          tag: 'meta',
+          attrs: {
+            name: 'apple-mobile-web-app-capable',
+            content: 'yes',
+          },
+        },
+        {
+          tag: 'meta',
+          attrs: {
+            name: 'apple-mobile-web-app-status-bar-style',
+            content: 'black-translucent',
+          },
+        },
+        {
+          tag: 'link',
+          attrs: {
+            rel: 'manifest',
+            href: '/site.webmanifest',
+          },
+        },
+        // DNS Prefetch & Preconnect for Google Fonts
+        {
+          tag: 'link',
+          attrs: { rel: 'dns-prefetch', href: 'https://fonts.googleapis.com' },
+        },
+        {
+          tag: 'link',
+          attrs: { rel: 'dns-prefetch', href: 'https://fonts.gstatic.com' },
+        },
         {
           tag: 'link',
           attrs: { rel: 'preconnect', href: 'https://fonts.googleapis.com' },

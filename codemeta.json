@@ -1,0 +1,58 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "identifier": "zadevpenseo.github.io",
+  "name": "Zadit Systems Architecture & Technical Case Studies Vault",
+  "description": "Open-access systems architecture, applied mathematical modeling, empirical research, and fullstack edge engineering case study vault by Muhammad Khoiruzzadittaqwa (Zadit) under PT PRISMA DIGITAL KREATIF.",
+  "codeRepository": "https://github.com/zadevpenseo/zadevpenseo.github.io",
+  "url": "https://zadevpenseo.github.io",
+  "dateCreated": "2026-09-27",
+  "dateModified": "2026-09-28",
+  "datePublished": "2026-09-28",
+  "license": "https://spdx.org/licenses/MIT",
+  "programmingLanguage": [
+    "TypeScript",
+    "JavaScript",
+    "Python",
+    "Astro",
+    "CSS",
+    "HTML"
+  ],
+  "runtimePlatform": [
+    "Astro v5",
+    "Starlight",
+    "Node.js",
+    "Pagefind WASM"
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Muhammad",
+      "familyName": "Khoiruzzadittaqwa",
+      "alternateName": "Zadit",
+      "@id": "https://orcid.org/0000-0002-1594-9548",
+      "sameAs": [
+        "https://www.wikidata.org/wiki/Q141474900",
+        "https://scholar.google.com/citations?user=CbR250MAAAAJ",
+        "https://github.com/zadevpenseo"
+      ],
+      "affiliation": {
+        "@type": "Organization",
+        "name": "PT PRISMA DIGITAL KREATIF",
+        "sameAs": "https://www.wikidata.org/wiki/Q141474927"
+      }
+    }
+  ],
+  "keywords": [
+    "systems architecture",
+    "high level design",
+    "web performance",
+    "core web vitals",
+    "applied mathematics",
+    "rasch model",
+    "data analytics",
+    "seo engineering",
+    "astro",
+    "starlight"
+  ]
+}

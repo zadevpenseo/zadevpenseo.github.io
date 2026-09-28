@@ -9,7 +9,7 @@ import '../styles/homepage.css';
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zadit | Web Dev Design · SEO · Writer · Data Analysis</title>
-  <meta name="description" content="Official portfolio and engineering case studies of Muhammad Khoiruzzadittaqwa (Zadit) - Web Dev Design, SEO, Writer, and Data Analysis." />
+  <meta name="description" content="Official systems architecture vault and engineering case studies of Muhammad Khoiruzzadittaqwa (Zadit) - PT PRISMA DIGITAL KREATIF. Web Dev Design, SEO, Writer, and Data Analysis." />
   <meta name="author" content="Muhammad Khoiruzzadittaqwa (Zadit) - zadevpenseo" />
   <link rel="canonical" href="https://zadevpenseo.github.io/" />
   
@@ -17,16 +17,27 @@ import '../styles/homepage.css';
   <link rel="alternate" hreflang="en" href="https://zadevpenseo.github.io/" />
   <link rel="alternate" hreflang="x-default" href="https://zadevpenseo.github.io/" />
 
+  <!-- Resource Hints -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+  <link rel="manifest" href="/site.webmanifest" />
+
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://zadevpenseo.github.io/" />
   <meta property="og:title" content="Zadit | Web Dev Design · SEO · Writer · Data Analysis" />
   <meta property="og:description" content="Verifiable system designs, high-level architectures, and deterministic prototypes by Muhammad Khoiruzzadittaqwa (Zadit)." />
+  <meta property="og:image" content="https://zadevpenseo.github.io/og/systems-blueprints-card.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="Zadit // Systems & Blueprints" />
   <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:creator" content="@zadevpenseo" />
   <meta name="twitter:site" content="@zadevpenseo" />
+  <meta name="twitter:image" content="https://zadevpenseo.github.io/og/systems-blueprints-card.png" />
 
   <!-- GEO & AEO Search Engine Meta Directives -->
   <meta name="publisher" content="PT PRISMA DIGITAL KREATIF" />
@@ -34,7 +45,11 @@ import '../styles/homepage.css';
   <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
   <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large" />
 
-  <!-- Fonts are loaded via homepage.css @import -->
+  <!-- Instant Theme Sync (Prevent FOUC) -->
+  <script is:inline>
+    const savedTheme = localStorage.getItem('starlight-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.dataset.theme = savedTheme;
+  </script>
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -48,7 +63,7 @@ import '../styles/homepage.css';
         "alternateName": "Zadit",
         "identifier": "zadevpenseo",
         "url": "https://zadevpenseo.github.io/",
-        "jobTitle": "Web Dev Design, SEO, Writer, & Data Analysis Specialist",
+        "jobTitle": "Principal Systems Architect & Data Engineer",
         "email": "devapenseo@gmail.com",
         "sameAs": [
           "https://www.wikidata.org/wiki/Q141474900",
@@ -87,11 +102,36 @@ import '../styles/homepage.css';
       </a>
       <nav class="nav-links">
         <a href="/case-studies/">Case Studies Hub</a>
+        <a href="#demos">Live Demos</a>
         <a href="/case-studies/web-dev-design/">Web Dev</a>
         <a href="/case-studies/seo/">SEO</a>
         <a href="/case-studies/writer/">Writer</a>
         <a href="/case-studies/data-analysis/">Data Analysis</a>
         <a href="#inquiry" class="btn-nav">Initiate Project</a>
+        
+        <!-- Theme Toggle -->
+        <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle visual theme" title="Toggle Dark / Light Theme">
+          <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12C18 15.3137 15.3137 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM11 1H13V4H11V1ZM11 20H13V23H11V20ZM3.51472 4.92893L4.92893 3.51472L7.05025 5.63604L5.63604 7.05025L3.51472 4.92893ZM16.9497 18.364L18.364 16.9497L20.4853 19.0711L19.0711 20.4853L16.9497 18.364ZM1 11H4V13H1V11ZM20 11H23V13H20V11ZM4.92893 20.4853L3.51472 19.0711L5.63604 16.9497L7.05025 18.364L4.92893 20.4853ZM18.364 7.05025L16.9497 5.63604L19.0711 3.51472L20.4853 4.92893L18.364 7.05025Z"></path>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M10 7C10 10.866 13.134 14 17 14C18.0674 14 19.0772 13.7607 19.979 13.3315C19.2435 18.2323 15.0509 22 10 22C4.47715 22 0 17.5228 0 12C0 6.94912 3.76766 2.75653 8.66847 2.02096C8.23933 2.92284 8 3.93259 8 5C8 6.10457 8.89543 7 10 7Z" transform="translate(2, 1)"></path>
+          </svg>
+        </button>
+
+        <!-- GitHub Source Repository Link -->
+        <a 
+          href="https://github.com/zadevpenseo/zadevpenseo.github.io" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="github-nav-btn" 
+          aria-label="View source repository on GitHub" 
+          title="GitHub Repository: zadevpenseo/zadevpenseo.github.io"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+          </svg>
+        </a>
       </nav>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span>
@@ -103,24 +143,28 @@ import '../styles/homepage.css';
 
   <!-- Hero Section -->
   <main class="container">
-    <section class="hero">
+    <section class="hero" id="overview">
       <div class="hero-badge">
-        ✦ PT PRISMA DIGITAL KREATIF · Ground Truth Systems & Verifiable Architecture
+        <span class="pulse-dot"></span>
+        PT PRISMA DIGITAL KREATIF · Ground Truth Systems &amp; Verifiable Architecture
       </div>
       <h1>
         Zadit // Web Dev Design<br />
         <span>SEO · Writer · Data Analysis</span>
       </h1>
       <p class="hero-subtitle">
-        Verifiable engineering case studies: high-level architectures, failure-mode diagnostics, and working prototypes before production.
+        Verifiable systems architecture: deterministic High-Level Designs (HLD), failure-mode isolation, and deployable prototypes before production.
       </p>
       <div class="hero-cta">
-        <a href="/case-studies/" class="btn-primary">Explore All Case Studies</a>
-        <a href="/case-studies/methodology/" class="btn-ghost">Read 3-Tier Proof Manifesto</a>
+        <a href="/case-studies/" class="btn-primary">Explore All Case Studies →</a>
+        <a href="#demos" class="btn-secondary">🎮 Test Live Demos</a>
+        <a href="#methodology" class="btn-ghost">3-Tier Proof Manifesto</a>
       </div>
 
       <!-- Authority Badges -->
       <div class="authority-bar">
+        <a href="https://github.com/zadevpenseo/zadevpenseo.github.io" target="_blank" rel="noopener" class="badge-pill"><strong>GitHub</strong> Repo ★ Star</a>
+        <a href="https://github.com/zadevpenseo" target="_blank" rel="noopener" class="badge-pill"><strong>Profile</strong> @zadevpenseo</a>
         <a href="https://www.wikidata.org/wiki/Q141474900" target="_blank" rel="noopener" class="badge-pill"><strong>Wikidata</strong> Q141474900</a>
         <a href="https://orcid.org/0000-0002-1594-9548" target="_blank" rel="noopener" class="badge-pill"><strong>ORCID</strong> 0000-0002-1594-9548</a>
         <span class="badge-pill"><strong>NIB</strong> 1801250039976</span>
@@ -128,63 +172,199 @@ import '../styles/homepage.css';
         <span class="badge-pill"><strong>Scholar</strong> Peer-Reviewed Author</span>
         <span class="badge-pill badge-award">🏆 SEO National Award 3rd</span>
       </div>
+
+      <!-- Quick Section Jumpers -->
+      <nav class="section-nav-pills" aria-label="Quick section navigation">
+        <a href="#demos" class="section-pill">🎮 Live Demos (3)</a>
+        <a href="#pillars" class="section-pill">🏛️ The 4 Pillars (23)</a>
+        <a href="#methodology" class="section-pill">🛡️ 3-Tier Proof</a>
+        <a href="#inquiry" class="section-pill">📬 Initiate Project</a>
+      </nav>
     </section>
 
     <!-- Key Statistics -->
-    <section class="stats-bar">
+    <section class="stats-bar" id="stats">
       <div class="stat-item">
-        <div class="stat-value">&lt; 1.0s</div>
-        <div class="stat-label">Core Web Vitals LCP</div>
+        <div class="stat-value">&lt; 0.5s</div>
+        <div class="stat-label">Global Edge LCP</div>
       </div>
       <div class="stat-item">
         <div class="stat-value">140 SKS</div>
         <div class="stat-label">Math Education / GPA 3.71</div>
       </div>
       <div class="stat-item">
-        <div class="stat-value">40+</div>
-        <div class="stat-label">Bankable Financial Models</div>
+        <div class="stat-value">28+</div>
+        <div class="stat-label">Production Case Studies</div>
       </div>
       <div class="stat-item">
-        <div class="stat-value">5.0 / 5.0</div>
-        <div class="stat-label">Client Satisfaction Rating</div>
+        <div class="stat-value">100%</div>
+        <div class="stat-label">Deterministic Verification</div>
+      </div>
+    </section>
+
+    <!-- NEW: Standalone Interactive Demos & Prototypes Showcase -->
+    <section id="demos" class="demos-section">
+      <div class="section-badge">Executable Testbeds & Proofs of Concept</div>
+      <h2 class="section-title">Interactive Standalone Prototypes</h2>
+      <p class="section-desc">
+        Experience zero-dependency, deployable prototypes compiled with modern vector graphics, real-time audio synthesis, and headless PDF automation.
+      </p>
+
+      <div class="demos-grid">
+        
+        <!-- Demo 1: Jira Weekly Executive Report -->
+        <div class="demo-card">
+          <div class="demo-header">
+            <span class="demo-live-badge">● LIVE INTERACTIVE PROTOTYPE</span>
+            <h3>Jira Weekly Executive Report Automation</h3>
+            <p>
+              Serverless data engineering pipeline aggregating Jira Cloud sprint velocity, vector SVG burndowns, and developer workload variance into an executive A4 master PDF.
+            </p>
+            <div class="demo-tags">
+              <span class="demo-tag">Python 3.11</span>
+              <span class="demo-tag">Playwright</span>
+              <span class="demo-tag">Vector SVG</span>
+              <span class="demo-tag">Serverless Cron</span>
+            </div>
+          </div>
+          <div class="demo-actions">
+            <a href="/demos/jira-weekly-report/" target="_blank" rel="noopener" class="btn-demo-live">
+              Launch Standalone Demo ↗
+            </a>
+            <a href="/case-studies/data-analysis/jira-weekly-report-automation-40725359/" class="demo-hld-link">
+              Inspect 10-Step HLD Blueprint & Code Vault →
+            </a>
+          </div>
+        </div>
+
+        <!-- Demo 2: Aura Studio Animated Landing Engine -->
+        <div class="demo-card">
+          <div class="demo-header">
+            <span class="demo-live-badge">● LIVE INTERACTIVE PROTOTYPE</span>
+            <h3>Aura Studio Animated Landing Engine</h3>
+            <p>
+              Sub-25KB turnkey agency showcase featuring 60 FPS GPU-accelerated micro-interactions, 3D card tilt physics, CSS Grid accordion, and zero external CDN dependencies.
+            </p>
+            <div class="demo-tags">
+              <span class="demo-tag">Vanilla HTML5/CSS3</span>
+              <span class="demo-tag">GPU Compositing</span>
+              <span class="demo-tag">Sub-25KB</span>
+              <span class="demo-tag">Zero CDN</span>
+            </div>
+          </div>
+          <div class="demo-actions">
+            <a href="/demos/animated-landing/" target="_blank" rel="noopener" class="btn-demo-live">
+              Launch Standalone Demo ↗
+            </a>
+            <a href="/case-studies/web-dev-design/animated-landing-page-659928/" class="demo-hld-link">
+              Inspect 10-Step HLD Blueprint & Code Vault →
+            </a>
+          </div>
+        </div>
+
+        <!-- Demo 3: HeartCraft Multi-Sensory Greeting -->
+        <div class="demo-card">
+          <div class="demo-header">
+            <span class="demo-live-badge">● LIVE INTERACTIVE PROTOTYPE</span>
+            <h3>HeartCraft Multi-Sensory Greeting Engine</h3>
+            <p>
+              8-beat sensory web journey featuring Web Audio synthesizer, canvas particle physics, acoustic mic candle blow detection, and dual-device WebRTC remote wand pairing.
+            </p>
+            <div class="demo-tags">
+              <span class="demo-tag">Web Audio API</span>
+              <span class="demo-tag">Canvas Particles</span>
+              <span class="demo-tag">WebRTC Remote</span>
+              <span class="demo-tag">Mobile Sensory</span>
+            </div>
+          </div>
+          <div class="demo-actions">
+            <a href="/demos/birthday-card/?to=Sakshi" target="_blank" rel="noopener" class="btn-demo-live">
+              Launch Standalone Demo ↗
+            </a>
+            <a href="/case-studies/web-dev-design/interactive-birthday-card-web-656043/" class="demo-hld-link">
+              Inspect 10-Step HLD Blueprint & Code Vault →
+            </a>
+          </div>
+        </div>
+
       </div>
     </section>
 
     <!-- Bento Grid Pillars -->
-    <section>
+    <section id="pillars">
+      <div class="section-badge">Core Disciplines</div>
       <h2 class="section-title">The Four Specialized Canonical Pillars</h2>
       <p class="section-desc">
-        Explore structured High-Level Designs, Architecture Decision Records (ADRs), and live prototype walkthroughs across our core domains.
+        Explore structured High-Level Designs, Architecture Decision Records (ADRs), and live prototype walkthroughs across our core engineering domains.
       </p>
 
-      <div class="bento-grid">
+      <!-- Interactive Bento Filter Tabs -->
+      <div class="filter-tabs" id="bentoFilter">
+        <button type="button" class="filter-btn active" data-filter="all">All Blueprints (23)</button>
+        <button type="button" class="filter-btn" data-filter="web-dev-design">Web Dev Design (7)</button>
+        <button type="button" class="filter-btn" data-filter="seo">SEO (4)</button>
+        <button type="button" class="filter-btn" data-filter="writer">Writer (4)</button>
+        <button type="button" class="filter-btn" data-filter="data-analysis">Data Analysis (8)</button>
+      </div>
+
+      <div class="bento-grid" id="bentoGrid">
         
         <!-- Pillar 1: Web Dev Design -->
-        <div class="bento-card">
+        <div class="bento-card" data-category="web-dev-design">
           <div class="bento-header">
             <div class="bento-tag">Pillar 01 // Engineering</div>
             <h3>Web Dev Design</h3>
             <p>
-              High-performance edge architectures, responsive luxury UI/UX, and zero-server-cost deployments. Sub-second LCP, clean Elementor JSON, and WooCommerce rescue audits.
+              High-performance edge architectures, responsive luxury UI/UX, and zero-server-cost deployments. Sub-second LCP, clean Elementor JSON, and WooCommerce platform optimizations.
             </p>
+            <div class="bento-flagships">
+              <div class="bento-flagships-title">Verified Flagships:</div>
+              <a href="/case-studies/web-dev-design/gworky-edge-web-app/" class="bento-flagship-link">
+                <span>Gworky Edge Next.js Platform</span>
+                <span>↗</span>
+              </a>
+              <a href="/case-studies/web-dev-design/animated-landing-page-659928/" class="bento-flagship-link">
+                <span>Aura Studio 60 FPS Engine</span>
+                <span>↗</span>
+              </a>
+              <a href="/case-studies/web-dev-design/interactive-birthday-card-web-656043/" class="bento-flagship-link">
+                <span>HeartCraft Web Audio Synthesizer</span>
+                <span>↗</span>
+              </a>
+            </div>
           </div>
           <div class="bento-metric">
-            STATUS: 1.18s LCP on Cloudflare Edge | Zero VPS Bloat
+            STATUS: 1.18s LCP on Cloudflare Edge | Zero VPS Overhead
           </div>
           <div class="bento-footer">
-            <span class="case-count">4 Verified Blueprints</span>
+            <span class="case-count">7 Verified Blueprints</span>
             <a href="/case-studies/web-dev-design/" class="card-link">Explore Pillar →</a>
           </div>
         </div>
 
         <!-- Pillar 2: SEO -->
-        <div class="bento-card">
+        <div class="bento-card" data-category="seo">
           <div class="bento-header">
             <div class="bento-tag">Pillar 02 // Organic Growth</div>
             <h3>SEO</h3>
             <p>
               Programmatic SEO engines compiling dynamic JSON payloads at scale, deep GA4/GSC technical audits, Generative Engine Optimization (GEO/AEO), and semantic knowledge graphs.
             </p>
+            <div class="bento-flagships">
+              <div class="bento-flagships-title">Verified Flagships:</div>
+              <a href="/case-studies/seo/programmatic-seo-scale-engine/" class="bento-flagship-link">
+                <span>Programmatic Edge Scale Engine</span>
+                <span>↗</span>
+              </a>
+              <a href="/case-studies/seo/technical-seo-vidio-tirto-audit/" class="bento-flagship-link">
+                <span>Technical Audit & GA4 Diagnostic</span>
+                <span>↗</span>
+              </a>
+              <a href="/case-studies/seo/knowledge-graph-entity-architecture/" class="bento-flagship-link">
+                <span>Wikidata Tri-Node Knowledge Graph</span>
+                <span>↗</span>
+              </a>
+            </div>
           </div>
           <div class="bento-metric">
             STATUS: 3rd Place National Award | 50+ Geo Hubs
@@ -196,13 +376,28 @@ import '../styles/homepage.css';
         </div>
 
         <!-- Pillar 3: Writer -->
-        <div class="bento-card">
+        <div class="bento-card" data-category="writer">
           <div class="bento-header">
             <div class="bento-tag">Pillar 03 // Advisory & Literature</div>
             <h3>Writer</h3>
             <p>
               High-stakes executive business proposals, bankable 5-year cash-flow models, 16:9 native PowerPoint pitch decks, peer-reviewed scientific papers (APA 7th), and multimedia scripts.
             </p>
+            <div class="bento-flagships">
+              <div class="bento-flagships-title">Verified Flagships:</div>
+              <a href="/case-studies/writer/executive-pitch-decks-jcg-partnership/" class="bento-flagship-link">
+                <span>Executive Pitch Decks (JCG Partnership)</span>
+                <span>↗</span>
+              </a>
+              <a href="/case-studies/writer/business-feasibility-financial-models/" class="bento-flagship-link">
+                <span>Bankable Feasibility & Cash-Flow Models</span>
+                <span>↗</span>
+              </a>
+              <a href="/case-studies/writer/peer-reviewed-empirical-publishing/" class="bento-flagship-link">
+                <span>Peer-Reviewed Empirical Publishing (APA 7)</span>
+                <span>↗</span>
+              </a>
+            </div>
           </div>
           <div class="bento-metric">
             STATUS: 40+ Feasibility Proposals | Zero Em-Dash
@@ -214,19 +409,34 @@ import '../styles/homepage.css';
         </div>
 
         <!-- Pillar 4: Data Analysis -->
-        <div class="bento-card">
+        <div class="bento-card" data-category="data-analysis">
           <div class="bento-header">
             <div class="bento-tag">Pillar 04 // Mathematics & Automation</div>
             <h3>Data Analysis</h3>
             <p>
               Mathematical modeling, psychometric survey validation (Rasch & Aiken), stealth Chrome DevTools Protocol (CDP) scraping, and high-precision financial simulations.
             </p>
+            <div class="bento-flagships">
+              <div class="bento-flagships-title">Verified Flagships:</div>
+              <a href="/case-studies/data-analysis/jira-weekly-report-automation-40725359/" class="bento-flagship-link">
+                <span>Jira Weekly Report Automation (Playwright)</span>
+                <span>↗</span>
+              </a>
+              <a href="/case-studies/data-analysis/power-bi-power-query-etl-650821/" class="bento-flagship-link">
+                <span>Enterprise Power BI & Power Query ETL</span>
+                <span>↗</span>
+              </a>
+              <a href="/case-studies/data-analysis/psychometric-survey-validation-rasch/" class="bento-flagship-link">
+                <span>Psychometric Validation (Rasch & Aiken)</span>
+                <span>↗</span>
+              </a>
+            </div>
           </div>
           <div class="bento-metric">
             STATUS: Advanced Statistics (89.8 / A-) | Exact Decimal
           </div>
           <div class="bento-footer">
-            <span class="case-count">5 Verified Blueprints</span>
+            <span class="case-count">8 Verified Blueprints</span>
             <a href="/case-studies/data-analysis/" class="card-link">Explore Pillar →</a>
           </div>
         </div>
@@ -234,7 +444,40 @@ import '../styles/homepage.css';
       </div>
     </section>
 
-    <!-- Interactive Asynchronous Lead Form -->
+    <!-- NEW: The 3-Tier Proof Methodology Flywheel Section -->
+    <section id="methodology" class="proof-section">
+      <div class="section-badge">Methodology & Governance</div>
+      <h2 class="section-title">The 3-Tier Adaptive Proof Paradigm</h2>
+      <p class="section-desc">
+        We eliminate generic portfolio misalignment through deterministic proof before committing to production:
+      </p>
+
+      <div class="proof-grid">
+        <div class="proof-card">
+          <div class="proof-tier-label">Tier 01 · Highest Relevance</div>
+          <h4>Case-Specific HLD & Prototype</h4>
+          <p>
+            Architectural High-Level Design (HLD 10-step: requirements, components, API contracts, scalability, trade-offs) and working code prototypes built specifically for the client's problem space.
+          </p>
+        </div>
+        <div class="proof-card">
+          <div class="proof-tier-label">Tier 02 · Industry Grounding</div>
+          <h4>Practitioner & Open-Source Benchmark</h4>
+          <p>
+            Deep analysis of engineering consensus from AWS reference architectures, Reddit and StackOverflow developer forums, and open-source standards to validate reliability.
+          </p>
+        </div>
+        <div class="proof-card">
+          <div class="proof-tier-label">Tier 03 · Precedent Match</div>
+          <h4>Historical Proof Bank</h4>
+          <p>
+            Selective citation of precedent case studies only when domain alignment is 100% exact. We never force unrelated historical artifacts onto new technical challenges.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Refined Asynchronous Project Inquiry Desk -->
     <section id="inquiry" class="lead-section">
       <div class="lead-header">
         <h2>Initiate an Architecture Review or Project Scope</h2>
@@ -259,25 +502,50 @@ import '../styles/homepage.css';
               <option value="web-dev-design">Web Dev Design (Performance, Full-Stack, UI/UX)</option>
               <option value="seo">SEO (Programmatic, Technical Audit, GEO/AEO)</option>
               <option value="writer">Writer (Pitch Decks, Business Feasibility, Research)</option>
-              <option value="data-analysis">Data Analysis (Mathematical Modeling, Scraping, Stats)</option>
+              <option value="data-analysis">Data Analysis (Mathematical Modeling, Automation, Stats)</option>
             </select>
           </div>
         </div>
 
         <div class="form-group" style="margin-bottom: 1.5rem;">
-          <label for="project_scope">Core Bottleneck, Deliverable Scope, or Link to Tender</label>
-          <textarea id="project_scope" name="project_scope" rows="4" class="form-control" placeholder="Describe the failure modes, current tech stack, target timeline, or paste your RFP / job post URL..." required></textarea>
+          <label for="project_scope">Core Bottleneck, Deliverable Scope, or Technical Challenge</label>
+          <textarea id="project_scope" name="project_scope" rows="4" class="form-control" placeholder="Describe the engineering challenge, tech stack, deliverables, or target timeline..." required></textarea>
         </div>
 
         <button type="submit" class="btn-primary" style="border: none; cursor: pointer;">
           Transmit Project Brief Directly to Engineering Desk →
         </button>
+
+        <!-- Direct Email Fast-Track & Reassurance -->
+        <div class="copy-email-bar">
+          <button type="button" id="copyEmailBtn" class="btn-copy-email" title="Click to copy direct email address">
+            <span>devapenseo@gmail.com</span>
+            <span>📋 Copy Address</span>
+          </button>
+          <span id="copyFeedback" class="copy-feedback">✓ Email copied to clipboard!</span>
+          <div class="trust-markers">
+            <span class="trust-item">⏱️ 24h Review SLA</span>
+            <span class="trust-item">🔒 Direct Senior Architect Review</span>
+            <span class="trust-item">📐 Strict Confidentiality</span>
+          </div>
+        </div>
       </form>
     </section>
   </main>
 
-  <!-- Client-side Scripts: Mobile Nav & Secure Inquiry Dispatch -->
+  <!-- Client-side Scripts: Mobile Nav, Theme Toggle, Bento Filter & Secure Inquiry Dispatch -->
   <script>
+    // Theme Toggle Handler
+    const themeBtn = document.getElementById('themeToggle');
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+        const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+        document.documentElement.dataset.theme = nextTheme;
+        localStorage.setItem('starlight-theme', nextTheme);
+      });
+    }
+
     // Mobile Nav Toggle
     const toggle = document.getElementById('navToggle');
     const navLinks = document.querySelector('.nav-links');
@@ -294,7 +562,70 @@ import '../styles/homepage.css';
       });
     }
 
-    // Secure Asynchronous Inquiry Dispatch (Zero Mixed-Content Warning)
+    // Interactive Bento Filter Handler
+    const filterContainer = document.getElementById('bentoFilter');
+    const bentoCards = document.querySelectorAll('.bento-card');
+    if (filterContainer && bentoCards.length > 0) {
+      filterContainer.addEventListener('click', (e) => {
+        const target = e.target;
+        if (target instanceof HTMLButtonElement && target.hasAttribute('data-filter')) {
+          const filter = target.getAttribute('data-filter');
+          filterContainer.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+          target.classList.add('active');
+
+          bentoCards.forEach(card => {
+            if (card instanceof HTMLElement) {
+              const category = card.getAttribute('data-category');
+              if (filter === 'all' || category === filter) {
+                card.style.display = 'flex';
+              } else {
+                card.style.display = 'none';
+              }
+            }
+          });
+        }
+      });
+    }
+
+    // Scroll-Spy for Quick Section Navigation Pills
+    const sectionPills = document.querySelectorAll('.section-pill');
+    const sections = ['demos', 'pillars', 'methodology', 'inquiry'].map(id => document.getElementById(id)).filter(Boolean);
+    if ('IntersectionObserver' in window && sectionPills.length > 0 && sections.length > 0) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            sectionPills.forEach(pill => {
+              if (pill.getAttribute('href') === `#${id}`) {
+                pill.classList.add('active');
+              } else {
+                pill.classList.remove('active');
+              }
+            });
+          }
+        });
+      }, { rootMargin: '-20% 0px -60% 0px' });
+      sections.forEach(sec => observer.observe(sec));
+    }
+
+    // One-Click Direct Email Copy
+    const copyBtn = document.getElementById('copyEmailBtn');
+    const feedback = document.getElementById('copyFeedback');
+    if (copyBtn && feedback) {
+      copyBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText('devapenseo@gmail.com');
+          feedback.classList.add('show');
+          setTimeout(() => {
+            feedback.classList.remove('show');
+          }, 2500);
+        } catch {
+          window.location.href = 'mailto:devapenseo@gmail.com';
+        }
+      });
+    }
+
+    // Secure Asynchronous Inquiry Dispatch
     const inquiryForm = document.getElementById('inquiryForm');
     if (inquiryForm) {
       inquiryForm.addEventListener('submit', (e) => {
@@ -325,7 +656,7 @@ import '../styles/homepage.css';
         © 2026 <strong>Muhammad Khoiruzzadittaqwa (Zadit)</strong>. Published under <strong>PT PRISMA DIGITAL KREATIF</strong>.
       </p>
       <p class="footer-meta">
-        NIB: 1801250039976 · TDPSE Kominfo: 017014.01/DJAI.PSE/01/2025 · Cirebon, Indonesia · <a href="/case-studies/">Explore Case Studies Vault</a>
+        NIB: 1801250039976 · TDPSE Kominfo: 017014.01/DJAI.PSE/01/2025 · Cirebon, Indonesia · <a href="https://github.com/zadevpenseo/zadevpenseo.github.io" target="_blank" rel="noopener noreferrer">GitHub Repository</a> · <a href="https://github.com/zadevpenseo" target="_blank" rel="noopener noreferrer">GitHub Profile</a> · <a href="/case-studies/">Explore Case Studies Vault</a> · <a href="/site.webmanifest">Webmanifest</a>
       </p>
     </div>
   </footer>
