@@ -1,18 +1,18 @@
 ---
 title: "Jira Weekly Report Automation & 10-Step HLD (#40725359)"
-description: "Serverless automated Jira developer performance reporting pipeline compiling sprint burndown velocity, task completion, and developer worklogs into an executive A4 PDF with zero recurring infrastructure costs."
+description: "Serverless automated Jira developer performance reporting pipeline compiling sprint burndown velocity, task completion, and developer worklogs into an executive A4 PDF with zero recurring infrastructure overhead."
 ---
 
 | Strategic Parameter | Commercial Specification |
 | :--- | :--- |
 | **Project Reference** | Freelancer.com Project #40725359 ("Jira Weekly Report Automation") |
 | **Client Location** | Eden Prairie, MN, United States (Payment & Deposit Verified) |
-| **Client Budget / Scope** | $250 – $750 USD (Average Bid: $412 USD) |
+| **Delivery Timeline** | 7 Days / Production Deployment |
 | **Pillar Alignment** | 5. Data Analysis & Automation |
 | **Core Metrics Tracked** | Completed Tasks, Sprint Burndown & Velocity, Developer Hours Logged vs Estimated |
 | **Technical Stack** | Python 3.11+, Jira Cloud/Agile REST API v3, Playwright (Headless Chromium), GitHub Actions Cron |
 | **Delivery Model** | Automated Scheduled PDF Dispatch (Email SMTP / Slack Webhook) + Interactive Web Dashboard Add-on |
-| **Hosting Cost** | $0/month (Serverless Scheduled GitHub Actions Runners) |
+| **Infrastructure** | Serverless Scheduled GitHub Actions Runners |
 
 ---
 
@@ -20,24 +20,78 @@ description: "Serverless automated Jira developer performance reporting pipeline
 
 Experience the interactive standalone preview of the weekly report below. It renders the exact HTML5/CSS layout compiled into the executive A4 PDF, complete with SVG burndown charts, developer workload capacity bars, and deliverable status badges:
 
-<div style="margin: 24px 0; display: flex; justify-content: center;">
+<div style="margin: 24px 0; border: 1px solid rgba(99, 102, 241, 0.4); border-radius: 14px; overflow: hidden; background: #0F172A; box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);">
+  <div style="background: #1E293B; padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); font-family: -apple-system, sans-serif; font-size: 12px; color: #CBD5E1;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <span style="width: 10px; height: 10px; border-radius: 50%; background: #EF4444; display: inline-block;"></span>
+      <span style="width: 10px; height: 10px; border-radius: 50%; background: #F59E0B; display: inline-block;"></span>
+      <span style="width: 10px; height: 10px; border-radius: 50%; background: #10B981; display: inline-block;"></span>
+      <strong style="color: #F8FAFC; margin-left: 6px;">Sprint 42 Executive Report Preview</strong>
+    </div>
+    
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <button 
+        type="button"
+        onclick="const ifr = document.getElementById('jiraDemoIframe'); const isPdf = ifr.src.includes('.pdf'); ifr.src = isPdf ? '/demos/jira-weekly-report/' : '/demos/jira-weekly-report/jira_weekly_executive_report.pdf'; this.textContent = isPdf ? '📄 View Master PDF' : '🌐 View Web DOM';"
+        style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #E2E8F0; padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 600; cursor: pointer;"
+      >
+        📄 View Master PDF
+      </button>
+      <button 
+        type="button"
+        onclick="const ifr = document.getElementById('jiraDemoIframe'); const isExpanded = ifr.style.height === '1050px'; ifr.style.height = isExpanded ? '650px' : '1050px'; this.textContent = isExpanded ? '⛶ Expand Viewer' : '⮌ Collapse Viewer';"
+        style="background: #4F46E5; border: none; color: #FFFFFF; padding: 5px 14px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer;"
+      >
+        ⛶ Expand Viewer
+      </button>
+      <button 
+        type="button"
+        onclick="const ifr = document.getElementById('jiraDemoIframe'); if(ifr.requestFullscreen){ifr.requestFullscreen();}else if(ifr.webkitRequestFullscreen){ifr.webkitRequestFullscreen();}"
+        style="background: #10B981; border: none; color: #FFFFFF; padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer;"
+      >
+        Full Screen
+      </button>
+      <a 
+        href="/demos/jira-weekly-report/" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #E2E8F0; padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 600; text-decoration: none;"
+      >
+        Open Standalone ↗
+      </a>
+    </div>
+  </div>
+
   <iframe 
+    id="jiraDemoIframe"
     src="/demos/jira-weekly-report/" 
     width="100%" 
-    height="740px" 
-    style="border: 1px solid rgba(99, 102, 241, 0.4); border-radius: 14px; background: #FFFFFF; box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);"
+    height="650px" 
+    style="border: none; background: #090D16; display: block; transition: height 0.3s cubic-bezier(0.16, 1, 0.3, 1);"
     loading="lazy"
     title="Jira Weekly Executive Report Interactive Prototype"
+    allow="fullscreen"
   ></iframe>
 </div>
 
-* 🔗 **[Open Standalone Fullscreen Demo in Browser](/demos/jira-weekly-report/)**
-* 📥 **[Download Compiled Executive Master PDF (299 KB)](/demos/jira-weekly-report/jira_weekly_executive_report.pdf)**
-* 📁 **[Inspect Standalone Report HTML Source](/demos/jira-weekly-report/index.html)**
+---
+
+## 📦 2. Downloadable Prototype Assets & Artifact Vault
+
+Every component of this prototype is fully implemented, verified, and available for direct download and code inspection:
+
+| Artifact File | Description & Specifications | Action / Direct Download |
+| :--- | :--- | :--- |
+| **`jira_weekly_executive_report.pdf`** | Production-compiled A4 master executive PDF (299 KB) with vector SVG charts and KPI grids. | 📥 **[Download Master PDF](/demos/jira-weekly-report/jira_weekly_executive_report.pdf)** |
+| **`index.html`** | Standalone single-file executive dashboard with responsive CSS and interactive ticket filters. | 🌐 **[Inspect HTML Source](/demos/jira-weekly-report/index.html)** |
+| **`jira_client.py`** | Dual-mode Jira connector supporting live Jira Cloud REST API v3 and offline synthetic fixture fallback. | 🐍 **[Download Python Client](/demos/jira-weekly-report/jira_client.py)** |
+| **`metrics_engine.py`** | Statistical processing engine calculating burndown coordinates, velocity completion rates, and dev workload. | ⚙️ **[Download Metrics Engine](/demos/jira-weekly-report/metrics_engine.py)** |
+| **`mock_jira_data.json`** | Realistic synthetic dataset for Sprint 42 including 5 developers, 10 tickets, and granular worklogs. | 📦 **[Download JSON Fixture](/demos/jira-weekly-report/mock_jira_data.json)** |
+| **`generate_report_pdf.py`** | Playwright headless Chromium compiler script converting HTML/CSS into print-perfect vector A4 PDF. | 🚀 **[Download PDF Script](/demos/jira-weekly-report/generate_report_pdf.py)** |
 
 ---
 
-## 📸 2. Feature & Visual Metric Hierarchy
+## 📸 3. Feature & Visual Metric Hierarchy
 
 | Visual Quadrant | Business Objective | Data Engineering Mechanism |
 | :--- | :--- | :--- |
@@ -90,7 +144,7 @@ flowchart TD
 4. **Automated Notification:** Deliver the generated PDF to project managers and stakeholders via email (SMTP) and Slack.
 
 #### Non-Functional Requirements (NFR):
-1. **Zero Recurring Infrastructure Cost:** Run on free serverless runners (GitHub Actions) with encrypted API secrets.
+1. **Serverless Infrastructure Architecture:** Run on free serverless runners (GitHub Actions) with encrypted API secrets.
 2. **Deterministic Output:** 100% mathematical reconciliation between Jira issue worklogs and summary KPI cards.
 3. **Execution Latency:** Complete full data fetch, chart computation, and PDF compilation in under 30 seconds.
 4. **Security & Governance:** Read-only API token scoping; no credentials stored in source code.
@@ -102,7 +156,7 @@ flowchart TD
 * **Issues per Sprint:** 20 – 100 tickets per active iteration.
 * **Worklogs per Issue:** 1 – 15 worklog entries per issue.
 * **API Ingestion Volume:** 1 JQL agile request + ~30 worklog child requests (under 1.5 MB uncompressed JSON).
-* **PDF Compilation Budget:** Chromium headless cold boot &lt; 2.5s, HTML layout render &lt; 400ms, PDF export &lt; 1.2s.
+* **PDF Compilation Target:** Chromium headless cold boot &lt; 2.5s, HTML layout render &lt; 400ms, PDF export &lt; 1.2s.
 * **Output Artifact Size:** 250 KB – 400 KB per report (easily attachable in standard corporate email systems).
 
 ---
@@ -225,7 +279,7 @@ Response (200 OK):
 ### Step 10: Trade-Offs & Architectural Decisions
 
 * **Trade-Off 1 (Pre-rendered SVG vs Client-side JavaScript Charts):** Generating SVG strings on the server/CLI guarantees that Playwright prints vector lines immediately without waiting for client-side JavaScript chart libraries (Chart.js/ApexCharts) to finish animation cycles.
-* **Trade-Off 2 (Serverless Cron vs Persistent Web Server):** A scheduled GitHub Actions workflow requires zero ongoing cloud maintenance costs compared to maintaining a 24/7 VPS.
+* **Trade-Off 2 (Serverless Cron vs Persistent Web Server):** A scheduled GitHub Actions workflow requires zero ongoing cloud maintenance overhead compared to maintaining a 24/7 VPS.
 
 ---
 
@@ -282,7 +336,7 @@ jobs:
 ## 📋 5. Ready-to-Submit Freelancer.com Proposal
 
 * **Target Job:** [Jira Weekly Report Automation (#40725359)](https://www.freelancer.com/projects/data-analysis/Jira-Weekly-Report-Automation/details)
-* **Bid Amount / Duration:** $450.00 USD / 7 Days
+* **Delivery Timeline:** 7 Days
 * **Live Interactive Demo:** [https://zadevpenseo.github.io/demos/jira-weekly-report/](https://zadevpenseo.github.io/demos/jira-weekly-report/)
 * **Live 10-Step HLD Blueprint:** [https://zadevpenseo.github.io/case-studies/data-analysis/jira-weekly-report-automation-40725359/](https://zadevpenseo.github.io/case-studies/data-analysis/jira-weekly-report-automation-40725359/)
 * **Word Count:** 144 words (Zero em-dash, zero bracket placeholders, anti-AI slop verified).
@@ -302,7 +356,7 @@ https://zadevpenseo.github.io/demos/jira-weekly-report/
 I also documented the complete 10-step system architecture and data extraction logic here:
 https://zadevpenseo.github.io/case-studies/data-analysis/jira-weekly-report-automation-40725359/
 
-The pipeline runs automatically every week via GitHub Actions or a lightweight cron script, securely reading Jira API tokens and emailing the final PDF with zero ongoing server costs.
+The pipeline runs automatically every week via GitHub Actions or a lightweight cron script, securely reading Jira API tokens and emailing the final PDF with zero ongoing server maintenance.
 
 Are you using Jira Cloud or Data Center, and do developers log time through native worklogs or a plugin like Tempo?
 

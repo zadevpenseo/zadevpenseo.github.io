@@ -6,7 +6,7 @@ description: "Turnkey creative agency landing page featuring pure Vanilla HTML5,
 | Strategic Parameter | Commercial Specification |
 | :--- | :--- |
 | **Project Reference** | Truelancer Project #659928 ("Simple Animated Landing Page Development") |
-| **Client Budget / Scope** | $10 USD (~₹850 - ₹900 INR) / 24-Hour Delivery |
+| **Delivery Timeline** | 24-Hour Rapid Production |
 | **Pillar Alignment** | 1. Web Dev Design |
 | **Design Concept** | AURA STUDIO: Editorial Luxury Creative Agency Showcase |
 | **Technical Stack** | Pure Vanilla HTML5, CSS3, Native ECMAScript (Zero CDN, Zero Bundler Dependencies) |
@@ -44,7 +44,7 @@ Experience the complete live landing page below. Test the theme accent switcher 
 | **Infinite Marquee** | Hardware-Accelerated Ticker | Pure CSS `@keyframes marquee` utilizing `translate3d(-50%, 0, 0)` with pause-on-hover interaction. |
 | **Work Showcase** | 3D Perspective Tilt & Radial Mouse Spotlight | Mathematical normalized coordinate tracking `rotateX`/`rotateY` with `perspective(1000px)`; dynamic `--mouse-x` and `--mouse-y` radial gradient. |
 | **Capabilities Section** | Fluid Variable-Height Accordion | Modern CSS Grid transition (`grid-template-rows: 0fr` to `1fr`) eliminating layout recalculation jank. |
-| **Project Inquiry** | Reactive Floating Form & Budget Pills | Floating labels via `:placeholder-shown` CSS selectors; client-side validation with keyframe shake feedback and simulated receipt state. |
+| **Project Inquiry** | Reactive Floating Form & Project Scope Selector | Floating labels via `:placeholder-shown` CSS selectors; client-side validation with keyframe shake feedback and simulated receipt state. |
 
 ---
 
@@ -93,9 +93,9 @@ graph TD
 
 ### Step 2: Estimate & Assume (Back-of-the-Envelope Calculations)
 
-* **Target Page Budget:** &lt; 30 KB HTML/CSS/JS.
-* **Network Latency Budget:** FCP &lt; 400ms globally over standard mobile networks.
-* **Frame Timing Budget:** Each animation frame must compute within 16.6 milliseconds (or 8.3ms on 120Hz ProMotion displays) to prevent dropped frames.
+* **Target Page Payload:** &lt; 30 KB HTML/CSS/JS.
+* **Network Latency Target:** FCP &lt; 400ms globally over standard mobile networks.
+* **Frame Timing Target:** Each animation frame must compute within 16.6 milliseconds (or 8.3ms on 120Hz ProMotion displays) to prevent dropped frames.
 * **Memory Footprint:** &lt; 15 MB heap allocation in Chrome DevTools memory profiler.
 
 ---
@@ -162,7 +162,7 @@ Request Payload:
 {
   "client_name": "Elena Rostova",
   "client_email": "elena@example.com",
-  "budget_tier": "$50 - $200",
+  "tier": "Standard Commercial",
   "project_scope": "Redesign corporate portfolio with modern CSS animations.",
   "submitted_at": "2026-09-28T09:00:00Z"
 }
@@ -180,7 +180,7 @@ Response (200 OK):
 
 | Option | Pros | Cons | Decision |
 | :--- | :--- | :--- | :--- |
-| **Pure Vanilla HTML/CSS/JS** | Zero dependencies, instant loading, 100% portable, zero security vulnerabilities in supply chain. | Requires manual math for complex timeline orchestration. | **Selected:** Ideal for high-speed landing pages and client budget. |
+| **Pure Vanilla HTML/CSS/JS** | Zero dependencies, instant loading, 100% portable, zero security vulnerabilities in supply chain. | Requires manual math for complex timeline orchestration. | **Selected:** Ideal for high-speed landing pages and lean operational footprints. |
 | **GSAP + ScrollTrigger** | Powerful timeline sequencing and physics easing. | ~65 KB additional download, commercial licensing restrictions for SaaS products. | **Rejected:** Overkill for lightweight landing pages. |
 | **Next.js / React** | Rich component ecosystem and state management. | Massive bundle size (>150 KB JS runtime), hydration delays on low-end devices. | **Rejected:** Unnecessary overhead for marketing pages. |
 
@@ -223,7 +223,7 @@ Response (200 OK):
 ## 📋 4. Ready-to-Submit Truelancer Proposal
 
 * **Target Job:** [Simple Animated Landing Page Development (#659928)](https://www.truelancer.com/freelance-project/simple-animated-landing-page-development-659928)
-* **Offered Price / Delivery:** $10 USD (or ₹850 INR) / 1 Business Day
+* **Turnaround Duration:** 1 Business Day
 * **Live Prototype:** [https://zadevpenseo.github.io/demos/animated-landing/](https://zadevpenseo.github.io/demos/animated-landing/)
 * **Verified Word Count:** 149 words
 * **Invariants Verified:** Zero em-dash, zero bracket placeholders, anti-AI slop compliance.

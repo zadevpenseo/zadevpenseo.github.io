@@ -1,0 +1,129 @@
+{
+  "sprint": {
+    "id": 42,
+    "name": "Sprint 42 - Core Platform Modernization",
+    "state": "active",
+    "startDate": "2026-09-21T09:00:00.000Z",
+    "endDate": "2026-09-28T18:00:00.000Z",
+    "goal": "Finalize real-time analytics streaming, resolve critical security patches, and optimize edge response latencies."
+  },
+  "developers": [
+    { "id": "dev_01", "name": "Alex Morgan", "role": "Senior Backend Engineer" },
+    { "id": "dev_02", "name": "Elena Rostova", "role": "Lead Frontend Architect" },
+    { "id": "dev_03", "name": "David Chen", "role": "DevOps & Cloud Engineer" },
+    { "id": "dev_04", "name": "Sarah Jenkins", "role": "Full-Stack Engineer" },
+    { "id": "dev_05", "name": "Marcus Vance", "role": "QA Automation Specialist" }
+  ],
+  "issues": [
+    {
+      "key": "CORE-101",
+      "summary": "Implement Redis edge caching layer for dashboard API",
+      "type": "Story",
+      "status": "Done",
+      "assignee": "Alex Morgan",
+      "story_points": 5,
+      "original_estimate_hours": 16,
+      "time_spent_hours": 14.5,
+      "completed_at": "2026-09-24T15:30:00.000Z"
+    },
+    {
+      "key": "CORE-102",
+      "summary": "Fix race condition in concurrent WebSocket sessions",
+      "type": "Bug",
+      "status": "Done",
+      "assignee": "Alex Morgan",
+      "story_points": 3,
+      "original_estimate_hours": 8,
+      "time_spent_hours": 9.0,
+      "completed_at": "2026-09-25T11:00:00.000Z"
+    },
+    {
+      "key": "CORE-103",
+      "summary": "Refactor navigation shell with responsive drawer component",
+      "type": "Story",
+      "status": "Done",
+      "assignee": "Elena Rostova",
+      "story_points": 8,
+      "original_estimate_hours": 24,
+      "time_spent_hours": 22.0,
+      "completed_at": "2026-09-26T17:00:00.000Z"
+    },
+    {
+      "key": "CORE-104",
+      "summary": "Migrate Docker compose definitions to Helm chart templates",
+      "type": "Task",
+      "status": "Done",
+      "assignee": "David Chen",
+      "story_points": 5,
+      "original_estimate_hours": 16,
+      "time_spent_hours": 15.0,
+      "completed_at": "2026-09-25T16:45:00.000Z"
+    },
+    {
+      "key": "CORE-105",
+      "summary": "Implement OAuth2 PKCE flow for mobile web integration",
+      "type": "Story",
+      "status": "Done",
+      "assignee": "Sarah Jenkins",
+      "story_points": 5,
+      "original_estimate_hours": 16,
+      "time_spent_hours": 17.5,
+      "completed_at": "2026-09-27T14:20:00.000Z"
+    },
+    {
+      "key": "CORE-106",
+      "summary": "Automate end-to-end Cypress regression suite for checkout",
+      "type": "Task",
+      "status": "Done",
+      "assignee": "Marcus Vance",
+      "story_points": 5,
+      "original_estimate_hours": 16,
+      "time_spent_hours": 16.0,
+      "completed_at": "2026-09-26T12:00:00.000Z"
+    },
+    {
+      "key": "CORE-107",
+      "summary": "Upgrade Next.js framework to version 15.2 with Turbopack",
+      "type": "Task",
+      "status": "In Progress",
+      "assignee": "Elena Rostova",
+      "story_points": 5,
+      "original_estimate_hours": 16,
+      "time_spent_hours": 12.0,
+      "completed_at": null
+    },
+    {
+      "key": "CORE-108",
+      "summary": "Optimize database indexing for slow transactional queries",
+      "type": "Task",
+      "status": "In Progress",
+      "assignee": "Alex Morgan",
+      "story_points": 3,
+      "original_estimate_hours": 8,
+      "time_spent_hours": 6.5,
+      "completed_at": null
+    },
+    {
+      "key": "CORE-109",
+      "summary": "Configure Prometheus alerting rules for Kubernetes ingress",
+      "type": "Task",
+      "status": "In Review",
+      "assignee": "David Chen",
+      "story_points": 3,
+      "original_estimate_hours": 8,
+      "time_spent_hours": 7.0,
+      "completed_at": null
+    },
+    {
+      "key": "CORE-110",
+      "summary": "Investigate memory leak on client report export service",
+      "type": "Bug",
+      "status": "In Review",
+      "assignee": "Sarah Jenkins",
+      "story_points": 3,
+      "original_estimate_hours": 8,
+      "time_spent_hours": 10.5,
+      "completed_at": null
+    }
+  ]
+}

@@ -108,7 +108,7 @@ graph TD
   * Optimized WebP Photo: ~120 KB
   * Total per Card: ~122 KB
   * Monthly New Storage: 50,000 * 122 KB ≈ 6.1 GB/month
-  * 3-Year Storage Accumulation: ≈ 220 GB (trivial, costing under $3 per month on Cloudflare R2).
+  * 3-Year Storage Accumulation: ≈ 220 GB (efficiently maintained on Cloudflare R2).
 * **Bandwidth & Egress:**
   * Engine bundle size: 35 KB gzipped.
   * Monthly CDN Egress: 210,000 * (35 KB + 120 KB) ≈ 32.5 GB/month (100% within free CDN tiers).
@@ -229,7 +229,7 @@ CREATE TABLE card_views (
 | **Client Frontend** | Vanilla HTML5 / Canvas / Web Audio | Zero framework overhead (35KB vs 400KB Next.js bundle); enables sub-second FCP on mobile networks. |
 | **Edge Compute** | Cloudflare Workers (V8 Isolates) | 0ms cold starts across 300+ cities vs 500ms AWS Lambda cold boots. |
 | **Database** | Cloudflare D1 (Serverless SQLite) | Globally replicated read-replicas located directly at edge PoPs for 5ms lookups. |
-| **Object Store** | Cloudflare R2 | Zero egress bandwidth fees, slashing image delivery costs by 95% compared to AWS S3. |
+| **Object Store** | Cloudflare R2 | Zero egress bandwidth fees, eliminating image delivery egress bottlenecks compared to AWS S3. |
 | **Real-time P2P** | WebRTC DataChannels + PeerJS | Direct client-to-client encrypted transmission with 0 ongoing server compute load. |
 
 ---
@@ -263,12 +263,12 @@ CREATE TABLE card_views (
 
 ---
 
-### Step 10: Review & Trade-offs (CAP, Cost & Simplicity)
+### Step 10: Review & Trade-offs (CAP, Efficiency & Simplicity)
 
 * **CAP Theorem Position:** **AP (Availability and Partition Tolerance)** over CP. When viewing an anniversary or birthday card, delivering the card immediately without delay is far more critical than strict cross-continent read-after-write consistency.
-* **Financial Model & Infrastructure Cost:**
-  * Running 50,000 monthly active cards on this serverless edge architecture costs **under $15.00 per month total** (Cloudflare Workers Paid Tier + R2 storage).
-  * Selling cards at $3.00 to $9.00 each delivers **over 98% gross profit margins**.
+* **Operational Scale & Resource Model:**
+  * Running 50,000 monthly active cards on this serverless edge architecture maintains lean resource consumption using Cloudflare Workers and R2 storage.
+  * Optimized asset bundling delivers high scalability with minimal operational overhead.
 
 ---
 
