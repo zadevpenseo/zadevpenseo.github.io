@@ -1,170 +1,289 @@
 ---
-title: "HeartCraft-Style 8-Beat Mobile Birthday Card Architecture (#656043)"
-description: "Turnkey mobile-first interactive birthday greeting engine featuring an 8-beat sensory journey, one-handed thumb ergonomics, and zero-dependency web audio synthesis."
+title: "HeartCraft 8-Beat Mobile Birthday Card & HLD Architecture (#656043)"
+description: "Turnkey mobile-first interactive birthday greeting engine featuring an 8-beat sensory journey, dual-device WebRTC remote triggering, and a comprehensive 10-step High-Level System Design (HLD)."
 ---
 
 | Strategic Parameter | Commercial Specification |
 | :--- | :--- |
 | **Project Reference** | Truelancer Project #656043 |
 | **Product Benchmark** | [HeartCraft](https://myheartcraft.com/) & [birthday.myheartcraft.com](https://birthday.myheartcraft.com/home) |
-| **Interaction Model** | 8-Beat Mobile-First Journey (Portrait Lock, 100dvh, Thumb-Zone CTA) |
+| **Interaction Model** | 8-Beat Sensory Journey + Dual-Device WebRTC Magic Wand (`?role=remote`) |
+| **Multi-Sensory Triggers** | Tap, Real-Time Acoustic Mic Blow, Device Accelerometer Shake, and Haptic Feedback |
 | **Core Architecture** | Vanilla HTML5/CSS3, Canvas Physics, Web Audio Synthesizer, Declarative Config JSON |
 | **Commercial Turnaround** | 24 Hours / Ready for Re-skinning into Multiple Market Niches |
-| **Delivery Package** | Reusable Scene State Machine + 1 Production Theme + Re-skinnable `config.js` |
+| **Delivery Package** | Reusable Scene State Machine + 4 Curated Themes + Personalization Studio Drawer |
 
 ---
 
-## 🎮 1. Live Interactive Demonstration (8-Beat HeartCraft Engine)
+## 🎮 1. Live Interactive Demonstration & Visual Previews
 
-Experience the complete 8-beat mobile journey below. Tap through the envelope seal, pop the balloons, blow out the candles, slice the cake, read the typewriter letter, and copy the personal sharing link:
+Experience the complete 8-beat mobile sensory journey below. Tap through the wax seal, pop the balloons, blow out the candles with your microphone, slice the multi-tier cake, read the handwritten linen letter, and test the smartphone remote:
 
 <div style="margin: 24px 0; display: flex; justify-content: center;">
   <iframe 
     src="/demos/birthday-card/?to=Sakshi" 
     width="100%" 
     max-width="430px"
-    height="660px" 
+    height="670px" 
     style="border: 1px solid rgba(197, 160, 89, 0.35); border-radius: 20px; background: #0d0b10; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);"
     loading="lazy"
     title="HeartCraft 8-Beat Interactive Birthday Card Live Demo"
   ></iframe>
 </div>
 
-> [!TIP]
-> **Mobile User?** [Open Fullscreen Mobile Experience](/demos/birthday-card/?to=Sakshi) *(Locks directly to your viewport with zero scroll interference).*
+### Quick Template & Builder Links:
+* 🌟 **[Launch Sakshi 24th (Midnight Gold)](/demos/birthday-card/?to=Sakshi&theme=midnight-gold)**
+* 🌹 **[Launch Rose Champagne & Velvet](/demos/birthday-card/?to=Elena&theme=rose-champagne)**
+* ⚡ **[Launch Cyber Synthwave 90s](/demos/birthday-card/?to=Alex&theme=cyber-neon)**
+* ✏️ **[Open Personalization Studio Drawer directly (`?edit=1`)](/demos/birthday-card/?edit=1)**
 
 ---
 
-## 💼 2. Business Value: Why 8-Beat Journey Cards Outsell Static E-Cards
+## 📸 2. Visual Design & Sensory Beat Previews
 
-Modern consumers do not want static digital greeting cards. Flat JPEG images and pre-rendered MP4 video attachments suffer from immediate attention drop-off: recipients look at them for 4 seconds, tap close, and forget them.
+The platform replaces generic placeholders with bespoke luxury assets and physical physics animations:
 
-HeartCraft proved that interactive web cards command premium pricing ($5 - $15 per link) because they transform a greeting into an **interactive tactile experience**.
-
-### The 4 Commercial Advantages of the 8-Beat Engine:
-
-1. **Micro-Dopamine Pacing (4x Retention):**  
-   Instead of overwhelming the user with a wall of text, the card guides the recipient through 8 bite-sized sensory beats. Each action (popping a balloon, blowing a candle, slicing cake) rewards the user with audio feedback and particle visuals.
-2. **One Engine, Infinite Niche Themes (High Margin Agency Model):**  
-   All content and colors are decoupled into a single declarative configuration file (`config.js`). A creator or agency can resell this exact engine across dozens of lucrative verticals (Kids Pastel, Midnight Gold Luxury, Bollywood, Retro Pixel, Romantic Anniversary) by changing only 10 lines of JSON.
-3. **Frictionless Web Link Delivery (No App Download):**  
-   Recipients open the card directly in Safari iOS or Chrome Android from WhatsApp, iMessage, or Instagram DMs. No App Store installs, no accounts, and no barriers.
-4. **Zero Ongoing Server Costs:**  
-   Pure client-side execution allows the card to be hosted on free edge tiers (GitHub Pages, Cloudflare Pages, Netlify) with sub-second Time to Interactive and zero recurring compute bills.
+| Beat | Sensory Visual Element | Technical Implementation |
+| :--- | :--- | :--- |
+| **Beat 1** | **Envelope with Wax Seal & Calligraphy Labels** | Direct recipient and sender calligraphy on the envelope flap with pulsating wax seal. |
+| **Beat 2** | **Floating Balloons & Confetti Bursts** | Physics-based particle explosions at touch coordinates with audio pop cues. |
+| **Beat 4** | **Vintage Film Polaroid with Washi Tape** | High-definition portraiture, realistic paper drop shadow, and sparkle particle burst upon tap. |
+| **Beat 5** | **Multi-Tier 3D Birthday Cake & Candles** | Acoustic microphone breath detection via Web Audio API FFT analyser to extinguish real flames. |
+| **Beat 6** | **Dynamic Cake Cutting Physics** | Knife sweeps diagonally, cleanly splitting a triangular cake slice with cream filling reveal. |
+| **Beat 7** | **Luxury Linen Letterhead with Wax Monogram** | Authentic character-by-character typewriter tick audio, skip button, and cursive signature. |
+| **Remote** | **Dual-Device WebRTC Magic Wand** | Smartphone tactile pad with haptic vibration (`navigator.vibrate`) and accelerometer shake blast. |
 
 ---
 
-## 🗺️ 3. The 8-Beat Interaction Journey Matrix
+## 🏛️ 3. Comprehensive 10-Step High-Level System Design (HLD)
 
-Our engine implements an unbroken linear state machine (`idle -> playing -> complete -> next`):
+To scale this product from a standalone single-card demo into a high-margin greeting card SaaS platform (handling millions of viral shares during holidays), we designed a robust, enterprise-grade architecture:
 
-| Beat # | Scene Name | Primary User Gesture | Technical Mechanism & Sensory Feedback |
-| :--- | :--- | :--- | :--- |
-| **Beat 1** | **Envelope & Wax Seal** | Tap Seal (Bottom 30% Thumb Reach) | Pulsating SVG wax seal, click sound, transition to stage. |
-| **Beat 2** | **Floating Balloons** | Tap Each Balloon to Pop | Balloon pop sound effect, targeted confetti particle explosion at origin. |
-| **Beat 3** | **Celebration Burst** | Automated Milestone Reveal | Full-canvas gravitational confetti surge, celebratory C-Major arpeggio. |
-| **Beat 4** | **Memory Polaroid** | Tap / Swipe Photo Card | Nostalgic photo frame presentation with cursive typography. |
-| **Beat 5** | **Birthday Cake & Candles** | Tap Candles (or Mic Fallback) | Flickering CSS flame extinguishing, smoke chime audio cue. |
-| **Beat 6** | **Cake Cutting** | Swipe / Tap Golden Knife | Knife slice animation with festive icing reveal. |
-| **Beat 7** | **Typewriter Letter** | Watch or Tap Screen to Fast-Forward | Authentic character-by-character typewriter cadence with sound ticks. |
-| **Beat 8** | **Finale & Viral Share** | One-Click Share / Replay | Instant URL generation with query parameters (`?to=Name`), replay loop. |
-
----
-
-## ⚙️ 4. Declarative Architecture (`cardConfig.js`)
-
-To enable rapid white-labeling, the entire card is driven by a clean, single-point configuration object:
-
-```javascript
-const cardConfig = {
-  // Recipient Metadata
-  name: "Sakshi",
-  age: 24,
-  sender: "Zadit",
-
-  // Theme Variables
-  theme: "midnight-gold", // Options: midnight-gold, pastel-kids, cottagecore, bollywood
-  primaryColor: "#c5a059",
-  backgroundColor: "#0d0b10",
-
-  // Personalized Content
-  cakeText: "Happy Birthday, Sakshi!",
-  letter: "May your new year bring courageous beginnings, quiet peace, and extraordinary joy in every milestone you reach. Thank you for bringing warmth and light to everyone around you.",
-  
-  // Audio & Animation Flags
-  enableChimes: true,
-  confettiParticleCount: 70
-};
+```mermaid
+graph TD
+    UserSender[Creator / Sender Client] -->|1. Create & Customize| EdgeCDN[Cloudflare Anycast CDN]
+    UserRecipient[Recipient Mobile Browser] -->|2. Open /c/:slug| EdgeCDN
+    PhoneRemote[Smartphone Magic Wand] -->|3. Scan QR / Pair Remote| EdgeCDN
+    
+    EdgeCDN -->|Static Assets & Pre-rendered Cards| CacheKV[(Cloudflare KV / Edge Cache)]
+    EdgeCDN -->|Dynamic API Requests| APIGateway[API Gateway / Edge Router]
+    
+    APIGateway --> CardService[Personalization & Card Service]
+    APIGateway --> MediaWorker[Asset Optimization Worker]
+    APIGateway --> SignalingHub[WebRTC Signaling Broker]
+    
+    CardService --> Database[(Cloudflare D1 / PostgreSQL)]
+    MediaWorker --> ObjectStorage[(Cloudflare R2 Object Store)]
+    SignalingHub <--> PhoneRemote
+    SignalingHub <--> UserRecipient
 ```
 
 ---
 
+### Step 1: Understand Requirements (FR & NFR)
+
+#### Functional Requirements (FR):
+1. **Template Catalog & Customizer:** Senders can browse curated templates (Midnight Gold, Rose Champagne, Cyber Neon, Pastel), customize recipient name, age, custom photos, cake icing, and letter text.
+2. **Instant Live Preview:** Senders see updates in real time with sub-10ms render latency.
+3. **URL Slug Shortening & Sharing:** Generates clean short-links (`/c/sakshi-24`) and QR codes for WhatsApp, iMessage, and Instagram.
+4. **Dual-Device WebRTC Remote Control:** Senders or party hosts can pair their smartphone to control the recipient's big-screen display without installing apps.
+5. **Multi-Sensory Hardware Triggers:** Microphone breath detection for blowing candles and device accelerometer shake for confetti bursts.
+
+#### Non-Functional Requirements (NFR):
+1. **Low Latency:** Time to First Byte (TTFB) < 100ms globally; remote control action latency < 50ms via P2P DataChannels.
+2. **High Availability:** 99.99% uptime with multi-region CDN failover.
+3. **Frictionless Recipient UX:** Recipients must never be blocked by login walls, paywalls, or app installation prompts.
+4. **Data Privacy & Security:** Senders' personal photos and letters are encrypted at rest with optional ephemeral auto-expiration (e.g., delete photos after 30 days).
+
 ---
 
-## 🤖 5. The Two-Track Agentic Workflow (Rive CLI vs Host Web Engine)
+### Step 2: Estimate & Assume (Back-of-the-Envelope Calculations)
 
-To enable autonomous coding agents (Claude Code, Cursor, Antigravity) to maintain and scale templates without breaking runtime behavior, the architecture strictly separates vector state-machine authoring from web narrative orchestration:
+* **Monthly Active Creators (Senders):** 50,000 new cards created per month.
+* **Viral Coefficient ($k$-factor):** 4.2 views per card (recipient + family/friends at celebration) = 210,000 views/month.
+* **Peak Traffic:** Holiday peaks (New Year, Valentine's, Diwali) drive 3x average traffic:
+  $$\text{Peak QPS} = \frac{210,000 \times 3}{30 \times 24 \times 3600} \approx 25 \text{ requests/sec (with surge spikes up to 120 RPS)}$$
+* **Storage Requirements:**
+  * Card Configuration JSON: ~2 KB
+  * Optimized WebP Photo: ~120 KB
+  * Total per Card: ~122 KB
+  * Monthly New Storage: $50,000 \times 122\text{ KB} \approx 6.1\text{ GB/month}$
+  * 3-Year Storage Accumulation: $\approx 220\text{ GB}$ (trivial, costing <$3/month on Cloudflare R2).
+* **Bandwidth & Egress:**
+  * Engine bundle size: 35 KB gzipped.
+  * Monthly CDN Egress: $210,000 \times (35\text{ KB} + 120\text{ KB}) \approx 32.5\text{ GB/month}$ (100% within free CDN tiers).
 
-```text
-┌────────────────────────────────────────────────────────┐
-│  Track A: Vector Asset Authoring (Rive CLI + RML)      │
-│  - Text-based RML (Rive Markup Language) + Luau        │
-│  - Headless QA: rive --verify && rive --screenshot     │
-│  - Outputs clean, production-grade .riv binary assets   │
-└──────────────────────────┬─────────────────────────────┘
-                           │
-                 [Frozen State Contracts]
-                 ├── Triggers: pop | blow | open | cut
-                 ├── Booleans: isLit | isOpen
-                 └── Out Events: opened | allOut | sliced
-                           │
-┌──────────────────────────▼─────────────────────────────┐
-│  Track B: Narrative Host Engine (Web DOM + Audio)      │
-│  - 8-Beat Scene State Machine in Vite / Astro          │
-│  - Web Audio AnalyserNode (blowDetector.js)            │
-│  - Lightweight Canvas Confetti & DOM Typewriter Letter │
-└────────────────────────────────────────────────────────┘
+---
+
+### Step 3: High-Level Architecture
+
+The system decouples read-heavy viral delivery from write-heavy creation:
+1. **Edge CDN Layer:** Caches pre-rendered static shells and assets across 300+ edge locations worldwide.
+2. **API Gateway & Router:** Validates authentication, enforces rate-limiting, and routes requests to edge microservices.
+3. **Personalization Service:** Handles card CRUD, slug generation, and cryptographic signature validation.
+4. **Media Optimization Worker:** Ingests raw user photo uploads, strips EXIF privacy data, and resizes/converts into WebP/AVIF formats asynchronously.
+5. **Real-Time Signaling Broker:** Provides STUN/TURN ICE negotiation and fallback WebSocket pub/sub for multi-device synchronization.
+
+---
+
+### Step 4: Data Design (Database Schema)
+
+We implement a relational schema optimized for sub-millisecond primary key lookups and analytics logging:
+
+```sql
+-- 1. Cards Table (Core Personalization Payload)
+CREATE TABLE cards (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    slug VARCHAR(64) UNIQUE NOT NULL,
+    creator_id UUID REFERENCES users(id) ON DELETE SET NULL,
+    recipient_name VARCHAR(100) NOT NULL,
+    sender_name VARCHAR(100) NOT NULL,
+    milestone_age INT DEFAULT 24,
+    theme_id VARCHAR(32) NOT NULL DEFAULT 'midnight-gold',
+    cake_text VARCHAR(120),
+    letter_body TEXT,
+    photo_r2_key VARCHAR(255),
+    is_password_protected BOOLEAN DEFAULT FALSE,
+    password_hash VARCHAR(255),
+    expires_at TIMESTAMPTZ,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Index for instant edge slug lookup
+CREATE INDEX idx_cards_slug ON cards(slug);
+
+-- 2. Templates & Themes Table
+CREATE TABLE templates (
+    id VARCHAR(32) PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    category VARCHAR(50) NOT NULL, -- 'birthday', 'anniversary', 'party'
+    primary_color VARCHAR(10) NOT NULL,
+    soundscape_preset VARCHAR(50) NOT NULL,
+    frozen_contracts JSONB NOT NULL,
+    is_active BOOLEAN DEFAULT TRUE
+);
+
+-- 3. Card View Events (Telemetry & Conversion)
+CREATE TABLE card_views (
+    id BIGSERIAL PRIMARY KEY,
+    card_id UUID REFERENCES cards(id) ON DELETE CASCADE,
+    device_type VARCHAR(20), -- 'mobile_ios', 'mobile_android', 'desktop'
+    remote_paired BOOLEAN DEFAULT FALSE,
+    candles_blown_via VARCHAR(20), -- 'microphone', 'touch', 'remote'
+    duration_seconds INT,
+    viewed_at TIMESTAMPTZ DEFAULT NOW()
+);
 ```
 
-### Frozen Contracts Specification (`contracts.js`)
-By freezing interaction tokens, AI agents generate asset variations (e.g., swapping balloons for floating lanterns) without touching or breaking the host web code:
+---
 
-```javascript
-export const RIVE_CONTRACTS = {
-  inputs: {
-    triggers: ['pop', 'blow', 'open', 'cut', 'celebrate'],
-    booleans: ['isLit', 'isOpen'],
-    numbers: ['cutProgress', 'balloonCount']
-  },
-  events: ['opened', 'popped', 'allOut', 'sliced', 'done'],
-  viewModel: ['recipientName', 'age', 'themeColor']
-};
+### Step 5: API Design (RESTful & Real-Time Contracts)
+
+#### 1. Create Personalized Card
+* **Endpoint:** `POST /api/v1/cards`
+* **Request Payload:**
+```json
+{
+  "recipientName": "Sakshi",
+  "senderName": "Zadit",
+  "age": 24,
+  "theme": "midnight-gold",
+  "cakeText": "Happy 24th, Sakshi!",
+  "letter": "May your new year bring extraordinary joy...",
+  "photoAssetKey": "uploads/temp-photo-uuid.webp"
+}
+```
+* **Response (201 Created):**
+```json
+{
+  "slug": "sakshi-24",
+  "shareableUrl": "https://card.domain/c/sakshi-24",
+  "qrCodeUrl": "https://card.domain/qr/sakshi-24.svg",
+  "expiresAt": "2026-10-28T00:00:00Z"
+}
+```
+
+#### 2. Get Published Card
+* **Endpoint:** `GET /api/v1/cards/:slug`
+* **Caching Header:** `Cache-Control: public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800`
+
+#### 3. Real-Time Remote Signaling (WebRTC / WebSocket Fallback)
+* **Endpoint:** `WSS /api/v1/rooms/:roomId`
+* **Payload Structure:**
+```json
+{
+  "type": "ACTION",
+  "sender": "remote-controller",
+  "action": "blow_candles",
+  "timestamp": 1790559600000
+}
 ```
 
 ---
 
-## 🛡️ 6. Mobile Ergonomics & Technical Safeguards
+### Step 6: Technology Stack & Architectural Trade-offs
 
-* **Viewport Height Stabilization:** Uses modern `100dvh` and `-webkit-fill-available` CSS declarations to eliminate the notorious mobile Safari bottom address bar jumping bug.
-* **Audio Autoplay Unlock:** Complies with iOS/Android strict media policies by unlocking the Web Audio API context on the first user pointer-down interaction.
-* **Microphone Blow Detection with Tap Fallback:** Uses `getUserMedia` with an RMS volume energy threshold to detect real candle blows, while seamlessly falling back to direct touch for users who decline microphone permissions.
-* **Zero Heavy External Dependencies:** The entire engine runs in vanilla JavaScript without GSAP or external MP3s, weighing under 35KB and loading instantly even on spotty 3G mobile networks.
-* **Touch-Action Lock:** Prevents accidental page pull-to-refresh and rubber-band bounce, keeping the user immersed in the 8-beat experience.
+| Component | Selected Technology | Why Chosen & Key Trade-off |
+| :--- | :--- | :--- |
+| **Client Frontend** | Vanilla HTML5 / Canvas / Web Audio | Zero framework overhead (35KB vs 400KB Next.js bundle); enables sub-second FCP on mobile networks. |
+| **Edge Compute** | Cloudflare Workers (V8 Isolates) | 0ms cold starts across 300+ cities vs 500ms AWS Lambda cold boots. |
+| **Database** | Cloudflare D1 (Serverless SQLite) | Globally replicated read-replicas located directly at edge PoPs for 5ms lookups. |
+| **Object Store** | Cloudflare R2 | Zero egress bandwidth fees, slashing image delivery costs by 95% compared to AWS S3. |
+| **Real-time P2P** | WebRTC DataChannels + PeerJS | Direct client-to-client encrypted transmission with 0 ongoing server compute load. |
 
 ---
 
-## 📦 7. Deliverables & Commercial Terms
+### Step 7: Scalability & Performance
+
+1. **Edge HTML Ingestion:** Static card HTML is compiled once and pushed to Cloudflare KV. Recipient hits receive pre-rendered HTML in under 45ms.
+2. **Zero Audio Bandwidth:** Audio stems are synthesized mathematically via oscillators in Web Audio API rather than downloading heavy MP3 sound files.
+3. **Progressive Image Delivery:** Polaroid portraits are served with blur-hash placeholders and responsive `srcset` (AVIF/WebP).
+
+---
+
+### Step 8: Reliability & Availability
+
+1. **Multi-Region Anycast:** DNS traffic routes to the nearest operational data center with automatic BGP failover.
+2. **P2P with Fallback:** If WebRTC peer connection fails due to symmetric NAT or corporate firewall, signaling automatically degrades to lightweight WebSocket broadcast channels.
+3. **Idempotent Card Creation:** Senders pass an `Idempotency-Key` header to prevent double charges and duplicate link generation upon intermittent mobile connections.
+
+---
+
+### Step 9: Monitoring & Observability
+
+* **Three Pillars:**
+  * **Logs:** Structured JSON emitted to Cloudflare Logpush and Datadog.
+  * **Metrics:** Prometheus scrape endpoints monitoring P95 render latency, WebRTC pairing success rate, and mic blow recognition rates.
+  * **Traces:** OpenTelemetry spans tracking requests from edge ingestion through D1 database queries.
+* **SLO Targets:**
+  * Global Card Render Availability: **99.95%**
+  * P99 Time to First Contentful Paint: **< 800ms**
+  * Remote Command Latency: **< 60ms**
+
+---
+
+### Step 10: Review & Trade-offs (CAP, Cost & Simplicity)
+
+* **CAP Theorem Position:** **AP (Availability and Partition Tolerance)** over CP. When viewing an anniversary or birthday card, delivering the card immediately without delay is far more critical than strict cross-continent read-after-write consistency.
+* **Financial Model & Infrastructure Cost:**
+  * Running 50,000 monthly active cards on this serverless edge architecture costs **under $15.00 / month total** (Cloudflare Workers Paid Tier + R2 storage).
+  * Selling cards at $3.00 to $9.00 each delivers **>98% gross profit margins**.
+
+---
+
+## 📦 4. Deliverables & Commercial Terms
 
 When commissioning this template deliverable:
-1. **Full Turnkey Source Code:** Production-ready, clean vanilla HTML/CSS/JS single-bundle engine.
-2. **Two-Track Agent Scaffolding:** Complete `rive/` directory with `AGENTS.md` and RML templates, alongside the `web/` host runtime.
-3. **Modular Theme Tokens:** Easily swappable CSS variables and `cardConfig.js` schema.
-4. **Live Demonstration Guarantee:** Fully tested across iOS Safari, Android Chrome, and modern desktop browsers.
-5. **All Commercial Rights Transferred:** 100% white-label ready for your platform or agency client delivery.
+1. **Full Turnkey Source Code:** Production-ready, clean vanilla HTML/CSS/JS single-bundle engine with zero external build requirements.
+2. **Interactive Personalization Studio:** Complete visual drawer with local photo upload, live theme switcher, and JSON code generator.
+3. **Dual-Device WebRTC Magic Wand:** Full pairing modal, dynamic QR generator, and remote mobile controller pad.
+4. **Complete 10-Step HLD Documentation:** White-label architecture blueprint ready for investor pitch decks and enterprise scaling.
+5. **Full Commercial Rights Transfer:** 100% white-label ready for your platform or agency client deployment.
 
 ---
 
-## 🤝 8. Ready to Launch Your Template?
+## 🤝 5. Ready to Launch Your Template?
 
 * **Truelancer Portal:** Award the milestone through the official project thread to begin immediate delivery.
 * **Direct Engineering Consultation:** `devapenseo@gmail.com`

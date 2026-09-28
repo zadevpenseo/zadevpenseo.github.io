@@ -326,6 +326,17 @@
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.08); }
     }
+    .envelope-label {
+      position: absolute;
+      font-family: 'Caveat', cursive;
+      color: var(--gold-light);
+      font-size: 1.15rem;
+      pointer-events: none;
+      z-index: 3;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+    }
+    .envelope-label.top { top: 10px; left: 16px; }
+    .envelope-label.btm { bottom: 10px; right: 16px; font-size: 1rem; color: #e6c887; opacity: 0.9; }
 
     /* BEAT 2: Balloons */
     .balloons-area {
@@ -980,10 +991,15 @@
         <p class="scene-sub">A personal celebration curated exclusively for <span class="recipient-name-tag">Sakshi</span>.</p>
       </div>
       <div class="envelope-box">
+        <div class="envelope-label top">For: <span class="recipient-name-tag">Sakshi</span></div>
         <div class="wax-seal" onclick="nextScene()"><span>💌</span></div>
+        <div class="envelope-label btm">With Love, <span id="env-sender-tag">Zadit</span></div>
       </div>
       <div class="thumb-zone">
         <button class="btn-action" onclick="nextScene()">Tap Wax Seal to Open</button>
+        <button class="btn-action" style="background: rgba(255,255,255,0.08); color: var(--gold-light); border: 1px solid rgba(197, 160, 89, 0.4); height: 44px; font-size: 0.86rem;" onclick="openStudioModal()">
+          ✏️ Personalize Card First (Foto, Nama, Tema)
+        </button>
         <span class="hint-text">Or trigger hands-free from paired phone</span>
       </div>
     </div>
@@ -1225,6 +1241,9 @@
 
     const signature = document.getElementById('letter-signature-text');
     if (signature) signature.textContent = cardConfig.from;
+
+    const envSender = document.getElementById('env-sender-tag');
+    if (envSender) envSender.textContent = cardConfig.from;
 
     const finale = document.getElementById('finale-title');
     if (finale) finale.textContent = `Cheers to ${cardConfig.to}!`;
@@ -1692,6 +1711,9 @@
   window.addEventListener('load', () => {
     applyConfigToDOM();
     initP2P();
+    if (urlParams.get('edit') === '1' || urlParams.get('customize') === '1' || urlParams.get('create') === '1') {
+      openStudioModal();
+    }
   });
 </script>
 </body>
