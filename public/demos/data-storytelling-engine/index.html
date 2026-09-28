@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Executive Data Storytelling & Visual Explainer Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Plotly.js for Story-First Interactive Visualizations -->
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <style>
+    :root {
+      --bg-base: #0B0813;
+      --bg-surface: #140F22;
+      --bg-elevated: #1F1735;
+      --bg-highlight: #2C214B;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(139, 92, 246, 0.35);
+      --accent-violet: #8B5CF6;
+      --accent-emerald: #10B981;
+      --accent-amber: #F59E0B;
+      --accent-rose: #F43F5E;
+      --accent-cyan: #06B6D4;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* Header Bar */
+    header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge-live {
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--accent-violet);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-secondary {
+      background: var(--bg-elevated);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-highlight);
+      border-color: var(--border-accent);
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      padding: 24px;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Scenario & 4-Test Control Strip */
+    .top-controls-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+
+    @media (max-width: 900px) {
+      .top-controls-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .scenario-picker {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .label-meta {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .scenario-btn {
+      background: var(--bg-elevated);
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .scenario-btn.active {
+      background: rgba(139, 92, 246, 0.2);
+      border-color: var(--accent-violet);
+      color: var(--text-main);
+    }
+
+    .test-pill-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .test-pill {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: var(--bg-elevated);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--accent-emerald);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .test-pill::before {
+      content: '✓';
+      font-weight: bold;
+    }
+
+    /* The 6-Stage Narrative Arc Stepper */
+    .arc-stepper-container {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+
+    .arc-stepper-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .stepper-track {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+    }
+
+    @media (max-width: 800px) {
+      .stepper-track {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .stepper-step {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: left;
+    }
+
+    .stepper-step:hover {
+      background: var(--bg-highlight);
+    }
+
+    .stepper-step.active {
+      background: rgba(139, 92, 246, 0.2);
+      border-color: var(--accent-violet);
+      box-shadow: 0 0 16px rgba(139, 92, 246, 0.2);
+    }
+
+    .step-num {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent-violet);
+      font-weight: 700;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .step-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: block;
+    }
+
+    /* Core Workspace Grid */
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 20px;
+    }
+
+    @media (max-width: 1080px) {
+      .workspace-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Chart Card */
+    .chart-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-height: 520px;
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .chart-headline {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+
+    .chart-subhead {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .chart-canvas-wrap {
+      flex: 1;
+      width: 100%;
+      min-height: 380px;
+      position: relative;
+    }
+
+    #plotly-chart {
+      width: 100%;
+      height: 100%;
+      min-height: 380px;
+    }
+
+    /* Narrative Sidebar Card */
+    .narrative-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .narrative-title {
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent-violet);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .takeaway-box {
+      background: rgba(139, 92, 246, 0.1);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 1.45;
+      font-weight: 600;
+      color: #EDE9FE;
+    }
+
+    .takeaway-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent-amber);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .narrative-prose {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .bullets-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-main);
+      letter-spacing: 0.04em;
+      margin-top: 4px;
+    }
+
+    .narrative-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .narrative-bullets li {
+      font-size: 13px;
+      color: #CBD5E1;
+      position: relative;
+      padding-left: 18px;
+      line-height: 1.45;
+    }
+
+    .narrative-bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent-cyan);
+      font-weight: bold;
+    }
+
+    .cta-card {
+      margin-top: auto;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-accent);
+      padding: 14px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cta-label {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--accent-emerald);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .cta-text {
+      font-size: 12px;
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    /* Footer Meta */
+    footer {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-subtle);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand-wrap">
+      <div class="brand-title">
+        <span>EXECUTIVE DATA STORYTELLING ENGINE</span>
+        <span class="badge-live">STORY-FIRST VIZ</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-secondary" id="btn-toggle-noise">
+        <span>Toggle Raw Noise vs Story Focus</span>
+      </button>
+      <button class="btn-secondary" id="btn-export-brief">
+        <span>Export Executive Brief</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Scenario Selection and Quality Tests Bar -->
+    <section class="top-controls-grid">
+      <div class="scenario-picker">
+        <span class="label-meta">Dataset Scenario:</span>
+        <button class="scenario-btn active" data-scenario="saas">SaaS Onboarding vs Churn Inflection</button>
+        <button class="scenario-btn" data-scenario="k8s">Cloud Memory Creep vs Invoice Shock</button>
+        <button class="scenario-btn" data-scenario="ecommerce">LCP Web Vitals vs Cart Abandonment</button>
+      </div>
+      <div class="test-pill-group">
+        <span class="test-pill">Story Test (1 Sentence)</span>
+        <span class="test-pill">Intuition Test (<5s Comprehension)</span>
+        <span class="test-pill">Concision Test (Zero Legend Noise)</span>
+        <span class="test-pill">Honesty Test (Causal Ground Truth)</span>
+      </div>
+    </section>
+
+    <!-- 6-Stage Narrative Arc Stepper -->
+    <section class="arc-stepper-container">
+      <div class="arc-stepper-header">
+        <span class="label-meta">The 6-Stage Narrative Arc Progression</span>
+        <span id="arc-stage-indicator" style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-violet);">Stage 4 of 6: The Inflection Climax</span>
+      </div>
+      <div class="stepper-track">
+        <div class="stepper-step" data-step="1">
+          <span class="step-num">Step 01</span>
+          <span class="step-name">The Hook</span>
+        </div>
+        <div class="stepper-step" data-step="2">
+          <span class="step-num">Step 02</span>
+          <span class="step-name">Baseline Context</span>
+        </div>
+        <div class="stepper-step" data-step="3">
+          <span class="step-num">Step 03</span>
+          <span class="step-name">Rising Friction</span>
+        </div>
+        <div class="stepper-step active" data-step="4">
+          <span class="step-num">Step 04</span>
+          <span class="step-name">Inflection Climax</span>
+        </div>
+        <div class="stepper-step" data-step="5">
+          <span class="step-num">Step 05</span>
+          <span class="step-name">Resolution</span>
+        </div>
+        <div class="stepper-step" data-step="6">
+          <span class="step-num">Step 06</span>
+          <span class="step-name">Strategic CTA</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Chart & Story Grid -->
+    <div class="workspace-grid">
+      <!-- Story-First Plotly Canvas -->
+      <section class="chart-card">
+        <div class="chart-header">
+          <div>
+            <h1 class="chart-headline" id="chart-main-headline">Loading Narrative...</h1>
+            <p class="chart-subhead" id="chart-subhead-text">Plotly.js High-Contrast Salience Engine</p>
+          </div>
+        </div>
+        <div class="chart-canvas-wrap">
+          <div id="plotly-chart"></div>
+        </div>
+      </section>
+
+      <!-- Editorial Narrative Takeaway Sidebar -->
+      <aside class="narrative-card">
+        <div class="narrative-title">
+          <span>Executive Decision Story</span>
+        </div>
+
+        <div class="takeaway-box">
+          <span class="takeaway-tag">One-Sentence Defensible Takeaway</span>
+          <div id="sidebar-takeaway-text">Calculating single-sentence insight...</div>
+        </div>
+
+        <p class="narrative-prose" id="sidebar-prose-text">
+          Loading narrative context and business implications...
+        </p>
+
+        <div class="bullets-title">Operational Proof Points</div>
+        <ul class="narrative-bullets" id="sidebar-bullet-list">
+          <li>Analyzing verified metrics...</li>
+          <li>Identifying systemic bottlenecks...</li>
+          <li>Measuring financial ROI exposure...</li>
+        </ul>
+
+        <div class="cta-card">
+          <span class="cta-label">Recommended Action</span>
+          <div class="cta-text" id="sidebar-cta-text">Deploy automated webhook provisioning to eliminate onboarding queue.</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div>Built with <strong>Plotly.js + Data Storytelling Architecture</strong> · Zero AI Slop · WCAG 2.1 AA Compliant</div>
+    <div>Canonical Engine: <code>apps/zadevpenseo.github.io/public/demos/data-storytelling-engine/</code></div>
+  </footer>
+
+  <!-- Story Engine Logic -->
+  <script>
+    // Scenarios Data Store
+    const SCENARIOS = {
+      saas: {
+        title: "Enterprise Onboarding Duration vs 90-Day Churn Hazard",
+        metricX: "Onboarding Latency (Days to First Webhook)",
+        metricY: "90-Day Churn Probability (%)",
+        xValues: [3, 7, 10, 14, 17, 21, 24, 28, 35, 42, 49],
+        yValues: [2.1, 3.4, 4.2, 5.8, 8.4, 18.2, 46.5, 68.2, 79.1, 84.5, 89.2],
+        inflectionIndex: 5, // Day 21
+        hook: "While Top-Line ARR Grew 24%, 90-Day Retention Quietly Cratered for Latency-Impacted Tiers",
+        takeaway: "Accounts experiencing onboarding delays past 21 days cross an irreversible cliff, triggering an 82% churn probability within 90 days.",
+        prose: "Statistical cohort regression across 1,420 enterprise accounts reveals that customer sentiment remains resilient up to Day 17 (under 9% churn). However, passing the 21-day threshold triggers an exponential cliff due to executive buyer disengagement.",
+        bullets: [
+          "Day 1 to 14 baseline churn stays below 6.0% across all tiers.",
+          "Day 21 represents the mathematical point of inflection (18.2% to 68.2% within 7 days).",
+          "Accounts in the 28+ day backlog represent $1.85M in at-risk annual recurring revenue."
+        ],
+        cta: "Automate API & webhook provisioning to compress time-to-first-event under 10 days, securing $1.85M at-risk ARR.",
+        stages: {
+          1: { headline: "The Hook: The Hidden Retention Erosion", focusRange: [0, 10], note: "Overall revenue hides the churn cliff in cohorts" },
+          2: { headline: "Baseline Context: Stable Early Performance", focusRange: [0, 3], note: "Days 1-14: Healthy baseline (<6% churn)" },
+          3: { headline: "Rising Friction: The Pre-Cliff Warning", focusRange: [3, 5], note: "Days 14-20: Friction begins accumulating" },
+          4: { headline: "Inflection Climax: The Critical 21-Day Cliff", focusRange: [5, 7], note: "CRITICAL INFLECTION: Day 21 Churn Explodes (82% Churn Risk)" },
+          5: { headline: "Resolution: Automated Provisioning Payoff", focusRange: [0, 5], note: "Compressing queue to <10 days recovers retention" },
+          6: { headline: "Strategic CTA: Implement 10-Day SLA", focusRange: [5, 5], note: "Action: Auto-provisioning rollout in Q4" }
+        }
+      },
+      k8s: {
+        title: "Kubernetes Zombie Node Drift vs Monthly Cloud Bill Leakage",
+        metricX: "Stale Worker Nodes in Cluster",
+        metricY: "Monthly Unallocated Spend ($k USD)",
+        xValues: [2, 5, 8, 12, 18, 24, 30, 34, 40, 50, 60],
+        yValues: [1.2, 2.5, 3.8, 6.1, 9.4, 13.2, 19.8, 38.4, 62.1, 88.5, 114.0],
+        inflectionIndex: 7, // Node 34
+        hook: "Idle Background Pods Triggered an Unbudgeted $114K/Mo AWS Billing Spiral",
+        takeaway: "Accumulating more than 34 zombie nodes triggers dynamic multi-zone cross-talk surcharges, doubling infrastructure cost per pod.",
+        prose: "Log forensics across AWS EKS clusters demonstrated that unevicted test jobs not only consume reserved instance capacity but trigger inter-AZ data transfer tariffs once the 34-node threshold is breached.",
+        bullets: [
+          "Clusters with <20 stale nodes incur predictable linear waste ($10k/mo).",
+          "Node 34 breach marks the non-linear multi-zone network tariff explosion.",
+          "Over $75,000/month in wasteful spend is completely recoverable via automated reaper scripts."
+        ],
+        cta: "Deploy automated node reaper DaemonSets with 48-hour TTL to eliminate $75K/mo in idle infrastructure drain.",
+        stages: {
+          1: { headline: "The Hook: The Surprise $114K AWS Invoice Shock", focusRange: [0, 10], note: "Unbudgeted infrastructure cost shock" },
+          2: { headline: "Baseline Context: Linear Node Scale", focusRange: [0, 4], note: "Nodes 1-18: Manageable idle overhead" },
+          3: { headline: "Rising Friction: Silent Capacity Saturation", focusRange: [4, 7], note: "Nodes 18-30: VPC peering saturation" },
+          4: { headline: "Inflection Climax: Node 34 Multi-Zone Multiplier", focusRange: [7, 8], note: "INFLECTION: Inter-AZ traffic fee explosion" },
+          5: { headline: "Resolution: DaemonSet Reaper Reclamation", focusRange: [0, 7], note: "Automated eviction caps spend at $10k" },
+          6: { headline: "Strategic CTA: Enforce Cluster-Wide TTL Policy", focusRange: [7, 7], note: "Action: Roll out Karpenter auto-cleanup" }
+        }
+      },
+      ecommerce: {
+        title: "Mobile Largest Contentful Paint (LCP) vs Cart Abandonment",
+        metricX: "Mobile LCP Load Time (Seconds)",
+        metricY: "Checkout Abandonment Rate (%)",
+        xValues: [1.0, 1.5, 1.8, 2.1, 2.4, 2.7, 3.0, 3.5, 4.0, 4.8, 5.5],
+        yValues: [14.2, 15.1, 16.0, 17.8, 21.4, 41.2, 58.7, 71.4, 78.9, 84.1, 88.0],
+        inflectionIndex: 4, // 2.4s
+        hook: "A 300ms Asset Bloat Induced a 39.8% Drop in High-Intent Mobile Purchases",
+        takeaway: "Mobile shoppers tolerate latencies up to 2.4 seconds, after which each additional 300ms induces a 20% surge in cart abandonment.",
+        prose: "Real-user monitoring (RUM) data over 850,000 checkout sessions revealed that customer drop-off is not linear. Exceeding Google's Core Web Vitals 2.5s good threshold shatters consumer checkout momentum.",
+        bullets: [
+          "Sub-2.4s LCP retains 80%+ of high-intent mobile shopping carts.",
+          "At 2.7s, abandonment spikes abruptly from 21.4% to 41.2%.",
+          "Optimizing hero image WebP compression and critical CSS yields an estimated $420,000 monthly revenue lift."
+        ],
+        cta: "Implement edge-cached AVIF images and inline critical CSS to guarantee mobile LCP stays strictly below 2.0s.",
+        stages: {
+          1: { headline: "The Hook: 300ms Delay Costs Millions in Abandoned Carts", focusRange: [0, 10], note: "Conversion drop tied directly to mobile latency" },
+          2: { headline: "Baseline Context: The Fast-Render Zone (<2.1s)", focusRange: [0, 3], note: "High buyer momentum (<17% drop)" },
+          3: { headline: "Rising Friction: The 2.4s Warning Threshold", focusRange: [3, 4], note: "Latency creep begins eating checkout rate" },
+          4: { headline: "Inflection Climax: The 2.7s Abandonment Spike", focusRange: [4, 6], note: "INFLECTION: Abandonment jumps to 58.7%" },
+          5: { headline: "Resolution: Edge Optimization Recovery", focusRange: [0, 4], note: "Compressing LCP below 2.0s restores conversions" },
+          6: { headline: "Strategic CTA: Edge Asset Pipeline Optimization", focusRange: [4, 4], note: "Action: Edge WebP/AVIF transformation" }
+        }
+      }
+    };
+
+    let currentScenarioKey = 'saas';
+    let currentStepNum = 4; // Inflection Climax
+    let showRawNoise = false;
+
+    // Initialize DOM references
+    const chartTitleEl = document.getElementById('chart-main-headline');
+    const chartSubheadEl = document.getElementById('chart-subhead-text');
+    const takeawayTextEl = document.getElementById('sidebar-takeaway-text');
+    const proseTextEl = document.getElementById('sidebar-prose-text');
+    const bulletsListEl = document.getElementById('sidebar-bullet-list');
+    const ctaTextEl = document.getElementById('sidebar-cta-text');
+    const stageIndicatorEl = document.getElementById('arc-stage-indicator');
+    const toggleNoiseBtn = document.getElementById('btn-toggle-noise');
+    const exportBriefBtn = document.getElementById('btn-export-brief');
+
+    // Render Plotly Chart
+    function renderChart() {
+      const data = SCENARIOS[currentScenarioKey];
+      const stage = data.stages[currentStepNum];
+
+      chartTitleEl.textContent = stage.headline;
+      chartSubheadEl.textContent = `${data.title} · Step 0${currentStepNum}: ${stage.note}`;
+      takeawayTextEl.textContent = data.takeaway;
+      proseTextEl.textContent = data.prose;
+      ctaTextEl.textContent = data.cta;
+
+      // Update bullets
+      bulletsListEl.innerHTML = '';
+      data.bullets.forEach(b => {
+        const li = document.createElement('li');
+        li.textContent = b;
+        bulletsListEl.appendChild(li);
+      });
+
+      // Traces Construction
+      const traces = [];
+
+      // Context Trace (Muted Slate Baseline)
+      traces.push({
+        x: data.xValues,
+        y: data.yValues,
+        type: 'scatter',
+        mode: 'lines+markers',
+        name: 'Baseline Cohort',
+        line: {
+          color: showRawNoise ? '#94A3B8' : '#475569',
+          width: showRawNoise ? 1.5 : 2.5,
+          dash: 'solid'
+        },
+        marker: {
+          size: 6,
+          color: '#64748B'
+        },
+        hoverinfo: 'x+y'
+      });
+
+      // Optional Raw Noise Traces to demonstrate "Dashboard Data Dump vs Story Focus"
+      if (showRawNoise) {
+        for (let i = 1; i <= 3; i++) {
+          const noiseY = data.yValues.map(v => Math.max(0, v + (Math.sin(v + i) * 6)));
+          traces.push({
+            x: data.xValues,
+            y: noiseY,
+            type: 'scatter',
+            mode: 'lines',
+            name: `Raw Cluster ${i}`,
+            line: { color: `rgba(148, 163, 184, 0.25)`, width: 1, dash: 'dot' },
+            hoverinfo: 'none'
+          });
+        }
+      }
+
+      // Highlight/Focus Trace for current stage
+      const [startIndex, endIndex] = stage.focusRange;
+      const highlightX = data.xValues.slice(startIndex, endIndex + 1);
+      const highlightY = data.yValues.slice(startIndex, endIndex + 1);
+
+      traces.push({
+        x: highlightX,
+        y: highlightY,
+        type: 'scatter',
+        mode: 'lines+markers',
+        name: 'Focus Inflection',
+        line: {
+          color: currentStepNum === 4 ? '#F43F5E' : '#8B5CF6',
+          width: 4
+        },
+        marker: {
+          size: 10,
+          color: currentStepNum === 4 ? '#F43F5E' : '#8B5CF6',
+          line: { color: '#FFFFFF', width: 2 }
+        },
+        hoverinfo: 'x+y'
+      });
+
+      // Inline Direct Callout Annotation (Zero Legend Dependency)
+      const inflectionX = data.xValues[data.inflectionIndex];
+      const inflectionY = data.yValues[data.inflectionIndex];
+
+      const annotations = [
+        {
+          x: inflectionX,
+          y: inflectionY,
+          xref: 'x',
+          yref: 'y',
+          text: `<b>CRITICAL INFLECTION POINT</b><br>${data.metricX}: ${inflectionX}<br>${data.metricY}: ${inflectionY}%`,
+          showarrow: true,
+          arrowhead: 2,
+          arrowsize: 1,
+          arrowwidth: 2,
+          arrowcolor: '#F43F5E',
+          ax: -60,
+          ay: -60,
+          bgcolor: '#1F1735',
+          bordercolor: '#F43F5E',
+          borderwidth: 1.5,
+          borderpad: 8,
+          font: {
+            family: 'Plus Jakarta Sans',
+            size: 12,
+            color: '#F8FAFC'
+          }
+        },
+        {
+          xref: 'paper',
+          yref: 'paper',
+          x: 0.02,
+          y: 0.95,
+          text: `<b>Takeaway:</b> ${data.takeaway}`,
+          showarrow: false,
+          align: 'left',
+          bgcolor: 'rgba(20, 15, 34, 0.85)',
+          bordercolor: 'rgba(139, 92, 246, 0.3)',
+          borderwidth: 1,
+          borderpad: 8,
+          font: {
+            family: 'Plus Jakarta Sans',
+            size: 12,
+            color: '#EDE9FE'
+          }
+        }
+      ];
+
+      // Layout
+      const layout = {
+        paper_bgcolor: 'transparent',
+        plot_bgcolor: 'transparent',
+        margin: { l: 60, r: 40, t: 20, b: 60 },
+        autosize: true,
+        showlegend: false, // Invariant: Direct labeling over legends
+        xaxis: {
+          title: {
+            text: data.metricX,
+            font: { family: 'Plus Jakarta Sans', size: 12, color: '#94A3B8' }
+          },
+          gridcolor: 'rgba(255, 255, 255, 0.06)',
+          zerolinecolor: 'rgba(255, 255, 255, 0.1)',
+          tickfont: { family: 'JetBrains Mono', size: 11, color: '#94A3B8' }
+        },
+        yaxis: {
+          title: {
+            text: data.metricY,
+            font: { family: 'Plus Jakarta Sans', size: 12, color: '#94A3B8' }
+          },
+          gridcolor: 'rgba(255, 255, 255, 0.06)',
+          zerolinecolor: 'rgba(255, 255, 255, 0.1)',
+          tickfont: { family: 'JetBrains Mono', size: 11, color: '#94A3B8' }
+        },
+        annotations: annotations
+      };
+
+      const config = {
+        responsive: true,
+        displayModeBar: false
+      };
+
+      Plotly.newPlot('plotly-chart', traces, layout, config);
+    }
+
+    // Step change handler
+    function setStep(stepNum) {
+      currentStepNum = parseInt(stepNum, 10);
+      document.querySelectorAll('.stepper-step').forEach(el => {
+        el.classList.toggle('active', parseInt(el.getAttribute('data-step'), 10) === currentStepNum);
+      });
+      stageIndicatorEl.textContent = `Stage ${currentStepNum} of 6: ${SCENARIOS[currentScenarioKey].stages[currentStepNum].headline.split(':')[0]}`;
+      renderChart();
+    }
+
+    // Scenario switch handler
+    function setScenario(key) {
+      currentScenarioKey = key;
+      document.querySelectorAll('.scenario-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-scenario') === key);
+      });
+      renderChart();
+    }
+
+    // Event Listeners
+    document.querySelectorAll('.stepper-step').forEach(el => {
+      el.addEventListener('click', () => {
+        setStep(el.getAttribute('data-step'));
+      });
+    });
+
+    document.querySelectorAll('.scenario-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        setScenario(btn.getAttribute('data-scenario'));
+      });
+    });
+
+    toggleNoiseBtn.addEventListener('click', () => {
+      showRawNoise = !showRawNoise;
+      toggleNoiseBtn.classList.toggle('active', showRawNoise);
+      toggleNoiseBtn.querySelector('span').textContent = showRawNoise ? "Hide Raw Noise (Story Mode)" : "Show Raw Noise (Compare)";
+      renderChart();
+    });
+
+    exportBriefBtn.addEventListener('click', () => {
+      const data = SCENARIOS[currentScenarioKey];
+      const briefContent = `========================================================
+EXECUTIVE DATA STORY BRIEF · 1-SENTENCE DEFENSE
+========================================================
+Scenario: ${data.title}
+Takeaway: ${data.takeaway}
+
+NARRATIVE SUMMARY:
+${data.prose}
+
+OPERATIONAL PROOF POINTS:
+${data.bullets.map(b => "• " + b).join("\n")}
+
+RECOMMENDED ACTION:
+${data.cta}
+========================================================`;
+      
+      const blob = new Blob([briefContent], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `executive-story-brief-${currentScenarioKey}.txt`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // Window Resize Support for Plotly
+    window.addEventListener('resize', () => {
+      Plotly.Plots.resize('plotly-chart');
+    });
+
+    // Initial Render
+    renderChart();
+  </script>
+</body>
+</html>
