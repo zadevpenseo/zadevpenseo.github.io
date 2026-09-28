@@ -47,6 +47,7 @@ export default defineConfig({
             { label: 'WooCommerce Rescue (#659829)', link: '/case-studies/web-dev-design/woocommerce-enhancement-659829/' },
             { label: 'DevPDF.in Conversion Architecture (#658700)', link: '/case-studies/web-dev-design/pdf-tools-devpdf-repair-658700/' },
             { label: 'Interactive Web Greeting Card (#656043)', link: '/case-studies/web-dev-design/interactive-birthday-card-web-656043/' },
+            { label: 'Animated Landing Page Architecture (#659928)', link: '/case-studies/web-dev-design/animated-landing-page-659928/' },
             { label: 'Modular Web App Architecture (#659861)', link: '/case-studies/web-dev-design/fullstack-custom-web-apps-659861/' },
             { label: 'Elementor JSON UI Architecture Engine', link: '/case-studies/web-dev-design/elementor-json-ui-engine/' },
           ],

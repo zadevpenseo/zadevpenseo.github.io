@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURA STUDIO | Digital Architecture & Interactive Experiences</title>
+  <meta name="description" content="Turnkey high-performance animated creative agency landing page engineered with pure Vanilla HTML5, CSS3, and modern JavaScript.">
+  
+  <!-- Modern Typography: Inter & Outfit from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. DESIGN TOKENS & RESET (TasteSkill Luxury System)
+       ========================================================================== */
+    :root {
+      /* Primary Color Tokens */
+      --bg-base: #0D0B10;
+      --bg-surface: #160D1A;
+      --bg-surface-elevated: #1F1224;
+      --border-subtle: rgba(197, 160, 89, 0.16);
+      --border-focus: rgba(197, 160, 89, 0.45);
+      
+      /* Dynamic Accent Palette (Bronze Gold Default) */
+      --accent: #C5A059;
+      --accent-rgb: 197, 160, 89;
+      --accent-glow: rgba(197, 160, 89, 0.25);
+      --accent-hover: #D4B36D;
+      
+      /* Typography Colors */
+      --text-main: #F4EFEA;
+      --text-muted: #9E96A6;
+      --text-dim: #6B6373;
+      
+      /* Fonts */
+      --font-display: 'Outfit', sans-serif;
+      --font-sans: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      
+      /* Animation Timings */
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --duration-fast: 220ms;
+      --duration-normal: 400ms;
+      --duration-slow: 800ms;
+    }
+
+    /* Alternate Theme Palettes */
+    [data-theme="cyan"] {
+      --accent: #00F0FF;
+      --accent-rgb: 0, 240, 255;
+      --accent-glow: rgba(0, 240, 255, 0.25);
+      --accent-hover: #4df4ff;
+    }
+    [data-theme="emerald"] {
+      --accent: #10B981;
+      --accent-rgb: 16, 185, 129;
+      --accent-glow: rgba(16, 185, 129, 0.25);
+      --accent-hover: #34d399;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      color-scheme: dark;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient Background Glow Mesh */
+    .bg-mesh {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.22;
+      transition: transform var(--duration-slow) var(--ease-out-expo);
+      will-change: transform;
+    }
+
+    .glow-orb-1 {
+      top: -10%;
+      right: 10%;
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+    }
+
+    .glow-orb-2 {
+      top: 45%;
+      left: -15%;
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, #5b1d70 0%, transparent 75%);
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Section Spacing */
+    section {
+      padding: 100px 0;
+      position: relative;
+    }
+
+    /* ==========================================================================
+       2. NAVIGATION HEADER & ACCENT SWITCHER
+       ========================================================================== */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 18px 0;
+      transition: background-color var(--duration-normal) ease, backdrop-filter var(--duration-normal) ease, border-color var(--duration-normal) ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    .site-header.scrolled {
+      background-color: rgba(13, 11, 16, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-color: var(--border-subtle);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+      transition: background-color var(--duration-fast) ease;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color var(--duration-fast) ease;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background-color: var(--accent);
+      transition: width var(--duration-normal) var(--ease-out-expo);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    /* Accent Color Selector */
+    .theme-pills {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-surface);
+      padding: 4px;
+      border-radius: 30px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .theme-btn {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: transform var(--duration-fast) var(--ease-spring);
+    }
+
+    .theme-btn:hover {
+      transform: scale(1.2);
+    }
+
+    .theme-btn.active {
+      outline: 2px solid #ffffff;
+      outline-offset: 2px;
+    }
+
+    .theme-gold { background: #C5A059; }
+    .theme-cyan { background: #00F0FF; }
+    .theme-emerald { background: #10B981; }
+
+    /* ==========================================================================
+       3. BUTTONS & MICRO-INTERACTIONS
+       ========================================================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 9999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: transform var(--duration-fast) var(--ease-spring), box-shadow var(--duration-fast) ease, background-color var(--duration-fast) ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: #0D0B10;
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px var(--accent-glow);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* Magnetic CTA Glow Layer */
+    .btn .btn-ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      transform: scale(0);
+      pointer-events: none;
+      animation: ripple 600ms linear;
+    }
+
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    /* ==========================================================================
+       4. SECTION 1: EDITORIAL HERO
+       ========================================================================== */
+    .hero-section {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      padding-top: 140px;
+      padding-bottom: 60px;
+    }
+
+    .hero-content {
+      max-width: 860px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-bottom: 28px;
+    }
+
+    .hero-badge-ping {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(var(--accent-rgb), 0); }
+      100% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0); }
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6vw, 4.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+
+    .hero-title span.highlight {
+      background: linear-gradient(135deg, var(--text-main) 30%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      max-width: 680px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .stat-item h3 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-item p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Staggered Reveal Initial State */
+    .reveal-item {
+      opacity: 0;
+      transform: translate3d(0, 30px, 0);
+      transition: opacity var(--duration-slow) var(--ease-out-expo), transform var(--duration-slow) var(--ease-out-expo);
+      transition-delay: var(--delay, 0ms);
+    }
+
+    .reveal-item.revealed {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    /* ==========================================================================
+       5. SECTION 2: INFINITE CLIENT & TECH MARQUEE
+       ========================================================================== */
+    .marquee-section {
+      padding: 30px 0;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(22, 13, 26, 0.4);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 24s linear infinite;
+    }
+
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+
+    .marquee-content {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      padding-right: 48px;
+    }
+
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      transition: color var(--duration-fast) ease;
+    }
+
+    .marquee-item:hover {
+      color: var(--accent);
+    }
+
+    .marquee-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    @keyframes marquee {
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(-50%, 0, 0); }
+    }
+
+    /* ==========================================================================
+       6. SECTION 3: INTERACTIVE WORK SHOWCASE (3D Tilt & Spotlight)
+       ========================================================================== */
+    .section-header {
+      margin-bottom: 56px;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 32px;
+      perspective: 1200px;
+    }
+
+    .work-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform var(--duration-normal) var(--ease-out-expo), border-color var(--duration-normal) ease, box-shadow var(--duration-normal) ease;
+      will-change: transform;
+      cursor: pointer;
+    }
+
+    .work-card:hover {
+      border-color: var(--border-focus);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px var(--accent-glow);
+    }
+
+    /* Dynamic Mouse Spotlight */
+    .work-card::before {
+      content: '';
+      position: absolute;
+      top: var(--mouse-y, -100%);
+      left: var(--mouse-x, -100%);
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--duration-normal) ease;
+      z-index: 1;
+    }
+
+    .work-card:hover::before {
+      opacity: 1;
+    }
+
+    .work-card-content {
+      position: relative;
+      z-index: 2;
+      transform: translateZ(30px);
+    }
+
+    .work-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .work-badge {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(197, 160, 89, 0.1);
+      color: var(--accent);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .work-arrow {
+      color: var(--text-dim);
+      transition: transform var(--duration-fast) var(--ease-spring), color var(--duration-fast) ease;
+    }
+
+    .work-card:hover .work-arrow {
+      color: var(--accent);
+      transform: translate(4px, -4px);
+    }
+
+    .work-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+
+    .work-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .work-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .work-tag {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      background: var(--bg-surface-elevated);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    /* ==========================================================================
+       7. SECTION 4: CAPABILITIES & SERVICES (Smooth CSS Grid Accordion)
+       ========================================================================== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .services-intro p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    .accordion-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .accordion-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color var(--duration-fast) ease;
+    }
+
+    .accordion-item.active {
+      border-color: var(--border-focus);
+      background: var(--bg-surface-elevated);
+    }
+
+    .accordion-trigger {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 24px;
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .accordion-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--bg-base);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      transition: transform var(--duration-normal) var(--ease-spring);
+    }
+
+    .accordion-item.active .accordion-icon {
+      transform: rotate(180deg);
+    }
+
+    /* CSS Grid 0fr -> 1fr butter-smooth animation */
+    .accordion-collapse {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows var(--duration-normal) var(--ease-out-expo);
+    }
+
+    .accordion-item.active .accordion-collapse {
+      grid-template-rows: 1fr;
+    }
+
+    .accordion-body {
+      overflow: hidden;
+    }
+
+    .accordion-content {
+      padding: 0 24px 22px 24px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .accordion-metric {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+    }
+
+    .metric-bar-bg {
+      flex: 1;
+      height: 4px;
+      background: var(--bg-base);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    .metric-bar-fill {
+      height: 100%;
+      width: var(--progress, 0%);
+      background: var(--accent);
+      border-radius: 9999px;
+      transition: width var(--duration-slow) var(--ease-out-expo);
+    }
+
+    /* ==========================================================================
+       8. SECTION 5: INTERACTIVE PROJECT INQUIRY & CONTACT
+       ========================================================================== */
+    .contact-container {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: clamp(32px, 6vw, 64px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    @media (max-width: 860px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .contact-info h3 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .contact-info p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .contact-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+    }
+
+    .contact-meta-icon {
+      color: var(--accent);
+    }
+
+    /* Reactive Contact Form */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Floating Input Field */
+    .form-group {
+      position: relative;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 18px 20px;
+      background: var(--bg-base);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+    }
+
+    .form-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .form-label {
+      position: absolute;
+      left: 20px;
+      top: 18px;
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      pointer-events: none;
+      transition: transform var(--duration-fast) var(--ease-spring), font-size var(--duration-fast) ease, color var(--duration-fast) ease;
+      background: var(--bg-base);
+      padding: 0 6px;
+    }
+
+    .form-input:focus ~ .form-label,
+    .form-input:not(:placeholder-shown) ~ .form-label {
+      transform: translateY(-28px);
+      font-size: 0.75rem;
+      color: var(--accent);
+    }
+
+    /* Budget Selection Pills */
+    .budget-selector {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .budget-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .budget-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .budget-pill {
+      padding: 8px 16px;
+      border-radius: 9999px;
+      background: var(--bg-base);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all var(--duration-fast) ease;
+    }
+
+    .budget-pill.active, .budget-pill:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(var(--accent-rgb), 0.08);
+    }
+
+    /* Form Status Messages */
+    .form-status {
+      display: none;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .form-status.success {
+      display: block;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid #10B981;
+      color: #34d399;
+    }
+
+    .form-status.error {
+      display: block;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid #EF4444;
+      color: #f87171;
+    }
+
+    /* Shake animation on invalid submission */
+    .shake {
+      animation: shake 400ms var(--ease-spring);
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+
+    /* ==========================================================================
+       9. FOOTER & BACK TO TOP
+       ========================================================================== */
+    .site-footer {
+      padding: 60px 0 36px 0;
+      border-top: 1px solid var(--border-subtle);
+      margin-top: 60px;
+    }
+
+    .footer-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-copy {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+
+    .back-to-top {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform var(--duration-fast) var(--ease-spring), border-color var(--duration-fast) ease, color var(--duration-fast) ease;
+    }
+
+    .back-to-top:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    /* ==========================================================================
+       10. ACCESSIBILITY: PREFERS REDUCED MOTION
+       ========================================================================== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .work-card {
+        transform: none !important;
+      }
+      .glow-orb {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Glow Mesh Background -->
+  <div class="bg-mesh" aria-hidden="true">
+    <div class="glow-orb glow-orb-1" id="orb1"></div>
+    <div class="glow-orb glow-orb-2" id="orb2"></div>
+  </div>
+
+  <!-- Navigation Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="container nav-container">
+      <a href="#hero" class="brand-logo" aria-label="Aura Studio Home">
+        <span class="brand-dot"></span>
+        <span>AURA STUDIO</span>
+      </a>
+
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-links">
+          <li><a href="#work">Showcase</a></li>
+          <li><a href="#services">Capabilities</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Palette Switcher -->
+        <div class="theme-pills" title="Switch Accent Palette" role="group" aria-label="Theme Color Switcher">
+          <button class="theme-btn theme-gold active" data-color="gold" aria-label="Bronze Gold Theme"></button>
+          <button class="theme-btn theme-cyan" data-color="cyan" aria-label="Cyber Cyan Theme"></button>
+          <button class="theme-btn theme-emerald" data-color="emerald" aria-label="Emerald Green Theme"></button>
+        </div>
+
+        <a href="#contact" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.85rem;">Initiate Project</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-badge reveal-item" style="--delay: 100ms;">
+            <span class="hero-badge-ping"></span>
+            <span>PURE VANILLA ARCHITECTURE · ZERO CDN OVERHEAD</span>
+          </div>
+
+          <h1 class="hero-title reveal-item" style="--delay: 200ms;">
+            We architect digital experiences with <span class="highlight">poetic motion</span> and ruthless precision.
+          </h1>
+
+          <p class="hero-subtitle reveal-item" style="--delay: 300ms;">
+            Elevating modern brands through bespoke editorial aesthetics, hardware-accelerated animations, and responsive zero-dependency web engineering.
+          </p>
+
+          <div class="hero-actions reveal-item" style="--delay: 400ms;">
+            <a href="#work" class="btn btn-primary magnetic-btn">
+              <span>Explore Selected Work</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#services" class="btn btn-outline">
+              <span>View Capabilities</span>
+            </a>
+          </div>
+
+          <div class="hero-stats reveal-item" style="--delay: 500ms;">
+            <div class="stat-item">
+              <h3>60 FPS</h3>
+              <p>Hardware Smooth</p>
+            </div>
+            <div class="stat-item">
+              <h3>&lt; 25 KB</h3>
+              <p>Total Footprint</p>
+            </div>
+            <div class="stat-item">
+              <h3>100%</h3>
+              <p>Zero External CDNs</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. INFINITE CLIENT & TECH MARQUEE -->
+    <section class="marquee-section" aria-label="Technology and Clients Marquee">
+      <div class="marquee-track">
+        <div class="marquee-content">
+          <div class="marquee-item">IntersectionObserver API <span class="marquee-dot"></span></div>
+          <div class="marquee-item">GPU translate3d & rotateY <span class="marquee-dot"></span></div>
+          <div class="marquee-item">Web Performance CWV <span class="marquee-dot"></span></div>
+          <div class="marquee-item">Clean Modular JS <span class="marquee-dot"></span></div>
+          <div class="marquee-item">CSS Grid 0fr-1fr Transitions <span class="marquee-dot"></span></div>
+          <div class="marquee-item">TasteSkill Luxury Aesthetics <span class="marquee-dot"></span></div>
+        </div>
+        <!-- Duplicated content for seamless infinite looping -->
+        <div class="marquee-content" aria-hidden="true">
+          <div class="marquee-item">IntersectionObserver API <span class="marquee-dot"></span></div>
+          <div class="marquee-item">GPU translate3d & rotateY <span class="marquee-dot"></span></div>
+          <div class="marquee-item">Web Performance CWV <span class="marquee-dot"></span></div>
+          <div class="marquee-item">Clean Modular JS <span class="marquee-dot"></span></div>
+          <div class="marquee-item">CSS Grid 0fr-1fr Transitions <span class="marquee-dot"></span></div>
+          <div class="marquee-item">TasteSkill Luxury Aesthetics <span class="marquee-dot"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. INTERACTIVE WORK SHOWCASE (3D Tilt & Spotlight) -->
+    <section id="work">
+      <div class="container">
+        <div class="section-header reveal-item">
+          <span class="section-eyebrow">Selected Projects</span>
+          <h2 class="section-title">Designed for distinction, engineered for speed.</h2>
+        </div>
+
+        <div class="work-grid">
+          <!-- Card 1 -->
+          <article class="work-card tilt-card reveal-item" style="--delay: 100ms;">
+            <div class="work-card-content">
+              <div class="work-header">
+                <span class="work-badge">Web Architecture</span>
+                <span class="work-arrow">↗</span>
+              </div>
+              <h3 class="work-title">Velox Design Engine</h3>
+              <p class="work-desc">An editorial design system featuring reactive CSS custom properties, zero-layout-shift micro-interactions, and sub-second paint benchmarks.</p>
+              <div class="work-tags">
+                <span class="work-tag">Vanilla JS</span>
+                <span class="work-tag">CSS GPU</span>
+                <span class="work-tag">A11y AA</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="work-card tilt-card reveal-item" style="--delay: 200ms;">
+            <div class="work-card-content">
+              <div class="work-header">
+                <span class="work-badge">Sensory E-Commerce</span>
+                <span class="work-arrow">↗</span>
+              </div>
+              <h3 class="work-title">Kallos Atelier</h3>
+              <p class="work-desc">High-fashion storefront with interactive 3D product card perspectives, tactile checkout drawer physics, and fluid typography scaling.</p>
+              <div class="work-tags">
+                <span class="work-tag">Custom Easing</span>
+                <span class="work-tag">Web Audio API</span>
+                <span class="work-tag">Sub-20ms INP</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="work-card tilt-card reveal-item" style="--delay: 300ms;">
+            <div class="work-card-content">
+              <div class="work-header">
+                <span class="work-badge">Data Visualization</span>
+                <span class="work-arrow">↗</span>
+              </div>
+              <h3 class="work-title">Astral Analytics Hub</h3>
+              <p class="work-desc">Real-time telemetry dashboard utilizing lightweight canvas-rendered sparklines, progressive data hydration, and dark obsidian aesthetics.</p>
+              <div class="work-tags">
+                <span class="work-tag">Canvas 2D</span>
+                <span class="work-tag">Zero Bundler</span>
+                <span class="work-tag">60 FPS</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. CAPABILITIES & SERVICES (CSS Grid Accordion) -->
+    <section id="services">
+      <div class="container">
+        <div class="services-grid">
+          <div class="services-intro reveal-item">
+            <span class="section-eyebrow">Our Capabilities</span>
+            <h2 class="section-title" style="margin-bottom: 24px;">Precision craftsmanship across every interaction.</h2>
+            <p>
+              We reject generic framework bloat. Every line of HTML, CSS, and JavaScript is written by hand to guarantee flawless performance, semantic accessibility, and timeless aesthetic elegance.
+            </p>
+            <a href="#contact" class="btn btn-outline">Consult Our Engineers</a>
+          </div>
+
+          <div class="accordion-list">
+            <!-- Accordion Item 1 -->
+            <div class="accordion-item active reveal-item" style="--delay: 100ms;">
+              <button class="accordion-trigger" aria-expanded="true">
+                <span>1. Hardware-Accelerated Animation</span>
+                <span class="accordion-icon">↓</span>
+              </button>
+              <div class="accordion-collapse">
+                <div class="accordion-body">
+                  <div class="accordion-content">
+                    We exclusively animate GPU-composited properties (`transform` and `opacity`), avoiding expensive browser layout recalculations and repaints. This ensures uninterrupted 60 FPS fluidity on mobile devices and desktop displays.
+                    <div class="accordion-metric">
+                      <span>FRAME TIMING</span>
+                      <div class="metric-bar-bg"><div class="metric-bar-fill" style="--progress: 98%;"></div></div>
+                      <span>16.6ms</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Accordion Item 2 -->
+            <div class="accordion-item reveal-item" style="--delay: 200ms;">
+              <button class="accordion-trigger" aria-expanded="false">
+                <span>2. Clean Semantic Architecture</span>
+                <span class="accordion-icon">↓</span>
+              </button>
+              <div class="accordion-collapse">
+                <div class="accordion-body">
+                  <div class="accordion-content">
+                    Proper HTML5 landmarks, WAI-ARIA states, and logical heading hierarchies. We ensure full keyboard navigation, screen reader support, and WCAG 2.1 AA color contrast compliance.
+                    <div class="accordion-metric">
+                      <span>ACCESSIBILITY SCORE</span>
+                      <div class="metric-bar-bg"><div class="metric-bar-fill" style="--progress: 100%;"></div></div>
+                      <span>100/100</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Accordion Item 3 -->
+            <div class="accordion-item reveal-item" style="--delay: 300ms;">
+              <button class="accordion-trigger" aria-expanded="false">
+                <span>3. Zero-CDN Portability</span>
+                <span class="accordion-icon">↓</span>
+              </button>
+              <div class="accordion-collapse">
+                <div class="accordion-body">
+                  <div class="accordion-content">
+                    All scripts, styling rules, and SVG icons are self-contained. The final deliverable can be hosted on any static web server, cPanel, Nginx, or GitHub Pages without build tools or dependency installations.
+                    <div class="accordion-metric">
+                      <span>PORTABILITY</span>
+                      <div class="metric-bar-bg"><div class="metric-bar-fill" style="--progress: 100%;"></div></div>
+                      <span>STANDALONE</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. INTERACTIVE PROJECT INQUIRY & CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <div class="contact-container reveal-item">
+          <div class="contact-grid">
+            <div class="contact-info">
+              <span class="section-eyebrow">Start a Conversation</span>
+              <h3>Let us build your next iconic digital experience.</h3>
+              <p>Ready to deploy a fast, beautifully animated landing page? Tell us about your project timeline and requirements.</p>
+              
+              <div class="contact-meta">
+                <div class="contact-meta-item">
+                  <span class="contact-meta-icon">✓</span>
+                  <span>Turnaround within 24 to 48 hours</span>
+                </div>
+                <div class="contact-meta-item">
+                  <span class="contact-meta-icon">✓</span>
+                  <span>100% clean, commented source code</span>
+                </div>
+                <div class="contact-meta-item">
+                  <span class="contact-meta-icon">✓</span>
+                  <span>Complete ownership & zero licensing fees</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Reactive Inquiry Form -->
+            <form class="contact-form" id="inquiryForm" novalidate>
+              <div class="form-group">
+                <input type="text" id="clientName" class="form-input" placeholder=" " required>
+                <label for="clientName" class="form-label">Your Name</label>
+              </div>
+
+              <div class="form-group">
+                <input type="email" id="clientEmail" class="form-input" placeholder=" " required>
+                <label for="clientEmail" class="form-label">Email Address</label>
+              </div>
+
+              <div class="budget-selector">
+                <span class="budget-label">PROJECT BUDGET TIER</span>
+                <div class="budget-options">
+                  <button type="button" class="budget-pill active" data-budget="$10 - $50">$10 - $50 (Prototype)</button>
+                  <button type="button" class="budget-pill" data-budget="$50 - $200">$50 - $200 (Standard)</button>
+                  <button type="button" class="budget-pill" data-budget="$200+">$200+ (Enterprise)</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <textarea id="clientMessage" class="form-input" rows="3" placeholder=" " style="resize: vertical;" required></textarea>
+                <label for="clientMessage" class="form-label">Project Scope & Vision</label>
+              </div>
+
+              <button type="submit" class="btn btn-primary" id="submitBtn">
+                <span>Send Project Brief</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              </button>
+
+              <div class="form-status" id="formStatus"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-copy">
+        <p>© 2026 AURA STUDIO · Clean Vanilla Architecture by Zadit (PT PRISMA DIGITAL KREATIF)</p>
+      </div>
+      <button class="back-to-top" id="backToTop" aria-label="Back to Top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+      </button>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       11. PURE VANILLA JAVASCRIPT LOGIC
+       ========================================================================== -->
+  <script>
+    /**
+     * AURA STUDIO INTERACTION ENGINE
+     * Zero-dependency native JavaScript orchestrating:
+     * 1. Viewport reveal via IntersectionObserver
+     * 2. 3D card perspective tilt with mathematical lerp
+     * 3. Ambient dynamic mouse glow tracking
+     * 4. CSS Grid accordion toggle
+     * 5. Theme accent palette switcher
+     * 6. Form reactive validation and success simulation
+     */
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // --- 1. Sticky Header Blur on Scroll ---
+      const siteHeader = document.getElementById('siteHeader');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 40) {
+          siteHeader.classList.add('scrolled');
+        } else {
+          siteHeader.classList.remove('scrolled');
+        }
+      }, { passive: true });
+
+      // --- 2. Viewport Reveal via IntersectionObserver ---
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        root: null,
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      document.querySelectorAll('.reveal-item').forEach(el => {
+        revealObserver.observe(el);
+      });
+
+      // --- 3. Ambient Background Glow Follow Cursor (Micro-Parallax) ---
+      const orb1 = document.getElementById('orb1');
+      const orb2 = document.getElementById('orb2');
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+      let currentX = mouseX;
+      let currentY = mouseY;
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      }, { passive: true });
+
+      function animateOrbs() {
+        // Smooth linear interpolation (lerp factor 0.05)
+        currentX += (mouseX - currentX) * 0.05;
+        currentY += (mouseY - currentY) * 0.05;
+
+        if (orb1 && orb2) {
+          orb1.style.transform = `translate3d(${currentX * 0.04}px, ${currentY * 0.04}px, 0)`;
+          orb2.style.transform = `translate3d(${-currentX * 0.03}px, ${-currentY * 0.03}px, 0)`;
+        }
+        requestAnimationFrame(animateOrbs);
+      }
+      requestAnimationFrame(animateOrbs);
+
+      // --- 4. 3D Card Perspective Tilt & Spotlight ---
+      const tiltCards = document.querySelectorAll('.tilt-card');
+      tiltCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          // Set CSS custom properties for radial spotlight
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+
+          // Calculate normalized tilt (-15deg to +15deg)
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = ((y - centerY) / centerY) * -10;
+          const rotateY = ((x - centerX) / centerX) * 10;
+
+          card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        });
+      });
+
+      // --- 5. Accordion Trigger Logic ---
+      const accordionItems = document.querySelectorAll('.accordion-item');
+      accordionItems.forEach(item => {
+        const trigger = item.querySelector('.accordion-trigger');
+        trigger.addEventListener('click', () => {
+          const isActive = item.classList.contains('active');
+
+          // Close all siblings for single-open behavior
+          accordionItems.forEach(sib => {
+            sib.classList.remove('active');
+            sib.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+          });
+
+          if (!isActive) {
+            item.classList.add('active');
+            trigger.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+
+      // --- 6. Accent Palette Switcher ---
+      const themeBtns = document.querySelectorAll('.theme-btn');
+      themeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          themeBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const color = btn.dataset.color;
+          if (color === 'gold') {
+            document.documentElement.removeAttribute('data-theme');
+          } else {
+            document.documentElement.setAttribute('data-theme', color);
+          }
+        });
+      });
+
+      // --- 7. Budget Selector Pills ---
+      const budgetPills = document.querySelectorAll('.budget-pill');
+      budgetPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          budgetPills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+        });
+      });
+
+      // --- 8. Reactive Contact Form Handling ---
+      const inquiryForm = document.getElementById('inquiryForm');
+      const formStatus = document.getElementById('formStatus');
+      const submitBtn = document.getElementById('submitBtn');
+
+      if (inquiryForm) {
+        inquiryForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          const nameInput = document.getElementById('clientName');
+          const emailInput = document.getElementById('clientEmail');
+          const messageInput = document.getElementById('clientMessage');
+
+          // Simple Validation Check
+          if (!nameInput.value.trim() || !emailInput.value.trim() || !messageInput.value.trim()) {
+            inquiryForm.classList.add('shake');
+            formStatus.className = 'form-status error';
+            formStatus.textContent = 'Please complete all required fields before submitting.';
+            setTimeout(() => inquiryForm.classList.remove('shake'), 500);
+            return;
+          }
+
+          // Visual Submit State
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = '<span>Transmitting Brief...</span>';
+
+          setTimeout(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<span>Send Project Brief</span>';
+            formStatus.className = 'form-status success';
+            formStatus.textContent = `Thank you, ${nameInput.value.trim()}! Your project inquiry has been received. We will respond within 24 hours.`;
+            inquiryForm.reset();
+          }, 900);
+        });
+      }
+
+      // --- 9. Smooth Back to Top Scroll ---
+      const backToTopBtn = document.getElementById('backToTop');
+      if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+    });
+  </script>
+</body>
+</html>
