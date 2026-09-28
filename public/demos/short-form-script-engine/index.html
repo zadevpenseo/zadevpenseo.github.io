@@ -597,6 +597,14 @@
         </div>
       </div>
 
+      <!-- 3-Hook Retention Matrix Switcher -->
+      <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; background: var(--bg-elevated); padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-subtle); font-size: 11px;">
+        <span style="color: var(--accent-amber); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">3-Hook Matrix:</span>
+        <button class="selector-tab active" id="hookTab0" style="padding: 4px 10px; font-size: 11px;" onclick="applyHook(0)">1. Negative Visualization</button>
+        <button class="selector-tab" id="hookTab1" style="padding: 4px 10px; font-size: 11px;" onclick="applyHook(1)">2. Curiosity Gap</button>
+        <button class="selector-tab" id="hookTab2" style="padding: 4px 10px; font-size: 11px;" onclick="applyHook(2)">3. Direct Operational Value</button>
+      </div>
+
       <!-- Teleprompter Table -->
       <div class="table-container">
         <table class="av-script-table">
@@ -721,6 +729,39 @@
       document.getElementById('tab1').classList.toggle('active', idx === 1);
       renderScript(idx);
       resetSim();
+    }
+
+    const hookVariations = [
+      {
+        phase: "Hook (Negative Visualization)",
+        visual_cue: "Medium close-up. Talent stares intensely at lens holding upside-down jar. Snap zoom with bold central typography: 'STOP BUANG 60 DETIK LO'.",
+        audio_spoken: "90% video pendek gagal bukan karena visualnya buram, tapi karena scriptnya kelamaan basa-basi di 3 detik awal.",
+        sfx_cue: "Sub-bass drop + glass tap impact"
+      },
+      {
+        phase: "Hook (Curiosity Gap)",
+        visual_cue: "Talent taps a glowing digital timer frozen at 00:58.20. Mystery central overlay: 'SATU RAHASIA KREATOR TOP'.",
+        audio_spoken: "Ada satu alasan kenapa kreator paling konsisten di feed lo selalu nahan kalimat terakhir sampai detik ke-58.",
+        sfx_cue: "Clock ticking + reverse cymbal swell"
+      },
+      {
+        phase: "Hook (Direct Operational Value)",
+        visual_cue: "Rapid zoom-in into a clean two-column AV script table. Kinetic title: 'FORMULA RETENSI 2X'.",
+        audio_spoken: "Ini cara melipatgandakan waktu tonton video 60 detik lo tanpa perlu beli kamera atau mic baru.",
+        sfx_cue: "High-tech snap + bell chime"
+      }
+    ];
+
+    function applyHook(hookIdx) {
+      [0, 1, 2].forEach(i => {
+        const tab = document.getElementById('hookTab' + i);
+        if (tab) tab.classList.toggle('active', i === hookIdx);
+      });
+      if (scriptData && scriptData[currentScriptIdx] && scriptData[currentScriptIdx].beats[0]) {
+        Object.assign(scriptData[currentScriptIdx].beats[0], hookVariations[hookIdx]);
+        renderScript(currentScriptIdx);
+        jumpToBeat(0);
+      }
     }
 
     function renderScript(idx) {
