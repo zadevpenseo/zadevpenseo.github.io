@@ -1,0 +1,110 @@
+---
+title: "Interactive Birthday Card Architecture (#656043)"
+description: "CSS 3D perspective transforms, Canvas particle physics, and Web Audio API synthesis for responsive web greeting templates."
+---
+
+| Parameter | Specification Detail |
+| :--- | :--- |
+| **Project Reference** | Truelancer Project #656043 |
+| **Deliverables** | Responsive 3D Card Engine, Canvas Confetti Physics, URL Parameter Personalization |
+| **Estimated Scope** | 2,000 INR / 1 Business Day |
+| **Pillar** | 1. Web Dev Design |
+
+---
+
+## 1. Executive Summary
+
+Digital greeting cards often feel flat and underwhelming when implemented as static images or heavy video loops. A memorable web-based greeting card requires physical sensory feedback: a natural 3D open-fold motion, physics-based particle confetti upon reveal, interactive elements (such as clicking to extinguish a candle), and real-time audio chimes.
+
+This blueprint presents a zero-dependency, ultra-lightweight web greeting card template built with semantic HTML5, CSS 3D transforms, HTML5 Canvas physics, and the Web Audio API.
+
+---
+
+## 2. High-Level Design (HLD)
+
+```text
+[Incoming URL: ?to=Sakshi&msg=CustomWish]
+                 │
+                 │ (1. Parameter Ingestion & DOM Hydration)
+                 ▼
+[CSS 3D Perspective Canvas: perspective(1200px)]
+                 │
+                 ├──> Front Face (Wax Candle Flame + Glow CSS)
+                 │         │
+                 │         └──> Click Candle: Extinguish Flame + Web Audio Chime
+                 │
+                 │ (2. User Click Card: rotateY(-140deg))
+                 ▼
+[Inside Face Unfolded]
+                 │
+                 ├──> Dynamic Recipient Typography & Microcopy
+                 ├──> HTML5 Canvas: 90-Particle Gravitational Confetti Burst
+                 └──> Synthesizer Harmonic Arpeggio (C5 -> E5 -> G5 -> C6)
+```
+
+---
+
+## 3. Core Architectural Modules
+
+### A. CSS 3D Perspective Card Folding
+To achieve a realistic physical greeting card motion without external animation libraries like GSAP, the card uses CSS perspective and preserve-3d:
+
+```css
+.card-container {
+  width: 340px;
+  height: 480px;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-container.open {
+  transform: rotateY(-140deg);
+}
+
+.card-face {
+  backface-visibility: hidden;
+  border-radius: 16px;
+}
+
+.card-inside {
+  transform: rotateY(180deg);
+}
+```
+
+### B. Web Audio API Harmonic Chime (Zero External Audio Files)
+Rather than loading bulky MP3 assets that fail on mobile autoplay policies, the card synthesizes crystal-clear celebration chimes dynamically:
+
+```javascript
+function playChime() {
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const chordFrequencies = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+  
+  chordFrequencies.forEach((freq, index) => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + index * 0.12);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + index * 0.12 + 0.6);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(audioCtx.currentTime + index * 0.12);
+    osc.stop(audioCtx.currentTime + index * 0.12 + 0.7);
+  });
+}
+```
+
+---
+
+## 4. Personalization & Delivery Protocol
+
+* **URL Parameter Integration:** Supports dynamic sharing via messaging apps using query parameters (`?to=Name&msg=YourMessage`).
+* **Zero Server Overhead:** 100% client-side execution, fully deployable to Cloudflare Pages or GitHub Pages with sub-second Time to Interactive (TTI).
+* **Cross-Browser Verification:** Tested for touch gestures on iOS Safari and Android Chrome with GPU-accelerated compositing.
+
+---
+
+## 5. Engineering & Review Contacts
+
+- **Email Direct:** `devapenseo@gmail.com`
+- **Truelancer Portal:** Confirm via the official client tender dashboard.

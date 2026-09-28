@@ -46,6 +46,7 @@ export default defineConfig({
             { label: 'Gworky Edge Next.js Flagship', link: '/case-studies/web-dev-design/gworky-edge-web-app/' },
             { label: 'WooCommerce Rescue (#659829)', link: '/case-studies/web-dev-design/woocommerce-enhancement-659829/' },
             { label: 'DevPDF.in Conversion Architecture (#658700)', link: '/case-studies/web-dev-design/pdf-tools-devpdf-repair-658700/' },
+            { label: 'Interactive Web Greeting Card (#656043)', link: '/case-studies/web-dev-design/interactive-birthday-card-web-656043/' },
             { label: 'Modular Web App Architecture (#659861)', link: '/case-studies/web-dev-design/fullstack-custom-web-apps-659861/' },
             { label: 'Elementor JSON UI Architecture Engine', link: '/case-studies/web-dev-design/elementor-json-ui-engine/' },
           ],
