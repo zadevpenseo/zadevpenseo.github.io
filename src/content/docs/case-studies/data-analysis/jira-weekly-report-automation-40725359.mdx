@@ -1,23 +1,25 @@
 ---
-title: "Automated Jira Weekly Performance Reporting Pipeline"
-description: "Serverless data engineering pipeline aggregating Jira Cloud sprint burndown velocity, developer capacity worklogs, and deliverable status into an executive A4 PDF and interactive dashboard."
+title: "Automated Jira Performance Pipeline & Bidirectional NL Ticket Orchestration"
+description: "Serverless data engineering and agentic operations pipeline: aggregating Jira Cloud sprint velocity into executive A4 PDFs while orchestrating bidirectional natural language issue management via Jira CLI and Atlassian MCP."
 ---
 
 | Engineering Dimension | Architecture & Delivery Specification |
 | :--- | :--- |
-| **Domain & Context** | Engineering Management & Agile Operations Analytics |
-| **Data Source Systems** | Jira Cloud & Jira Software Agile REST API v3 |
+| **Domain & Context** | Engineering Management, Agile Operations Analytics & Autonomous Agentic Workflows |
+| **Data Source Systems** | Jira Cloud & Jira Software Agile REST API v3, Jira Data Center REST API |
 | **Core Metrics Synthesized** | Sprint Burndown Velocity, Story Point Completion, Developer Workload Variance |
-| **Core Engine Stack** | Python 3.11, Playwright Headless Chromium, Pure SVG Vector Engine |
+| **Core Reporting Stack** | Python 3.11, Playwright Headless Chromium, Pure SVG Vector Engine |
+| **Bidirectional Agent Engine** | Dual-Backend Jira CLI (ankitpokhrel/jira-cli) & Atlassian MCP Server (stdio) |
+| **State Machine Safety** | Transition gate verification, zero-loss description diffing, notification storm throttling |
 | **Distribution Pipeline** | Automated GitHub Actions Scheduled Cron (SMTP Email & Slack Webhook Dispatch) |
-| **Production Deliverables** | Executive A4 Print-Ready Master PDF (Vector) + Responsive Standalone Web Dashboard |
+| **Production Deliverables** | Executive A4 Print-Ready Master PDF (Vector) + Standalone Interactive Web Dashboard + CLI/MCP Console |
 | **Infrastructure Overhead** | Zero-maintenance serverless execution with &lt; 2s total pipeline runtime |
 
 ---
 
 ## 🎮 1. Live Interactive Demonstration
 
-Experience the interactive standalone preview of the weekly report below. It renders the exact HTML5/CSS layout compiled into the executive A4 PDF, complete with SVG burndown charts, developer workload capacity bars, and deliverable status badges:
+Experience the interactive standalone preview below. You can toggle between the **📊 Executive Report** (compiled A4 print layout with SVG burndown charts, developer workload capacity bars, and deliverable status badges) and the **⚡ Bidirectional CLI/MCP** console (simulating real-time Jira CLI commands and Atlassian MCP tool execution that dynamically mutates deliverables state and velocity metrics):
 
 <div style="margin: 24px 0; border: 1px solid rgba(99, 102, 241, 0.4); border-radius: 14px; overflow: hidden; background: #0F172A; box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);">
   <div style="background: #1E293B; padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); font-family: -apple-system, sans-serif; font-size: 12px; color: #CBD5E1;">
@@ -105,30 +107,34 @@ Every component of this prototype is fully implemented, verified, and available 
 
 ```mermaid
 flowchart TD
-    subgraph Trigger & Ingestion
+    subgraph Inbound Telemetry & Aggregation
         A1[GitHub Actions Weekly Cron / Local CLI] --> B[Dual-Mode Jira Connector]
         A2[Web Dashboard UI Trigger] --> B
         B -->|Live Mode| C1[Jira Cloud REST API v3 / Agile v1]
         B -->|Offline/Test Mode| C2[Synthetic Fixture: mock_jira_data.json]
-    end
-
-    subgraph Analytics & Aggregation
         C1 & C2 --> D[Metrics Aggregation Engine]
         D --> E1[Sprint Velocity & Burndown Vectors]
         D --> E2[Developer Worklog Breakdown]
         D --> E3[Task Status & Scope Creep Tracking]
     end
 
-    subgraph Luxury Document Synthesis
+    subgraph Outbound Document Synthesis
         E1 & E2 & E3 --> F[SVG & HTML5 Template Engine]
         F --> G[Playwright Headless PDF Renderer]
         G --> H[Executive A4 PDF Deliverable]
-    end
-
-    subgraph Automated Dispatch
         H --> I1[Local Delivery Vault Archive]
         H --> I2[SMTP Email Dispatcher]
         H --> I3[Slack Webhook Notification]
+    end
+
+    subgraph Bidirectional NL Agentic Control
+        J1[Natural Language Prompt / Dev Chat] --> K[Agile Operations Orchestrator]
+        K -->|Check CLI| L1[Jira CLI Execution Engine]
+        K -->|Check MCP| L2[Atlassian MCP Tool Protocol]
+        L1 & L2 --> M{State Transition Guard}
+        M -->|Verify Workflow Gates| N1[Jira Issue Transitions]
+        M -->|Throttled Updates| N2[Watcher-Safe Comments & Worklogs]
+        N1 & N2 -->|Dynamic Sync| C1
     end
 ```
 
@@ -279,6 +285,21 @@ Response (200 OK):
 
 * **Trade-Off 1 (Pre-rendered SVG vs Client-side JavaScript Charts):** Generating SVG strings on the server/CLI guarantees that Playwright prints vector lines immediately without waiting for client-side JavaScript chart libraries (Chart.js/ApexCharts) to finish animation cycles.
 * **Trade-Off 2 (Serverless Cron vs Persistent Web Server):** A scheduled GitHub Actions workflow requires zero ongoing cloud maintenance overhead compared to maintaining a 24/7 VPS.
+
+---
+
+### Step 11: Bidirectional Agentic Control & Safety Protocols (Jira CLI & Atlassian MCP)
+
+The pipeline transitions from passive read-only reporting to an active **Bidirectional Agentic Loop** via Jira CLI (`ankitpokhrel/jira-cli`) and the Atlassian Model Context Protocol (MCP) server:
+
+1. **Dual-Backend Auto-Detection Protocol:**
+   - Detects local binary `which jira` for high-speed terminal execution (`jira issue list`, `jira issue move`).
+   - Falls back to `mcp__atlassian__*` tools when operating within agentic AI orchestrators.
+2. **State Machine Integrity Invariants:**
+   - **Pre-transition Status Verification:** Never transitions issues without verifying active state and permitted paths (preventing illegal `To Do` to `Done` jumps when `In Progress` is enforced).
+   - **Account ID Resolution:** In MCP mode, resolves user display names to canonical Atlassian account IDs via `lookupJiraAccountId` to prevent silent assignment failures.
+   - **Zero-Loss Description Diffing:** Surfaces existing descriptions before applying modifications, preserving user criteria and historical comments.
+   - **Notification Storm Throttling:** Throttles batch edits to protect project watchers from excessive email alerts.
 
 ---
 

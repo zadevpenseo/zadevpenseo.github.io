@@ -90,7 +90,7 @@ export default defineConfig({
             { label: 'Resilient CDP WebSocket Scraping Engine', link: '/case-studies/data-analysis/resilient-cdp-websocket-scraping/' },
             { label: 'Morpheus V2 Financial Simulation Model', link: '/case-studies/data-analysis/morpheus-v2-tax-simulation-659758/' },
             { label: 'DocuMorph PDF & Table Extraction Pipeline', link: '/case-studies/data-analysis/documorph-pdf-table-extraction/' },
-            { label: 'Automated Jira Weekly Performance Pipeline', link: '/case-studies/data-analysis/jira-weekly-report-automation-40725359/' },
+            { label: 'Jira Performance & NL Ticket Pipeline', link: '/case-studies/data-analysis/jira-weekly-report-automation-40725359/' },
             { label: 'Executive Data Storytelling Engine', link: '/case-studies/data-analysis/executive-data-storytelling-engine/' },
           ],
         },

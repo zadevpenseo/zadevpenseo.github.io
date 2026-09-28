@@ -575,6 +575,163 @@
                 padding: 24px 20px;
             }
         }
+
+        /* Bidirectional View Switcher */
+        .view-mode-toggle {
+            display: inline-flex;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+            padding: 3px;
+            gap: 4px;
+        }
+
+        .tab-btn {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 7px;
+            border: none;
+            background: transparent;
+            color: #94A3B8;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tab-btn:hover {
+            color: #FFFFFF;
+        }
+
+        .tab-btn.active {
+            background: #4F46E5;
+            color: #FFFFFF;
+            box-shadow: 0 2px 8px rgba(79, 70, 229, 0.4);
+        }
+
+        /* Terminal Console Sheet */
+        .console-sheet {
+            width: 100%;
+            max-width: 980px;
+            background: #0B0F19;
+            border: 1px solid #1E293B;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .term-header {
+            background: #111827;
+            padding: 12px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1E293B;
+        }
+
+        .term-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .term-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #EF4444; }
+        .dot-yellow { background: #F59E0B; }
+        .dot-green { background: #10B981; }
+
+        .term-title {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: #94A3B8;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .term-pill-strip {
+            background: #0F172A;
+            padding: 10px 18px;
+            border-bottom: 1px solid #1E293B;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .term-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #64748B;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .cmd-pill {
+            background: #1E293B;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #A5B4FC;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .cmd-pill:hover {
+            background: #312E81;
+            color: #FFFFFF;
+            border-color: #6366F1;
+        }
+
+        .term-body {
+            padding: 20px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            line-height: 1.6;
+            color: #E2E8F0;
+            min-height: 380px;
+            max-height: 520px;
+            overflow-y: auto;
+            background: #090D16;
+        }
+
+        .term-input-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 18px;
+            background: #111827;
+            border-top: 1px solid #1E293B;
+        }
+
+        .term-prompt {
+            color: #10B981;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .term-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #FFFFFF;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            outline: none;
+        }
     </style>
 </head>
 <body>
@@ -589,6 +746,14 @@
             </div>
         </div>
         <div class="navbar-actions">
+            <div class="view-mode-toggle">
+                <button id="btn-tab-report" class="tab-btn active" onclick="switchMainView('report')">
+                    <span>📊 Executive Report</span>
+                </button>
+                <button id="btn-tab-console" class="tab-btn" onclick="switchMainView('console')">
+                    <span>⚡ Bidirectional CLI/MCP</span>
+                </button>
+            </div>
             <button class="btn btn-print" onclick="window.print()" title="Print or Save as PDF via Browser">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
                 <span>Print Document</span>
@@ -605,7 +770,7 @@
 
     <!-- Main Document Canvas -->
     <main class="canvas-wrapper">
-        <article class="report-sheet">
+        <article class="report-sheet" id="reportView">
             
             <!-- Header Section -->
             <header class="report-header">
@@ -972,15 +1137,83 @@
                 <div>Generated for Stakeholder Review &bull; Confidential</div>
             </footer>
         </article>
+
+        <!-- Bidirectional Jira CLI & MCP Terminal Console -->
+        <section class="console-sheet" id="consoleView" style="display: none;">
+            <div class="term-header">
+                <div class="term-dots">
+                    <span class="term-dot dot-red"></span>
+                    <span class="term-dot dot-yellow"></span>
+                    <span class="term-dot dot-green"></span>
+                </div>
+                <div class="term-title">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+                    <span>jira-agent@agile-ops: ~ (backend: dual Jira CLI & Atlassian MCP)</span>
+                </div>
+                <div style="font-family: var(--font-mono); font-size: 11px; color: #10B981;">● Latency: 12ms</div>
+            </div>
+
+            <!-- Quick Action Command Pills -->
+            <div class="term-pill-strip">
+                <span class="term-label">Quick Commands:</span>
+                <button class="cmd-pill" onclick="executeCommand('jira issue list -s&quot;In Progress&quot;')">jira issue list -s"In Progress"</button>
+                <button class="cmd-pill" onclick="executeCommand('jira issue move CORE-107 &quot;Done&quot;')">jira issue move CORE-107 "Done" ⚡</button>
+                <button class="cmd-pill" onclick="executeCommand('mcp__atlassian__searchJiraIssuesUsingJql')">mcp__atlassian__searchJiraIssuesUsingJql</button>
+                <button class="cmd-pill" onclick="executeCommand('ai: triage unassigned sprint backlog')">ai: triage unassigned backlog</button>
+                <button class="cmd-pill" onclick="executeCommand('jira issue view CORE-101')">jira issue view CORE-101</button>
+                <button class="cmd-pill" onclick="executeCommand('clear')">clear</button>
+            </div>
+
+            <!-- Terminal Output Body -->
+            <div class="term-body" id="terminalOutput">
+                <div style="color: #94A3B8; margin-bottom: 12px;">
+                    <div>[SYSTEM INITIALIZING] Loading Agile Operations Agent Toolkit...</div>
+                    <div>[BACKEND 1] Jira CLI v1.5.0 detected at /usr/local/bin/jira &bull; Authenticated as $(jira me): zadit@prismakreatif.com</div>
+                    <div>[BACKEND 2] Atlassian MCP Server connected via stdio &bull; 9 tools active (search, transitions, worklogs)</div>
+                    <div>[SPRINT 42] Active Scope: 48 pts &bull; 10 issues &bull; Target Date: Sep 28, 2026</div>
+                    <div style="color: #6366F1; margin-top: 6px;">Type a command below or click a quick action pill above to test bidirectional execution:</div>
+                </div>
+            </div>
+
+            <!-- Command Input Line -->
+            <div class="term-input-row">
+                <span class="term-prompt">jira-agent@sprint-42:~$</span>
+                <input type="text" id="terminalInput" class="term-input" placeholder="Enter CLI or MCP command (e.g. jira issue move CORE-107 'Done')..." autocomplete="off" spellcheck="false">
+            </div>
+        </section>
     </main>
 
     <script>
+        function switchMainView(mode) {
+            const reportEl = document.getElementById('reportView');
+            const consoleEl = document.getElementById('consoleView');
+            const btnReport = document.getElementById('btn-tab-report');
+            const btnConsole = document.getElementById('btn-tab-console');
+
+            if (mode === 'report') {
+                reportEl.style.display = 'block';
+                consoleEl.style.display = 'none';
+                btnReport.classList.add('active');
+                btnConsole.classList.remove('active');
+            } else {
+                reportEl.style.display = 'none';
+                consoleEl.style.display = 'flex';
+                btnReport.classList.remove('active');
+                btnConsole.classList.add('active');
+                setTimeout(() => {
+                    document.getElementById('terminalInput').focus();
+                }, 100);
+            }
+        }
+
         function filterTable(status) {
             const rows = document.querySelectorAll('#deliverablesTable tbody tr');
             const buttons = document.querySelectorAll('.filter-btn');
 
             buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
 
             rows.forEach(row => {
                 if (status === 'all') {
@@ -991,6 +1224,141 @@
                     row.style.display = row.getAttribute('data-status') === 'active' ? '' : 'none';
                 }
             });
+        }
+
+        // Terminal Command Simulator
+        const termInput = document.getElementById('terminalInput');
+        const termOutput = document.getElementById('terminalOutput');
+
+        termInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const val = termInput.value.trim();
+                if (val) {
+                    executeCommand(val);
+                    termInput.value = '';
+                }
+            }
+        });
+
+        function appendTermLine(html) {
+            const line = document.createElement('div');
+            line.innerHTML = html;
+            termOutput.appendChild(line);
+            termOutput.scrollTop = termOutput.scrollHeight;
+        }
+
+        function executeCommand(cmd) {
+            appendTermLine(`<div style="margin-top: 10px; color: #38BDF8;"><strong>jira-agent@sprint-42:~$</strong> ${escapeHtml(cmd)}</div>`);
+
+            const lower = cmd.toLowerCase().trim();
+
+            if (lower === 'clear') {
+                termOutput.innerHTML = '';
+                return;
+            }
+
+            if (lower.includes('list -s"in progress"') || lower.includes('list in progress')) {
+                appendTermLine(`
+<div style="color: #94A3B8; margin-top: 4px;">
+TYPE    KEY       SUMMARY                                             ASSIGNEE        STATUS       POINTS
+Task    CORE-107  Upgrade Next.js framework to version 15.2           Elena Rostova   In Progress  5 pts
+Task    CORE-108  Optimize database indexing for slow queries        Alex Morgan     In Progress  3 pts
+Task    CORE-109  Configure Prometheus alerting rules for ingress    David Chen      In Progress  3 pts
+Bug     CORE-110  Investigate memory leak on client report service    Sarah Jenkins   In Progress  3 pts
+</div>
+<div style="color: #10B981; font-weight: 600;">✓ 4 active in-progress issues retrieved in 14ms via CLI backend.</div>`);
+                return;
+            }
+
+            if (lower.includes('move core-107 "done"') || lower.includes('move core-107 done')) {
+                // Live state transition!
+                const targetRow = document.querySelector('tr:has(.issue-key:contains("CORE-107"))') || Array.from(document.querySelectorAll('#deliverablesTable tbody tr')).find(r => r.textContent.includes('CORE-107'));
+                if (targetRow) {
+                    targetRow.setAttribute('data-status', 'done');
+                    const badgeCell = targetRow.querySelector('td:nth-child(3)');
+                    if (badgeCell) {
+                        badgeCell.innerHTML = '<span class="badge badge-done" style="background: rgba(16,185,129,0.15); color: #10B981; border: 1px solid rgba(16,185,129,0.3);">Done</span>';
+                    }
+                }
+                
+                // Update KPI card
+                const kpiVal = document.querySelector('.kpi-card:nth-child(1) .kpi-value');
+                if (kpiVal) {
+                    kpiVal.innerHTML = '36 <span class="kpi-unit">pts</span>';
+                }
+
+                appendTermLine(`
+<div style="color: #10B981; margin-top: 4px;">
+[STATE MACHINE TRANSITION]
+→ Issue: CORE-107 (Upgrade Next.js framework to version 15.2)
+→ Transition Path: "In Progress" (ID: 21) ──► "Done" (ID: 31)
+→ Resolution: Done (Automated by Agile Operations Agent)
+→ Completed Sprint Velocity: 31 pts ──► 36 pts (+5 pts)
+→ Notification: Watchers alerted (0 email storms triggered)
+</div>
+<div style="color: #A5B4FC; font-weight: 600;">⚡ Live DOM synchronized: Deliverables table and burndown velocity updated. Switch to 'Executive Report' tab to review.</div>`);
+                return;
+            }
+
+            if (lower.includes('mcp__atlassian__searchjiraisssuesusingjql') || lower.includes('searchjiraisssues') || lower.includes('jql')) {
+                appendTermLine(`
+<div style="color: #E2E8F0; margin-top: 4px; background: rgba(30, 41, 59, 0.6); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
+<span style="color: #F59E0B;">[MCP Tool Response: mcp__atlassian__searchJiraIssuesUsingJql]</span>
+{
+  "total": 1,
+  "maxResults": 1,
+  "issues": [
+    {
+      "key": "CORE-110",
+      "fields": {
+        "summary": "Investigate memory leak on client report export service",
+        "issuetype": { "name": "Bug" },
+        "priority": { "name": "High" },
+        "assignee": { "displayName": "Sarah Jenkins", "accountId": "usr_77a98bf2" },
+        "status": { "name": "In Progress" },
+        "customfield_10026": 3.0,
+        "timespent": 37800
+      }
+    }
+  ]
+}
+</div>`);
+                return;
+            }
+
+            if (lower.includes('triage') || lower.includes('ai:')) {
+                appendTermLine(`
+<div style="color: #C084FC; margin-top: 4px;">
+[AI AGENT SPRINT TRIAGE ASSESSMENT]
+• Burndown Velocity: 31/48 pts completed with 1 day remaining in Sprint 42.
+• High-Risk Bottleneck: CORE-110 (Memory Leak Bug) has consumed 10.5h against a 3 pts estimate.
+• Actionable Recommendation: Reassign CORE-110 root cause profiling to Marcus Vance (QA Lead) to protect Sprint 42 deliverable SLA.
+• CLI Proposed: <code>jira issue assign CORE-110 usr_marcus_vance</code>
+</div>`);
+                return;
+            }
+
+            if (lower.includes('view core-101')) {
+                appendTermLine(`
+<div style="color: #94A3B8; margin-top: 4px;">
+[ISSUE CORE-101] Implement Redis edge caching layer for dashboard API
+• Status: Done &bull; Type: Story &bull; Priority: High
+• Assignee: Alex Morgan &bull; Reporter: Zadit (Engineering Lead)
+• Estimate: 5 pts &bull; Logged: 14.5 hours
+• Description: Configure Cloudflare Worker KV and Redis cluster replication to cache weekly sprint analytics queries.
+</div>`);
+                return;
+            }
+
+            appendTermLine(`
+<div style="color: #EF4444; margin-top: 4px;">
+Command executed: "${escapeHtml(cmd)}" (Status: 200 OK)
+Backend response logged. Try one of the quick command pills above for live state machine updates.
+</div>`);
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
         }
     </script>
 </body>
