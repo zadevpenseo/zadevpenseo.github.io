@@ -2,385 +2,996 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Jira Weekly Executive Report - Sprint 42 - Core Platform Modernization</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jira Weekly Executive Report &bull; Live Interactive Dashboard &amp; Prototype (#40725359)</title>
+    <meta name="description" content="Production-ready weekly Jira sprint performance and developer workload executive report with automated burndown analytics and PDF generation.">
+    <!-- Google Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        @page {
-            size: A4 portrait;
-            margin: 14mm 14mm 16mm 14mm;
+        :root {
+            --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+            --color-bg-dark: #090D16;
+            --color-surface-dark: #111827;
+            --color-paper: #FFFFFF;
+            --color-primary: #4F46E5;
+            --color-primary-light: #6366F1;
+            --color-success: #10B981;
+            --color-warning: #F59E0B;
+            --color-danger: #EF4444;
+            --color-slate-900: #0F172A;
+            --color-slate-800: #1E293B;
+            --color-slate-700: #334155;
+            --color-slate-600: #475569;
+            --color-slate-500: #64748B;
+            --color-slate-400: #94A3B8;
+            --color-slate-200: #E2E8F0;
+            --color-slate-100: #F1F5F9;
+            --color-slate-50: #F8FAFC;
         }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #FFFFFF;
-            color: #0F172A;
-            line-height: 1.45;
-            font-size: 11pt;
+            font-family: var(--font-sans);
+            background-color: var(--color-bg-dark);
+            color: var(--color-slate-900);
+            line-height: 1.5;
+            font-size: 14px;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
         }
-        .header {
+
+        /* Top Global Sticky Navigation Bar */
+        .demo-navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.25);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #FFFFFF;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .badge-live {
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: #FFFFFF;
+            padding: 3px 8px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .badge-live::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #FFFFFF;
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.8); }
+        }
+
+        .navbar-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #F8FAFC;
+            letter-spacing: -0.01em;
+        }
+
+        .navbar-subtitle {
+            font-size: 12px;
+            color: #94A3B8;
+        }
+
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn {
+            font-family: var(--font-sans);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            border: none;
+        }
+
+        .btn-download {
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: #FFFFFF;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+        }
+
+        .btn-download:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+        }
+
+        .btn-hld {
+            background: rgba(99, 102, 241, 0.15);
+            color: #A5B4FC;
+            border: 1px solid rgba(99, 102, 241, 0.35);
+        }
+
+        .btn-hld:hover {
+            background: rgba(99, 102, 241, 0.25);
+            color: #FFFFFF;
+            border-color: rgba(99, 102, 241, 0.6);
+        }
+
+        .btn-print {
+            background: #1E293B;
+            color: #E2E8F0;
+            border: 1px solid #334155;
+        }
+
+        .btn-print:hover {
+            background: #334155;
+            color: #FFFFFF;
+        }
+
+        /* Document Canvas Container */
+        .canvas-wrapper {
+            padding: 32px 16px 64px 16px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .report-sheet {
+            width: 100%;
+            max-width: 980px;
+            background: var(--color-paper);
+            border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
+            padding: 40px 48px;
+            position: relative;
+        }
+
+        /* Header Component */
+        .report-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            border-bottom: 2px solid #E2E8F0;
-            padding-bottom: 12px;
-            margin-bottom: 16px;
+            border-bottom: 2px solid var(--color-slate-100);
+            padding-bottom: 20px;
+            margin-bottom: 24px;
         }
-        .header-title h1 {
-            font-size: 20pt;
+
+        .report-title-area h1 {
+            font-size: 24px;
             font-weight: 800;
-            color: #0F172A;
-            letter-spacing: -0.02em;
+            color: var(--color-slate-900);
+            letter-spacing: -0.025em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .header-title p {
-            font-size: 9.5pt;
-            color: #64748B;
-            margin-top: 3px;
+
+        .report-title-area p {
+            font-size: 13px;
+            color: var(--color-slate-500);
+            margin-top: 6px;
+            max-width: 640px;
         }
-        .header-badge {
-            background: linear-gradient(135deg, #4338CA, #6366F1);
-            color: #FFFFFF;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 9pt;
+
+        .report-meta-badge {
+            background: linear-gradient(135deg, #1E1B4B, #312E81);
+            color: #E0E7FF;
+            border: 1px solid #4338CA;
+            border-radius: 8px;
+            padding: 8px 14px;
+            text-align: right;
+        }
+
+        .report-meta-badge .meta-label {
+            font-size: 10px;
             font-weight: 700;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            color: #A5B4FC;
         }
+
+        .report-meta-badge .meta-val {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 2px;
+            color: #FFFFFF;
+        }
+
+        /* KPI Cards Grid */
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-bottom: 16px;
+            gap: 16px;
+            margin-bottom: 28px;
         }
+
         .kpi-card {
-            background: #F8FAFC;
-            border: 1px solid #E2E8F0;
-            border-radius: 8px;
-            padding: 10px 12px;
+            background: var(--color-slate-50);
+            border: 1px solid var(--color-slate-200);
+            border-radius: 12px;
+            padding: 16px 18px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
+
+        .kpi-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.06);
+        }
+
         .kpi-label {
-            font-size: 8pt;
+            font-size: 11px;
             font-weight: 700;
-            color: #64748B;
+            color: var(--color-slate-500);
             text-transform: uppercase;
             letter-spacing: 0.06em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
+
         .kpi-value {
-            font-size: 17pt;
+            font-size: 26px;
             font-weight: 800;
-            color: #0F172A;
-            margin-top: 2px;
+            color: var(--color-slate-900);
+            letter-spacing: -0.02em;
+            margin: 6px 0 2px 0;
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
         }
-        .kpi-subtext {
-            font-size: 7.5pt;
-            color: #10B981;
+
+        .kpi-unit {
+            font-size: 13px;
             font-weight: 600;
-            margin-top: 1px;
+            color: var(--color-slate-500);
         }
+
+        .kpi-subtext {
+            font-size: 11px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .subtext-success { color: var(--color-success); }
+        .subtext-primary { color: var(--color-primary-light); }
+
+        /* Section Title */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
         .section-title {
-            font-size: 11pt;
+            font-size: 13px;
             font-weight: 700;
-            color: #1E293B;
-            margin-bottom: 8px;
+            color: var(--color-slate-800);
             text-transform: uppercase;
-            letter-spacing: 0.04em;
+            letter-spacing: 0.06em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::before {
+            content: "";
+            width: 4px;
+            height: 14px;
+            background: linear-gradient(to bottom, var(--color-primary-light), var(--color-primary));
+            border-radius: 2px;
+        }
+
+        /* Burndown Chart Card */
+        .chart-card {
+            background: #FFFFFF;
+            border: 1px solid var(--color-slate-200);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 28px;
+        }
+
+        .chart-meta-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 12px;
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .legend-item {
             display: flex;
             align-items: center;
             gap: 6px;
+            font-size: 11.5px;
+            color: var(--color-slate-600);
+            font-weight: 600;
         }
-        .section-title::before {
-            content: "";
-            display: inline-block;
-            width: 4px;
-            height: 13px;
-            background-color: #6366F1;
+
+        .legend-dot-ideal {
+            width: 14px;
+            height: 3px;
             border-radius: 2px;
+            background: repeating-linear-gradient(90deg, #94A3B8, #94A3B8 4px, transparent 4px, transparent 8px);
         }
-        .burndown-container {
-            background: #FFFFFF;
-            border: 1px solid #E2E8F0;
-            border-radius: 8px;
-            padding: 10px;
-            margin-bottom: 16px;
+
+        .legend-dot-actual {
+            width: 14px;
+            height: 3px;
+            border-radius: 2px;
+            background: var(--color-primary-light);
         }
-        .chart-svg {
+
+        .chart-container-svg {
             width: 100%;
-            height: 140px;
+            height: auto;
             display: block;
         }
+
+        /* Tables & Lists */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            border: 1px solid var(--color-slate-200);
+            border-radius: 12px;
+            margin-bottom: 28px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 9pt;
-            margin-bottom: 16px;
-        }
-        th {
-            background-color: #F1F5F9;
-            color: #475569;
+            font-size: 13px;
             text-align: left;
-            padding: 7px 10px;
+        }
+
+        thead {
+            background: var(--color-slate-50);
+            border-bottom: 1px solid var(--color-slate-200);
+        }
+
+        th {
+            padding: 12px 16px;
             font-weight: 700;
-            font-size: 8pt;
+            font-size: 11px;
+            color: var(--color-slate-500);
             text-transform: uppercase;
-            letter-spacing: 0.04em;
-            border-bottom: 1px solid #CBD5E1;
+            letter-spacing: 0.06em;
         }
+
+        tbody tr {
+            border-bottom: 1px solid var(--color-slate-100);
+            transition: background 0.15s ease;
+        }
+
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: var(--color-slate-50);
+        }
+
         td {
-            padding: 7px 10px;
-            border-bottom: 1px solid #F1F5F9;
+            padding: 12px 16px;
+            vertical-align: middle;
         }
-        .badge {
-            display: inline-block;
-            padding: 2px 7px;
-            border-radius: 4px;
-            font-size: 7.5pt;
+
+        /* Developer Row Details */
+        .dev-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dev-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
             font-weight: 700;
+            color: #FFFFFF;
+            flex-shrink: 0;
         }
-        .badge.completed { background-color: #DCFCE7; color: #166534; }
-        .badge.active { background-color: #FEF3C7; color: #92400E; }
-        .badge.type-story { background-color: #E0E7FF; color: #3730A3; }
-        .badge.type-bug { background-color: #FEE2E2; color: #991B1B; }
-        .badge.type-task { background-color: #F1F5F9; color: #334155; }
-        .progress-bar-bg {
+
+        .dev-info .dev-name {
+            font-weight: 700;
+            color: var(--color-slate-900);
+        }
+
+        .dev-info .dev-role {
+            font-size: 11px;
+            color: var(--color-slate-500);
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .badge-done { background: #DCFCE7; color: #15803D; }
+        .badge-active { background: #FEF3C7; color: #B45309; }
+        .badge-review { background: #E0E7FF; color: #4338CA; }
+
+        .badge-story { background: #EEF2FF; color: #4F46E5; border: 1px solid #C7D2FE; }
+        .badge-bug { background: #FEE2E2; color: #DC2626; border: 1px solid #FECACA; }
+        .badge-task { background: #F1F5F9; color: #475569; border: 1px solid #E2E8F0; }
+
+        .progress-track {
             width: 100%;
-            height: 7px;
-            background-color: #E2E8F0;
-            border-radius: 4px;
+            height: 8px;
+            background: var(--color-slate-200);
+            border-radius: 9999px;
             overflow: hidden;
+            position: relative;
         }
+
         .progress-bar-fill {
             height: 100%;
-            border-radius: 4px;
+            border-radius: 9999px;
+            transition: width 0.6s ease;
         }
-        .footer {
-            margin-top: 14px;
-            padding-top: 8px;
-            border-top: 1px solid #E2E8F0;
+
+        .issue-key {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        /* Filter Controls */
+        .filter-group {
+            display: flex;
+            gap: 6px;
+        }
+
+        .filter-btn {
+            background: var(--color-slate-100);
+            border: 1px solid var(--color-slate-200);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-slate-600);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--color-slate-800);
+            color: #FFFFFF;
+            border-color: var(--color-slate-800);
+        }
+
+        /* Footer */
+        .report-footer {
+            border-top: 1px solid var(--color-slate-200);
+            padding-top: 16px;
             display: flex;
             justify-content: space-between;
-            font-size: 7.5pt;
-            color: #94A3B8;
+            align-items: center;
+            font-size: 11px;
+            color: var(--color-slate-400);
+        }
+
+        /* Print Media Style Overrides */
+        @media print {
+            body {
+                background: #FFFFFF !important;
+                color: #000000 !important;
+                font-size: 10pt !important;
+            }
+
+            .demo-navbar {
+                display: none !important;
+            }
+
+            .canvas-wrapper {
+                padding: 0 !important;
+                display: block !important;
+            }
+
+            .report-sheet {
+                max-width: 100% !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                padding: 0 !important;
+            }
+
+            @page {
+                size: A4 portrait;
+                margin: 12mm 14mm 14mm 14mm;
+            }
+
+            .kpi-card, .chart-card, .table-responsive {
+                break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .demo-navbar {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .report-sheet {
+                padding: 24px 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <div style="background: #0F172A; color: #FFFFFF; padding: 10px 16px; margin: -14mm -14mm 16px -14mm; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #6366F1; font-family: -apple-system, sans-serif; font-size: 9pt;">
-        <div style="display: flex; align-items: center; gap: 8px;">
-            <span style="background: #6366F1; color: white; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 7.5pt; text-transform: uppercase;">Live Demo</span>
-            <span style="font-weight: 600; color: #E2E8F0;">Jira Weekly Executive Report Prototype (#40725359)</span>
+
+    <!-- Sticky Live Demo Navigation Bar -->
+    <header class="demo-navbar">
+        <div class="navbar-brand">
+            <span class="badge-live">Live Prototype</span>
+            <div>
+                <div class="navbar-title">Jira Weekly Executive Report Pipeline (#40725359)</div>
+                <div class="navbar-subtitle">Sprint 42 &bull; Automated Data Extraction &bull; Playwright PDF Compiler</div>
+            </div>
         </div>
-        <div style="display: flex; gap: 10px; align-items: center;">
-            <a href="./jira_weekly_executive_report.pdf" download="jira_weekly_executive_report.pdf" style="background: #10B981; color: #FFFFFF; padding: 5px 12px; border-radius: 5px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 5px;">
+        <div class="navbar-actions">
+            <button class="btn btn-print" onclick="window.print()" title="Print or Save as PDF via Browser">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+                <span>Print Document</span>
+            </button>
+            <a href="./jira_weekly_executive_report.pdf" download="jira_weekly_executive_report.pdf" class="btn btn-download" title="Download High-Res Compiled Master PDF">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                 <span>Download Executive PDF (299 KB)</span>
             </a>
-            <a href="/case-studies/data-analysis/jira-weekly-report-automation-40725359/" style="background: rgba(255,255,255,0.1); color: #E0E7FF; padding: 5px 12px; border-radius: 5px; text-decoration: none; font-weight: 600;">
-                <span>View 10-Step HLD Architecture &rarr;</span>
+            <a href="/case-studies/data-analysis/jira-weekly-report-automation-40725359/" class="btn btn-hld" title="Read the complete 10-step High-Level Architecture">
+                <span>View 10-Step HLD &rarr;</span>
             </a>
         </div>
-    </div>
-    <div class="header">
-        <div class="header-title">
-            <h1>Weekly Developer Performance Report</h1>
-            <p><strong>Sprint 42 - Core Platform Modernization</strong> &bull; Goal: Finalize real-time analytics streaming, resolve critical security patches, and optimize edge response latencies.</p>
-        </div>
-        <div class="header-badge">Executive Delivery</div>
-    </div>
+    </header>
 
-    <div class="kpi-grid">
-        <div class="kpi-card">
-            <div class="kpi-label">Sprint Velocity</div>
-            <div class="kpi-value">31 / 45</div>
-            <div class="kpi-subtext">68.9% Target Accomplished</div>
-        </div>
-        <div class="kpi-card">
-            <div class="kpi-label">Completed Tasks</div>
-            <div class="kpi-value">6 <span style="font-size: 10pt; color: #64748B;">/ 10</span></div>
-            <div class="kpi-subtext">+6 Issues Closed</div>
-        </div>
-        <div class="kpi-card">
-            <div class="kpi-label">Total Time Spent</div>
-            <div class="kpi-value">130.0h</div>
-            <div class="kpi-subtext">Est: 136h (-6.0h variance)</div>
-        </div>
-        <div class="kpi-card">
-            <div class="kpi-label">Active / In Review</div>
-            <div class="kpi-value">4</div>
-            <div class="kpi-subtext" style="color: #6366F1;">On Track for Sprint Close</div>
-        </div>
-    </div>
-
-    <div class="section-title">Sprint Burndown Progression</div>
-    <div class="burndown-container">
-        
-    <svg viewBox="0 0 500 180" class="chart-svg" xmlns="http://www.w3.org/2000/svg">
-        <line x1="40" y1="20.0" x2="480" y2="20.0" stroke="#E2E8F0" stroke-dasharray="3,3"/><text x="32" y="23.0" text-anchor="end" font-size="9" fill="#94A3B8">45</text><line x1="40" y1="63.3" x2="480" y2="63.3" stroke="#E2E8F0" stroke-dasharray="3,3"/><text x="32" y="66.3" text-anchor="end" font-size="9" fill="#94A3B8">30</text><line x1="40" y1="106.7" x2="480" y2="106.7" stroke="#E2E8F0" stroke-dasharray="3,3"/><text x="32" y="109.7" text-anchor="end" font-size="9" fill="#94A3B8">15</text><line x1="40" y1="150.0" x2="480" y2="150.0" stroke="#E2E8F0" stroke-dasharray="3,3"/><text x="32" y="153.0" text-anchor="end" font-size="9" fill="#94A3B8">0</text>
-        <!-- Ideal Burn line -->
-        <polyline points="40.0,20.0 113.3,42.0 186.7,64.2 260.0,85.0 333.3,107.0 406.7,129.2 480.0,150.0" fill="none" stroke="#94A3B8" stroke-width="2" stroke-dasharray="5,4" />
-        <!-- Actual Burn line -->
-        <polyline points="40.0,20.0 113.3,20.0 186.7,34.4 260.0,57.6 333.3,80.7 406.7,95.1 480.0,109.6" fill="none" stroke="#6366F1" stroke-width="3" stroke-linecap="round" />
-        <text x="40.0" y="172" text-anchor="middle" font-size="10" fill="#64748B">Mon</text><text x="113.3" y="172" text-anchor="middle" font-size="10" fill="#64748B">Tue</text><text x="186.7" y="172" text-anchor="middle" font-size="10" fill="#64748B">Wed</text><text x="260.0" y="172" text-anchor="middle" font-size="10" fill="#64748B">Thu</text><text x="333.3" y="172" text-anchor="middle" font-size="10" fill="#64748B">Fri</text><text x="406.7" y="172" text-anchor="middle" font-size="10" fill="#64748B">Sat</text><text x="480.0" y="172" text-anchor="middle" font-size="10" fill="#64748B">Sun</text>
-        <!-- Legend -->
-        <circle cx="340" cy="12" r="4" fill="#94A3B8" />
-        <text x="350" y="15" font-size="10" fill="#64748B">Ideal Burn</text>
-        <circle cx="420" cy="12" r="4" fill="#6366F1" />
-        <text x="430" y="15" font-size="10" fill="#1E293B" font-weight="600">Actual Remaining</text>
-    </svg>
-    
-    </div>
-
-    <div class="section-title">Developer Workload & Hours Logged</div>
-    <table>
-        <thead>
-            <tr>
-                <th>Developer</th>
-                <th>Completed</th>
-                <th>In Progress</th>
-                <th>Logged vs Estimate</th>
-                <th>Capacity Allocation</th>
-            </tr>
-        </thead>
-        <tbody>
+    <!-- Main Document Canvas -->
+    <main class="canvas-wrapper">
+        <article class="report-sheet">
             
-        <tr>
-            <td style="font-weight: 600; color: #1E293B;">Elena Rostova</td>
-            <td><span class="badge completed">1 Done</span></td>
-            <td><span class="badge active">1 Active</span></td>
-            <td style="font-family: monospace; font-weight: 600;">34.0h / 40.0h</td>
-            <td style="width: 140px;">
-                <div class="progress-bar-bg">
-                    <div class="progress-bar-fill" style="width: 85.0%; background-color: #10B981;"></div>
+            <!-- Header Section -->
+            <header class="report-header">
+                <div class="report-title-area">
+                    <h1>Weekly Developer Performance Report</h1>
+                    <p><strong>Sprint 42 - Core Platform Modernization</strong> &bull; Goal: Finalize real-time analytics streaming, resolve critical security patches, and optimize edge response latencies.</p>
                 </div>
-            </td>
-        </tr>
-        
-        <tr>
-            <td style="font-weight: 600; color: #1E293B;">Alex Morgan</td>
-            <td><span class="badge completed">2 Done</span></td>
-            <td><span class="badge active">1 Active</span></td>
-            <td style="font-family: monospace; font-weight: 600;">30.0h / 32.0h</td>
-            <td style="width: 140px;">
-                <div class="progress-bar-bg">
-                    <div class="progress-bar-fill" style="width: 94.0%; background-color: #10B981;"></div>
+                <div class="report-meta-badge">
+                    <div class="meta-label">Iteration Cycle</div>
+                    <div class="meta-val">Sep 21 – Sep 28, 2026</div>
                 </div>
-            </td>
-        </tr>
-        
-        <tr>
-            <td style="font-weight: 600; color: #1E293B;">Sarah Jenkins</td>
-            <td><span class="badge completed">1 Done</span></td>
-            <td><span class="badge active">1 Active</span></td>
-            <td style="font-family: monospace; font-weight: 600;">28.0h / 24.0h</td>
-            <td style="width: 140px;">
-                <div class="progress-bar-bg">
-                    <div class="progress-bar-fill" style="width: 100%; background-color: #F59E0B;"></div>
-                </div>
-            </td>
-        </tr>
-        
-        <tr>
-            <td style="font-weight: 600; color: #1E293B;">David Chen</td>
-            <td><span class="badge completed">1 Done</span></td>
-            <td><span class="badge active">1 Active</span></td>
-            <td style="font-family: monospace; font-weight: 600;">22.0h / 24.0h</td>
-            <td style="width: 140px;">
-                <div class="progress-bar-bg">
-                    <div class="progress-bar-fill" style="width: 92.0%; background-color: #10B981;"></div>
-                </div>
-            </td>
-        </tr>
-        
-        <tr>
-            <td style="font-weight: 600; color: #1E293B;">Marcus Vance</td>
-            <td><span class="badge completed">1 Done</span></td>
-            <td><span class="badge active">0 Active</span></td>
-            <td style="font-family: monospace; font-weight: 600;">16.0h / 16.0h</td>
-            <td style="width: 140px;">
-                <div class="progress-bar-bg">
-                    <div class="progress-bar-fill" style="width: 100.0%; background-color: #10B981;"></div>
-                </div>
-            </td>
-        </tr>
-        
-        </tbody>
-    </table>
+            </header>
 
-    <div class="section-title">Key Completed Deliverables</div>
-    <table>
-        <thead>
-            <tr>
-                <th>Issue Key</th>
-                <th>Summary</th>
-                <th>Type</th>
-                <th>Assignee</th>
-                <th>Story Points</th>
-                <th>Time Spent</th>
-            </tr>
-        </thead>
-        <tbody>
-            
-        <tr>
-            <td style="font-family: monospace; font-weight: 700; color: #4338CA;">CORE-101</td>
-            <td style="color: #334155;">Implement Redis edge caching layer for dashboard API</td>
-            <td><span class="badge type-story">Story</span></td>
-            <td style="color: #475569;">Alex Morgan</td>
-            <td style="font-weight: 600; color: #0F172A;">5 pts</td>
-            <td style="font-family: monospace; color: #10B981; font-weight: 600;">14.5h</td>
-        </tr>
-        
-        <tr>
-            <td style="font-family: monospace; font-weight: 700; color: #4338CA;">CORE-102</td>
-            <td style="color: #334155;">Fix race condition in concurrent WebSocket sessions</td>
-            <td><span class="badge type-bug">Bug</span></td>
-            <td style="color: #475569;">Alex Morgan</td>
-            <td style="font-weight: 600; color: #0F172A;">3 pts</td>
-            <td style="font-family: monospace; color: #10B981; font-weight: 600;">9.0h</td>
-        </tr>
-        
-        <tr>
-            <td style="font-family: monospace; font-weight: 700; color: #4338CA;">CORE-103</td>
-            <td style="color: #334155;">Refactor navigation shell with responsive drawer component</td>
-            <td><span class="badge type-story">Story</span></td>
-            <td style="color: #475569;">Elena Rostova</td>
-            <td style="font-weight: 600; color: #0F172A;">8 pts</td>
-            <td style="font-family: monospace; color: #10B981; font-weight: 600;">22.0h</td>
-        </tr>
-        
-        <tr>
-            <td style="font-family: monospace; font-weight: 700; color: #4338CA;">CORE-104</td>
-            <td style="color: #334155;">Migrate Docker compose definitions to Helm chart templates</td>
-            <td><span class="badge type-task">Task</span></td>
-            <td style="color: #475569;">David Chen</td>
-            <td style="font-weight: 600; color: #0F172A;">5 pts</td>
-            <td style="font-family: monospace; color: #10B981; font-weight: 600;">15.0h</td>
-        </tr>
-        
-        <tr>
-            <td style="font-family: monospace; font-weight: 700; color: #4338CA;">CORE-105</td>
-            <td style="color: #334155;">Implement OAuth2 PKCE flow for mobile web integration</td>
-            <td><span class="badge type-story">Story</span></td>
-            <td style="color: #475569;">Sarah Jenkins</td>
-            <td style="font-weight: 600; color: #0F172A;">5 pts</td>
-            <td style="font-family: monospace; color: #10B981; font-weight: 600;">17.5h</td>
-        </tr>
-        
-        <tr>
-            <td style="font-family: monospace; font-weight: 700; color: #4338CA;">CORE-106</td>
-            <td style="color: #334155;">Automate end-to-end Cypress regression suite for checkout</td>
-            <td><span class="badge type-task">Task</span></td>
-            <td style="color: #475569;">Marcus Vance</td>
-            <td style="font-weight: 600; color: #0F172A;">5 pts</td>
-            <td style="font-family: monospace; color: #10B981; font-weight: 600;">16.0h</td>
-        </tr>
-        
-        </tbody>
-    </table>
+            <!-- 4-Quadrant Metric Cards -->
+            <section class="kpi-grid" aria-label="Sprint Key Metrics">
+                <div class="kpi-card">
+                    <div class="kpi-label">
+                        <span>Sprint Velocity</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6366F1" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+                    </div>
+                    <div class="kpi-value">31 <span class="kpi-unit">/ 45 pts</span></div>
+                    <div class="kpi-subtext subtext-success">68.9% Target Accomplished</div>
+                </div>
 
-    <div class="footer">
-        <div>Automated Jira Executive Pipeline &bull; Grounded in Deterministic Analytics</div>
-        <div>Generated for Stakeholder Review &bull; Confidential</div>
-    </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">
+                        <span>Completed Tasks</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <div class="kpi-value">6 <span class="kpi-unit">/ 10 issues</span></div>
+                    <div class="kpi-subtext subtext-success">+6 Closed this iteration</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-label">
+                        <span>Time Logged</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <div class="kpi-value">130.0 <span class="kpi-unit">hours</span></div>
+                    <div class="kpi-subtext subtext-success">Est: 136h (-6.0h variance)</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-label">
+                        <span>Active / Review</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6366F1" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    </div>
+                    <div class="kpi-value">4 <span class="kpi-unit">tickets</span></div>
+                    <div class="kpi-subtext subtext-primary">On Track for Release</div>
+                </div>
+            </section>
+
+            <!-- Sprint Burndown Progression Chart -->
+            <section class="chart-card">
+                <div class="chart-meta-bar">
+                    <div class="section-title">Sprint Burndown Progression</div>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <span class="legend-dot-ideal"></span>
+                            <span>Ideal Guideline</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot-actual"></span>
+                            <span style="color: var(--color-slate-900);">Actual Remaining Points</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- High-Definition Responsive Vector SVG Chart -->
+                <svg viewBox="0 0 880 220" class="chart-container-svg" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="burnGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#6366F1" stop-opacity="0.22" />
+                            <stop offset="100%" stop-color="#6366F1" stop-opacity="0.01" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Horizontal Grid lines & Y-Axis Scale -->
+                    <line x1="50" y1="20" x2="850" y2="20" stroke="#F1F5F9" stroke-width="1.5" stroke-dasharray="4,4"/>
+                    <text x="40" y="24" text-anchor="end" font-size="11" fill="#94A3B8" font-family="var(--font-mono)">45</text>
+
+                    <line x1="50" y1="73" x2="850" y2="73" stroke="#F1F5F9" stroke-width="1.5" stroke-dasharray="4,4"/>
+                    <text x="40" y="77" text-anchor="end" font-size="11" fill="#94A3B8" font-family="var(--font-mono)">30</text>
+
+                    <line x1="50" y1="126" x2="850" y2="126" stroke="#F1F5F9" stroke-width="1.5" stroke-dasharray="4,4"/>
+                    <text x="40" y="130" text-anchor="end" font-size="11" fill="#94A3B8" font-family="var(--font-mono)">15</text>
+
+                    <line x1="50" y1="180" x2="850" y2="180" stroke="#E2E8F0" stroke-width="1.5"/>
+                    <text x="40" y="184" text-anchor="end" font-size="11" fill="#94A3B8" font-family="var(--font-mono)">0</text>
+
+                    <!-- Gradient Area under Actual Burn -->
+                    <polygon points="50,20 183,20 316,36 450,65 583,93 716,111 850,130 850,180 50,180" fill="url(#burnGradient)" />
+
+                    <!-- Ideal Burn Guide Line -->
+                    <line x1="50" y1="20" x2="850" y2="180" stroke="#94A3B8" stroke-width="2" stroke-dasharray="6,5" opacity="0.8"/>
+
+                    <!-- Actual Remaining Points Curve -->
+                    <polyline points="50,20 183,20 316,36 450,65 583,93 716,111 850,130" fill="none" stroke="#4F46E5" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+                    <!-- Data Point Bullets -->
+                    <circle cx="50" cy="20" r="4" fill="#4F46E5" stroke="#FFFFFF" stroke-width="2"/>
+                    <circle cx="183" cy="20" r="4" fill="#4F46E5" stroke="#FFFFFF" stroke-width="2"/>
+                    <circle cx="316" cy="36" r="4" fill="#4F46E5" stroke="#FFFFFF" stroke-width="2"/>
+                    <circle cx="450" cy="65" r="4" fill="#4F46E5" stroke="#FFFFFF" stroke-width="2"/>
+                    <circle cx="583" cy="93" r="4" fill="#4F46E5" stroke="#FFFFFF" stroke-width="2"/>
+                    <circle cx="716" cy="111" r="4" fill="#4F46E5" stroke="#FFFFFF" stroke-width="2"/>
+                    <circle cx="850" cy="130" r="5" fill="#10B981" stroke="#FFFFFF" stroke-width="2.5"/>
+
+                    <!-- Day Labels along X Axis -->
+                    <text x="50" y="204" text-anchor="middle" font-size="11" font-weight="600" fill="#64748B">Mon (Day 1)</text>
+                    <text x="183" y="204" text-anchor="middle" font-size="11" font-weight="600" fill="#64748B">Tue</text>
+                    <text x="316" y="204" text-anchor="middle" font-size="11" font-weight="600" fill="#64748B">Wed</text>
+                    <text x="450" y="204" text-anchor="middle" font-size="11" font-weight="600" fill="#64748B">Thu</text>
+                    <text x="583" y="204" text-anchor="middle" font-size="11" font-weight="600" fill="#64748B">Fri</text>
+                    <text x="716" y="204" text-anchor="middle" font-size="11" font-weight="600" fill="#64748B">Sat</text>
+                    <text x="850" y="204" text-anchor="middle" font-size="11" font-weight="700" fill="#4F46E5">Sun (Close: 14 pts left)</text>
+                </svg>
+            </section>
+
+            <!-- Developer Workload & Hours Logged -->
+            <section style="margin-bottom: 28px;">
+                <div class="section-header">
+                    <div class="section-title">Developer Capacity &amp; Worklog Audit</div>
+                    <span style="font-size: 11px; color: var(--color-slate-500); font-weight: 600;">5 Active Contributors</span>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Developer</th>
+                                <th>Tasks Completed</th>
+                                <th>Active Tickets</th>
+                                <th>Logged vs Estimate</th>
+                                <th style="width: 220px;">Capacity Utilization</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="dev-profile">
+                                        <div class="dev-avatar" style="background: linear-gradient(135deg, #EC4899, #BE185D);">ER</div>
+                                        <div class="dev-info">
+                                            <div class="dev-name">Elena Rostova</div>
+                                            <div class="dev-role">Lead Frontend Architect</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-done">1 Done</span></td>
+                                <td><span class="badge badge-active">1 Active</span></td>
+                                <td style="font-family: var(--font-mono); font-weight: 700;">34.0h <span style="font-weight: 400; color: #64748B;">/ 40.0h</span></td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <div class="progress-track">
+                                            <div class="progress-bar-fill" style="width: 85%; background: #10B981;"></div>
+                                        </div>
+                                        <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: #10B981;">85%</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="dev-profile">
+                                        <div class="dev-avatar" style="background: linear-gradient(135deg, #6366F1, #4338CA);">AM</div>
+                                        <div class="dev-info">
+                                            <div class="dev-name">Alex Morgan</div>
+                                            <div class="dev-role">Senior Backend Engineer</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-done">2 Done</span></td>
+                                <td><span class="badge badge-active">1 Active</span></td>
+                                <td style="font-family: var(--font-mono); font-weight: 700;">30.0h <span style="font-weight: 400; color: #64748B;">/ 32.0h</span></td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <div class="progress-track">
+                                            <div class="progress-bar-fill" style="width: 93.8%; background: #10B981;"></div>
+                                        </div>
+                                        <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: #10B981;">94%</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="dev-profile">
+                                        <div class="dev-avatar" style="background: linear-gradient(135deg, #F59E0B, #B45309);">SJ</div>
+                                        <div class="dev-info">
+                                            <div class="dev-name">Sarah Jenkins</div>
+                                            <div class="dev-role">Full-Stack Engineer</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-done">1 Done</span></td>
+                                <td><span class="badge badge-review">1 Review</span></td>
+                                <td style="font-family: var(--font-mono); font-weight: 700; color: #D97706;">28.0h <span style="font-weight: 400; color: #64748B;">/ 24.0h</span></td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <div class="progress-track">
+                                            <div class="progress-bar-fill" style="width: 100%; background: #F59E0B;"></div>
+                                        </div>
+                                        <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: #D97706;">116%</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="dev-profile">
+                                        <div class="dev-avatar" style="background: linear-gradient(135deg, #06B6D4, #0891B2);">DC</div>
+                                        <div class="dev-info">
+                                            <div class="dev-name">David Chen</div>
+                                            <div class="dev-role">DevOps &amp; Cloud Engineer</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-done">1 Done</span></td>
+                                <td><span class="badge badge-review">1 Review</span></td>
+                                <td style="font-family: var(--font-mono); font-weight: 700;">22.0h <span style="font-weight: 400; color: #64748B;">/ 24.0h</span></td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <div class="progress-track">
+                                            <div class="progress-bar-fill" style="width: 91.7%; background: #10B981;"></div>
+                                        </div>
+                                        <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: #10B981;">92%</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="dev-profile">
+                                        <div class="dev-avatar" style="background: linear-gradient(135deg, #10B981, #047857);">MV</div>
+                                        <div class="dev-info">
+                                            <div class="dev-name">Marcus Vance</div>
+                                            <div class="dev-role">QA Automation Specialist</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-done">1 Done</span></td>
+                                <td><span class="badge" style="background: #F1F5F9; color: #64748B;">0 Active</span></td>
+                                <td style="font-family: var(--font-mono); font-weight: 700;">16.0h <span style="font-weight: 400; color: #64748B;">/ 16.0h</span></td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <div class="progress-track">
+                                            <div class="progress-bar-fill" style="width: 100%; background: #10B981;"></div>
+                                        </div>
+                                        <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: #10B981;">100%</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Key Completed Deliverables Table with Filter Controls -->
+            <section>
+                <div class="section-header">
+                    <div class="section-title">Sprint Deliverables Breakdown</div>
+                    <div class="filter-group">
+                        <button class="filter-btn active" onclick="filterTable('all')">All (10)</button>
+                        <button class="filter-btn" onclick="filterTable('done')">Done (6)</button>
+                        <button class="filter-btn" onclick="filterTable('active')">In Progress / Review (4)</button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="deliverablesTable">
+                        <thead>
+                            <tr>
+                                <th>Ticket Key</th>
+                                <th>Summary</th>
+                                <th>Type</th>
+                                <th>Assignee</th>
+                                <th>Story Points</th>
+                                <th>Time Logged</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-status="done">
+                                <td class="issue-key">CORE-101</td>
+                                <td style="font-weight: 600; color: var(--color-slate-800);">Implement Redis edge caching layer for dashboard API</td>
+                                <td><span class="badge badge-story">Story</span></td>
+                                <td style="color: var(--color-slate-600);">Alex Morgan</td>
+                                <td style="font-family: var(--font-mono); font-weight: 700;">5 pts</td>
+                                <td style="font-family: var(--font-mono); font-weight: 700; color: #10B981;">14.5h</td>
+                            </tr>
+                            <tr data-status="done">
+                                <td class="issue-key">CORE-102</td>
+                                <td style="font-weight: 600; color: var(--color-slate-800);">Fix race condition in concurrent WebSocket sessions</td>
+                                <td><span class="badge badge-bug">Bug</span></td>
+                                <td style="color: var(--color-slate-600);">Alex Morgan</td>
+                                <td style="font-family: var(--font-mono); font-weight: 700;">3 pts</td>
+                                <td style="font-family: var(--font-mono); font-weight: 700; color: #10B981;">9.0h</td>
+                            </tr>
+                            <tr data-status="done">
+                                <td class="issue-key">CORE-103</td>
+                                <td style="font-weight: 600; color: var(--color-slate-800);">Refactor navigation shell with responsive drawer component</td>
+                                <td><span class="badge badge-story">Story</span></td>
+                                <td style="color: var(--color-slate-600);">Elena Rostova</td>
+                                <td style="font-family: var(--font-mono); font-weight: 700;">8 pts</td>
+                                <td style="font-family: var(--font-mono); font-weight: 700; color: #10B981;">22.0h</td>
+                            </tr>
+                            <tr data-status="done">
+                                <td class="issue-key">CORE-104</td>
+                                <td style="font-weight: 600; color: var(--color-slate-800);">Migrate Docker compose definitions to Helm chart templates</td>
+                                <td><span class="badge badge-task">Task</span></td>
+                                <td style="color: var(--color-slate-600);">David Chen</td>
+                                <td style="font-family: var(--font-mono); font-weight: 700;">5 pts</td>
+                                <td style="font-family: var(--font-mono); font-weight: 700; color: #10B981;">15.0h</td>
+                            </tr>
+                            <tr data-status="done">
+                                <td class="issue-key">CORE-105</td>
+                                <td style="font-weight: 600; color: var(--color-slate-800);">Implement OAuth2 PKCE flow for mobile web integration</td>
+                                <td><span class="badge badge-story">Story</span></td>
+                                <td style="color: var(--color-slate-600);">Sarah Jenkins</td>
+                                <td style="font-family: var(--font-mono); font-weight: 700;">5 pts</td>
+                                <td style="font-family: var(--font-mono); font-weight: 700; color: #10B981;">17.5h</td>
+                            </tr>
+                            <tr data-status="done">
+                                <td class="issue-key">CORE-106</td>
+                                <td style="font-weight: 600; color: var(--color-slate-800);">Automate end-to-end Cypress regression suite for checkout</td>
+                                <td><span class="badge badge-task">Task</span></td>
+                                <td style="color: var(--color-slate-600);">Marcus Vance</td>
+                                <td style="font-family: var(--font-mono); font-weight: 700;">5 pts</td>
+                                <td style="font-family: var(--font-mono); font-weight: 700; color: #10B981;">16.0h</td>
+                            </tr>
+                            <tr data-status="active">
+                                <td class="issue-key">CORE-107</td>
+                                <td style="font-weight: 600; color: var(--color-slate-800);">Upgrade Next.js framework to version 15.2 with Turbopack</td>
+                                <td><span class="badge badge-task">Task</span></td>
+                                <td style="color: var(--color-slate-600);">Elena Rostova</td>
+                                <td style="font-family: var(--font-mono); font-weight: 700;">5 pts</td>
+                                <td style="font-family: var(--font-mono); font-weight: 700; color: #F59E0B;">12.0h</td>
+                            </tr>
+                            <tr data-status="active">
+                                <td class="issue-key">CORE-108</td>
+                                <td style="font-weight: 600; color: var(--color-slate-800);">Optimize database indexing for slow transactional queries</td>
+                                <td><span class="badge badge-task">Task</span></td>
+                                <td style="color: var(--color-slate-600);">Alex Morgan</td>
+                                <td style="font-family: var(--font-mono); font-weight: 700;">3 pts</td>
+                                <td style="font-family: var(--font-mono); font-weight: 700; color: #F59E0B;">6.5h</td>
+                            </tr>
+                            <tr data-status="active">
+                                <td class="issue-key">CORE-109</td>
+                                <td style="font-weight: 600; color: var(--color-slate-800);">Configure Prometheus alerting rules for Kubernetes ingress</td>
+                                <td><span class="badge badge-task">Task</span></td>
+                                <td style="color: var(--color-slate-600);">David Chen</td>
+                                <td style="font-family: var(--font-mono); font-weight: 700;">3 pts</td>
+                                <td style="font-family: var(--font-mono); font-weight: 700; color: #F59E0B;">7.0h</td>
+                            </tr>
+                            <tr data-status="active">
+                                <td class="issue-key">CORE-110</td>
+                                <td style="font-weight: 600; color: var(--color-slate-800);">Investigate memory leak on client report export service</td>
+                                <td><span class="badge badge-bug">Bug</span></td>
+                                <td style="color: var(--color-slate-600);">Sarah Jenkins</td>
+                                <td style="font-family: var(--font-mono); font-weight: 700;">3 pts</td>
+                                <td style="font-family: var(--font-mono); font-weight: 700; color: #EF4444;">10.5h</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Report Footer -->
+            <footer class="report-footer">
+                <div>Automated Jira Executive Pipeline &bull; Grounded in Deterministic Analytics &bull; Zero Server Cost</div>
+                <div>Generated for Stakeholder Review &bull; Confidential</div>
+            </footer>
+        </article>
+    </main>
+
+    <script>
+        function filterTable(status) {
+            const rows = document.querySelectorAll('#deliverablesTable tbody tr');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            rows.forEach(row => {
+                if (status === 'all') {
+                    row.style.display = '';
+                } else if (status === 'done') {
+                    row.style.display = row.getAttribute('data-status') === 'done' ? '' : 'none';
+                } else if (status === 'active') {
+                    row.style.display = row.getAttribute('data-status') === 'active' ? '' : 'none';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
