@@ -3,55 +3,104 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>HeartCraft 8-Beat Card with WebRTC Magic Remote</title>
+  <title>HeartCraft 8-Beat Interactive Card with WebRTC Magic Remote</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
   <style>
     :root {
       --bg: #0d0b10;
+      --card-bg: #1c1424;
       --gold: #c5a059;
       --gold-light: #e6c887;
       --text: #f5f2eb;
       --text-muted: #a69cb0;
       --accent: #ff477e;
       --green: #2ecc71;
+      --cake-frosting: #fff5eb;
+      --cake-filling: #ff85a1;
+      --letter-bg: #fdfaf2;
+      --letter-text: #2c221a;
+      --theme-name: 'midnight-gold';
     }
+
+    body[data-theme="rose-champagne"] {
+      --bg: #140a12;
+      --card-bg: #241220;
+      --gold: #e0a96d;
+      --gold-light: #f7d1ba;
+      --accent: #ff758f;
+      --cake-frosting: #ffe5ec;
+      --cake-filling: #c9184a;
+      --letter-bg: #fff0f3;
+      --letter-text: #3a1523;
+    }
+
+    body[data-theme="cyber-neon"] {
+      --bg: #070914;
+      --card-bg: #0f1530;
+      --gold: #00f0ff;
+      --gold-light: #70f7ff;
+      --accent: #ff007f;
+      --cake-frosting: #1b204a;
+      --cake-filling: #00f0ff;
+      --letter-bg: #0b112c;
+      --letter-text: #e0f8ff;
+    }
+
+    body[data-theme="pastel-fiesta"] {
+      --bg: #0e1a18;
+      --card-bg: #162f2b;
+      --gold: #06d6a0;
+      --gold-light: #a7f3d0;
+      --accent: #ffd166;
+      --cake-frosting: #fefae0;
+      --cake-filling: #ef476f;
+      --letter-bg: #f7fee7;
+      --letter-text: #14352f;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      -webkit-tap-highlight-color: transparent;
       user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
     body {
-      background-color: var(--bg);
+      background: var(--bg);
       color: var(--text);
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       min-height: 100vh;
       min-height: 100dvh;
       display: flex;
       justify-content: center;
       align-items: center;
       overflow: hidden;
+      transition: background 0.4s ease;
     }
-    /* Main Screen Stage (Default View) */
+
+    /* Main Stage */
     .stage {
       width: 100%;
-      max-width: 430px;
+      max-width: 440px;
       height: 100vh;
       height: 100dvh;
       position: relative;
-      background: radial-gradient(circle at 50% 30%, #1f1124 0%, #0d0b10 100%);
-      overflow: hidden;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 0 50px rgba(0,0,0,0.8);
+      justify-content: space-between;
+      padding: 16px 18px 24px;
+      background: radial-gradient(circle at 50% 25%, var(--card-bg) 0%, var(--bg) 95%);
+      box-shadow: 0 0 70px rgba(0, 0, 0, 0.9);
       border-left: 1px solid rgba(197, 160, 89, 0.15);
       border-right: 1px solid rgba(197, 160, 89, 0.15);
+      overflow: hidden;
     }
-    /* Remote Controller Stage (When opened on phone with ?role=remote) */
+
+    /* Remote Stage (when ?role=remote) */
     .remote-stage {
       display: none;
       width: 100%;
@@ -61,51 +110,62 @@
       padding: 24px 20px;
       flex-direction: column;
       justify-content: space-between;
-      background: #0f0c13;
+      background: var(--bg);
     }
     body.is-remote .stage { display: none; }
     body.is-remote .remote-stage { display: flex; }
 
-    /* Progress Indicators (8 Beats) */
+    /* Top Navigation */
     .top-nav {
-      position: absolute;
-      top: 14px;
-      left: 16px;
-      right: 16px;
       display: flex;
       flex-direction: column;
       gap: 10px;
       z-index: 50;
+      position: relative;
     }
     .progress-bar {
       display: flex;
-      gap: 6px;
+      gap: 5px;
       width: 100%;
     }
     .progress-seg {
       flex: 1;
       height: 4px;
-      background: rgba(255, 255, 255, 0.15);
       border-radius: 2px;
-      transition: background 0.4s ease;
+      background: rgba(255, 255, 255, 0.15);
+      transition: background 0.3s, transform 0.3s;
     }
     .progress-seg.active {
       background: var(--gold);
-      box-shadow: 0 0 8px var(--gold);
+      box-shadow: 0 0 10px var(--gold);
+      transform: scaleY(1.3);
     }
-    .remote-badge {
-      align-self: flex-end;
+
+    /* Action Badges Row */
+    .badges-row {
       display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge-btn {
+      display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(22, 13, 26, 0.85);
-      border: 1px solid rgba(197, 160, 89, 0.35);
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 0.72rem;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(197, 160, 89, 0.3);
       color: var(--gold-light);
+      font-size: 0.76rem;
+      font-weight: 600;
       cursor: pointer;
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(8px);
+      transition: all 0.2s;
+    }
+    .badge-btn:hover {
+      background: rgba(197, 160, 89, 0.18);
+      border-color: var(--gold);
     }
     .status-dot {
       width: 7px;
@@ -118,17 +178,47 @@
       box-shadow: 0 0 8px var(--green);
     }
 
-    /* Scene Viewport */
+    /* Quick Theme Presets Pills */
+    .presets-bar {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 2px;
+    }
+    .presets-bar::-webkit-scrollbar { display: none; }
+    .preset-pill {
+      white-space: nowrap;
+      padding: 3px 9px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .preset-pill.active, .preset-pill:hover {
+      background: var(--gold);
+      color: #100b14;
+      border-color: var(--gold);
+    }
+
+    /* Scene Container */
     .scene-viewport {
       flex: 1;
       position: relative;
       width: 100%;
-      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 10px 0;
+      perspective: 1000px;
     }
     .scene {
       position: absolute;
       inset: 0;
-      padding: 60px 24px 24px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -136,42 +226,55 @@
       text-align: center;
       opacity: 0;
       pointer-events: none;
-      transform: translateY(15px);
-      transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transform: scale(0.95) translateY(12px);
+      transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .scene.active {
       opacity: 1;
       pointer-events: auto;
-      transform: translateY(0);
+      transform: scale(1) translateY(0);
     }
 
-    /* Thumb Zone */
+    /* Typography */
+    h2.scene-title {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      margin-bottom: 6px;
+      font-family: 'Playfair Display', serif;
+    }
+    p.scene-sub {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      max-width: 300px;
+    }
+
+    /* Bottom Action Area (Thumb-Zone) */
     .thumb-zone {
       width: 100%;
-      margin-top: auto;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 10px;
-      z-index: 20;
+      z-index: 50;
     }
     .btn-action {
       width: 100%;
-      max-width: 320px;
       height: 52px;
       border-radius: 26px;
-      background: linear-gradient(135deg, var(--gold) 0%, #9e7a33 100%);
-      color: #0d0b10;
+      background: linear-gradient(135deg, var(--gold) 0%, #aa803a 100%);
+      color: #110915;
+      font-size: 0.98rem;
       font-weight: 700;
-      font-size: 0.95rem;
       border: none;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 8px 20px rgba(197, 160, 89, 0.3);
-      transition: transform 0.15s ease;
+      box-shadow: 0 8px 24px rgba(197, 160, 89, 0.35);
+      transition: transform 0.15s, box-shadow 0.15s;
     }
     .btn-action:active { transform: scale(0.97); }
     .hint-text {
@@ -179,53 +282,52 @@
       color: var(--text-muted);
     }
 
-    /* Headings */
-    h2.scene-title {
-      font-size: 1.55rem;
-      font-weight: 700;
-      color: var(--gold-light);
-      margin-bottom: 6px;
-    }
-    p.scene-sub {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.45;
-      max-width: 290px;
-    }
-
-    /* Beat 1: Envelope */
+    /* BEAT 1: Envelope */
     .envelope-box {
-      width: 210px;
-      height: 140px;
-      background: #2a1630;
-      border-radius: 12px;
+      width: 220px;
+      height: 150px;
+      background: #24132b;
+      border-radius: 14px;
       margin: auto;
       border: 1px solid rgba(197, 160, 89, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.6);
+      position: relative;
+    }
+    .envelope-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 70px;
+      background: #2c1834;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      border-bottom: 1px solid rgba(197, 160, 89, 0.25);
     }
     .wax-seal {
-      width: 60px;
-      height: 60px;
-      background: radial-gradient(circle, #e63946 0%, #9b111e 100%);
+      width: 64px;
+      height: 64px;
+      background: radial-gradient(circle, #e63946 0%, #8b0a1a 100%);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(230, 57, 70, 0.6);
+      box-shadow: 0 4px 18px rgba(230, 57, 70, 0.7);
       animation: pulse-seal 2s infinite;
       border: 2px solid #ff758f;
-      font-size: 1.3rem;
+      font-size: 1.5rem;
+      z-index: 2;
     }
     @keyframes pulse-seal {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.08); }
     }
 
-    /* Beat 2: Balloons */
+    /* BEAT 2: Balloons */
     .balloons-area {
       flex: 1;
       width: 100%;
@@ -234,8 +336,8 @@
       align-items: center;
     }
     .balloon {
-      width: 62px;
-      height: 76px;
+      width: 65px;
+      height: 80px;
       border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
       cursor: pointer;
       position: relative;
@@ -243,9 +345,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.1rem;
-      box-shadow: inset -5px -5px 12px rgba(0,0,0,0.3);
-      transition: transform 0.2s;
+      font-size: 1.2rem;
+      box-shadow: inset -5px -5px 14px rgba(0,0,0,0.3);
+      transition: transform 0.2s, opacity 0.2s;
     }
     .balloon::after {
       content: '';
@@ -254,7 +356,7 @@
       left: 50%;
       transform: translateX(-50%);
       width: 2px;
-      height: 20px;
+      height: 22px;
       background: rgba(255,255,255,0.4);
     }
     .b1 { background: #ff477e; animation-delay: 0s; }
@@ -263,48 +365,77 @@
     .b4 { background: #a55eea; animation-delay: 0.4s; }
     @keyframes float-b {
       0% { transform: translateY(0); }
-      100% { transform: translateY(-18px); }
+      100% { transform: translateY(-20px); }
     }
 
-    /* Beat 4: Polaroid */
-    .polaroid-frame {
-      background: #fff;
-      padding: 10px 10px 22px;
-      border-radius: 6px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-      width: 230px;
+    /* BEAT 4: Polaroid with High-Res Photo & Washi Tape */
+    .polaroid-wrapper {
       margin: auto;
-      transform: rotate(-3deg);
+      position: relative;
+      padding-top: 15px;
+    }
+    .washi-tape {
+      position: absolute;
+      top: 5px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-2deg);
+      width: 80px;
+      height: 24px;
+      background: rgba(230, 200, 135, 0.7);
+      backdrop-filter: blur(2px);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      z-index: 10;
+      clip-path: polygon(4% 0%, 96% 0%, 100% 100%, 0% 100%);
+    }
+    .polaroid-frame {
+      background: #ffffff;
+      padding: 12px 12px 18px;
+      border-radius: 4px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.7), 0 2px 5px rgba(0,0,0,0.2);
+      width: 250px;
+      transform: rotate(-2.5deg);
+      transition: transform 0.3s ease;
       cursor: pointer;
     }
-    .polaroid-img {
+    .polaroid-frame:hover { transform: rotate(0deg) scale(1.02); }
+    .polaroid-img-box {
       width: 100%;
-      height: 190px;
-      background: linear-gradient(135deg, #3d2645, #1d0f22);
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
+      height: 215px;
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+      background: #1e1122;
     }
+    .polaroid-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .polaroid-frame:hover .polaroid-img-box img { transform: scale(1.05); }
     .polaroid-caption {
-      color: #333;
+      color: #222;
       font-family: 'Caveat', cursive;
-      font-size: 1.3rem;
-      margin-top: 8px;
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin-top: 10px;
+      line-height: 1.2;
     }
 
-    /* Beat 5: Cake & Candles */
-    .cake-wrapper {
+    /* BEAT 5: Multi-Tier Birthday Cake & Candles */
+    .cake-container {
       margin: auto;
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
     }
     .candles-row {
       display: flex;
-      gap: 18px;
-      margin-bottom: 2px;
+      gap: 16px;
+      margin-bottom: -4px;
+      z-index: 5;
     }
     .candle-unit {
       display: flex;
@@ -315,9 +446,10 @@
     .flame-svg {
       width: 14px;
       height: 22px;
-      background: radial-gradient(ellipse at bottom, #fff 0%, #ff9e00 60%, transparent 100%);
+      background: radial-gradient(ellipse at bottom, #fff 0%, #ffbe0b 50%, #fb5607 80%, transparent 100%);
       border-radius: 50% 50% 20% 20%;
       animation: flame-dance 0.5s infinite alternate;
+      box-shadow: 0 0 12px rgba(255, 190, 11, 0.8);
     }
     .flame-svg.blown { display: none; }
     @keyframes flame-dance {
@@ -325,96 +457,342 @@
       100% { transform: scale(1.15) rotate(4deg); }
     }
     .candle-stick {
-      width: 10px;
-      height: 36px;
+      width: 9px;
+      height: 38px;
       background: repeating-linear-gradient(45deg, #fff, #fff 5px, var(--gold) 5px, var(--gold) 10px);
-      border-radius: 3px;
+      border-radius: 2px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
-    .cake-base {
-      width: 180px;
-      height: 76px;
-      background: linear-gradient(to bottom, #fceade 0%, #f7d6c8 100%);
+
+    /* 3D Tiered Cake Stand */
+    .tier-top {
+      width: 140px;
+      height: 52px;
+      background: linear-gradient(180deg, var(--cake-frosting) 0%, #f7d6c8 100%);
       border-radius: 12px 12px 6px 6px;
-      border: 3px solid #ffccd5;
+      border: 2px solid rgba(255, 255, 255, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      position: relative;
     }
-    .cake-icing {
-      color: #7209b7;
+    .tier-top::after {
+      content: '🍓 🫐 🍓';
+      position: absolute;
+      top: -10px;
+      font-size: 0.9rem;
+      letter-spacing: 6px;
+    }
+    .tier-bottom {
+      width: 200px;
+      height: 64px;
+      background: linear-gradient(180deg, #fceade 0%, #ecc8b5 100%);
+      border-radius: 14px 14px 8px 8px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: -6px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+      position: relative;
+      overflow: hidden;
+    }
+    .tier-bottom::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: var(--cake-filling);
+      opacity: 0.7;
+    }
+    .cake-stand {
+      width: 230px;
+      height: 12px;
+      background: linear-gradient(90deg, #8a6528 0%, var(--gold-light) 50%, #8a6528 100%);
+      border-radius: 6px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.5);
+    }
+    .cake-icing-text {
+      color: #6a1b9a;
       font-family: 'Caveat', cursive;
       font-size: 1.35rem;
       font-weight: 700;
+      text-shadow: 0 1px 1px rgba(255,255,255,0.8);
     }
 
-    /* Beat 6: Cake Cutting */
-    .knife-btn {
-      font-size: 3rem;
-      animation: knife-wiggle 1.2s infinite;
-      cursor: pointer;
-    }
-    @keyframes knife-wiggle {
-      0%, 100% { transform: rotate(0); }
-      50% { transform: rotate(-15deg); }
-    }
-
-    /* Beat 7: Letter */
-    .letter-paper {
-      background: #fdfaf2;
-      color: #2b2318;
-      width: 100%;
-      max-width: 310px;
-      min-height: 230px;
-      border-radius: 8px;
-      padding: 20px;
+    /* BEAT 6: Dynamic Cake Cutting Physics */
+    .slice-stage {
       margin: auto;
-      text-align: left;
-      font-family: 'Caveat', cursive;
-      font-size: 1.3rem;
-      line-height: 1.55;
-      border: 1px solid #e0d5be;
+      position: relative;
+      width: 240px;
+      height: 210px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .knife-actor {
+      position: absolute;
+      top: 0px;
+      right: 30px;
+      font-size: 3.8rem;
+      transform: rotate(-35deg);
+      cursor: pointer;
+      z-index: 20;
+      transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1), top 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.5));
+    }
+    .knife-actor.cutting {
+      transform: rotate(15deg) translate(-50px, 90px);
+    }
+    .cake-split-box {
+      width: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      position: relative;
+    }
+    .cake-main-body {
+      width: 170px;
+      height: 80px;
+      background: linear-gradient(180deg, var(--cake-frosting) 0%, #e8c2af 100%);
+      border-radius: 12px 4px 6px 12px;
+      border: 2px solid rgba(255,255,255,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    }
+    .cake-slice-piece {
+      width: 50px;
+      height: 80px;
+      background: linear-gradient(180deg, var(--cake-filling) 0%, #c9184a 100%);
+      border-radius: 4px 12px 12px 4px;
+      border: 2px solid rgba(255,255,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
+      transform-origin: left bottom;
+    }
+    .cake-slice-piece.sliced {
+      transform: translateX(25px) rotate(12deg);
+      box-shadow: 0 10px 25px rgba(255, 71, 126, 0.5);
     }
 
-    /* Modal Pairing Dialog */
+    /* BEAT 7: Luxury Linen Letter & 3D Envelope Unfold */
+    .letter-envelope-unfold {
+      margin: auto;
+      width: 100%;
+      max-width: 320px;
+      perspective: 800px;
+    }
+    .letter-paper {
+      background: var(--letter-bg);
+      color: var(--letter-text);
+      width: 100%;
+      min-height: 250px;
+      border-radius: 10px;
+      padding: 22px 20px;
+      text-align: left;
+      border: 1px solid rgba(197, 160, 89, 0.35);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+      position: relative;
+      background-image: radial-gradient(rgba(197, 160, 89, 0.08) 1px, transparent 1px);
+      background-size: 16px 16px;
+    }
+    .letter-paper::before {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border: 1px dashed rgba(197, 160, 89, 0.4);
+      border-radius: 6px;
+      pointer-events: none;
+    }
+    .letter-body {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      min-height: 110px;
+      color: var(--letter-text);
+    }
+    .letter-sign-block {
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      padding-top: 10px;
+    }
+    .signature-text {
+      font-family: 'Caveat', cursive;
+      font-size: 1.5rem;
+      color: #8b0a1a;
+      font-weight: 700;
+    }
+    .letter-seal-stamp {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #e63946, #9b111e);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    /* Modals Overlay (Pairing & Studio) */
     .modal-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(10px);
+      background: rgba(8, 6, 12, 0.88);
+      backdrop-filter: blur(12px);
       display: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 16px;
       z-index: 100;
       text-align: center;
     }
     .modal-overlay.open { display: flex; }
     .modal-card {
-      background: #190f1f;
+      background: var(--card-bg);
       border: 1px solid var(--gold);
       border-radius: 20px;
-      padding: 26px 20px;
+      padding: 22px 18px;
       width: 100%;
-      max-width: 320px;
+      max-width: 380px;
+      max-height: 90vh;
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 16px;
+      gap: 14px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      text-align: left;
     }
-    .qr-placeholder {
-      background: #fff;
-      padding: 12px;
-      border-radius: 12px;
-      width: 170px;
-      height: 170px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .qr-placeholder img { width: 100%; height: 100%; }
 
-    /* Remote Controller Pad (When in is-remote mode) */
+    /* Modal Tabs */
+    .modal-tabs {
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 8px;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 6px;
+      border-radius: 8px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .tab-btn.active {
+      background: rgba(197, 160, 89, 0.2);
+      color: var(--gold-light);
+    }
+
+    /* Studio Form Controls */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .form-group label {
+      font-size: 0.76rem;
+      color: var(--gold-light);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .form-input, .form-textarea, .form-select {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(197, 160, 89, 0.3);
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: var(--text);
+      font-size: 0.88rem;
+      font-family: inherit;
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    .form-textarea { resize: vertical; min-height: 60px; font-size: 0.82rem; }
+
+    /* Photo Presets Grid */
+    .photo-presets-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .preset-img-thumb {
+      height: 65px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 2px solid transparent;
+      cursor: pointer;
+      position: relative;
+    }
+    .preset-img-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .preset-img-thumb.selected { border-color: var(--gold); box-shadow: 0 0 10px var(--gold); }
+    .preset-img-thumb span {
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.7);
+      font-size: 0.62rem;
+      text-align: center;
+      color: #fff;
+    }
+
+    /* JSON Box */
+    .json-code-box {
+      background: #09060c;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 0.72rem;
+      color: #70f7ff;
+      max-height: 180px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+
+    /* Toast Notification */
+    .toast-msg {
+      position: absolute;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%) translateY(50px);
+      background: var(--gold);
+      color: #100b14;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      opacity: 0;
+      transition: all 0.3s;
+      pointer-events: none;
+      z-index: 200;
+    }
+    .toast-msg.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Remote Controller Pad */
     .remote-pad-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -424,7 +802,7 @@
     .remote-btn {
       height: 100px;
       border-radius: 18px;
-      background: #1c1322;
+      background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(197, 160, 89, 0.3);
       color: var(--text);
       display: flex;
@@ -454,11 +832,12 @@
     }
   </style>
 </head>
-<body>
+<body data-theme="midnight-gold">
 
 <!-- 1. MAIN DISPLAY SCREEN STAGE -->
 <div class="stage">
   <div class="top-nav">
+    <!-- Progress Indicator -->
     <div class="progress-bar">
       <div class="progress-seg active" id="seg-0"></div>
       <div class="progress-seg" id="seg-1"></div>
@@ -469,51 +848,151 @@
       <div class="progress-seg" id="seg-6"></div>
       <div class="progress-seg" id="seg-7"></div>
     </div>
-    <div class="remote-badge" onclick="openPairingModal()">
-      <span class="status-dot" id="p2p-dot"></span>
-      <span id="p2p-text">Pair Phone Remote</span>
-      <span>📱</span>
+
+    <!-- Action Badges Row -->
+    <div class="badges-row">
+      <div class="badge-btn" onclick="openStudioModal()">
+        <span>🎨</span>
+        <span>Customize Studio</span>
+      </div>
+      <div class="badge-btn" onclick="openPairingModal()">
+        <span class="status-dot" id="p2p-dot"></span>
+        <span id="p2p-text">Pair Phone Remote</span>
+        <span>📱</span>
+      </div>
+    </div>
+
+    <!-- Quick Theme Presets Pills -->
+    <div class="presets-bar">
+      <div class="preset-pill active" onclick="applyPresetTheme('midnight-gold')">🌟 Midnight Gold</div>
+      <div class="preset-pill" onclick="applyPresetTheme('rose-champagne')">🌹 Rose Champagne</div>
+      <div class="preset-pill" onclick="applyPresetTheme('cyber-neon')">⚡ Cyber Synth</div>
+      <div class="preset-pill" onclick="applyPresetTheme('pastel-fiesta')">🎈 Pastel Fiesta</div>
     </div>
   </div>
 
   <canvas id="fx-canvas"></canvas>
+  <div class="toast-msg" id="toast-msg">Link Copied to Clipboard! ✨</div>
 
-  <!-- Pairing QR Modal -->
-  <div class="modal-overlay" id="pairing-modal">
+  <!-- MODAL 1: Personalization Studio -->
+  <div class="modal-overlay" id="studio-modal">
     <div class="modal-card">
-      <h3 style="color: var(--gold-light);">Magic Phone Remote</h3>
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="color: var(--gold-light); font-size: 1.15rem;">🎨 Personalization Studio</h3>
+        <button style="background: none; border: none; color: #aaa; font-size: 1.2rem; cursor: pointer;" onclick="closeStudioModal()">✕</button>
+      </div>
+
+      <div class="modal-tabs">
+        <button class="tab-btn active" id="tab-btn-visual" onclick="switchStudioTab('visual')">✏️ Visual Editor</button>
+        <button class="tab-btn" id="tab-btn-json" onclick="switchStudioTab('json')">💻 Developer JSON</button>
+      </div>
+
+      <!-- Tab Content 1: Visual Form -->
+      <div id="tab-visual-content" style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div class="form-group">
+            <label>Recipient Name</label>
+            <input type="text" class="form-input" id="input-recipient" value="Sakshi">
+          </div>
+          <div class="form-group">
+            <label>Age / Milestone</label>
+            <input type="number" class="form-input" id="input-age" value="24">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Sender Name</label>
+          <input type="text" class="form-input" id="input-sender" value="Zadit">
+        </div>
+
+        <div class="form-group">
+          <label>Choose Photo Preset</label>
+          <div class="photo-presets-row">
+            <div class="preset-img-thumb selected" id="thumb-preset-1" onclick="selectPhotoPreset('./assets/sakshi_portrait.jpg', 'thumb-preset-1')">
+              <img src="./assets/sakshi_portrait.jpg" alt="Sakshi Sparkler">
+              <span>Sakshi Gold</span>
+            </div>
+            <div class="preset-img-thumb" id="thumb-preset-2" onclick="selectPhotoPreset('./assets/rose_champagne_portrait.jpg', 'thumb-preset-2')">
+              <img src="./assets/rose_champagne_portrait.jpg" alt="Rose Champagne">
+              <span>Champagne</span>
+            </div>
+            <div class="preset-img-thumb" id="thumb-preset-3" onclick="selectPhotoPreset('./assets/cyber_neon_portrait.jpg', 'thumb-preset-3')">
+              <img src="./assets/cyber_neon_portrait.jpg" alt="Cyber Neon">
+              <span>Cyber Neon</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Or Upload Custom Photo</label>
+          <input type="file" id="photo-upload-input" accept="image/*" style="font-size: 0.8rem; color: var(--text-muted);" onchange="handleCustomPhotoUpload(event)">
+        </div>
+
+        <div class="form-group">
+          <label>Cake Icing Inscription</label>
+          <input type="text" class="form-input" id="input-cake" value="Happy 24th, Sakshi!">
+        </div>
+
+        <div class="form-group">
+          <label>Personal Letter Wishes</label>
+          <textarea class="form-textarea" id="input-letter">Happy Birthday! May your new year bring courageous beginnings, quiet peace, and extraordinary joy in every milestone you reach. Thank you for bringing warmth and light to everyone around you.</textarea>
+        </div>
+
+        <button class="btn-action" style="height: 44px; font-size: 0.88rem;" onclick="saveAndGenerateShareLink()">
+          ✨ Save & Copy Shareable Link
+        </button>
+      </div>
+
+      <!-- Tab Content 2: JSON Code -->
+      <div id="tab-json-content" style="display: none; flex-direction: column; gap: 10px;">
+        <p style="font-size: 0.78rem; color: var(--text-muted);">
+          White-label configuration object. Decoupled for rapid agency re-skinning:
+        </p>
+        <div class="json-code-box" id="json-preview-box"></div>
+        <button class="btn-action" style="height: 42px; font-size: 0.85rem;" onclick="copyJsonConfig()">
+          📋 Copy Config Code
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: Pairing QR Modal -->
+  <div class="modal-overlay" id="pairing-modal">
+    <div class="modal-card" style="text-align: center; align-items: center;">
+      <h3 style="color: var(--gold-light);">📱 Magic Phone Remote</h3>
       <p style="font-size: 0.82rem; color: var(--text-muted);">
-        Scan this QR code with your smartphone camera to control this birthday card hands-free!
+        Scan this QR code with your smartphone camera to control this birthday card hands-free via WebRTC!
       </p>
-      <div class="qr-placeholder" id="qr-box">
-        <img id="qr-img" src="" alt="Pairing QR Code">
+      <div style="background: #fff; padding: 12px; border-radius: 12px; width: 170px; height: 170px; display: flex; align-items: center; justify-content: center;">
+        <img id="qr-img" src="" alt="Pairing QR Code" style="width: 100%; height: 100%;">
       </div>
       <button class="btn-action" style="height: 42px; font-size: 0.85rem;" onclick="copyRemoteUrl()">Copy Controller Link</button>
       <button style="background: none; border: none; color: #888; font-size: 0.8rem; cursor: pointer;" onclick="closePairingModal()">Close</button>
     </div>
   </div>
 
+  <!-- SCENE VIEWPORT (8 BEATS) -->
   <div class="scene-viewport">
     <!-- BEAT 1: Envelope -->
     <div class="scene active" id="scene-0">
       <div>
         <h2 class="scene-title">A Special Delivery</h2>
-        <p class="scene-sub">A personal celebration journey curated exclusively for you.</p>
+        <p class="scene-sub">A personal celebration curated exclusively for <span class="recipient-name-tag">Sakshi</span>.</p>
       </div>
       <div class="envelope-box">
         <div class="wax-seal" onclick="nextScene()"><span>💌</span></div>
       </div>
       <div class="thumb-zone">
-        <button class="btn-action" onclick="nextScene()">Tap Seal to Open</button>
-        <span class="hint-text">Or trigger from paired phone</span>
+        <button class="btn-action" onclick="nextScene()">Tap Wax Seal to Open</button>
+        <span class="hint-text">Or trigger hands-free from paired phone</span>
       </div>
     </div>
 
-    <!-- BEAT 2: Balloons -->
+    <!-- BEAT 2: Floating Balloons -->
     <div class="scene" id="scene-1">
       <div>
         <h2 class="scene-title">Pop the Balloons!</h2>
-        <p class="scene-sub">Tap balloons or trigger from phone remote.</p>
+        <p class="scene-sub">Tap each balloon or trigger from phone remote.</p>
       </div>
       <div class="balloons-area">
         <div class="balloon b1" onclick="popBalloon(this)">🎈</div>
@@ -526,46 +1005,58 @@
       </div>
     </div>
 
-    <!-- BEAT 3: Celebration Burst -->
+    <!-- BEAT 3: Celebration Milestone -->
     <div class="scene" id="scene-2">
       <div>
-        <h2 class="scene-title">Celebration Unlocked!</h2>
-        <p class="scene-sub">Wishes released into the atmosphere.</p>
+        <h2 class="scene-title">Wishes Released!</h2>
+        <p class="scene-sub">Celebration aura unlocked for <span class="recipient-name-tag">Sakshi</span>.</p>
       </div>
-      <div style="margin: auto; font-size: 4rem;">🎊</div>
+      <div style="margin: auto; font-size: 4.5rem; animation: pulse-seal 1.5s infinite;">🎊</div>
       <div class="thumb-zone">
-        <button class="btn-action" onclick="nextScene()">Reveal the Cake 🎂</button>
+        <button class="btn-action" onclick="nextScene()">View Cherished Memories 📸</button>
       </div>
     </div>
 
-    <!-- BEAT 4: Memory Polaroid -->
+    <!-- BEAT 4: Memory Polaroid (HIGH-RES PHOTO OVERHAUL) -->
     <div class="scene" id="scene-3">
       <div>
         <h2 class="scene-title">Cherished Moments</h2>
-        <p class="scene-sub">Looking back at bright memories.</p>
+        <p class="scene-sub">Looking back at bright milestones & laughter.</p>
       </div>
-      <div class="polaroid-frame" onclick="nextScene()">
-        <div class="polaroid-img">📸</div>
-        <div class="polaroid-caption">Joy, Laughter & Milestones</div>
+      <div class="polaroid-wrapper" onclick="sparklePolaroid()">
+        <div class="washi-tape"></div>
+        <div class="polaroid-frame" id="polaroid-frame-card">
+          <div class="polaroid-img-box">
+            <img id="polaroid-photo-elem" src="./assets/sakshi_portrait.jpg" alt="Birthday Portrait">
+          </div>
+          <div class="polaroid-caption" id="polaroid-caption-text">
+            Sakshi · 24 Years of Joy & Grace ✨
+          </div>
+        </div>
       </div>
       <div class="thumb-zone">
-        <button class="btn-action" onclick="nextScene()">Make a Birthday Wish 🌟</button>
+        <button class="btn-action" onclick="nextScene()">Make a Birthday Wish 🎂</button>
+        <span class="hint-text">Tap photo for sparkle burst</span>
       </div>
     </div>
 
-    <!-- BEAT 5: Cake & Candles -->
+    <!-- BEAT 5: Cake & Candles Blowout (MIC + TAP) -->
     <div class="scene" id="scene-4">
       <div>
         <h2 class="scene-title">Blow Out the Candles</h2>
-        <p class="scene-sub">Blow into your phone or tap each candle!</p>
+        <p class="scene-sub">Blow directly into your mic or tap each candle!</p>
       </div>
-      <div class="cake-wrapper">
-        <div class="candles-row">
+      <div class="cake-container">
+        <div class="candles-row" id="candles-row-container">
           <div class="candle-unit" onclick="blowCandle(this)"><div class="flame-svg"></div><div class="candle-stick"></div></div>
           <div class="candle-unit" onclick="blowCandle(this)"><div class="flame-svg"></div><div class="candle-stick"></div></div>
           <div class="candle-unit" onclick="blowCandle(this)"><div class="flame-svg"></div><div class="candle-stick"></div></div>
         </div>
-        <div class="cake-base"><span class="cake-icing" id="cake-name">Happy Birthday!</span></div>
+        <div class="tier-top"></div>
+        <div class="tier-bottom">
+          <span class="cake-icing-text" id="cake-name-display">Happy 24th, Sakshi!</span>
+        </div>
+        <div class="cake-stand"></div>
       </div>
       <div class="thumb-zone">
         <button class="btn-action" style="height: 42px; font-size: 0.85rem; background: rgba(255,255,255,0.1); color: var(--gold-light); border: 1px solid var(--gold);" onclick="enableMicBlow()">
@@ -575,41 +1066,72 @@
       </div>
     </div>
 
-    <!-- BEAT 6: Cake Cutting -->
+    <!-- BEAT 6: Dynamic Cake Cutting Physics (OVERHAUL) -->
     <div class="scene" id="scene-5">
       <div>
         <h2 class="scene-title">Cut the First Slice</h2>
-        <p class="scene-sub">Ushering in sweetness and joy.</p>
+        <p class="scene-sub">Tap knife or swipe down to cut the cake.</p>
       </div>
-      <div class="knife-btn" onclick="cutCake()">🔪</div>
+      <div class="slice-stage">
+        <div class="knife-actor" id="knife-element" onclick="triggerCakeCut()">🔪</div>
+        <div class="cake-split-box">
+          <div class="cake-main-body">
+            <span class="cake-icing-text" id="cake-slice-icing">Sakshi ✨</span>
+          </div>
+          <div class="cake-slice-piece" id="cake-slice-elem">
+            <span style="font-size: 0.9rem;">🍰</span>
+          </div>
+        </div>
+        <div class="cake-stand" style="width: 230px; margin-top: 2px;"></div>
+      </div>
       <div class="thumb-zone">
-        <button class="btn-action" id="cut-btn" onclick="cutCake()">Slice the Cake ✨</button>
+        <button class="btn-action" id="cut-action-btn" onclick="triggerCakeCut()">Slice the Cake 🍰</button>
+        <span class="hint-text">Or tap "Slice Cake" on your phone remote</span>
       </div>
     </div>
 
-    <!-- BEAT 7: Letter -->
+    <!-- BEAT 7: Luxury Linen Letter with Typewriter Audio (OVERHAUL) -->
     <div class="scene" id="scene-6">
       <div>
         <h2 class="scene-title">A Letter for You</h2>
-        <p class="scene-sub">Written with heartfelt gratitude.</p>
+        <p class="scene-sub">Written with heartfelt gratitude & warmth.</p>
       </div>
-      <div class="letter-paper" onclick="fastForwardTypewriter()">
-        <p id="typed-content"></p>
+      <div class="letter-envelope-unfold">
+        <div class="letter-paper">
+          <div class="letter-body" id="typed-content"></div>
+          <div class="letter-sign-block">
+            <div>
+              <div style="font-size: 0.72rem; color: #777; text-transform: uppercase;">With warm love,</div>
+              <div class="signature-text" id="letter-signature-text">Zadit</div>
+            </div>
+            <div class="letter-seal-stamp">✦</div>
+          </div>
+        </div>
       </div>
       <div class="thumb-zone">
-        <button class="btn-action" onclick="nextScene()">View Finale 🥂</button>
+        <div style="display: flex; gap: 8px; width: 100%;">
+          <button class="btn-action" style="background: rgba(255,255,255,0.08); color: var(--gold-light); border: 1px solid rgba(197, 160, 89, 0.4); flex: 1; height: 46px; font-size: 0.85rem;" onclick="fastForwardTypewriter()">
+            ⚡ Skip / Read All
+          </button>
+          <button class="btn-action" style="flex: 2; height: 46px; font-size: 0.9rem;" onclick="nextScene()">
+            View Finale 🥂
+          </button>
+        </div>
       </div>
     </div>
 
-    <!-- BEAT 8: Finale -->
+    <!-- BEAT 8: Finale & Viral Sharing -->
     <div class="scene" id="scene-7">
       <div>
-        <h2 class="scene-title" id="finale-title">Happy Birthday!</h2>
-        <p class="scene-sub">May your journey ahead be extraordinary.</p>
+        <h2 class="scene-title" id="finale-title">Cheers to Sakshi!</h2>
+        <p class="scene-sub">May this milestone herald your most luminous year yet.</p>
       </div>
-      <div style="margin: auto; font-size: 4rem;">👑</div>
+      <div style="margin: auto; font-size: 4.8rem; filter: drop-shadow(0 0 20px var(--gold));">👑</div>
       <div class="thumb-zone">
-        <button class="btn-action" onclick="restartJourney()">Replay Experience ↺</button>
+        <button class="btn-action" onclick="openStudioModal()">Customize for Someone Else 🎁</button>
+        <button class="btn-action" style="background: rgba(255,255,255,0.08); color: var(--gold-light); border: 1px solid var(--gold); height: 44px; font-size: 0.86rem;" onclick="restartJourney()">
+          Replay Experience ↺
+        </button>
       </div>
     </div>
   </div>
@@ -620,20 +1142,20 @@
   <div>
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
       <h2 style="font-size: 1.3rem; color: var(--gold-light);">Magic Controller</h2>
-      <span class="remote-badge" style="cursor: default;">
+      <span class="badge-btn" style="cursor: default;">
         <span class="status-dot connected"></span>
         <span id="remote-status-text">Connected</span>
       </span>
     </div>
     <p style="font-size: 0.85rem; color: var(--text-muted);">
-      Tap buttons on your phone to trigger real-time actions on the main birthday screen!
+      Tap buttons on your smartphone to trigger real-time actions on the main birthday screen!
     </p>
   </div>
 
   <div class="remote-pad-grid">
     <div class="remote-btn" onclick="sendRemoteCmd('open_envelope')">
       <span class="icon">💌</span>
-      <span>Open Envelope</span>
+      <span>Open Seal</span>
     </div>
     <div class="remote-btn" onclick="sendRemoteCmd('pop_balloon')">
       <span class="icon">🎈</span>
@@ -644,7 +1166,7 @@
       <span>Blow Candles</span>
     </div>
     <div class="remote-btn" onclick="sendRemoteCmd('slice_cake')">
-      <span class="icon">🎂</span>
+      <span class="icon">🍰</span>
       <span>Slice Cake</span>
     </div>
     <div class="remote-btn" onclick="sendRemoteCmd('trigger_confetti')">
@@ -653,26 +1175,74 @@
     </div>
     <div class="remote-btn" onclick="sendRemoteCmd('next_beat')">
       <span class="icon">⏭️</span>
-      <span>Next Scene</span>
+      <span>Next Beat</span>
     </div>
   </div>
 
   <div style="text-align: center;">
     <p style="font-size: 0.75rem; color: var(--text-muted);">
-      Tip: Shake your phone to shower confetti on the screen!
+      💡 Shake your smartphone to blast celebration confetti across the screen!
     </p>
   </div>
 </div>
 
 <script>
-  // 1. URL Parameters & Role Detection
+  // 1. Declarative Master Config & State
   const urlParams = new URLSearchParams(window.location.search);
   const isRemoteRole = urlParams.get('role') === 'remote';
   const roomId = urlParams.get('room') || 'bday-' + Math.random().toString(36).substring(2, 8);
-  const recipientName = urlParams.get('to') || urlParams.get('name') || "Sakshi";
+
+  const cardConfig = {
+    to: urlParams.get('to') || urlParams.get('name') || "Sakshi",
+    from: urlParams.get('from') || "Zadit",
+    age: parseInt(urlParams.get('age')) || 24,
+    theme: urlParams.get('theme') || "midnight-gold",
+    photo: urlParams.get('photo') || localStorage.getItem('custom_card_photo') || "./assets/sakshi_portrait.jpg",
+    cakeText: urlParams.get('cake') || `Happy ${urlParams.get('age') || 24}th, ${urlParams.get('to') || 'Sakshi'}!`,
+    letter: urlParams.get('letter') || "Happy Birthday! May your new year bring courageous beginnings, quiet peace, and extraordinary joy in every milestone you reach. Thank you for bringing warmth and light to everyone around you."
+  };
 
   if (isRemoteRole) {
     document.body.classList.add('is-remote');
+  }
+
+  // Apply Theme & Data on Load
+  function applyConfigToDOM() {
+    document.body.setAttribute('data-theme', cardConfig.theme);
+    document.querySelectorAll('.recipient-name-tag').forEach(el => el.textContent = cardConfig.to);
+    
+    const polaroidImg = document.getElementById('polaroid-photo-elem');
+    if (polaroidImg) polaroidImg.src = cardConfig.photo;
+
+    const polaroidCap = document.getElementById('polaroid-caption-text');
+    if (polaroidCap) polaroidCap.textContent = `${cardConfig.to} · ${cardConfig.age} Years of Joy & Grace ✨`;
+
+    const cakeName = document.getElementById('cake-name-display');
+    if (cakeName) cakeName.textContent = cardConfig.cakeText;
+
+    const cakeSlice = document.getElementById('cake-slice-icing');
+    if (cakeSlice) cakeSlice.textContent = `${cardConfig.to} ✨`;
+
+    const signature = document.getElementById('letter-signature-text');
+    if (signature) signature.textContent = cardConfig.from;
+
+    const finale = document.getElementById('finale-title');
+    if (finale) finale.textContent = `Cheers to ${cardConfig.to}!`;
+
+    // Sync input fields
+    document.getElementById('input-recipient').value = cardConfig.to;
+    document.getElementById('input-sender').value = cardConfig.from;
+    document.getElementById('input-age').value = cardConfig.age;
+    document.getElementById('input-cake').value = cardConfig.cakeText;
+    document.getElementById('input-letter').value = cardConfig.letter;
+
+    // Highlight active preset pill
+    document.querySelectorAll('.preset-pill').forEach(pill => {
+      pill.classList.toggle('active', pill.getAttribute('onclick')?.includes(cardConfig.theme));
+    });
+
+    // Update JSON Box
+    updateJsonPreview();
   }
 
   // 2. Audio Engine (Web Audio API)
@@ -697,8 +1267,10 @@
     } catch(e) {}
   }
   function playPopSound() { playTone(480, 'triangle', 0.1, 0.25); }
+  function playTypeTick() { playTone(900 + Math.random() * 200, 'triangle', 0.03, 0.04); }
   function playChimeArpeggio() {
-    [523.25, 659.25, 783.99, 1046.50].forEach((n, i) => {
+    const scale = cardConfig.theme === 'cyber-neon' ? [440, 554.37, 659.25, 830.61] : [523.25, 659.25, 783.99, 1046.50];
+    scale.forEach((n, i) => {
       setTimeout(() => playTone(n, 'sine', 0.5, 0.12), i * 110);
     });
   }
@@ -717,7 +1289,11 @@
   resizeCanvas();
 
   function spawnConfetti(count = 60, originX = canvas.width / 2, originY = canvas.height / 2) {
-    const colors = ['#c5a059', '#e6c887', '#ff6b8b', '#48cae4', '#a55eea', '#fff'];
+    let colors = ['#c5a059', '#e6c887', '#ff477e', '#48cae4', '#a55eea', '#fff'];
+    if (cardConfig.theme === 'rose-champagne') colors = ['#e0a96d', '#ff758f', '#c9184a', '#ffe5ec', '#fff'];
+    if (cardConfig.theme === 'cyber-neon') colors = ['#00f0ff', '#ff007f', '#7000ff', '#ffe600', '#fff'];
+    if (cardConfig.theme === 'pastel-fiesta') colors = ['#06d6a0', '#ffd166', '#ef476f', '#118ab2', '#fff'];
+
     for (let i = 0; i < count; i++) {
       particles.push({
         x: originX, y: originY, r: Math.random() * 5 + 3,
@@ -774,10 +1350,19 @@
     candlesBlown = 0;
     document.querySelectorAll('.flame-svg').forEach(f => f.classList.remove('blown'));
     document.getElementById('candles-hint').textContent = '3 candles burning';
+    
+    // Reset cake slice
+    const slice = document.getElementById('cake-slice-elem');
+    const knife = document.getElementById('knife-element');
+    const cutBtn = document.getElementById('cut-action-btn');
+    if (slice) slice.classList.remove('sliced');
+    if (knife) knife.classList.remove('cutting');
+    if (cutBtn) cutBtn.textContent = 'Slice the Cake 🍰';
+
     setScene(0);
   }
 
-  // Balloon & Cake logic
+  // Balloons
   let balloonsLeft = 4;
   function popBalloon(el) {
     initAudio();
@@ -790,6 +1375,17 @@
     if (balloonsLeft <= 0) setTimeout(nextScene, 600);
   }
 
+  // Polaroid Sparkle Burst
+  function sparklePolaroid() {
+    initAudio();
+    playChimeArpeggio();
+    spawnConfetti(45);
+    const frame = document.getElementById('polaroid-frame-card');
+    frame.style.transform = 'rotate(0deg) scale(1.04)';
+    setTimeout(() => frame.style.transform = 'rotate(-2.5deg)', 400);
+  }
+
+  // Cake Candles
   let candlesBlown = 0;
   function blowCandle(unit) {
     initAudio();
@@ -807,34 +1403,45 @@
     }
   }
 
-  function cutCake() {
+  // Dynamic Cake Slice Physics
+  function triggerCakeCut() {
     initAudio();
-    playChimeArpeggio();
-    spawnConfetti(60);
-    document.getElementById('cut-btn').textContent = 'Slice Enjoyed! 🎂';
-    setTimeout(nextScene, 800);
+    playTone(280, 'triangle', 0.4, 0.25);
+    const knife = document.getElementById('knife-element');
+    const slice = document.getElementById('cake-slice-elem');
+    const btn = document.getElementById('cut-action-btn');
+
+    if (knife) knife.classList.add('cutting');
+    setTimeout(() => {
+      if (slice) slice.classList.add('sliced');
+      playChimeArpeggio();
+      spawnConfetti(70);
+      if (btn) btn.textContent = 'Slice Enjoyed! 🍰';
+      setTimeout(nextScene, 900);
+    }, 400);
   }
 
+  // Typewriter Letter
   let typeTimer = null;
-  const letterText = "Happy Birthday! May your new year bring courageous beginnings, quiet peace, and extraordinary joy in every milestone you reach. Thank you for bringing warmth and light to everyone around you.";
   function startTypewriter() {
     const target = document.getElementById('typed-content');
     target.textContent = '';
     let idx = 0;
     clearInterval(typeTimer);
     typeTimer = setInterval(() => {
-      if (idx < letterText.length) {
-        target.textContent += letterText.charAt(idx);
+      if (idx < cardConfig.letter.length) {
+        target.textContent += cardConfig.letter.charAt(idx);
+        if (idx % 3 === 0) playTypeTick();
         idx++;
       } else clearInterval(typeTimer);
-    }, 40);
+    }, 35);
   }
   function fastForwardTypewriter() {
     clearInterval(typeTimer);
-    document.getElementById('typed-content').textContent = letterText;
+    document.getElementById('typed-content').textContent = cardConfig.letter;
   }
 
-  // 5. Hardware Sensor Triggers (Microphone Blow & Shake)
+  // 5. Hardware Sensor Triggers
   let micListening = false;
   async function enableMicBlow() {
     try {
@@ -869,7 +1476,7 @@
     }
   }
 
-  // Device Motion Shake Detection
+  // Device Motion Shake
   let lastShakeTime = 0;
   if (window.DeviceMotionEvent) {
     window.addEventListener('devicemotion', (e) => {
@@ -884,7 +1491,7 @@
     });
   }
 
-  // 6. Dual-Device PeerJS WebRTC Realtime Protocol
+  // 6. Dual-Device PeerJS WebRTC Protocol
   let peer = null;
   let p2pConn = null;
 
@@ -892,21 +1499,19 @@
     if (typeof Peer === 'undefined') return;
 
     if (isRemoteRole) {
-      // Role: Remote Controller
       const remotePeerId = 'rc-' + Math.random().toString(36).substring(2, 7);
       peer = new Peer(remotePeerId);
       peer.on('open', () => {
-        // Connect to display host
         p2pConn = peer.connect(roomId);
         p2pConn.on('open', () => {
           document.getElementById('remote-status-text').textContent = 'Connected to Screen';
         });
       });
     } else {
-      // Role: Display Screen Host
       peer = new Peer(roomId);
       peer.on('open', (id) => {
-        const remoteUrl = window.location.origin + window.location.pathname + '?role=remote&room=' + id + '&to=' + encodeURIComponent(recipientName);
+        const remoteUrl = window.location.origin + window.location.pathname + 
+          `?role=remote&room=${id}&to=${encodeURIComponent(cardConfig.to)}&theme=${cardConfig.theme}`;
         const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(remoteUrl);
         document.getElementById('qr-img').src = qrUrl;
         window.remotePairingUrl = remoteUrl;
@@ -930,7 +1535,6 @@
   function sendRemoteCmd(action) {
     if (p2pConn && p2pConn.open) {
       p2pConn.send({ action: action });
-      // Haptic vibration feedback
       if (navigator.vibrate) navigator.vibrate(40);
     } else {
       alert("Connecting to display screen... ensure screen is open!");
@@ -953,7 +1557,7 @@
         document.querySelectorAll('.candle-unit').forEach(u => blowCandle(u));
         break;
       case 'slice_cake':
-        if (currentScene === 5) cutCake();
+        if (currentScene === 5) triggerCakeCut();
         else nextScene();
         break;
       case 'trigger_confetti':
@@ -966,22 +1570,128 @@
     }
   }
 
-  // Pairing Modal Helpers
+  // 7. Personalization Studio & Modals Management
+  function openStudioModal() {
+    document.getElementById('studio-modal').classList.add('open');
+    updateJsonPreview();
+  }
+  function closeStudioModal() {
+    document.getElementById('studio-modal').classList.remove('open');
+  }
   function openPairingModal() { document.getElementById('pairing-modal').classList.add('open'); }
   function closePairingModal() { document.getElementById('pairing-modal').classList.remove('open'); }
+
+  function switchStudioTab(tab) {
+    document.getElementById('tab-btn-visual').classList.toggle('active', tab === 'visual');
+    document.getElementById('tab-btn-json').classList.toggle('active', tab === 'json');
+    document.getElementById('tab-visual-content').style.display = tab === 'visual' ? 'flex' : 'none';
+    document.getElementById('tab-json-content').style.display = tab === 'json' ? 'flex' : 'none';
+  }
+
+  function applyPresetTheme(themeName) {
+    cardConfig.theme = themeName;
+    document.body.setAttribute('data-theme', themeName);
+    document.querySelectorAll('.preset-pill').forEach(pill => {
+      pill.classList.toggle('active', pill.getAttribute('onclick')?.includes(themeName));
+    });
+    spawnConfetti(35);
+    playChimeArpeggio();
+    updateJsonPreview();
+  }
+
+  function selectPhotoPreset(url, thumbId) {
+    cardConfig.photo = url;
+    document.querySelectorAll('.preset-img-thumb').forEach(t => t.classList.remove('selected'));
+    document.getElementById(thumbId)?.classList.add('selected');
+    const elem = document.getElementById('polaroid-photo-elem');
+    if (elem) elem.src = url;
+    updateJsonPreview();
+  }
+
+  function handleCustomPhotoUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const dataUrl = e.target.result;
+      cardConfig.photo = dataUrl;
+      try {
+        localStorage.setItem('custom_card_photo', dataUrl);
+      } catch(err) {}
+      const elem = document.getElementById('polaroid-photo-elem');
+      if (elem) elem.src = dataUrl;
+      document.querySelectorAll('.preset-img-thumb').forEach(t => t.classList.remove('selected'));
+      showToast("Custom Photo Loaded! 📸");
+      updateJsonPreview();
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function saveAndGenerateShareLink() {
+    cardConfig.to = document.getElementById('input-recipient').value.trim() || "Sakshi";
+    cardConfig.from = document.getElementById('input-sender').value.trim() || "Zadit";
+    cardConfig.age = parseInt(document.getElementById('input-age').value) || 24;
+    cardConfig.cakeText = document.getElementById('input-cake').value.trim() || `Happy ${cardConfig.age}th, ${cardConfig.to}!`;
+    cardConfig.letter = document.getElementById('input-letter').value.trim();
+
+    applyConfigToDOM();
+    closeStudioModal();
+
+    // Construct Shareable URL
+    const shareUrl = new URL(window.location.origin + window.location.pathname);
+    shareUrl.searchParams.set('to', cardConfig.to);
+    shareUrl.searchParams.set('from', cardConfig.from);
+    shareUrl.searchParams.set('age', cardConfig.age);
+    shareUrl.searchParams.set('theme', cardConfig.theme);
+    shareUrl.searchParams.set('cake', cardConfig.cakeText);
+    shareUrl.searchParams.set('letter', cardConfig.letter);
+
+    // If using default local image path, add photo param
+    if (!cardConfig.photo.startsWith('data:')) {
+      shareUrl.searchParams.set('photo', cardConfig.photo);
+    }
+
+    window.history.replaceState({}, '', shareUrl.toString());
+
+    navigator.clipboard.writeText(shareUrl.toString()).then(() => {
+      showToast("✨ Personalized Link Copied to Clipboard!");
+      spawnConfetti(50);
+      playChimeArpeggio();
+    });
+  }
+
+  function updateJsonPreview() {
+    const box = document.getElementById('json-preview-box');
+    if (box) {
+      box.textContent = JSON.stringify(cardConfig, null, 2);
+    }
+  }
+
+  function copyJsonConfig() {
+    navigator.clipboard.writeText(JSON.stringify(cardConfig, null, 2)).then(() => {
+      showToast("JSON Config Copied! 📋");
+    });
+  }
+
   function copyRemoteUrl() {
     if (window.remotePairingUrl) {
       navigator.clipboard.writeText(window.remotePairingUrl).then(() => {
-        alert("Remote Controller URL copied! Open this on your smartphone.");
+        showToast("Magic Remote Link Copied! 📱");
       });
     }
   }
 
-  // Initialize P2P on page load
+  function showToast(msg) {
+    const toast = document.getElementById('toast-msg');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2800);
+  }
+
+  // Initialize on load
   window.addEventListener('load', () => {
+    applyConfigToDOM();
     initP2P();
-    document.getElementById('cake-name').textContent = "Happy Birthday, " + recipientName + "!";
-    document.getElementById('finale-title').textContent = "Cheers to " + recipientName + "!";
   });
 </script>
 </body>
