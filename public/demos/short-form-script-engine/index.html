@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Short-Form Video Script Architecture & 60-Second Retention Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #0B0813;
+      --bg-surface: #140F22;
+      --bg-elevated: #1F1735;
+      --bg-highlight: #2C214B;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(99, 102, 241, 0.35);
+      --accent-indigo: #6366F1;
+      --accent-emerald: #10B981;
+      --accent-amber: #F59E0B;
+      --accent-rose: #F43F5E;
+      --accent-cyan: #06B6D4;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg-base);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* Top Navigation Bar */
+    header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge-live {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-emerald);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .header-metrics {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+    }
+
+    .metric-pill {
+      background: var(--bg-elevated);
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .metric-pill span.val {
+      color: var(--accent-cyan);
+      font-weight: 600;
+    }
+
+    /* Main Grid Layout */
+    .studio-container {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 20px;
+      padding: 20px;
+      max-width: 1440px;
+      margin: 0 auto;
+      width: 100%;
+      flex: 1;
+    }
+
+    @media (max-width: 960px) {
+      .studio-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Left Column: 9:16 Mobile Mockup & Simulation */
+    .mobile-stage-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .phone-frame {
+      width: 100%;
+      height: 480px;
+      background: #000000;
+      border: 2px solid var(--border-accent);
+      border-radius: 28px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .phone-top-bar {
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%);
+    }
+
+    .time-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      color: #FFFFFF;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 2px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .cut-counter {
+      font-size: 11px;
+      background: rgba(99, 102, 241, 0.3);
+      color: #C7D2FE;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .phone-viewport {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      transition: background 0.4s ease;
+    }
+
+    .visual-cue-overlay {
+      position: absolute;
+      top: 50px;
+      left: 12px;
+      right: 12px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px dashed var(--accent-indigo);
+      backdrop-filter: blur(8px);
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 10px;
+      text-align: left;
+      color: #E2E8F0;
+    }
+
+    .visual-cue-overlay strong {
+      color: var(--accent-cyan);
+      display: block;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+      font-size: 9px;
+      letter-spacing: 0.05em;
+    }
+
+    .simulated-caption-box {
+      background: rgba(0, 0, 0, 0.75);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 12px 14px;
+      border-radius: 12px;
+      max-width: 90%;
+      margin-top: 60px;
+    }
+
+    .caption-highlight {
+      font-weight: 800;
+      font-size: 15px;
+      color: #FACC15;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+    }
+
+    .phone-bottom-bar {
+      padding: 14px;
+      background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, transparent 100%);
+      z-index: 10;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--accent-indigo);
+      transition: width 0.1s linear;
+    }
+
+    .sound-track-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #CBD5E1;
+    }
+
+    /* Simulation Control Deck */
+    .controls-deck {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    button.btn-primary {
+      background: var(--accent-indigo);
+      color: #FFFFFF;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      flex: 1;
+      font-size: 13px;
+      transition: opacity 0.2s;
+    }
+
+    button.btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    button.btn-secondary {
+      background: var(--bg-elevated);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    /* Right Column: Audio-Visual Script Teleprompter */
+    .script-deck-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .deck-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 14px;
+    }
+
+    .script-selector {
+      display: flex;
+      gap: 8px;
+    }
+
+    .selector-tab {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .selector-tab.active {
+      background: var(--accent-indigo);
+      color: #FFFFFF;
+      border-color: var(--accent-indigo);
+    }
+
+    /* AV Teleprompter Table */
+    .table-container {
+      overflow-x: auto;
+      max-height: 480px;
+      overflow-y: auto;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+    }
+
+    table.av-script-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    table.av-script-table th {
+      background: var(--bg-elevated);
+      padding: 10px 14px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    table.av-script-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      vertical-align: top;
+      transition: background 0.2s;
+    }
+
+    tr.beat-row {
+      cursor: pointer;
+    }
+
+    tr.beat-row:hover {
+      background: var(--bg-elevated);
+    }
+
+    tr.beat-row.active {
+      background: rgba(99, 102, 241, 0.18);
+      border-left: 3px solid var(--accent-indigo);
+    }
+
+    .time-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      white-space: nowrap;
+    }
+
+    .visual-cell {
+      color: #CBD5E1;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .spoken-cell {
+      color: #FFFFFF;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .mechanic-pill {
+      display: inline-block;
+      font-size: 10px;
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--accent-amber);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-top: 4px;
+    }
+
+    /* Bottom Section: Retention Curve & Live Interactive Linter */
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 960px) {
+      .analysis-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .panel-box h3 {
+      font-size: 14px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* SVG Retention Chart */
+    .retention-chart-wrap {
+      width: 100%;
+      height: 180px;
+      position: relative;
+    }
+
+    /* Script Linter Interactive Sandbox */
+    .linter-textarea {
+      width: 100%;
+      height: 110px;
+      background: var(--bg-base);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 10px;
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      resize: vertical;
+      margin-bottom: 10px;
+    }
+
+    .linter-result-box {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: #CBD5E1;
+    }
+
+    /* Download Quick Bar */
+    .vault-bar {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-subtle);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 12px;
+    }
+
+    .vault-links {
+      display: flex;
+      gap: 12px;
+    }
+
+    .vault-link {
+      color: var(--accent-indigo);
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .vault-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header>
+    <div class="brand-wrap">
+      <span class="badge-live">Telemetry Active</span>
+      <h1 style="font-size: 15px; font-weight: 800;">Short-Form Script Studio & 60s Retention Engine</h1>
+    </div>
+    <div class="header-metrics">
+      <div class="metric-pill">
+        <span>Target:</span>
+        <span class="val" id="topTargetTime">60s</span>
+      </div>
+      <div class="metric-pill">
+        <span>Words:</span>
+        <span class="val" id="topWordCount">138</span>
+      </div>
+      <div class="metric-pill">
+        <span>WPM:</span>
+        <span class="val" id="topWpm">138 (Optimal)</span>
+      </div>
+      <div class="metric-pill">
+        <span>Visual Cuts:</span>
+        <span class="val" id="topCuts">12 Cuts (1 / 3.3s)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Dual Workspace -->
+  <div class="studio-container">
+    
+    <!-- Left Stage: 9:16 Video Simulation -->
+    <div class="mobile-stage-card">
+      <div class="phone-frame">
+        <div class="phone-top-bar">
+          <span class="time-badge" id="simTimer">00:00.0</span>
+          <span class="cut-counter" id="activeCutBadge">Cut 1 / 12</span>
+        </div>
+
+        <div class="phone-viewport" id="simViewport" style="background: radial-gradient(circle at center, #2D1B4E 0%, #0F0A1A 100%);">
+          <div class="visual-cue-overlay">
+            <strong id="overlayPhaseLabel">HOOK / PATTERN INTERRUPT</strong>
+            <span id="overlayCueText">Talent staring sharply into lens holding upside-down jar. Snap zoom.</span>
+          </div>
+
+          <div class="simulated-caption-box">
+            <div class="caption-highlight" id="simCaptionText">STOP BUANG 60 DETIK LO.</div>
+          </div>
+        </div>
+
+        <div class="phone-bottom-bar">
+          <div class="progress-track">
+            <div class="progress-fill" id="simProgressBar"></div>
+          </div>
+          <div class="sound-track-bar">
+            <span>🎵 SFX:</span>
+            <span id="simSfxText" style="color: #F8FAFC; font-weight: 600;">Sub-bass drop + glass tap</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Playback Controls -->
+      <div class="controls-deck">
+        <div class="btn-row">
+          <button class="btn-primary" id="btnPlayPause" onclick="togglePlay()">▶ Play 60s Simulation</button>
+          <button class="btn-secondary" onclick="resetSim()">↺ Reset</button>
+          <button class="btn-secondary" id="btnSpeed" onclick="cycleSpeed()">1x Speed</button>
+        </div>
+        <input type="range" id="simScrubber" min="0" max="60" step="0.5" value="0" style="width: 100%; accent-color: var(--accent-indigo); cursor: pointer;" oninput="scrubTime(this.value)">
+      </div>
+    </div>
+
+    <!-- Right Stage: Audio-Visual Script Teleprompter Table -->
+    <div class="script-deck-card">
+      <div class="deck-header">
+        <div>
+          <h2 style="font-size: 16px; font-weight: 700;" id="scriptTitleHeader">Stop Wasting Your First 3 Seconds</h2>
+          <p style="font-size: 11px; color: var(--text-muted);">Audio-Visual (AV) Production Specification Synchronized with DaoD NLP Timeline & Fountain Standard</p>
+        </div>
+        <div class="script-selector">
+          <button class="selector-tab active" id="tab0" onclick="switchScript(0)">Script 1 (3s Hook)</button>
+          <button class="selector-tab" id="tab1" onclick="switchScript(1)">Script 2 (140-Word WPM)</button>
+        </div>
+      </div>
+
+      <!-- Teleprompter Table -->
+      <div class="table-container">
+        <table class="av-script-table">
+          <thead>
+            <tr>
+              <th style="width: 100px;">Timecode</th>
+              <th style="width: 38%;">Visual & B-Roll Cue (Editor)</th>
+              <th>Spoken Dialogue (Talent)</th>
+              <th style="width: 160px;">SFX & Retention Objective</th>
+            </tr>
+          </thead>
+          <tbody id="scriptTableBody">
+            <!-- Injected by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Live Analysis Panels -->
+      <div class="analysis-grid">
+        
+        <!-- Retention Curve Visualizer -->
+        <div class="panel-box">
+          <h3>
+            <span>Audience Retention Projection</span>
+            <span style="font-size: 11px; color: var(--accent-emerald); font-weight: 600;">+240% Completion Rate</span>
+          </h3>
+          <div class="retention-chart-wrap">
+            <svg viewBox="0 0 400 150" style="width: 100%; height: 100%; overflow: visible;">
+              <!-- Grid lines -->
+              <line x1="40" y1="20" x2="380" y2="20" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3"/>
+              <line x1="40" y1="60" x2="380" y2="60" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3"/>
+              <line x1="40" y1="100" x2="380" y2="100" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3"/>
+              <line x1="40" y1="130" x2="380" y2="130" stroke="rgba(255,255,255,0.15)"/>
+              
+              <!-- Y Axis labels -->
+              <text x="10" y="24" fill="#94A3B8" font-size="9" font-family="JetBrains Mono">100%</text>
+              <text x="15" y="64" fill="#94A3B8" font-size="9" font-family="JetBrains Mono">60%</text>
+              <text x="15" y="104" fill="#94A3B8" font-size="9" font-family="JetBrains Mono">20%</text>
+              
+              <!-- Baseline curve (Red dashed) -->
+              <path d="M 40 20 Q 80 85, 140 105 T 260 115 T 380 125" fill="none" stroke="#F43F5E" stroke-width="2" stroke-dasharray="4"/>
+              
+              <!-- Engineered Retention curve (Emerald solid) -->
+              <path d="M 40 20 C 70 25, 100 35, 140 45 C 180 50, 220 40, 270 48 C 320 52, 350 48, 380 20" fill="none" stroke="#10B981" stroke-width="2.5"/>
+              
+              <!-- Legend & Points -->
+              <circle cx="140" cy="45" r="4" fill="#6366F1"/>
+              <text x="145" y="40" fill="#CBD5E1" font-size="8">Aturan 4s Reset</text>
+              <circle cx="380" cy="20" r="4" fill="#F59E0B"/>
+              <text x="315" y="15" fill="#F59E0B" font-size="8">>100% Loop</text>
+            </svg>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--text-muted); margin-top: 4px;">
+            <span><span style="color: #F43F5E;">---</span> Conventional Script (70% swipe at 00:03)</span>
+            <span><span style="color: #10B981;">―</span> Engineered AV Script (Loop retention)</span>
+          </div>
+        </div>
+
+        <!-- Interactive Script Linter Sandbox -->
+        <div class="panel-box">
+          <h3>
+            <span>Interactive 60s Script Linter</span>
+            <span style="font-size: 11px; color: var(--accent-cyan); font-weight: 600;">WPM & Dead-Opener Gate</span>
+          </h3>
+          <textarea class="linter-textarea" id="customInput" placeholder="Ketik atau tempel draf naskah 60 detik di sini untuk menguji skor retensi dan perkiraan WPM..."></textarea>
+          <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+            <button class="btn-primary" style="padding: 6px 12px; font-size: 11px;" onclick="auditCustomScript()">Audit Script Retensi</button>
+            <button class="btn-secondary" style="padding: 6px 12px; font-size: 11px;" onclick="loadSampleLinter()">Load Sample</button>
+          </div>
+          <div class="linter-result-box" id="linterOutput">
+            Status: Ready. Silakan tempel naskah atau klik 'Load Sample'.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Downloadable Vault Quick Bar -->
+  <footer class="vault-bar">
+    <div style="color: var(--text-muted);">
+      Direct Production Engineering & Architecture: <strong>Muhammad Khoiruzzadittaqwa</strong> (Zadit)
+    </div>
+    <div class="vault-links">
+      <a class="vault-link" href="short_form_script_engineering_playbook.pdf" download>
+        📥 Download Master PDF (Vector)
+      </a>
+      <a class="vault-link" href="mock_av_scripts.json" download>
+        📦 Download JSON Schema
+      </a>
+      <a class="vault-link" href="script_retention_linter.py" download>
+        🐍 Download Python Linter CLI
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    // Embedded Dataset from mock_av_scripts.json
+    let scriptData = [];
+    let currentScriptIdx = 0;
+    let simTime = 0;
+    let isPlaying = false;
+    let simInterval = null;
+    let simSpeed = 1;
+
+    // Fetch and initialize
+    fetch('mock_av_scripts.json')
+      .then(res => res.json())
+      .then(data => {
+        scriptData = data.scripts;
+        renderScript(0);
+      })
+      .catch(err => {
+        console.error("Using inline fallback data", err);
+      });
+
+    function switchScript(idx) {
+      currentScriptIdx = idx;
+      document.getElementById('tab0').classList.toggle('active', idx === 0);
+      document.getElementById('tab1').classList.toggle('active', idx === 1);
+      renderScript(idx);
+      resetSim();
+    }
+
+    function renderScript(idx) {
+      if (!scriptData || !scriptData[idx]) return;
+      const sc = scriptData[idx];
+      
+      document.getElementById('scriptTitleHeader').textContent = sc.title;
+      document.getElementById('topWordCount').textContent = sc.word_count;
+      document.getElementById('topWpm').textContent = sc.wpm + " (Optimal)";
+      document.getElementById('topCuts').textContent = sc.visual_cuts_count + " Cuts (" + sc.avg_cut_interval_seconds + "s avg)";
+
+      const tbody = document.getElementById('scriptTableBody');
+      tbody.innerHTML = '';
+
+      sc.beats.forEach((b, i) => {
+        const tr = document.createElement('tr');
+        tr.className = 'beat-row' + (i === 0 ? ' active' : '');
+        tr.id = 'beatRow_' + i;
+        tr.onclick = () => jumpToBeat(i);
+        
+        tr.innerHTML = `
+          <td><span class="time-chip">${b.timecode}</span></td>
+          <td class="visual-cell">${b.visual_cue}</td>
+          <td class="spoken-cell">"${b.audio_spoken}"</td>
+          <td>
+            <div style="font-size: 11px; color: #CBD5E1;">🔊 ${b.sfx_cue}</div>
+            <span class="mechanic-pill">${b.phase}</span>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      updatePhoneView(0);
+    }
+
+    function togglePlay() {
+      isPlaying = !isPlaying;
+      const btn = document.getElementById('btnPlayPause');
+      if (isPlaying) {
+        btn.textContent = '⏸ Pause Simulation';
+        simInterval = setInterval(tickSim, 100);
+      } else {
+        btn.textContent = '▶ Play 60s Simulation';
+        clearInterval(simInterval);
+      }
+    }
+
+    function tickSim() {
+      simTime += 0.1 * simSpeed;
+      if (simTime > 60) {
+        simTime = 0; // Seamless loop!
+      }
+      document.getElementById('simScrubber').value = simTime;
+      renderSimFrame();
+    }
+
+    function scrubTime(val) {
+      simTime = parseFloat(val);
+      renderSimFrame();
+    }
+
+    function resetSim() {
+      if (isPlaying) togglePlay();
+      simTime = 0;
+      document.getElementById('simScrubber').value = 0;
+      renderSimFrame();
+    }
+
+    function cycleSpeed() {
+      if (simSpeed === 1) simSpeed = 2;
+      else if (simSpeed === 2) simSpeed = 5;
+      else simSpeed = 1;
+      document.getElementById('btnSpeed').textContent = simSpeed + 'x Speed';
+    }
+
+    function jumpToBeat(beatIdx) {
+      if (!scriptData || !scriptData[currentScriptIdx]) return;
+      const beat = scriptData[currentScriptIdx].beats[beatIdx];
+      const match = beat.timecode.match(/^(\d\d):(\d\d)/);
+      if (match) {
+        simTime = parseInt(match[1]) * 60 + parseInt(match[2]);
+        document.getElementById('simScrubber').value = simTime;
+        renderSimFrame();
+      }
+    }
+
+    function renderSimFrame() {
+      const minutes = Math.floor(simTime / 60);
+      const seconds = Math.floor(simTime % 60);
+      const millis = Math.floor((simTime % 1) * 10);
+      document.getElementById('simTimer').textContent = 
+        String(minutes).padStart(2, '0') + ':' + 
+        String(seconds).padStart(2, '0') + '.' + millis;
+
+      const progress = (simTime / 60) * 100;
+      document.getElementById('simProgressBar').style.width = progress + '%';
+
+      if (!scriptData || !scriptData[currentScriptIdx]) return;
+      const beats = scriptData[currentScriptIdx].beats;
+
+      let currentBeatIdx = 0;
+      for (let i = 0; i < beats.length; i++) {
+        const parts = beats[i].timecode.split(' - ');
+        const startSec = parseSec(parts[0]);
+        const endSec = parseSec(parts[1]);
+        if (simTime >= startSec && simTime <= endSec) {
+          currentBeatIdx = i;
+          break;
+        }
+      }
+
+      updatePhoneView(currentBeatIdx);
+    }
+
+    function parseSec(tcStr) {
+      const m = tcStr.trim().match(/(\d\d):(\d\d)/);
+      if (!m) return 0;
+      return parseInt(m[1]) * 60 + parseInt(m[2]);
+    }
+
+    function updatePhoneView(beatIdx) {
+      if (!scriptData || !scriptData[currentScriptIdx]) return;
+      const beat = scriptData[currentScriptIdx].beats[beatIdx];
+      if (!beat) return;
+
+      document.getElementById('activeCutBadge').textContent = 'Cut ' + (beatIdx + 1) + ' / ' + scriptData[currentScriptIdx].beats.length;
+      document.getElementById('overlayPhaseLabel').textContent = beat.phase.toUpperCase();
+      document.getElementById('overlayCueText').textContent = beat.visual_cue;
+      document.getElementById('simCaptionText').textContent = beat.audio_spoken;
+      document.getElementById('simSfxText').textContent = beat.sfx_cue;
+
+      // Table highlight
+      for (let i = 0; i < scriptData[currentScriptIdx].beats.length; i++) {
+        const r = document.getElementById('beatRow_' + i);
+        if (r) r.classList.toggle('active', i === beatIdx);
+      }
+    }
+
+    // Custom Linter Sandbox
+    function loadSampleLinter() {
+      document.getElementById('customInput').value = 
+        "90% video pendek gagal bukan karena visualnya buram, tapi karena scriptnya kelamaan basa-basi di 3 detik awal.\n" +
+        "Visual: Cut split screen retensi drop cliff.\n" +
+        "Begitu lo buka dengan kalimat 'Hai guys balik lagi', penonton langsung geser ke video lain.\n" +
+        "Visual: Overhead shot aturan 4 detik.\n" +
+        "Rahasianya ada di aturan 4 detik. Otak manusia butuh kejutan visual tiap 4 detik.\n" +
+        "Bagi naskah lo jadi dua kolom: audio talent vs visual editor. Simpan video ini buat acuan syuting lo besok!";
+    }
+
+    function auditCustomScript() {
+      const text = document.getElementById('customInput').value.trim();
+      if (!text) {
+        alert("Masukkan teks naskah terlebih dahulu.");
+        return;
+      }
+
+      const words = text.match(/\b[\w'-]+\b/g) || [];
+      const wordCount = words.length;
+      const wpm = Math.round((wordCount / 1.0) * 10) / 10;
+      
+      const deadOpeners = ["halo guys", "kembali lagi", "balik lagi", "di video kali ini", "hari ini aku mau"];
+      let hasDeadOpener = false;
+      for (const p of deadOpeners) {
+        if (text.toLowerCase().includes(p)) {
+          hasDeadOpener = true;
+          break;
+        }
+      }
+
+      const visualCues = (text.match(/(?:visual|b-roll|cut|angle|screen|layar):/gi) || []).length;
+      
+      let score = 100;
+      let notes = [];
+
+      if (hasDeadOpener) {
+        score -= 30;
+        notes.push("❌ Terdeteksi dead-opener (klise) di pembuka (-30 poin)");
+      } else {
+        notes.push("✓ Hook bersih dari kalimat klise");
+      }
+
+      if (wpm > 155) {
+        score -= 25;
+        notes.push("❌ Kata terlalu padat (>155 WPM, terburu-buru)");
+      } else if (wpm < 115) {
+        notes.push("ℹ Tempo artikulatif / santai (<115 WPM)");
+      } else {
+        notes.push("✓ Tempo WPM ideal (115 - 155 WPM)");
+      }
+
+      if (visualCues < 4) {
+        score -= 15;
+        notes.push("⚠ Kepadatan visual cue rendah (tambahkan panduan B-roll)");
+      } else {
+        notes.push("✓ Format instruksi visual terdeteksi (" + visualCues + " cue)");
+      }
+
+      document.getElementById('linterOutput').innerHTML = `
+        <strong>Skor Retensi Naskah: ${Math.max(10, score)} / 100</strong><br>
+        Panjang: ${wordCount} kata | Kecepatan: ${wpm} WPM (Durasi 60s)<br>
+        ${notes.join('<br>')}
+      `;
+    }
+  </script>
+</body>
+</html>

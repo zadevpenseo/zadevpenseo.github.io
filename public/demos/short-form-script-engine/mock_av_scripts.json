@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "engine": "Short-Form Video Script & Retention Engine v2.4",
+    "target_platform": "TikTok, YouTube Shorts, Instagram Reels",
+    "maximum_duration_seconds": 60,
+    "optimal_wpm_range": [135, 155],
+    "max_visual_pause_seconds": 4.0
+  },
+  "scripts": [
+    {
+      "id": "script_01",
+      "title": "Stop Wasting Your First 3 Seconds (Pattern Interrupt)",
+      "target_duration": 60,
+      "word_count": 138,
+      "wpm": 138,
+      "visual_cuts_count": 12,
+      "avg_cut_interval_seconds": 3.3,
+      "target_niche": "Content Creators & Digital Entrepreneurs",
+      "hook_type": "Negation & Strong Cognitive Dissonance",
+      "beats": [
+        {
+          "timecode": "00:00 - 00:03",
+          "phase": "Hook (Pattern Interrupt)",
+          "visual_cue": "Medium close-up. Talent stares intensely at lens, holding empty glass jar upside down. Sudden snap zoom with bold central typography: 'STOP BUANG 60 DETIK LO'.",
+          "audio_spoken": "90% video pendek gagal bukan karena visualnya buram, tapi karena scriptnya kelamaan basa-basi di 3 detik awal.",
+          "sfx_cue": "Sub-bass drop + glass tap impact",
+          "retention_mechanic": "Breaks feed scrolling velocity via visual anomaly and immediate provocative accusation."
+        },
+        {
+          "timecode": "00:04 - 00:14",
+          "phase": "Agitation & Proof",
+          "visual_cue": "Fast split screen. Left side: typical talking head video. Right side: real retention analytics curve diving off a cliff at second 3.",
+          "audio_spoken": "Begitu lo buka dengan kalimat 'Hai guys balik lagi sama gue', 70 persen jempol penonton udah geser ke video orang lain.",
+          "sfx_cue": "Vinyl record scratch + downward whoosh",
+          "retention_mechanic": "Visualizes concrete loss aversion; validates the viewer's unconscious behavior."
+        },
+        {
+          "timecode": "00:15 - 00:25",
+          "phase": "First Re-Hook (The Inflection)",
+          "visual_cue": "Rapid cut to overhead desk angle. Hand circles a red countdown timer showing 4.0s. High-contrast typography: 'ATURAN 4 DETIK'.",
+          "audio_spoken": "Rahasianya ada di aturan 4 detik. Otak manusia di mobile feed butuh kejutan visual baru setiap 4 detik sebelum dopaminnya turun.",
+          "sfx_cue": "Mechanical ticking + subtle bass riser",
+          "retention_mechanic": "Resets viewer attention right at the classic 20-second drop-off curve."
+        },
+        {
+          "timecode": "00:26 - 00:44",
+          "phase": "Actionable Framework (Core Value)",
+          "visual_cue": "Three-point graphical stack slides in synchronously with voice rhythm: 1. Action Hook, 2. Contrarian Data, 3. Micro-Payoff.",
+          "audio_spoken": "Bagi naskah lo jadi dua kolom: apa yang didengar talent, dan apa yang dilihat editor. Jangan biarkan talent ngomong tanpa ada B-roll pendukung atau teks penegas di layar.",
+          "sfx_cue": "Typewriter ticks per bullet point",
+          "retention_mechanic": "High-density actionable insight prevents cognitive fatigue."
+        },
+        {
+          "timecode": "00:45 - 00:54",
+          "phase": "Resolution & Proof Anchor",
+          "visual_cue": "Full-screen clean AV script table preview showing color-coded columns for talent and editor.",
+          "audio_spoken": "Dengan format ini, video 60 detik lo bukan cuma ditonton sampai tuntas, tapi memandu editor motong klip dengan presisi frame.",
+          "sfx_cue": "Smooth chime accent",
+          "retention_mechanic": "Delivers the promised payoff; establishes authority and professional competence."
+        },
+        {
+          "timecode": "00:55 - 01:00",
+          "phase": "Seamless Loop / Micro-CTA",
+          "visual_cue": "Talent points down. Subtle prompt sticker appears: 'Simpan buat syuting besok'. Quick snap back to opening frame.",
+          "audio_spoken": "Simpan video ini buat acuan syuting lo besok, karena...",
+          "sfx_cue": "Whoosh looping into opening sound",
+          "retention_mechanic": "Incomplete sentence seamlessly chains back into the opening hook, driving >100% completion rate."
+        }
+      ]
+    },
+    {
+      "id": "script_02",
+      "title": "The 140-Word Speed Limit (WPM Telemetry)",
+      "target_duration": 60,
+      "word_count": 142,
+      "wpm": 142,
+      "visual_cuts_count": 11,
+      "avg_cut_interval_seconds": 3.6,
+      "target_niche": "Agency Producers & Video Editors",
+      "hook_type": "Myth-Busting & Algorithmic Constraint",
+      "beats": [
+        {
+          "timecode": "00:00 - 00:04",
+          "phase": "Hook",
+          "visual_cue": "Talent holding a stopwatch counting down rapidly from 60 to 0. Big red text: 'MAKSIMAL 140 KATA'.",
+          "audio_spoken": "Kalau script 60 detik lo lebih dari 150 kata, gue jamin video lo bakal gagal di editing.",
+          "sfx_cue": "Digital alarm buzzer",
+          "retention_mechanic": "Unambiguous numerical boundary creates instant curiosity."
+        },
+        {
+          "timecode": "00:05 - 00:16",
+          "phase": "Agitation",
+          "visual_cue": "Video playback speed fast-forwarded to 1.5x showing comic distorted face and unintelligible robotic audio.",
+          "audio_spoken": "Banyak scriptwriter nulis kayak nulis artikel blog. Akhirnya talent terpaksa ngomong kayak dikejar kereta dan editor bingung mau taruh B-roll di mana.",
+          "sfx_cue": "Fast tape rewind noise",
+          "retention_mechanic": "Humorous relatable pain point relieves cognitive fatigue."
+        },
+        {
+          "timecode": "00:17 - 00:28",
+          "phase": "Cadence Metric",
+          "visual_cue": "Animated audio waveform visualizer showing healthy pause pockets between words.",
+          "audio_spoken": "Tempo bicara natural bahasa Indonesia itu 140 kata per menit. Lo butuh jeda 0.5 detik buat nafas, sound effect, dan transisi layar.",
+          "sfx_cue": "Heartbeat pulse audio",
+          "retention_mechanic": "Grounded mathematical metric provides undeniable clarity."
+        },
+        {
+          "timecode": "00:29 - 00:46",
+          "phase": "Production Solution",
+          "visual_cue": "Side-by-side comparison of cluttered prose paragraph vs streamlined 2-column AV table.",
+          "audio_spoken": "Gunakan struktur 3-layer: baris dialog pendek, kolom visual cue buat panduan editor, dan catatan emosi talent. Satu kalimat, satu ide tunggal.",
+          "sfx_cue": "Double click snap",
+          "retention_mechanic": "Strunk Elements of Style applied to short video delivery."
+        },
+        {
+          "timecode": "00:47 - 00:60",
+          "phase": "Closing Loop",
+          "visual_cue": "Stopwatch stops exactly at 00:60.00. Talent smiles and taps screen.",
+          "audio_spoken": "Terapkan aturan 140 kata ini di draf naskah berikutnya, dan tonton retensi video lo melonjak dua kali lipat.",
+          "sfx_cue": "Crisp victory bell chime",
+          "retention_mechanic": "Definitive outcome expectation paired with positive reinforcement."
+        }
+      ]
+    }
+  ]
+}

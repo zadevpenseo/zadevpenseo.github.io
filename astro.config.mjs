@@ -73,6 +73,7 @@ export default defineConfig({
           label: '4. Writer',
           items: [
             { label: 'Pillar Overview', link: '/case-studies/writer/' },
+            { label: 'Short-Form Script & Retention Engine', link: '/case-studies/writer/short-form-video-script-engine/' },
             { label: 'Executive Pitch Decks (JCG Partnership)', link: '/case-studies/writer/executive-pitch-decks-jcg-partnership/' },
             { label: 'Business Feasibility & Financial Models', link: '/case-studies/writer/business-feasibility-financial-models/' },
             { label: 'Peer-Reviewed Empirical Research (APA 7th)', link: '/case-studies/writer/peer-reviewed-empirical-publishing/' },
