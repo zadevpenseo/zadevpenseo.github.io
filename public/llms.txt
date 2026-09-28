@@ -1,0 +1,39 @@
+# Zadit // Systems & Blueprints Vault
+
+> Canonical knowledge index and verified engineering architecture repository by Muhammad Khoiruzzadittaqwa (Zadit), operating under PT PRISMA DIGITAL KREATIF.
+
+- **Author**: Muhammad Khoiruzzadittaqwa (Zadit)
+- **Legal Entity**: PT PRISMA DIGITAL KREATIF (NIB 1801250039976, TDPSE Kominfo 017014.01/DJAI.PSE/01/2025)
+- **Wikidata**: [Q141474900](https://www.wikidata.org/wiki/Q141474900)
+- **ORCID**: [0000-0002-1594-9548](https://orcid.org/0000-0002-1594-9548)
+- **GitHub**: [zadevpenseo](https://github.com/zadevpenseo)
+- **Website**: https://zadevpenseo.github.io/
+
+## Four Core Competency Pillars
+
+1. **Web Dev Design**: High-performance edge architectures, responsive luxury UI/UX systems, WooCommerce store optimizations, and zero-server-cost serverless deployments.
+2. **SEO**: Programmatic edge SEO engines, technical audits (GA4/GSC), Schema.org entity knowledge graphs, and Generative Engine Optimization (GEO/AEO).
+3. **Writer**: Executive pitch decks, bankable business feasibility models, peer-reviewed empirical research papers, and editorial storytelling.
+4. **Data Analysis**: Applied mathematical modeling, psychometric survey validation (Rasch and Aiken), stealth Chrome DevTools Protocol (CDP) scraping, and deterministic financial simulations.
+
+## Canonical Architecture Blueprints & Case Studies
+
+- [Master Case Studies Index](https://zadevpenseo.github.io/case-studies/): Full directory of verified designs and testbeds.
+- [3-Tier Proof Methodology](https://zadevpenseo.github.io/case-studies/methodology/): High-level system design verification before client delivery.
+- [Gworky Edge Next.js Flagship](https://zadevpenseo.github.io/case-studies/web-dev-design/gworky-edge-web-app/): Next.js 15 on Cloudflare Edge with high-concurrency PostgreSQL.
+- [WooCommerce Store Rescue (#659829)](https://zadevpenseo.github.io/case-studies/web-dev-design/woocommerce-enhancement-659829/): Non-destructive checkout audit and wp_usermeta index resolution.
+- [Modular Custom Web App Architecture (#659861)](https://zadevpenseo.github.io/case-studies/web-dev-design/fullstack-custom-web-apps-659861/): Clean relational schema and stateless JWT authentication.
+- [Elementor JSON UI Architecture Engine](https://zadevpenseo.github.io/case-studies/web-dev-design/elementor-json-ui-engine/): Lean component export-import pipelines without plugin bloat.
+- [Programmatic SEO Edge Scale Engine](https://zadevpenseo.github.io/case-studies/seo/programmatic-seo-scale-engine/): R2 payloads serving 50+ city and university hubs.
+- [Technical SEO & GA4/GSC Audit](https://zadevpenseo.github.io/case-studies/seo/technical-seo-vidio-tirto-audit/): Organic search architecture dissection on national media.
+- [National SEO Competition Award (WOM Finance)](https://zadevpenseo.github.io/case-studies/seo/national-seo-competition-wom-finance/): Documentation of 3rd place national award-winning long-form article.
+- [Entity Knowledge Graph Architecture](https://zadevpenseo.github.io/case-studies/seo/knowledge-graph-entity-architecture/): Tri-node Wikidata, ORCID, and Google Scholar entity mesh.
+- [Executive Pitch Decks (JCG Partnership)](https://zadevpenseo.github.io/case-studies/writer/executive-pitch-decks-jcg-partnership/): High-stakes board advisory decks and financial visual flywheels.
+- [Business Feasibility & Financial Models](https://zadevpenseo.github.io/case-studies/writer/business-feasibility-financial-models/): Bankable dynamic DCF models and sensitivity matrices.
+- [Peer-Reviewed Empirical Research](https://zadevpenseo.github.io/case-studies/writer/peer-reviewed-empirical-publishing/): Published educational research indexed in SINTA / IJMME.
+- [Cinematic 3D Video & Script (#659866)](https://zadevpenseo.github.io/case-studies/writer/cinematic-3d-birthday-video-659866/): 4-act synchronized narrative timeline for 3D animation.
+- [Mathematical Modeling & Statistics](https://zadevpenseo.github.io/case-studies/data-analysis/mathematical-modeling-and-statistics/): 140 SKS mathematical rigor and exact decimal computation.
+- [DocuMorph PDF Table Extraction](https://zadevpenseo.github.io/case-studies/data-analysis/documorph-pdf-table-extraction/): Lossless tabular extraction pipeline from complex PDF artifacts.
+- [Morpheus V2 Financial Tax Simulation (#659758)](https://zadevpenseo.github.io/case-studies/data-analysis/morpheus-v2-tax-simulation-659758/): Deterministic bracket validation and multi-tier tax calculators.
+- [Psychometric Survey Validation](https://zadevpenseo.github.io/case-studies/data-analysis/psychometric-survey-validation-rasch/): Rasch model logit transformations and Aiken's V validity coefficients.
+- [Resilient CDP WebSocket Scraping](https://zadevpenseo.github.io/case-studies/data-analysis/resilient-cdp-websocket-scraping/): Stealth Chrome DevTools Protocol harvesting under active Cloudflare Turnstile.

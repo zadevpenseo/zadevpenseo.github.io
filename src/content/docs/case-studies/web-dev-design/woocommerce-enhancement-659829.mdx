@@ -3,47 +3,47 @@ title: "WooCommerce Store Rescue (#659829)"
 description: "Non-destructive performance audit, database query optimization, and staging isolation for high-volume WooCommerce stores."
 ---
 
-| Parameter | Detail Penugasan |
+| Parameter | Specification Detail |
 | :--- | :--- |
 | **Project Reference** | Truelancer Project #659829 |
-| **Deliverable** | Non-Destructive Health Audit, Staging Fixes, Zero-Downtime Deployment |
-| **Estimated Scope** | 2,000 INR / 2 Hari Kerja |
+| **Deliverables** | Non-Destructive Health Audit, Staging Sandbox Fixes, Zero-Downtime Migration |
+| **Estimated Scope** | 2,000 INR / 2 Business Days |
 | **Pillar** | 1. Web Dev Design |
 
 ---
 
 ## 1. Executive Summary
 
-Banyak toko WooCommerce mengalami lonjakan bounce rate dan keranjang belanja ditinggalkan (*cart abandonment*) karena lambatnya respon server saat pelanggan melakukan aksi filter produk atau checkout. Masalah ini umumnya bukan disebabkan oleh spesifikasi server, melainkan tumpukan query lambat pada tabel `wp_options` (transient kedaluwarsa) dan `wp_usermeta`, serta konflik plugin yang menghabiskan memory limit PHP.
+Many WooCommerce storefronts suffer from high bounce rates and cart abandonment due to sluggish server response times during product filtering and checkout. This friction rarely stems from server hardware limitations; instead, it is driven by unindexed queries in `wp_options` (expired transients), `wp_usermeta` bloat, and conflicting plugins exhausting PHP memory limits.
 
-Cetak biru ini menyajikan metodologi isolasi staging non-destruktif untuk memulihkan kecepatan toko online tanpa risiko kehilangan data pesanan riil pelanggan.
+This blueprint presents a non-destructive staging isolation methodology to restore ecommerce speed with zero risk of transaction loss.
 
 ---
 
 ## 2. High-Level Design (HLD)
 
 ```text
-[Production Store]
+[Production Storefront]
        │
-       │ (1. Read-Only Snapshot via WP-CLI / Backup)
+       │ (1. Read-Only Snapshot via WP-CLI / Database Dump)
        ▼
-[Isolated Staging Environment]
+[Isolated Staging Sandbox]
        │
-       ├──> Diagnostic Script Execution (wc_health_audit.php)
+       ├──> Diagnostic Execution (wc_health_audit.php)
        ├──> Identify Query Bottlenecks & Autoloaded Options Bloat
-       ├──> Fix CSS Layout Shifts & Mobile Breakpoints
-       └──> Benchmark TTFB & Checkout Speed
+       ├──> Resolve CSS Layout Shifts & Mobile Breakpoints
+       └──> Benchmark TTFB & Multi-Currency Checkout Speed
        │
        │ (2. Clean Patch Applied during Low-Traffic Window)
        ▼
-[Production Store: Speed Restored, Zero Orders Lost]
+[Production Storefront: Sub-Second Speed Restored, Zero Orders Lost]
 ```
 
 ---
 
-## 3. Diagnostik PHP Mandiri (wc_health_audit.php)
+## 3. Standalone Diagnostic Script (wc_health_audit.php)
 
-Berikut skrip diagnostik berbobot ringan untuk memetakan kesehatan memori, versi dependensi, dan akumulasi autoload options:
+The following lightweight diagnostic script profiles PHP memory allocations, environment versions, and autoload options accumulation:
 
 ```php
 <?php
@@ -79,15 +79,15 @@ echo json_encode($audit_results, JSON_PRETTY_PRINT);
 
 ---
 
-## 4. Rencana Kerja Terukur
+## 4. Phased Milestone Execution
 
-1. **Hari 1:** Duplikasi database dan berkas ke lingkungan staging tertutup. Jalankan profiling query menggunakan Query Monitor dan analisis ukuran `autoload`.
-2. **Hari 2:** Pembersihan transients basi, perbaikan CSS layout shift pada tampilan mobile, uji coba simulasi checkout 10x, dan serah terima laporan teknis.
+1. **Day 1: Sandbox Replication & Deep Profiling.** Clone the database and asset layers into an isolated staging container. Profile slow queries using Query Monitor and measure `autoload` database footprint.
+2. **Day 2: Transients Pruning, CSS Refactoring, & Validation.** Purge orphaned transients, optimize mobile layout shifts, execute 10 automated test checkout cycles, and deploy the verified patch to production.
 
 ---
 
-## 5. Hubungi Pengembang
+## 5. Engineering Contact
 
-Ajukan peninjauan langsung untuk toko WooCommerce Anda:
+Request an architecture review for your WooCommerce infrastructure:
 - **Email:** `devapenseo@gmail.com`
-- **Proposal Truelancer:** Silakan konfirmasi melalui chat penawaran resmi.
+- **Truelancer Portal:** Confirm via the official client tender dashboard.

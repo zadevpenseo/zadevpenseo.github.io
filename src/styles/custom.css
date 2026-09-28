@@ -1,11 +1,11 @@
 /**
  * ════════════════════════════════════════════════════════════════
  *  TASTESKILL DESIGN SYSTEM v2.0
- *  zadevpenseo.github.io — Unified Design Token Architecture
+ *  zadevpenseo.github.io - Unified Design Token Architecture
  *
  *  Structure:
  *   1. Font Import
- *   2. Design Tokens (:root — single source of truth)
+ *   2. Design Tokens (:root - single source of truth)
  *   3. Starlight Token Overrides
  *   4. Global Reset & Base
  *   5. Typography Scale
@@ -30,7 +30,7 @@
   --zd-gold-300:        #f5e4be;
   --zd-gold-200:        #b8a07a;
 
-  /* Text — contrast ratios on #0d0b10 */
+  /* Text - contrast ratios on #0d0b10 */
   --zd-text-primary:    #faf9f6;   /* 18:1 AAA */
   --zd-text-secondary:  #d4cfc6;   /* 12:1 AAA */
   --zd-text-muted:      #b8b4a8;   /* 7.2:1 AA */
@@ -57,7 +57,7 @@
   --zd-font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --zd-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
-  /* Type Scale — 1.25 Major Third */
+  /* Type Scale - 1.25 Major Third */
   --zd-text-xs:   0.75rem;
   --zd-text-sm:   0.875rem;
   --zd-text-base: 1rem;
@@ -67,7 +67,7 @@
   --zd-text-3xl:  1.875rem;
   --zd-text-4xl:  2.25rem;
 
-  /* Spacing — 8px grid */
+  /* Spacing - 8px grid */
   --zd-space-1:  0.25rem;
   --zd-space-2:  0.5rem;
   --zd-space-3:  0.75rem;
@@ -215,7 +215,7 @@ a { color: inherit; }
 }
 
 .sl-markdown-content p {
-  color: #c8c4bc;  /* 9.8:1 contrast — AAA */
+  color: #c8c4bc;  /* 9.8:1 contrast - AAA */
   margin-bottom: var(--zd-space-5);
   max-width: var(--zd-content-max);
   line-height: 1.78;
@@ -388,7 +388,7 @@ a { color: inherit; }
   font-size: inherit;
 }
 
-/* Mermaid fallback — when not rendered as SVG */
+/* Mermaid fallback - when not rendered as SVG */
 .sl-markdown-content pre:has(code.language-mermaid) {
   border-left: 4px solid var(--zd-blue);
 }
@@ -637,7 +637,7 @@ a[href='#_top'].sl-skip-link, .skip-link {
 }
 a[href='#_top'].sl-skip-link:focus, .skip-link:focus { top: 0; }
 
-/* Focus rings — #c5a059 = 5.4:1 contrast on obsidian (WCAG AA) */
+/* Focus rings - #c5a059 = 5.4:1 contrast on obsidian (WCAG AA) */
 *:focus-visible {
   outline: 2px solid var(--zd-gold-500) !important;
   outline-offset: 3px !important;
@@ -652,7 +652,7 @@ a[href='#_top'].sl-skip-link:focus, .skip-link:focus { top: 0; }
   align-items: center;
 }
 
-/* Max line length — reading comfort */
+/* Max line length - reading comfort */
 .sl-markdown-content p,
 .sl-markdown-content li,
 .sl-markdown-content ul,

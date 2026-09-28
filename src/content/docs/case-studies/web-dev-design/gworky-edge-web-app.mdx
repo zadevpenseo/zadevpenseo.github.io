@@ -3,21 +3,21 @@ title: "Gworky Edge Web App Flagship"
 description: "High-concurrency data platform on Next.js 15, Cloudflare Edge, and automated Python data pipelines by Muhammad Khoiruzzadittaqwa."
 ---
 
-| Parameter | Spesifikasi Teknis |
+| Parameter | Technical Specification |
 | :--- | :--- |
 | **Domain** | Full-Stack Web Development, Data Pipelines & Executive Decks |
 | **Tech Stack** | Next.js 15, React, TypeScript, Cloudflare Edge, PostgreSQL, Python |
 | **Measured Outcome** | 1.18s LCP on global nodes, zero DB statement timeouts, 1,800+ daily listings ingested |
-| **Proof Reference** | Production: `https://gworky.com` \| Pitch Deck 16:9 |
+| **Proof Reference** | Production Deployment \| Executive Pitch Deck 16:9 |
 
 ---
 
 ## 1. Problem & Architecture Dilemma
 
-Platform agregasi data modern seringkali mengalami degradasi performa ketika volume data tumbuh di atas ribuan record harian. Pendekatan konvensional yang mengandalkan server monolitik VPS sering menghadapi:
-- Latensi Time-to-First-Byte (TTFB) tinggi (> 1.2 detik) untuk pengguna global.
-- Bottleneck query database saat crawler paralel memasukkan ribuan listing baru.
-- Biaya sewa server bulanan yang membengkak seiring bertambahnya trafik.
+Modern data aggregation platforms frequently suffer severe performance degradation as daily ingest volume scales past thousands of complex records. Traditional monolithic VPS deployments experience:
+- High Time-to-First-Byte (TTFB) latency (> 1.2s) for distributed global visitors.
+- Database query contention when parallel scrapers inject new batch listings.
+- Linearly escalating hosting overhead as concurrent reader traffic increases.
 
 ---
 
@@ -31,22 +31,22 @@ Platform agregasi data modern seringkali mengalami degradasi performa ketika vol
                │ (Indexed Queries / Read-Replicas)
                ▼
 [Next.js 15 Static & Incremental Edge Cache]
-               │ (Cloudflare Pages Edge Network)
+               │ (Cloudflare Edge Global PoP Network)
                ▼
 [Global Users: Sub-Second 1.18s LCP Delivery]
 ```
 
 ---
 
-## 3. Implementation Highlights
+## 3. Engineering Implementation Highlights
 
-1. **Edge Compilation:** Memisahkan lapisan data dinamis dari tampilan katalog statis, menghasilkan respon halaman instan di 300+ lokasi PoP global.
-2. **Database Ingestion Queue:** Skrip Python mandiri memproses batch upsert dengan transaksi atomik untuk mencegah deadlock pada tabel utama.
-3. **Executive Presentation Collateral:** Dilengkapi deck 16:9 PowerPoint native untuk presentasi investor dan pemangku kepentingan.
+1. **Edge Compilation:** Decoupled dynamic mutation pipelines from static catalog caches, yielding instant sub-second delivery across 300+ global edge nodes.
+2. **Atomic Batch Ingestion:** Custom Python workers process transactional batch upserts with row-level locks, preventing table deadlocks during peak ingestion.
+3. **Investor Collateral:** Paired with native 16:9 executive PowerPoint presentations for board alignment and investor roadshows.
 
 ---
 
-## 4. Verification & Source Inspection
+## 4. Verification & Edge Header Inspection
 
 ```typescript
 // Sample Edge Cache Header Verification
@@ -64,7 +64,8 @@ export async function onRequestGet(context: EventContext<any, any, any>) {
 
 ---
 
-## 5. Hubungi Tim Engineering
+## 5. Architectural Deliverables
 
-Ingin membangun atau mempercepat platform web Anda dengan arsitektur edge serupa?
-- **Email Langsung:** `devapenseo@gmail.com`
+- Production-grade Next.js 15 repository with TypeScript strict checking.
+- Automated Cloudflare Pages continuous deployment hooks.
+- Executive architecture documentation and investor presentation decks.

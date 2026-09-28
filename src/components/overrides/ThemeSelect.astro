@@ -1,19 +1,20 @@
 ---
 /**
  * src/components/overrides/ThemeSelect.astro
- * Override for Starlight's ThemeSelect to ensure the select element has
- * an explicit id, name, and aria-label attribute for accessibility and autofill auditing.
+ * Override for Starlight's ThemeSelect.
+ * Guarantees unique ID per instance (desktop vs mobile drawer) and proper form name/label attributes.
  */
+const selectId = `theme-select-${Math.random().toString(36).substring(2, 8)}`;
 ---
 
 <starlight-theme-select>
-	<label style="--sl-select-width: 6.25em">
+	<label style="--sl-select-width: 6.25em" for={selectId}>
 		<span class="sr-only">{Astro.locals.t('themeSelect.accessibleLabel')}</span>
 		<svg aria-hidden="true" class="icon label-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
 			<path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/>
 		</svg>
 		<select
-			id="starlight-theme-select"
+			id={selectId}
 			name="theme_selection"
 			value="auto"
 			autocomplete="off"

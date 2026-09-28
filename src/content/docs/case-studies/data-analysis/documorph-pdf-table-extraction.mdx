@@ -3,59 +3,67 @@ title: "DocuMorph PDF & Table Extraction Pipeline"
 description: "Deterministic document engineering and tabular data extraction from complex bank statements and financial PDFs to clean Excel/CSV."
 ---
 
-| Parameter | Spesifikasi Solusi |
+| Parameter | Solution Specification |
 | :--- | :--- |
-| **Sistem** | DocuMorph Studio (Komponen OmniData Enterprise Pipeline) |
-| **Target Berkas** | Mutasi Rekening Bank, Rekapitulasi Faktur Pajak, Laporan Finansial Tahunan |
-| **Akurasi Ekstraksi** | 100% Akurasi Baris per Baris (Zero Dropped Lines) |
+| **System** | DocuMorph Studio (OmniData Enterprise Pipeline Subsystem) |
+| **Target Documents** | Banking Account Statements, Tax Invoices, Annual Corporate Financial Reports |
+| **Extraction Reliability** | 100% Deterministic Row-by-Row Reconciliation (Zero Dropped Lines) |
 | **Pillar** | 4. Data Analysis |
 
 ---
 
-## 1. Problem Space: PDF Tabular Chaos
+## 1. Problem Space: Unstructured PDF Tabular Chaos
 
-Mengekstrak data transaksi keuangan dari berkas PDF ke spreadsheet Excel sering kali menjadi mimpi buruk:
-- Baris transaksi bertingkat (*multi-line descriptions*) sering terpecah menjadi baris terpisah atau kolom yang bergeser.
-- Format tanggal dan angka desimal/ribuan bercampur antara standar Indonesia (`1.000,00`) dan standar internasional (`1,000.00`).
-- Penggunaan alat konverter otomatis online sering membocorkan data rahasia perbankan nasabah.
+Extracting multi-page financial transactions from PDF documents into relational Excel worksheets is traditionally error-prone:
+- Multi-line transaction narratives collapse or spill across unintended rows and offset adjacent numeric columns.
+- Numeric notations mix European/Indonesian formats (`1.000,00`) with Anglo-American standards (`1,000.00`), causing parse failures in standard spreadsheet tools.
+- Public web-based converter SaaS tools introduce confidentiality leaks and compliance violations when handling proprietary client banking ledgers.
 
 ---
 
-## 2. Arsitektur Pemrosesan Deterministik
+## 2. Deterministic Pipeline Architecture
 
 ```text
-[PDF Input (Bank Statement / Invoice Table)]
+[PDF Document Input (Bank Ledger / Multi-page Statements)]
                          │
-                         ▼ (PyMuPDF / pdfplumber Coordinate Extraction)
-[Bounding Box & Layout Heuristic Analysis]
+                         ▼ (PyMuPDF / pdfplumber Coordinate Geometry Extraction)
+[Bounding Box & Layout Heuristic Analysis Engine]
                          │
-                         ├── Line Reconstitution (Penggabungan Keterangan Bertingkat)
-                         ├── Currency & Date Sanitization (Format Normalization)
-                         └── Debit / Kredit Balance Validation Rule:
-                             Saldo Awal + Total Kredit - Total Debit == Saldo Akhir
+                         ├── Line Reconstitution (Grouping Multi-Line Descriptions)
+                         ├── ISO Date & Currency Sanitization (Numeric Normalization)
+                         └── Debit / Credit Balance Invariant Gate:
+                             Opening Balance + Sum(Credits) - Sum(Debits) == Closing Balance
                          │
                          ▼
-[Clean Formatted CSV / Excel (.xlsx) dengan Formula Otomatis]
+[Clean Formatted CSV / Excel (.xlsx) with Verifiable Summary Formulas]
 ```
 
 ---
 
-## 3. Aturan Validasi Saldo Otomatis (The Balance Invariant)
+## 3. The Balance Reconciliation Invariant
 
-Setiap ekstraksi rekening koran diaudit melalui pengujian matematis tertutup:
+Every account statement transformation enforces strict closed-loop accounting validation:
 
 ```python
-def verify_statement_balance(opening_bal: float, debits: list, credits: list, closing_bal: float) -> bool:
+from decimal import Decimal
+
+def verify_statement_balance(
+    opening_bal: Decimal, 
+    debits: list[Decimal], 
+    credits: list[Decimal], 
+    closing_bal: Decimal
+) -> bool:
     calculated_closing = opening_bal + sum(credits) - sum(debits)
-    # Toleransi selisih pembulatan mata uang < 0.01
-    return abs(calculated_closing - closing_bal) < 0.01
+    # Zero acceptable drift under exact Decimal arithmetic
+    return calculated_closing == closing_bal
 ```
 
-Jika terjadi selisih bahkan sebesar Rp1,- skrip akan menandai baris spesifik untuk inspeksi manusia (*Human-in-the-Loop*).
+If any reconciliation discrepancy arises, even by a single cent, the engine halts export and flags the exact line coordinates for Human-in-the-Loop review.
 
 ---
 
-## 4. Hubungi Tim Ekstraksi Data
+## 4. Contact Data Extraction Engineer
 
-Ingin memproses ratusan halaman mutasi rekening menjadi spreadsheet rapi?
-- **Email:** `devapenseo@gmail.com`
+Need to transform hundreds of statement pages into structured tabular data?
+- **Email Direct:** `devapenseo@gmail.com`
+- **Consultation Portal:** Available via the homepage project initiation form.

@@ -3,7 +3,7 @@ title: "Elementor JSON UI Architecture Engine"
 description: "Zero-bloat WordPress UI delivery through native Elementor JSON schema compilation without third-party plugin dependencies."
 ---
 
-| Parameter | Spesifikasi Teknis |
+| Parameter | Technical Specification |
 | :--- | :--- |
 | **Domain** | WordPress Engineering, UI/UX Delivery, Zero-Bloat Systems |
 | **Pillar** | 1. Web Dev Design |
@@ -14,37 +14,37 @@ description: "Zero-bloat WordPress UI delivery through native Elementor JSON sch
 
 ## 1. The Dilemma: Addon Bloat vs Native JSON
 
-Mayoritas agensi WordPress memasang puluhan plugin tambahan (Essential Addons, Ultimate Addons, dll.) untuk membuat komponen modern, mengakibatkan:
-- DOM tree yang sangat dalam (> 32 level).
-- Puluhan berkas CSS dan JavaScript yang dimuat secara bersamaan dan memblokir render browser.
-- Kerentanan keamanan dan risiko kerusakan antarmuka saat WordPress diperbarui.
+Most WordPress development workflows stack dozens of third-party addon plugins (Essential Addons, Ultimate Addons, etc.) to achieve modern layouts, creating severe technical debt:
+- Excessive DOM tree depth (> 32 nested levels).
+- Dozens of render-blocking CSS and JavaScript bundles firing simultaneously.
+- Security vulnerabilities and breaking changes across plugin update cycles.
 
-Solusi kami adalah merekayasa komponen langsung ke dalam struktur skema **Elementor Native JSON**:
-- Menggunakan widget inti WordPress/Elementor murni.
-- Menghasilkan berkas template JSON yang dapat diimpor langsung tanpa memerlukan plugin eksternal apa pun.
-- Keteraturan CSS menggunakan custom CSS selector scoped (`selector { ... }`).
+Our solution bypasses addon bloat by compiling components directly into native **Elementor JSON Schemas**:
+- Employs core WordPress/Elementor primitives exclusively.
+- Produces clean JSON templates directly importable into any WordPress site without external plugin dependencies.
+- Enforces scoped CSS via native custom selectors (`selector { ... }`).
 
 ---
 
-## 2. Arsitektur Komponen JSON Murni
+## 2. Native JSON Component Architecture
 
 ```text
-[Figma / Web Design System]
+[Figma / UI Design System]
              │
-             ▼ (TasteSkill Luxury Design Rules)
+             ▼ (TasteSkill Editorial Design Directives)
 [Deterministic JSON Engine]
              │
              ├── Structure: Container / Flexbox / Grid
              ├── Typography: Scoped Font Sizes & Line Heights
              └── Clean CSS: Inline Custom Properties
              │
-             ▼ (Import into WordPress Site)
-[Elementor Template Library: 100% Native, 0 Extra Plugins]
+             ▼ (Direct Import to WordPress)
+[Elementor Template Library: 100% Native, Zero Extra Plugins]
 ```
 
 ---
 
-## 3. Contoh Snippet Struktur JSON
+## 3. Native JSON Schema Snippet
 
 ```json
 {
@@ -58,16 +58,10 @@ Solusi kami adalah merekayasa komponen langsung ke dalam struktur skema **Elemen
       "settings": {
         "flex_direction": "column",
         "align_items": "center",
-        "background_background": "classic",
-        "background_color": "#0d0b10",
-        "padding": {
-          "unit": "px",
-          "top": "80",
-          "bottom": "80",
-          "isLinked": false
-        }
-      },
-      "elements": []
+        "content_width": "boxed",
+        "boxed_width": { "size": 1160, "unit": "px" },
+        "custom_css": "selector { background: #0D0B10; border-bottom: 1px solid rgba(197, 160, 89, 0.2); }"
+      }
     }
   ]
 }
@@ -75,7 +69,8 @@ Solusi kami adalah merekayasa komponen langsung ke dalam struktur skema **Elemen
 
 ---
 
-## 4. Hubungi Tim Engineering
+## 4. Engineering Impact & Deliverables
 
-Ingin merombak situs WordPress Anda menjadi ringan dan cepat?
-- **Email:** `devapenseo@gmail.com`
+- **Zero Plugin Tax:** Eliminates recurring subscription fees for redundant Elementor addons.
+- **Predictable Portability:** Templates transfer seamlessly across WordPress environments without dependency clashes.
+- **Audited CWV Compliance:** Produces clean semantic HTML structures that effortlessly pass Core Web Vitals.

@@ -1,0 +1,123 @@
+---
+/**
+ * src/components/overrides/Head.astro
+ * Comprehensive SEO, AEO, GEO, Metatags, Hreflang (Lang Graph), and JSON-LD Structured Data
+ */
+import Default from '@astrojs/starlight/components/Head.astro';
+
+const { entry, siteTitle } = Astro.locals.starlightRoute;
+const { data } = entry;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site || 'https://zadevpenseo.github.io').href;
+
+// Construct BreadcrumbList for SERP navigation and search engines
+const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
+const breadcrumbs = [
+  {
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Home",
+    "item": "https://zadevpenseo.github.io/"
+  }
+];
+
+let accumulatedPath = '';
+pathSegments.forEach((segment, index) => {
+  accumulatedPath += `/${segment}`;
+  const formattedName = segment
+    .split('-')
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ');
+  breadcrumbs.push({
+    "@type": "ListItem",
+    "position": index + 2,
+    "name": formattedName,
+    "item": `https://zadevpenseo.github.io${accumulatedPath}/`
+  });
+});
+
+const schemaGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://zadevpenseo.github.io/#website",
+      "url": "https://zadevpenseo.github.io/",
+      "name": "Zadit // Systems & Blueprints",
+      "description": "Verified system designs, high-level architectures, and executable prototypes by Muhammad Khoiruzzadittaqwa.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://zadevpenseo.github.io/#organization"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://zadevpenseo.github.io/#organization",
+      "name": "PT PRISMA DIGITAL KREATIF",
+      "legalName": "PT PRISMA DIGITAL KREATIF",
+      "url": "https://zadevpenseo.github.io/",
+      "identifier": "NIB 1801250039976",
+      "taxID": "1801250039976",
+      "founder": {
+        "@id": "https://zadevpenseo.github.io/#author"
+      },
+      "sameAs": [
+        "https://www.wikidata.org/wiki/Q141474927"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://zadevpenseo.github.io/#author",
+      "name": "Muhammad Khoiruzzadittaqwa",
+      "alternateName": ["Zadit", "zadevpenseo"],
+      "jobTitle": "Systems Architect & Fullstack Engineer",
+      "url": "https://zadevpenseo.github.io/",
+      "sameAs": [
+        "https://www.wikidata.org/wiki/Q141474900",
+        "https://orcid.org/0000-0002-1594-9548",
+        "https://github.com/zadevpenseo"
+      ],
+      "worksFor": {
+        "@id": "https://zadevpenseo.github.io/#organization"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": `${canonicalUrl}#article`,
+      "headline": data.title,
+      "description": data.description || "Verified engineering case study and system architecture blueprint.",
+      "url": canonicalUrl,
+      "inLanguage": "en",
+      "author": {
+        "@id": "https://zadevpenseo.github.io/#author"
+      },
+      "publisher": {
+        "@id": "https://zadevpenseo.github.io/#organization"
+      },
+      "mainEntityOfPage": canonicalUrl
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${canonicalUrl}#breadcrumb`,
+      "itemListElement": breadcrumbs
+    }
+  ]
+};
+---
+
+<Default><slot /></Default>
+
+<!-- Hreflang & International SEO Lang Graph -->
+<link rel="alternate" hreflang="en" href={canonicalUrl} />
+<link rel="alternate" hreflang="x-default" href={canonicalUrl} />
+
+<!-- Generative Engine Optimization (GEO) & AEO Meta Signals -->
+<meta name="author" content="Muhammad Khoiruzzadittaqwa (Zadit)" />
+<meta name="publisher" content="PT PRISMA DIGITAL KREATIF" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large" />
+<meta name="twitter:creator" content="@zadevpenseo" />
+<meta name="twitter:site" content="@zadevpenseo" />
+
+<!-- Structured Data Knowledge Graph (JSON-LD) -->
+<script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />

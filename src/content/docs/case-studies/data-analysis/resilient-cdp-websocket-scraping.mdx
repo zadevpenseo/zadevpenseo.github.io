@@ -3,45 +3,45 @@ title: "Resilient CDP WebSocket Scraping Engine"
 description: "High-resilience headless web scraping and browser automation using Chrome DevTools Protocol (CDP) WebSocket sessions."
 ---
 
-| Parameter | Spesifikasi Sistem |
+| Parameter | Architecture Specification |
 | :--- | :--- |
-| **Protokol Inti** | Chrome DevTools Protocol (CDP) via Raw WebSockets & NoDriver |
-| **Ketahanan Sesi** | Bypass dynamic JS hydration, Cloudflare turnstile awareness, infinite scroll |
-| **Keluaran Data** | Format JSON terstruktur, CSV, dan ingestion database atomik |
+| **Core Protocol** | Chrome DevTools Protocol (CDP) via Raw WebSockets & NoDriver |
+| **Session Resilience** | Client-side JS hydration navigation, bot-mitigation evasion, virtual scroll handling |
+| **Data Output** | Validated JSON schemas, normalized CSV tables, atomic database pipelines |
 | **Pillar** | 4. Data Analysis |
 
 ---
 
-## 1. Problem: The Death of Basic HTTP Scraping
+## 1. Problem: The Obsolescence of Raw HTTP Scraping
 
-Pengikisan data web modern menggunakan pustaka HTTP sederhana (`requests`, `urllib`, `curl`) kini hampir 90% selalu diblokir oleh platform target. Target modern menerapkan:
-- JavaScript Single-Page Application (SPA) di mana data baru dirender setelah eksekusi script browser.
-- Analisis sidik jari peramban (Canvas fingerprint, WebGL, WebRTC leaks).
-- Paginasi asinkron berbasis scroll tanpa nomor halaman URL statis.
+Extracting data from contemporary web platforms using basic HTTP client libraries (`requests`, `urllib`, `curl`) fails across modern web applications:
+- Single-Page Applications (SPAs) defer data hydration until after complex client scripts execute.
+- Advanced bot heuristics inspect client TLS fingerprints, Canvas rendering signatures, and WebRTC network leaks.
+- Endless virtualized scrolling patterns conceal pagination endpoints behind asynchronous state dispatches.
 
 ---
 
-## 2. Arsitektur CDP WebSocket Bridge
+## 2. CDP Direct WebSocket Architecture
 
-Alih-alih menggunakan Puppeteer atau Selenium yang meninggalkan jejak `navigator.webdriver = true`, mesin kami menyambung langsung ke instance Google Chrome aktif melalui soket CDP:
+Rather than depending on legacy browser automation drivers that set detectable flags like `navigator.webdriver = true`, our ingestion pipeline interfaces directly with active Chromium processes over native CDP WebSockets:
 
 ```text
-[Chrome Headless Browser Instance with Remote Debugging]
+[Sandboxed Chromium Engine Instance with Remote Debugging]
                          │
                          ▼ (Raw WebSocket: ws://localhost:9222/devtools/page/...)
-[CDP Bridge Controller: JSON-RPC 2.0 Commands]
+[CDP Bridge Controller: JSON-RPC 2.0 Command Dispatch]
                          │
                          ├── DOM.getDocument & DOM.querySelectorAll
-                         ├── Page.captureScreenshot (Vision Linting)
-                         └── Runtime.evaluate (Isolasi Eksekusi JS Klien)
+                         ├── Page.captureScreenshot (Vision QA Linting)
+                         └── Runtime.evaluate (Isolated Client JS Context Extraction)
                          │
                          ▼
-[Clean Structured JSON Pipeline -> PostgreSQL / Excel]
+[Clean Structured JSON Pipeline -> PostgreSQL / Relational Schemas]
 ```
 
 ---
 
-## 3. Snippet Inisialisasi Soket CDP Mandiri
+## 3. Standalone CDP Socket Handshake
 
 ```python
 import asyncio
@@ -50,7 +50,7 @@ import websockets
 
 async def fetch_live_dom(ws_url: str):
     async with websockets.connect(ws_url, max_size=10 * 1024 * 1024) as ws:
-        # Buka akses DOM tree
+        # Request full DOM tree depth
         req = {"id": 1, "method": "DOM.getDocument", "params": {"depth": -1}}
         await ws.send(json.dumps(req))
         resp = await ws.recv()
@@ -60,7 +60,8 @@ async def fetch_live_dom(ws_url: str):
 
 ---
 
-## 4. Hubungi Tim Ekstraksi Data
+## 4. Contact Data Extraction Engineer
 
-Butuh ekstraksi dataset berskala jutaan record secara andal?
-- **Email:** `devapenseo@gmail.com`
+Need resilient, large-scale data harvesting across complex interactive portals?
+- **Email Direct:** `devapenseo@gmail.com`
+- **Consultation Portal:** Available via the homepage project initiation form.

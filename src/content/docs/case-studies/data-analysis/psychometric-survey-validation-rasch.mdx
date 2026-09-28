@@ -3,46 +3,47 @@ title: "Psychometric & Survey Validation (Rasch & Aiken)"
 description: "Empirical survey instrument validation and psychometric calibration using Aiken's V content validity and Rasch Rating Scale Model."
 ---
 
-| Parameter | Spesifikasi Pengujian |
+| Parameter | Analytical Specification |
 | :--- | :--- |
-| **Metode Validasi Konten** | Koefisien Validitas Isi Aiken's V (Penilaian Expert Judgment) |
-| **Model Pengukuran** | Rasch Rating Scale Model (Winsteps / Python Psychometrics) |
-| **Target Output** | Item Reliability, Person Reliability, Infit/Outfit MNSQ, Wright Map Person-Item |
+| **Content Validity Metric** | Aiken's V Content Validity Coefficient (Multi-Expert Panel Judgment) |
+| **Measurement Framework** | Rasch Rating Scale Model (Winsteps / Python Psychometrics) |
+| **Target Outputs** | Item Reliability, Person Reliability, Infit/Outfit MNSQ, Wright Person-Item Separation Maps |
 | **Pillar** | 4. Data Analysis |
 
 ---
 
-## 1. Dilema Teori Tes Klasik (CTT) vs Model Rasch
+## 1. Classical Test Theory (CTT) Limitations vs Rasch Measurement
 
-Banyak instrumen survei kepuasan pelanggan atau kuesioner riset perilaku hanya diuji menggunakan korelasi Pearson (Product Moment) dan Cronbach's Alpha. Teori Tes Klasik ini memiliki kelemahan mendasar:
-- Menganggap skor mentah berskala interval, padahal pilihan kuesioner (*Sangat Tidak Setuju* hingga *Sangat Setuju*) adalah data ordinal.
-- Pengukuran instrumen bergantung pada sampel (*sample-dependent*).
+Commercial customer feedback surveys and behavioral research instruments frequently rely on simplistic Pearson bivariate correlations and Cronbach's Alpha. Classical Test Theory harbors fundamental mathematical flaws:
+- It treats non-linear ordinal Likert rating categories (*Strongly Disagree* to *Strongly Agree*) as linear interval scales.
+- Instrument calibration remains sample-dependent: test difficulty fluctuations cannot be decoupled from the specific respondent cohort.
 
 ---
 
 ## 2. Rasch Measurement Model Framework
 
-Model Rasch mentransformasi skor ordinal menjadi data logit interval linear:
+The Rasch Rating Scale Model mathematically maps ordinal discrete responses onto an equal-interval linear logit scale:
 
 ```text
 ln(P_ni / (1 - P_ni)) = beta_n - delta_i
 ```
 
-Di mana beta_n adalah tingkat kemampuan/persetujuan responden n, dan delta_i adalah tingkat kesulitan butir i.
+Where `beta_n` represents the latent ability or endorsement level of respondent `n`, and `delta_i` defines the calibration threshold difficulty of item `i`.
 
-### Kriteria Kelayakan Butir:
-1. **Nilai Outfit MNSQ:** 0.5 hingga 1.5 (produktif untuk pengukuran).
-2. **Nilai ZSTD:** -2.0 hingga +2.0.
-3. **Pt-Measure Correlation:** Positif (0.4 hingga 0.85).
-
----
-
-## 3. Hasil & Peta Wright (Person-Item Map)
-
-Melalui pemodelan Rasch, peneliti dan pengambil kebijakan dapat melihat secara transparan butir soal atau atribut layanan mana yang paling sulit dipenuhi oleh organisasi dan responden mana yang memiliki bias ekstrim.
+### Deterministic Item Fit Criteria:
+1. **Outfit Mean Square (MNSQ):** 0.5 to 1.5 (productive for measurement).
+2. **Standardized Z (ZSTD):** -2.0 to +2.0.
+3. **Point-Measure Correlation (Pt-Measure Corr):** Positive (0.40 to 0.85).
 
 ---
 
-## 4. Hubungi Konsultan Psikometrik
+## 3. Measurable Outcomes & Wright Maps
 
-- **Email:** `devapenseo@gmail.com`
+Through Rasch calibration, leadership teams and academic review boards obtain an objective, visual Wright Map (Person-Item Map). This diagnostic identifies which survey dimensions are excessively demanding or redundant, and pinpoints uncalibrated respondent rating biases.
+
+---
+
+## 4. Contact Psychometrics Specialist
+
+- **Email Direct:** `devapenseo@gmail.com`
+- **Consultation Portal:** Available via the homepage project initiation form.

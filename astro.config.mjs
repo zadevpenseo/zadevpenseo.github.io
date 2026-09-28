@@ -9,6 +9,13 @@ export default defineConfig({
     starlight({
       title: 'Zadit // Systems & Blueprints',
       description: 'Zadit | Web Dev Design · SEO · Writer · Data Analysis. Verified case studies, high-level architectures, and executable prototypes by Muhammad Khoiruzzadittaqwa.',
+      defaultLocale: 'root',
+      locales: {
+        root: {
+          label: 'English',
+          lang: 'en',
+        },
+      },
       social: {
         github: 'https://github.com/zadevpenseo/zadevpenseo.github.io',
       },
@@ -18,6 +25,7 @@ export default defineConfig({
         Footer: './src/components/overrides/Footer.astro',
         PageTitle: './src/components/overrides/PageTitle.astro',
         ThemeSelect: './src/components/overrides/ThemeSelect.astro',
+        Head: './src/components/overrides/Head.astro',
       },
       tableOfContents: {
         minHeadingLevel: 2,

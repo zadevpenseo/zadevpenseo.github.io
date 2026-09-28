@@ -3,22 +3,22 @@ title: "Modular Custom Web App Architecture (#659861)"
 description: "Architectural blueprint for building resilient, modular full-stack web applications with relational schemas and idempotent APIs."
 ---
 
-| Parameter | Detail Penugasan |
+| Parameter | Specification Detail |
 | :--- | :--- |
 | **Project Reference** | Truelancer Project #659861 |
-| **Deliverable** | Database Schema, Idempotent REST APIs, Responsive Frontend Boilerplate |
-| **Estimated Scope** | 2,000 INR / 2 Hari Kerja |
+| **Deliverables** | Relational Database Schema, Idempotent REST APIs, Responsive Frontend Boilerplate |
+| **Estimated Scope** | 2,000 INR / 2 Business Days |
 | **Pillar** | 1. Web Dev Design |
 
 ---
 
 ## 1. Executive Dilemma
 
-Proyek pengembangan web kustom sering kali gagal mencapai stabilitas akibat dua ekstrem yang keliru:
-1. *Monolitik berlebihan:* Menggabungkan seluruh logika bisnis, perutean antarmuka, dan akses database langsung di satu berkas tanpa pemisahan lapisan layanan (*service layer*).
-2. *Over-engineering:* Mengadopsi arsitektur mikroservis kompleks yang tidak sebanding dengan kebutuhan awal proyek, mengakibatkan tagihan infrastruktur melambung.
+Custom web engineering projects frequently destabilize under two flawed extremes:
+1. *Monolithic Coupling:* Mixing business logic, presentation routing, and direct database queries inside single controller files without a domain service layer.
+2. *Premature Over-Engineering:* Introducing distributed microservice overhead that inflates infrastructure costs before product-market validation.
 
-Pendekatan modular yang kami tawarkan menerapkan pola *Pragmatic Clean Architecture*: struktur folder berorientasi fitur, skema relasional dengan indeks ketat, serta kontrak API idempoten.
+Our modular blueprint implements *Pragmatic Clean Architecture*: feature-driven directory structures, strictly indexed relational schemas, and idempotent API contracts.
 
 ---
 
@@ -28,7 +28,7 @@ Pendekatan modular yang kami tawarkan menerapkan pola *Pragmatic Clean Architect
 [Client Layer: Responsive Web & Mobile Web (HTML5 / TypeScript / CSS)]
                                 │
                                 ▼ (HTTPS / Bearer JWT)
-[API Gateway & Middleware Layer (Validation & Rate Limiting)]
+[API Gateway & Middleware Layer (Input Validation & Rate Limiting)]
                                 │
                                 ▼
 [Service Domain: Business Rules & Idempotency Handlers]
@@ -41,7 +41,7 @@ Pendekatan modular yang kami tawarkan menerapkan pola *Pragmatic Clean Architect
 
 ## 3. Database Schema Blueprint (SQL DDL)
 
-Berikut fondasi tabel relasional bersih yang mendukung integritas data tingkat enterprise:
+The following foundational schema establishes enterprise-grade relational data integrity:
 
 ```sql
 -- Core Accounts & Profiles Schema
@@ -68,15 +68,15 @@ CREATE INDEX idx_users_email ON users(email);
 
 ---
 
-## 4. Rencana Kerja Terstruktur
+## 4. Structured Phased Milestones
 
-- **Tonggak 1 (Database & API Layer):** Finalisasi skema relasional, pembuatan migrasi database, dan pengujian unit endpoint autentikasi.
-- **Tonggak 2 (Frontend Integration & QA):** Pemasangan antarmuka responsif, penanganan state visual (loading, error, empty state), dan penyerahan dokumentasi rute API.
+- **Milestone 1 (Database & API Layer):** Finalize relational data schemas, create automated schema migrations, and execute unit tests on authentication endpoints.
+- **Milestone 2 (Frontend Integration & QA):** Wire up responsive frontend views, handle asynchronous states (loading, error, empty state), and deliver OpenAPI documentation.
 
 ---
 
-## 5. Hubungi Pengembang
+## 5. Engineering Contact
 
-Konsultasikan spesifikasi aplikasi web kustom Anda:
+Scope your custom web application requirements:
 - **Email:** `devapenseo@gmail.com`
-- **Proposal Truelancer:** Konfirmasi langsung melalui portal tender.
+- **Truelancer Portal:** Confirm via the official client tender dashboard.

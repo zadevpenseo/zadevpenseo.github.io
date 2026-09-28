@@ -80,6 +80,17 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
       });
     });
   }
+
+  // Ensure dynamic search inputs from Pagefind have explicit id and name attributes
+  const ensureInputAttrs = () => {
+    document.querySelectorAll('.pagefind-ui__search-input').forEach(input => {
+      if (!input.hasAttribute('id')) input.setAttribute('id', 'pagefind-search-input');
+      if (!input.hasAttribute('name')) input.setAttribute('name', 'search_query');
+    });
+  };
+  ensureInputAttrs();
+  const searchObserver = new MutationObserver(ensureInputAttrs);
+  searchObserver.observe(document.body, { childList: true, subtree: true });
 </script>
 
 <style>

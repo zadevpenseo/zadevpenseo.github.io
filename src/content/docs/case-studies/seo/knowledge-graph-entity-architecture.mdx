@@ -3,20 +3,20 @@ title: "Entity Knowledge Graph Architecture"
 description: "Semantic entity authority engineering linking founder, corporate legal identity, and scholarly publications via Wikidata, ORCID, and Schema.org."
 ---
 
-| Parameter | Spesifikasi Semantik |
+| Parameter | Semantic Specification |
 | :--- | :--- |
 | **Domain** | Semantic Web, Knowledge Graph, Entity SEO, AI Citability |
-| **Entitas Perorangan** | Muhammad Khoiruzzadittaqwa ([Wikidata Q141474900](https://www.wikidata.org/wiki/Q141474900)) |
-| **Entitas Korporasi** | PT PRISMA DIGITAL KREATIF ([Wikidata Q141474927](https://www.wikidata.org/wiki/Q141474927)) |
+| **Individual Entity** | Muhammad Khoiruzzadittaqwa ([Wikidata Q141474900](https://www.wikidata.org/wiki/Q141474900)) |
+| **Corporate Entity** | PT PRISMA DIGITAL KREATIF ([Wikidata Q141474927](https://www.wikidata.org/wiki/Q141474927)) |
 | **Pillar** | 2. SEO |
 
 ---
 
 ## 1. The Entity Authority Paradigm
 
-Di era Generative Engine Optimization (GEO) dan AI Overviews, algoritma mesin pencari seperti Google Search, Perplexity, dan ChatGPT tidak lagi hanya merayapi kata kunci berbasis teks (*strings*), melainkan mengenali entitas dunia nyata (*things*).
+In the era of Generative Engine Optimization (GEO) and AI Overviews, search retrieval algorithms (Google, Perplexity, ChatGPT Search) no longer index websites merely as strings of keywords; they map queries to real-world verified entities ("things, not strings").
 
-Sebuah website personal atau agensi yang tidak terhubung dengan graph entitas otoritatif akan dianggap sebagai sumber anonim yang memiliki tingkat kepercayaan (E-E-A-T) rendah.
+Portfolios and agencies disconnected from unambiguous knowledge graphs remain untrusted anonymous sources with negligible Experience, Expertise, Authoritativeness, and Trustworthiness (E-E-A-T).
 
 ---
 
@@ -35,9 +35,9 @@ graph TD
 
 ---
 
-## 3. Implementasi JSON-LD Schema
+## 3. Production JSON-LD Schema Blueprint
 
-Cetak biru skema terstruktur yang disematkan pada setiap aset web:
+Every asset in the vault implements structured `@graph` nodes linking identity claims to cryptographic and institutional records:
 
 ```json
 {
@@ -47,18 +47,20 @@ Cetak biru skema terstruktur yang disematkan pada setiap aset web:
       "@type": "Person",
       "@id": "https://zadevpenseo.github.io/#person",
       "name": "Muhammad Khoiruzzadittaqwa",
-      "alternateName": "Zadit",
+      "alternateName": ["Zadit", "zadevpenseo"],
       "sameAs": [
         "https://www.wikidata.org/wiki/Q141474900",
         "https://orcid.org/0000-0002-1594-9548",
-        "https://scholar.google.com/citations?user=CbR250MAAAAJ"
+        "https://scholar.google.com/citations?user=CbR250MAAAAJ",
+        "https://github.com/zadevpenseo"
       ]
     },
     {
       "@type": "Organization",
       "@id": "https://zadevpenseo.github.io/#org",
       "name": "PT PRISMA DIGITAL KREATIF",
-      "founder": { "@id": "https://zadevpenseo.github.io/#person" },
+      "url": "https://zadevpenseo.github.io/",
+      "identifier": "NIB 1801250039976",
       "sameAs": [
         "https://www.wikidata.org/wiki/Q141474927"
       ]
@@ -69,6 +71,8 @@ Cetak biru skema terstruktur yang disematkan pada setiap aset web:
 
 ---
 
-## 4. Hubungi Tim Semantic Engineering
+## 4. Verification Deliverables
 
-- **Email:** `devapenseo@gmail.com`
+- Wikidata item `Q141474900` linked to official government and academic registers.
+- Validated Schema.org markup passing Google Rich Results testing.
+- Verified ORCID metadata cross-referenced across indexed scientific publications.

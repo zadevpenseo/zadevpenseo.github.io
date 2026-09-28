@@ -3,49 +3,49 @@ title: "Morpheus V2 Financial Simulation (#659758)"
 description: "High-precision statutory tax computation and simulation framework eliminating binary floating-point rounding errors."
 ---
 
-| Parameter | Detail Penugasan |
+| Parameter | Engagement Detail |
 | :--- | :--- |
 | **Project Reference** | Truelancer Project #659758 |
 | **Domain** | Financial Mathematics, Statutory Tax Brackets, Precision Accounting |
-| **Deliverable** | Modul Komputasi Deterministik Python `Decimal`, Audit Log Rekonsiliasi, Test Harness |
+| **Deliverables** | Deterministic Python `Decimal` Calculation Engine, Reconciliation Audit Log, Test Suite |
 | **Pillar** | 4. Data Analysis |
 
 ---
 
 ## 1. Problem Space: Floating-Point Tax Hazards
 
-Dalam sistem penggajian dan akuntansi komersial, penggunaan tipe data `float` standar komputer adalah sebuah kesalahan fatal:
+In commercial payroll and accounting systems, adopting standard computer `float` types creates compounding legal and financial liabilities:
 
 ```python
-# Bahaya binary floating point standar IEEE 754:
-0.1 + 0.2 == 0.3  # Menghasilkan False (0.30000000000000004)
+# IEEE 754 binary floating-point round-off hazards:
+0.1 + 0.2 == 0.3  # Returns False (0.30000000000000004)
 ```
 
-Pada simulasi pajak penghasilan berjenjang (*graduated tax brackets*) atau kalkulasi PPh 21, selisih pecahan terkecil akan menumpuk menjadi selisih audit ribuan rupiah di akhir tahun buku.
+Across graduated statutory tax brackets and multi-tier withholdings, tiny fractional inaccuracies accumulate into substantial reconciliation discrepancies across balance sheets by fiscal year-end.
 
-Cetak biru ini menyajikan mesin kalkulasi statutory Morpheus V2 yang beroperasi murni dengan aritmatika desimal dengan presisi yang dapat dikonfigurasi.
+This blueprint delivers the Morpheus V2 statutory calculation engine operating strictly on arbitrary-precision decimal representations with configurable rounding modes.
 
 ---
 
 ## 2. High-Level Design (HLD)
 
 ```text
-[Input Data: Bruto, Tunjangan, Potongan, Status PTKP]
+[Input Data: Gross Earnings, Allowances, Deductions, Statutory Relief Status]
                          │
-                         ▼ (Validasi Tipe Data Strict)
-[Morpheus V2 Engine: Decimal Type System (Rounding HALF_UP)]
+                         ▼ (Strict Schema & Type Validation)
+[Morpheus V2 Engine: Decimal Type System (ROUND_HALF_UP Protocol)]
                          │
-                         ├── Layer 1: Penghasilan Neto Tahunan
-                         ├── Layer 2: Pengurangan PTKP Terkini
-                         └── Layer 3: Simulasi Progresif Lapisan Tarif Pajak
+                         ├── Layer 1: Net Annualized Taxable Income
+                         ├── Layer 2: Statutory Non-Taxable Threshold Subtraction
+                         └── Layer 3: Progressive Bracket Marginal Tax Allocation
                          │
                          ▼
-[Output Terkonsolidasi: JSON Audit Log & Rincian Potongan Slip Gaji]
+[Consolidated Output: JSON Reconciliation Audit Log & Itemized Payslip Breakdowns]
 ```
 
 ---
 
-## 3. Implementasi Kode Mandiri (morpheus_tax_engine.py)
+## 3. Standalone Engine Implementation (morpheus_tax_engine.py)
 
 ```python
 from decimal import Decimal, ROUND_HALF_UP
@@ -85,14 +85,14 @@ class MorpheusTaxEngine:
 
 ---
 
-## 4. Rencana Kerja Terukur
+## 4. Measurable Execution Milestones
 
-1. **Tahap 1:** Validasi tabel tarif dan PTKP terkini sesuai regulasi yang berlaku.
-2. **Tahap 2:** Eksekusi unit test dengan 50 kasus uji ekstrem (corner cases: penghasilan di batas persis tarif, nilai minus, nol).
+1. **Milestone 1:** Dynamic calibration of current statutory brackets and non-taxable allowances per jurisdiction tax codes.
+2. **Milestone 2:** Unit test execution across 50 boundary corner cases (exact bracket thresholds, zero income, negative adjusters).
 
 ---
 
-## 5. Hubungi Rekayasawan Finansial
+## 5. Contact Financial Systems Engineer
 
-- **Email:** `devapenseo@gmail.com`
-- **Proposal Truelancer:** Konfirmasi langsung pada portal penawaran.
+- **Email Direct:** `devapenseo@gmail.com`
+- **Truelancer Portal:** Confirm via the official client tender dashboard.
