@@ -566,7 +566,8 @@
             <div class="progress-fill" id="simProgressBar"></div>
           </div>
           <div class="sound-track-bar">
-            <span>🎵 SFX:</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+            <span style="color: #94A3B8;">SFX:</span>
             <span id="simSfxText" style="color: #F8FAFC; font-weight: 600;">Sub-bass drop + glass tap</span>
           </div>
         </div>
@@ -745,7 +746,10 @@
           <td class="visual-cell">${b.visual_cue}</td>
           <td class="spoken-cell">"${b.audio_spoken}"</td>
           <td>
-            <div style="font-size: 11px; color: #CBD5E1;">🔊 ${b.sfx_cue}</div>
+            <div style="font-size: 11px; color: #CBD5E1; display: flex; align-items: center; gap: 4px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+              <span>${b.sfx_cue}</span>
+            </div>
             <span class="mechanic-pill">${b.phase}</span>
           </td>
         `;
