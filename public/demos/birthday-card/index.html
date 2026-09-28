@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>HeartCraft-Style 8-Beat Interactive Birthday Card</title>
+  <title>HeartCraft 8-Beat Card with WebRTC Magic Remote</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
   <style>
     :root {
       --bg: #0d0b10;
-      --card-bg: #160d1a;
       --gold: #c5a059;
       --gold-light: #e6c887;
       --text: #f5f2eb;
       --text-muted: #a69cb0;
-      --accent: #ff6b8b;
+      --accent: #ff477e;
+      --green: #2ecc71;
     }
     * {
       box-sizing: border-box;
@@ -35,7 +36,7 @@
       align-items: center;
       overflow: hidden;
     }
-    /* Mobile-first Portrait Stage */
+    /* Main Screen Stage (Default View) */
     .stage {
       width: 100%;
       max-width: 430px;
@@ -50,15 +51,36 @@
       border-left: 1px solid rgba(197, 160, 89, 0.15);
       border-right: 1px solid rgba(197, 160, 89, 0.15);
     }
-    /* Top Progress Bar (8 Beats) */
-    .progress-bar {
+    /* Remote Controller Stage (When opened on phone with ?role=remote) */
+    .remote-stage {
+      display: none;
+      width: 100%;
+      max-width: 430px;
+      height: 100vh;
+      height: 100dvh;
+      padding: 24px 20px;
+      flex-direction: column;
+      justify-content: space-between;
+      background: #0f0c13;
+    }
+    body.is-remote .stage { display: none; }
+    body.is-remote .remote-stage { display: flex; }
+
+    /* Progress Indicators (8 Beats) */
+    .top-nav {
       position: absolute;
       top: 14px;
       left: 16px;
       right: 16px;
       display: flex;
-      gap: 6px;
+      flex-direction: column;
+      gap: 10px;
       z-index: 50;
+    }
+    .progress-bar {
+      display: flex;
+      gap: 6px;
+      width: 100%;
     }
     .progress-seg {
       flex: 1;
@@ -71,8 +93,32 @@
       background: var(--gold);
       box-shadow: 0 0 8px var(--gold);
     }
+    .remote-badge {
+      align-self: flex-end;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(22, 13, 26, 0.85);
+      border: 1px solid rgba(197, 160, 89, 0.35);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.72rem;
+      color: var(--gold-light);
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+    }
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #888;
+    }
+    .status-dot.connected {
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+    }
 
-    /* Scene Container */
+    /* Scene Viewport */
     .scene-viewport {
       flex: 1;
       position: relative;
@@ -82,7 +128,7 @@
     .scene {
       position: absolute;
       inset: 0;
-      padding: 50px 24px 30px;
+      padding: 60px 24px 24px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -90,7 +136,7 @@
       text-align: center;
       opacity: 0;
       pointer-events: none;
-      transform: translateY(20px);
+      transform: translateY(15px);
       transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
     .scene.active {
@@ -99,76 +145,70 @@
       transform: translateY(0);
     }
 
-    /* Thumb Reach Zone (Bottom 30%) */
+    /* Thumb Zone */
     .thumb-zone {
       width: 100%;
       margin-top: auto;
-      padding-bottom: 24px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       z-index: 20;
     }
     .btn-action {
       width: 100%;
       max-width: 320px;
-      height: 54px;
-      border-radius: 27px;
+      height: 52px;
+      border-radius: 26px;
       background: linear-gradient(135deg, var(--gold) 0%, #9e7a33 100%);
       color: #0d0b10;
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 0.95rem;
       border: none;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 10px 25px rgba(197, 160, 89, 0.35);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: 0 8px 20px rgba(197, 160, 89, 0.3);
+      transition: transform 0.15s ease;
     }
-    .btn-action:active {
-      transform: scale(0.97);
-    }
+    .btn-action:active { transform: scale(0.97); }
     .hint-text {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
-      letter-spacing: 0.5px;
     }
 
     /* Headings */
     h2.scene-title {
-      font-size: 1.6rem;
+      font-size: 1.55rem;
       font-weight: 700;
       color: var(--gold-light);
-      margin-bottom: 8px;
-      line-height: 1.3;
+      margin-bottom: 6px;
     }
     p.scene-sub {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
-      line-height: 1.5;
-      max-width: 300px;
+      line-height: 1.45;
+      max-width: 290px;
     }
 
-    /* Scene 1: Envelope & Wax Seal */
+    /* Beat 1: Envelope */
     .envelope-box {
-      width: 220px;
-      height: 150px;
+      width: 210px;
+      height: 140px;
       background: #2a1630;
       border-radius: 12px;
-      position: relative;
       margin: auto;
       border: 1px solid rgba(197, 160, 89, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
     }
     .wax-seal {
-      width: 64px;
-      height: 64px;
+      width: 60px;
+      height: 60px;
       background: radial-gradient(circle, #e63946 0%, #9b111e 100%);
       border-radius: 50%;
       display: flex;
@@ -178,37 +218,31 @@
       box-shadow: 0 4px 15px rgba(230, 57, 70, 0.6);
       animation: pulse-seal 2s infinite;
       border: 2px solid #ff758f;
-    }
-    .wax-seal span {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
     }
     @keyframes pulse-seal {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.08); }
     }
 
-    /* Scene 2: Floating Balloons */
+    /* Beat 2: Balloons */
     .balloons-area {
       flex: 1;
       width: 100%;
-      position: relative;
       display: flex;
       justify-content: space-around;
       align-items: center;
-      padding: 20px 0;
     }
     .balloon {
-      width: 65px;
-      height: 80px;
+      width: 62px;
+      height: 76px;
       border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
       cursor: pointer;
       position: relative;
-      animation: float-balloon 3s ease-in-out infinite alternate;
+      animation: float-b 3s ease-in-out infinite alternate;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: bold;
-      color: #fff;
       font-size: 1.1rem;
       box-shadow: inset -5px -5px 12px rgba(0,0,0,0.3);
       transition: transform 0.2s;
@@ -220,79 +254,56 @@
       left: 50%;
       transform: translateX(-50%);
       width: 2px;
-      height: 24px;
+      height: 20px;
       background: rgba(255,255,255,0.4);
     }
     .b1 { background: #ff477e; animation-delay: 0s; }
-    .b2 { background: var(--gold); animation-delay: 0.7s; }
-    .b3 { background: #48cae4; animation-delay: 1.4s; }
-    .b4 { background: #a55eea; animation-delay: 0.3s; }
-    @keyframes float-balloon {
-      0% { transform: translateY(0) rotate(-2deg); }
-      100% { transform: translateY(-20px) rotate(3deg); }
+    .b2 { background: var(--gold); animation-delay: 0.8s; }
+    .b3 { background: #48cae4; animation-delay: 1.5s; }
+    .b4 { background: #a55eea; animation-delay: 0.4s; }
+    @keyframes float-b {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-18px); }
     }
 
-    /* Scene 3: Confetti Celebration */
-    .celebration-badge {
-      margin: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-    }
-    .celebration-icon {
-      font-size: 4rem;
-      animation: bounce-icon 1s infinite alternate;
-    }
-    @keyframes bounce-icon {
-      0% { transform: scale(1); }
-      100% { transform: scale(1.15) rotate(5deg); }
-    }
-
-    /* Scene 4: Memory Polaroid Stack */
+    /* Beat 4: Polaroid */
     .polaroid-frame {
       background: #fff;
-      padding: 12px 12px 24px;
+      padding: 10px 10px 22px;
       border-radius: 6px;
       box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-      width: 240px;
+      width: 230px;
       margin: auto;
       transform: rotate(-3deg);
-      transition: transform 0.3s ease;
       cursor: pointer;
-    }
-    .polaroid-frame:active {
-      transform: rotate(2deg) scale(1.03);
     }
     .polaroid-img {
       width: 100%;
-      height: 200px;
+      height: 190px;
       background: linear-gradient(135deg, #3d2645, #1d0f22);
       border-radius: 4px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 3rem;
-      overflow: hidden;
     }
     .polaroid-caption {
       color: #333;
       font-family: 'Caveat', cursive;
       font-size: 1.3rem;
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
-    /* Scene 5: Birthday Cake & Candles */
+    /* Beat 5: Cake & Candles */
     .cake-wrapper {
       margin: auto;
-      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
     .candles-row {
       display: flex;
-      gap: 20px;
+      gap: 18px;
       margin-bottom: 2px;
     }
     .candle-unit {
@@ -303,51 +314,40 @@
     }
     .flame-svg {
       width: 14px;
-      height: 24px;
+      height: 22px;
       background: radial-gradient(ellipse at bottom, #fff 0%, #ff9e00 60%, transparent 100%);
       border-radius: 50% 50% 20% 20%;
       animation: flame-dance 0.5s infinite alternate;
-      cursor: pointer;
     }
-    .flame-svg.blown {
-      display: none;
-    }
+    .flame-svg.blown { display: none; }
     @keyframes flame-dance {
       0% { transform: scale(1) rotate(-3deg); }
       100% { transform: scale(1.15) rotate(4deg); }
     }
     .candle-stick {
       width: 10px;
-      height: 38px;
+      height: 36px;
       background: repeating-linear-gradient(45deg, #fff, #fff 5px, var(--gold) 5px, var(--gold) 10px);
       border-radius: 3px;
     }
     .cake-base {
       width: 180px;
-      height: 80px;
+      height: 76px;
       background: linear-gradient(to bottom, #fceade 0%, #f7d6c8 100%);
       border-radius: 12px 12px 6px 6px;
       border: 3px solid #ffccd5;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
     }
     .cake-icing {
       color: #7209b7;
       font-family: 'Caveat', cursive;
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       font-weight: 700;
     }
 
-    /* Scene 6: Knife Cake Slice */
-    .cutting-board {
-      margin: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-    }
+    /* Beat 6: Cake Cutting */
     .knife-btn {
       font-size: 3rem;
       animation: knife-wiggle 1.2s infinite;
@@ -358,58 +358,91 @@
       50% { transform: rotate(-15deg); }
     }
 
-    /* Scene 7: Typewriter Letter */
+    /* Beat 7: Letter */
     .letter-paper {
       background: #fdfaf2;
       color: #2b2318;
       width: 100%;
-      max-width: 320px;
-      min-height: 250px;
+      max-width: 310px;
+      min-height: 230px;
       border-radius: 8px;
-      padding: 24px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      padding: 20px;
       margin: auto;
       text-align: left;
       font-family: 'Caveat', cursive;
-      font-size: 1.35rem;
-      line-height: 1.6;
+      font-size: 1.3rem;
+      line-height: 1.55;
       border: 1px solid #e0d5be;
-      position: relative;
-    }
-    .cursor-blink {
-      display: inline-block;
-      width: 2px;
-      height: 1.2rem;
-      background: #7209b7;
-      animation: blink 0.7s infinite;
-      vertical-align: middle;
-      margin-left: 2px;
-    }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
     }
 
-    /* Scene 8: Finale & Share */
-    .finale-box {
-      margin: auto;
+    /* Modal Pairing Dialog */
+    .modal-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 100;
+      text-align: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-card {
+      background: #190f1f;
+      border: 1px solid var(--gold);
+      border-radius: 20px;
+      padding: 26px 20px;
+      width: 100%;
+      max-width: 320px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
     }
-    .share-pill {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(197, 160, 89, 0.4);
-      padding: 10px 18px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      color: var(--gold-light);
-      cursor: pointer;
+    .qr-placeholder {
+      background: #fff;
+      padding: 12px;
+      border-radius: 12px;
+      width: 170px;
+      height: 170px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: center;
     }
+    .qr-placeholder img { width: 100%; height: 100%; }
+
+    /* Remote Controller Pad (When in is-remote mode) */
+    .remote-pad-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: auto 0;
+    }
+    .remote-btn {
+      height: 100px;
+      border-radius: 18px;
+      background: #1c1322;
+      border: 1px solid rgba(197, 160, 89, 0.3);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.4);
+      transition: transform 0.1s, background 0.15s;
+    }
+    .remote-btn:active {
+      transform: scale(0.95);
+      background: rgba(197, 160, 89, 0.2);
+    }
+    .remote-btn span.icon { font-size: 2rem; }
 
     canvas#fx-canvas {
       position: absolute;
@@ -417,51 +450,70 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 100;
+      z-index: 90;
     }
   </style>
 </head>
 <body>
 
+<!-- 1. MAIN DISPLAY SCREEN STAGE -->
 <div class="stage">
-  <!-- Top 8-Beat Progress Indicators -->
-  <div class="progress-bar">
-    <div class="progress-seg active" id="seg-0"></div>
-    <div class="progress-seg" id="seg-1"></div>
-    <div class="progress-seg" id="seg-2"></div>
-    <div class="progress-seg" id="seg-3"></div>
-    <div class="progress-seg" id="seg-4"></div>
-    <div class="progress-seg" id="seg-5"></div>
-    <div class="progress-seg" id="seg-6"></div>
-    <div class="progress-seg" id="seg-7"></div>
+  <div class="top-nav">
+    <div class="progress-bar">
+      <div class="progress-seg active" id="seg-0"></div>
+      <div class="progress-seg" id="seg-1"></div>
+      <div class="progress-seg" id="seg-2"></div>
+      <div class="progress-seg" id="seg-3"></div>
+      <div class="progress-seg" id="seg-4"></div>
+      <div class="progress-seg" id="seg-5"></div>
+      <div class="progress-seg" id="seg-6"></div>
+      <div class="progress-seg" id="seg-7"></div>
+    </div>
+    <div class="remote-badge" onclick="openPairingModal()">
+      <span class="status-dot" id="p2p-dot"></span>
+      <span id="p2p-text">Pair Phone Remote</span>
+      <span>📱</span>
+    </div>
   </div>
 
   <canvas id="fx-canvas"></canvas>
 
-  <div class="scene-viewport">
+  <!-- Pairing QR Modal -->
+  <div class="modal-overlay" id="pairing-modal">
+    <div class="modal-card">
+      <h3 style="color: var(--gold-light);">Magic Phone Remote</h3>
+      <p style="font-size: 0.82rem; color: var(--text-muted);">
+        Scan this QR code with your smartphone camera to control this birthday card hands-free!
+      </p>
+      <div class="qr-placeholder" id="qr-box">
+        <img id="qr-img" src="" alt="Pairing QR Code">
+      </div>
+      <button class="btn-action" style="height: 42px; font-size: 0.85rem;" onclick="copyRemoteUrl()">Copy Controller Link</button>
+      <button style="background: none; border: none; color: #888; font-size: 0.8rem; cursor: pointer;" onclick="closePairingModal()">Close</button>
+    </div>
+  </div>
 
-    <!-- BEAT 1: Envelope & Wax Seal -->
+  <div class="scene-viewport">
+    <!-- BEAT 1: Envelope -->
     <div class="scene active" id="scene-0">
       <div>
         <h2 class="scene-title">A Special Delivery</h2>
         <p class="scene-sub">A personal celebration journey curated exclusively for you.</p>
       </div>
       <div class="envelope-box">
-        <div class="wax-seal" onclick="nextScene()">
-          <span>💌</span>
-        </div>
+        <div class="wax-seal" onclick="nextScene()"><span>💌</span></div>
       </div>
       <div class="thumb-zone">
         <button class="btn-action" onclick="nextScene()">Tap Seal to Open</button>
-        <span class="hint-text">Designed for one-handed mobile experience</span>
+        <span class="hint-text">Or trigger from paired phone</span>
       </div>
     </div>
 
-    <!-- BEAT 2: Floating Balloons -->
+    <!-- BEAT 2: Balloons -->
     <div class="scene" id="scene-1">
       <div>
         <h2 class="scene-title">Pop the Balloons!</h2>
-        <p class="scene-sub" id="balloon-hint">Tap each balloon to release your celebration wishes.</p>
+        <p class="scene-sub">Tap balloons or trigger from phone remote.</p>
       </div>
       <div class="balloons-area">
         <div class="balloon b1" onclick="popBalloon(this)">🎈</div>
@@ -474,62 +526,51 @@
       </div>
     </div>
 
-    <!-- BEAT 3: Confetti Celebration Burst -->
+    <!-- BEAT 3: Celebration Burst -->
     <div class="scene" id="scene-2">
       <div>
         <h2 class="scene-title">Celebration Unlocked!</h2>
-        <p class="scene-sub">Every balloon carried a warm wish for your new year.</p>
+        <p class="scene-sub">Wishes released into the atmosphere.</p>
       </div>
-      <div class="celebration-badge">
-        <div class="celebration-icon">🎊</div>
-        <h3 style="color: var(--gold-light); font-size: 1.4rem;">You Did It!</h3>
-      </div>
+      <div style="margin: auto; font-size: 4rem;">🎊</div>
       <div class="thumb-zone">
         <button class="btn-action" onclick="nextScene()">Reveal the Cake 🎂</button>
       </div>
     </div>
 
-    <!-- BEAT 4: Memory Polaroid Stack -->
+    <!-- BEAT 4: Memory Polaroid -->
     <div class="scene" id="scene-3">
       <div>
         <h2 class="scene-title">Cherished Moments</h2>
-        <p class="scene-sub">Looking back at the milestones that brought us here.</p>
+        <p class="scene-sub">Looking back at bright memories.</p>
       </div>
       <div class="polaroid-frame" onclick="nextScene()">
         <div class="polaroid-img">📸</div>
-        <div class="polaroid-caption" id="polaroid-caption">Laughter & Bright Memories</div>
+        <div class="polaroid-caption">Joy, Laughter & Milestones</div>
       </div>
       <div class="thumb-zone">
         <button class="btn-action" onclick="nextScene()">Make a Birthday Wish 🌟</button>
       </div>
     </div>
 
-    <!-- BEAT 5: Birthday Cake & Candles -->
+    <!-- BEAT 5: Cake & Candles -->
     <div class="scene" id="scene-4">
       <div>
         <h2 class="scene-title">Blow Out the Candles</h2>
-        <p class="scene-sub">Tap each candle flame to extinguish it and seal your wish.</p>
+        <p class="scene-sub">Blow into your phone or tap each candle!</p>
       </div>
       <div class="cake-wrapper">
         <div class="candles-row">
-          <div class="candle-unit" onclick="blowCandle(this)">
-            <div class="flame-svg"></div>
-            <div class="candle-stick"></div>
-          </div>
-          <div class="candle-unit" onclick="blowCandle(this)">
-            <div class="flame-svg"></div>
-            <div class="candle-stick"></div>
-          </div>
-          <div class="candle-unit" onclick="blowCandle(this)">
-            <div class="flame-svg"></div>
-            <div class="candle-stick"></div>
-          </div>
+          <div class="candle-unit" onclick="blowCandle(this)"><div class="flame-svg"></div><div class="candle-stick"></div></div>
+          <div class="candle-unit" onclick="blowCandle(this)"><div class="flame-svg"></div><div class="candle-stick"></div></div>
+          <div class="candle-unit" onclick="blowCandle(this)"><div class="flame-svg"></div><div class="candle-stick"></div></div>
         </div>
-        <div class="cake-base">
-          <span class="cake-icing" id="cake-name">Happy Birthday!</span>
-        </div>
+        <div class="cake-base"><span class="cake-icing" id="cake-name">Happy Birthday!</span></div>
       </div>
       <div class="thumb-zone">
+        <button class="btn-action" style="height: 42px; font-size: 0.85rem; background: rgba(255,255,255,0.1); color: var(--gold-light); border: 1px solid var(--gold);" onclick="enableMicBlow()">
+          🎙️ Blow with Microphone
+        </button>
         <span class="hint-text" id="candles-hint">3 candles burning</span>
       </div>
     </div>
@@ -538,83 +579,110 @@
     <div class="scene" id="scene-5">
       <div>
         <h2 class="scene-title">Cut the First Slice</h2>
-        <p class="scene-sub">A traditional gesture to usher in sweetness and joy.</p>
+        <p class="scene-sub">Ushering in sweetness and joy.</p>
       </div>
-      <div class="cutting-board">
-        <div class="knife-btn" onclick="cutCake()">🔪</div>
-        <p style="color: var(--gold); font-size: 0.9rem;">Tap the knife to slice!</p>
-      </div>
+      <div class="knife-btn" onclick="cutCake()">🔪</div>
       <div class="thumb-zone">
         <button class="btn-action" id="cut-btn" onclick="cutCake()">Slice the Cake ✨</button>
       </div>
     </div>
 
-    <!-- BEAT 7: Typewriter Letter -->
+    <!-- BEAT 7: Letter -->
     <div class="scene" id="scene-6">
       <div>
         <h2 class="scene-title">A Letter for You</h2>
-        <p class="scene-sub">Written with heartfelt gratitude and warmth.</p>
+        <p class="scene-sub">Written with heartfelt gratitude.</p>
       </div>
       <div class="letter-paper" onclick="fastForwardTypewriter()">
-        <p id="typed-content"></p><span class="cursor-blink"></span>
+        <p id="typed-content"></p>
       </div>
       <div class="thumb-zone">
         <button class="btn-action" onclick="nextScene()">View Finale 🥂</button>
-        <span class="hint-text">Tap letter to fast-forward text</span>
       </div>
     </div>
 
-    <!-- BEAT 8: Finale & Share -->
+    <!-- BEAT 8: Finale -->
     <div class="scene" id="scene-7">
       <div>
         <h2 class="scene-title" id="finale-title">Happy Birthday!</h2>
-        <p class="scene-sub">May your journey ahead be brilliant, peaceful, and filled with love.</p>
+        <p class="scene-sub">May your journey ahead be extraordinary.</p>
       </div>
-      <div class="finale-box">
-        <div style="font-size: 3.5rem;">👑</div>
-        <div class="share-pill" onclick="copyShareLink()">
-          <span>🔗 Copy Personal Card Link</span>
-        </div>
-      </div>
+      <div style="margin: auto; font-size: 4rem;">👑</div>
       <div class="thumb-zone">
         <button class="btn-action" onclick="restartJourney()">Replay Experience ↺</button>
-        <span class="hint-text">HeartCraft Engine · 100% Zero-Dependency Web</span>
       </div>
     </div>
+  </div>
+</div>
 
+<!-- 2. SMARTPHONE REMOTE CONTROLLER STAGE (When ?role=remote) -->
+<div class="remote-stage">
+  <div>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+      <h2 style="font-size: 1.3rem; color: var(--gold-light);">Magic Controller</h2>
+      <span class="remote-badge" style="cursor: default;">
+        <span class="status-dot connected"></span>
+        <span id="remote-status-text">Connected</span>
+      </span>
+    </div>
+    <p style="font-size: 0.85rem; color: var(--text-muted);">
+      Tap buttons on your phone to trigger real-time actions on the main birthday screen!
+    </p>
+  </div>
+
+  <div class="remote-pad-grid">
+    <div class="remote-btn" onclick="sendRemoteCmd('open_envelope')">
+      <span class="icon">💌</span>
+      <span>Open Envelope</span>
+    </div>
+    <div class="remote-btn" onclick="sendRemoteCmd('pop_balloon')">
+      <span class="icon">🎈</span>
+      <span>Pop Balloon</span>
+    </div>
+    <div class="remote-btn" onclick="sendRemoteCmd('blow_candles')">
+      <span class="icon">💨</span>
+      <span>Blow Candles</span>
+    </div>
+    <div class="remote-btn" onclick="sendRemoteCmd('slice_cake')">
+      <span class="icon">🎂</span>
+      <span>Slice Cake</span>
+    </div>
+    <div class="remote-btn" onclick="sendRemoteCmd('trigger_confetti')">
+      <span class="icon">🎊</span>
+      <span>Blast Confetti</span>
+    </div>
+    <div class="remote-btn" onclick="sendRemoteCmd('next_beat')">
+      <span class="icon">⏭️</span>
+      <span>Next Scene</span>
+    </div>
+  </div>
+
+  <div style="text-align: center;">
+    <p style="font-size: 0.75rem; color: var(--text-muted);">
+      Tip: Shake your phone to shower confetti on the screen!
+    </p>
   </div>
 </div>
 
 <script>
-  // 1. Declarative Configuration (HeartCraft Architecture)
+  // 1. URL Parameters & Role Detection
   const urlParams = new URLSearchParams(window.location.search);
-  const cardConfig = {
-    name: urlParams.get('to') || urlParams.get('name') || "Sakshi",
-    sender: urlParams.get('from') || "Zadit",
-    letter: "Happy Birthday! May your new year bring courageous beginnings, quiet peace, and extraordinary joy in every milestone you reach. Thank you for bringing warmth and light to everyone around you.",
-    cakeText: "Happy Birthday, " + (urlParams.get('to') || "Sakshi") + "!"
-  };
+  const isRemoteRole = urlParams.get('role') === 'remote';
+  const roomId = urlParams.get('room') || 'bday-' + Math.random().toString(36).substring(2, 8);
+  const recipientName = urlParams.get('to') || urlParams.get('name') || "Sakshi";
 
-  // Hydrate DOM with config
-  document.getElementById('cake-name').textContent = cardConfig.cakeText;
-  document.getElementById('finale-title').textContent = "Cheers to " + cardConfig.name + "!";
-
-  // 2. Audio Engine (Web Audio API Synthesizer - Zero External MP3)
-  let audioUnlocked = false;
-  let audioCtx = null;
-
-  function initAudio() {
-    if (!audioCtx) {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
-    audioUnlocked = true;
+  if (isRemoteRole) {
+    document.body.classList.add('is-remote');
   }
 
+  // 2. Audio Engine (Web Audio API)
+  let audioCtx = null;
+  function initAudio() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+  }
   function playTone(freq, type = 'sine', duration = 0.3, gainLevel = 0.15) {
-    if (!audioCtx) initAudio();
+    initAudio();
     try {
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
@@ -628,25 +696,22 @@
       osc.stop(audioCtx.currentTime + duration);
     } catch(e) {}
   }
-
-  function playPopSound() {
-    playTone(480, 'triangle', 0.1, 0.25);
-  }
+  function playPopSound() { playTone(480, 'triangle', 0.1, 0.25); }
   function playChimeArpeggio() {
-    const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
-    notes.forEach((n, i) => {
+    [523.25, 659.25, 783.99, 1046.50].forEach((n, i) => {
       setTimeout(() => playTone(n, 'sine', 0.5, 0.12), i * 110);
     });
   }
 
-  // 3. Canvas Physics Particle Engine
+  // 3. Canvas Physics Confetti
   const canvas = document.getElementById('fx-canvas');
   const ctx = canvas.getContext('2d');
   let particles = [];
-
   function resizeCanvas() {
-    canvas.width = canvas.parentElement.clientWidth;
-    canvas.height = canvas.parentElement.clientHeight;
+    if (canvas && canvas.parentElement) {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+    }
   }
   window.addEventListener('resize', resizeCanvas);
   resizeCanvas();
@@ -655,29 +720,20 @@
     const colors = ['#c5a059', '#e6c887', '#ff6b8b', '#48cae4', '#a55eea', '#fff'];
     for (let i = 0; i < count; i++) {
       particles.push({
-        x: originX,
-        y: originY,
-        r: Math.random() * 5 + 3,
+        x: originX, y: originY, r: Math.random() * 5 + 3,
         color: colors[Math.floor(Math.random() * colors.length)],
-        vx: (Math.random() - 0.5) * 12,
-        vy: (Math.random() - 0.7) * 12,
-        gravity: 0.25,
-        alpha: 1
+        vx: (Math.random() - 0.5) * 12, vy: (Math.random() - 0.7) * 12,
+        gravity: 0.25, alpha: 1
       });
     }
-    if (particles.length === count) {
-      renderParticles();
-    }
+    if (particles.length === count) renderParticles();
   }
 
   function renderParticles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     let active = 0;
     particles.forEach(p => {
-      p.x += p.vx;
-      p.y += p.vy;
-      p.vy += p.gravity;
-      p.alpha -= 0.012;
+      p.x += p.vx; p.y += p.vy; p.vy += p.gravity; p.alpha -= 0.012;
       if (p.alpha > 0) {
         active++;
         ctx.save();
@@ -689,87 +745,56 @@
         ctx.restore();
       }
     });
-    if (active > 0) {
-      requestAnimationFrame(renderParticles);
-    } else {
-      particles = [];
-    }
+    if (active > 0) requestAnimationFrame(renderParticles);
+    else particles = [];
   }
 
-  // 4. Scene State Machine (8 Beats: 0 through 7)
+  // 4. Scene State Machine
   let currentScene = 0;
   const totalScenes = 8;
-
   function setScene(index) {
     if (index < 0 || index >= totalScenes) return;
-    document.querySelectorAll('.scene').forEach((sc, i) => {
-      sc.classList.toggle('active', i === index);
-    });
-    document.querySelectorAll('.progress-seg').forEach((seg, i) => {
-      seg.classList.toggle('active', i <= index);
-    });
+    document.querySelectorAll('.scene').forEach((sc, i) => sc.classList.toggle('active', i === index));
+    document.querySelectorAll('.progress-seg').forEach((seg, i) => seg.classList.toggle('active', i <= index));
     currentScene = index;
 
-    // Scene onEnter triggers
-    if (currentScene === 2) {
-      spawnConfetti(70);
-      playChimeArpeggio();
-    } else if (currentScene === 6) {
-      startTypewriter();
-    } else if (currentScene === 7) {
-      spawnConfetti(100);
-      playChimeArpeggio();
-    }
+    if (currentScene === 2) { spawnConfetti(70); playChimeArpeggio(); }
+    else if (currentScene === 6) { startTypewriter(); }
+    else if (currentScene === 7) { spawnConfetti(100); playChimeArpeggio(); }
   }
-
   function nextScene() {
     initAudio();
     playTone(660, 'sine', 0.2, 0.1);
     setScene(currentScene + 1);
   }
-
   function restartJourney() {
-    // Reset state
     balloonsLeft = 4;
-    document.querySelectorAll('.balloon').forEach(b => {
-      b.style.display = 'flex';
-      b.style.opacity = '1';
-    });
+    document.querySelectorAll('.balloon').forEach(b => { b.style.display = 'flex'; b.style.opacity = '1'; });
     document.getElementById('balloon-count').textContent = '4 balloons remaining';
-
     candlesBlown = 0;
     document.querySelectorAll('.flame-svg').forEach(f => f.classList.remove('blown'));
     document.getElementById('candles-hint').textContent = '3 candles burning';
-
-    typedIdx = 0;
-    document.getElementById('typed-content').textContent = '';
-
     setScene(0);
   }
 
-  // Beat 2: Balloon Pop Logic
+  // Balloon & Cake logic
   let balloonsLeft = 4;
   function popBalloon(el) {
     initAudio();
     playPopSound();
-    const rect = el.getBoundingClientRect();
-    const stageRect = document.querySelector('.stage').getBoundingClientRect();
-    spawnConfetti(25, rect.left - stageRect.left + rect.width / 2, rect.top - stageRect.top + rect.height / 2);
     el.style.opacity = '0';
     setTimeout(() => { el.style.display = 'none'; }, 200);
+    spawnConfetti(25);
     balloonsLeft--;
     document.getElementById('balloon-count').textContent = balloonsLeft > 0 ? `${balloonsLeft} balloons remaining` : 'All popped!';
-    if (balloonsLeft <= 0) {
-      setTimeout(nextScene, 600);
-    }
+    if (balloonsLeft <= 0) setTimeout(nextScene, 600);
   }
 
-  // Beat 5: Candle Blow Logic
   let candlesBlown = 0;
   function blowCandle(unit) {
     initAudio();
     const flame = unit.querySelector('.flame-svg');
-    if (!flame.classList.contains('blown')) {
+    if (flame && !flame.classList.contains('blown')) {
       flame.classList.add('blown');
       playTone(320, 'sine', 0.4, 0.2);
       candlesBlown++;
@@ -782,51 +807,182 @@
     }
   }
 
-  // Beat 6: Cut Cake
   function cutCake() {
     initAudio();
     playChimeArpeggio();
     spawnConfetti(60);
-    const btn = document.getElementById('cut-btn');
-    btn.textContent = 'Slice Enjoyed! 🎂';
-    btn.style.background = '#48cae4';
+    document.getElementById('cut-btn').textContent = 'Slice Enjoyed! 🎂';
     setTimeout(nextScene, 800);
   }
 
-  // Beat 7: Typewriter
-  let typedIdx = 0;
   let typeTimer = null;
+  const letterText = "Happy Birthday! May your new year bring courageous beginnings, quiet peace, and extraordinary joy in every milestone you reach. Thank you for bringing warmth and light to everyone around you.";
   function startTypewriter() {
     const target = document.getElementById('typed-content');
     target.textContent = '';
-    typedIdx = 0;
+    let idx = 0;
     clearInterval(typeTimer);
     typeTimer = setInterval(() => {
-      if (typedIdx < cardConfig.letter.length) {
-        target.textContent += cardConfig.letter.charAt(typedIdx);
-        if (typedIdx % 4 === 0) playTone(800 + (typedIdx % 5) * 60, 'sine', 0.05, 0.04);
-        typedIdx++;
-      } else {
-        clearInterval(typeTimer);
-      }
+      if (idx < letterText.length) {
+        target.textContent += letterText.charAt(idx);
+        idx++;
+      } else clearInterval(typeTimer);
     }, 40);
   }
   function fastForwardTypewriter() {
     clearInterval(typeTimer);
-    document.getElementById('typed-content').textContent = cardConfig.letter;
+    document.getElementById('typed-content').textContent = letterText;
   }
 
-  // Beat 8: Share Link
-  function copyShareLink() {
-    const url = window.location.href;
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(url).then(() => {
-        alert("Personalized card link copied to clipboard!");
-      });
-    } else {
-      prompt("Copy your personalized link:", url);
+  // 5. Hardware Sensor Triggers (Microphone Blow & Shake)
+  let micListening = false;
+  async function enableMicBlow() {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      initAudio();
+      const analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 512;
+      const mic = audioCtx.createMediaStreamSource(stream);
+      mic.connect(analyser);
+      micListening = true;
+      document.getElementById('candles-hint').textContent = '🎙️ Blow into mic now!';
+
+      function pollMic() {
+        if (!micListening || candlesBlown >= 3) return;
+        const data = new Uint8Array(analyser.frequencyBinCount);
+        analyser.getByteTimeDomainData(data);
+        let sum = 0;
+        for (let i = 0; i < data.length; i++) {
+          const val = (data[i] - 128) / 128;
+          sum += val * val;
+        }
+        const rms = Math.sqrt(sum / data.length);
+        if (rms > 0.16) {
+          document.querySelectorAll('.candle-unit').forEach(u => blowCandle(u));
+        } else {
+          requestAnimationFrame(pollMic);
+        }
+      }
+      pollMic();
+    } catch(e) {
+      alert("Microphone permission denied. You can tap candles directly!");
     }
   }
+
+  // Device Motion Shake Detection
+  let lastShakeTime = 0;
+  if (window.DeviceMotionEvent) {
+    window.addEventListener('devicemotion', (e) => {
+      const acc = e.accelerationIncludingGravity;
+      if (!acc) return;
+      const speed = Math.abs(acc.x + acc.y + acc.z);
+      if (speed > 25 && Date.now() - lastShakeTime > 1200) {
+        lastShakeTime = Date.now();
+        if (isRemoteRole) sendRemoteCmd('trigger_confetti');
+        else { spawnConfetti(80); playChimeArpeggio(); }
+      }
+    });
+  }
+
+  // 6. Dual-Device PeerJS WebRTC Realtime Protocol
+  let peer = null;
+  let p2pConn = null;
+
+  function initP2P() {
+    if (typeof Peer === 'undefined') return;
+
+    if (isRemoteRole) {
+      // Role: Remote Controller
+      const remotePeerId = 'rc-' + Math.random().toString(36).substring(2, 7);
+      peer = new Peer(remotePeerId);
+      peer.on('open', () => {
+        // Connect to display host
+        p2pConn = peer.connect(roomId);
+        p2pConn.on('open', () => {
+          document.getElementById('remote-status-text').textContent = 'Connected to Screen';
+        });
+      });
+    } else {
+      // Role: Display Screen Host
+      peer = new Peer(roomId);
+      peer.on('open', (id) => {
+        const remoteUrl = window.location.origin + window.location.pathname + '?role=remote&room=' + id + '&to=' + encodeURIComponent(recipientName);
+        const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(remoteUrl);
+        document.getElementById('qr-img').src = qrUrl;
+        window.remotePairingUrl = remoteUrl;
+      });
+
+      peer.on('connection', (conn) => {
+        p2pConn = conn;
+        document.getElementById('p2p-dot').classList.add('connected');
+        document.getElementById('p2p-text').textContent = 'Phone Remote Connected';
+        closePairingModal();
+        spawnConfetti(40);
+        playTone(880, 'sine', 0.2, 0.15);
+
+        conn.on('data', (data) => {
+          handleRemoteCommand(data);
+        });
+      });
+    }
+  }
+
+  function sendRemoteCmd(action) {
+    if (p2pConn && p2pConn.open) {
+      p2pConn.send({ action: action });
+      // Haptic vibration feedback
+      if (navigator.vibrate) navigator.vibrate(40);
+    } else {
+      alert("Connecting to display screen... ensure screen is open!");
+    }
+  }
+
+  function handleRemoteCommand(data) {
+    if (!data || !data.action) return;
+    initAudio();
+    switch (data.action) {
+      case 'open_envelope':
+        if (currentScene === 0) nextScene();
+        break;
+      case 'pop_balloon':
+        const unpopped = document.querySelector('.balloon[style*="opacity: 1"], .balloon:not([style*="display: none"])');
+        if (unpopped) popBalloon(unpopped);
+        else nextScene();
+        break;
+      case 'blow_candles':
+        document.querySelectorAll('.candle-unit').forEach(u => blowCandle(u));
+        break;
+      case 'slice_cake':
+        if (currentScene === 5) cutCake();
+        else nextScene();
+        break;
+      case 'trigger_confetti':
+        spawnConfetti(90);
+        playChimeArpeggio();
+        break;
+      case 'next_beat':
+        nextScene();
+        break;
+    }
+  }
+
+  // Pairing Modal Helpers
+  function openPairingModal() { document.getElementById('pairing-modal').classList.add('open'); }
+  function closePairingModal() { document.getElementById('pairing-modal').classList.remove('open'); }
+  function copyRemoteUrl() {
+    if (window.remotePairingUrl) {
+      navigator.clipboard.writeText(window.remotePairingUrl).then(() => {
+        alert("Remote Controller URL copied! Open this on your smartphone.");
+      });
+    }
+  }
+
+  // Initialize P2P on page load
+  window.addEventListener('load', () => {
+    initP2P();
+    document.getElementById('cake-name').textContent = "Happy Birthday, " + recipientName + "!";
+    document.getElementById('finale-title').textContent = "Cheers to " + recipientName + "!";
+  });
 </script>
 </body>
 </html>
