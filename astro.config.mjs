@@ -82,6 +82,7 @@ export default defineConfig({
             { label: 'Resilient CDP WebSocket Scraping Engine', link: '/case-studies/data-analysis/resilient-cdp-websocket-scraping/' },
             { label: 'Morpheus V2 Financial Simulation (#659758)', link: '/case-studies/data-analysis/morpheus-v2-tax-simulation-659758/' },
             { label: 'DocuMorph PDF & Table Extraction Pipeline', link: '/case-studies/data-analysis/documorph-pdf-table-extraction/' },
+            { label: 'Jira Weekly Report Automation (#40725359)', link: '/case-studies/data-analysis/jira-weekly-report-automation-40725359/' },
           ],
         },
       ],

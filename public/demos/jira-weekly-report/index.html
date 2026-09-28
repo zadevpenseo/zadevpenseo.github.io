@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jira Weekly Executive Report - Sprint 42 - Core Platform Modernization</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 14mm 14mm 16mm 14mm;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #FFFFFF;
+            color: #0F172A;
+            line-height: 1.45;
+            font-size: 11pt;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid #E2E8F0;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+        .header-title h1 {
+            font-size: 20pt;
+            font-weight: 800;
+            color: #0F172A;
+            letter-spacing: -0.02em;
+        }
+        .header-title p {
+            font-size: 9.5pt;
+            color: #64748B;
+            margin-top: 3px;
+        }
+        .header-badge {
+            background: linear-gradient(135deg, #4338CA, #6366F1);
+            color: #FFFFFF;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 9pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .kpi-card {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            padding: 10px 12px;
+        }
+        .kpi-label {
+            font-size: 8pt;
+            font-weight: 700;
+            color: #64748B;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+        .kpi-value {
+            font-size: 17pt;
+            font-weight: 800;
+            color: #0F172A;
+            margin-top: 2px;
+        }
+        .kpi-subtext {
+            font-size: 7.5pt;
+            color: #10B981;
+            font-weight: 600;
+            margin-top: 1px;
+        }
+        .section-title {
+            font-size: 11pt;
+            font-weight: 700;
+            color: #1E293B;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .section-title::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 13px;
+            background-color: #6366F1;
+            border-radius: 2px;
+        }
+        .burndown-container {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 16px;
+        }
+        .chart-svg {
+            width: 100%;
+            height: 140px;
+            display: block;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9pt;
+            margin-bottom: 16px;
+        }
+        th {
+            background-color: #F1F5F9;
+            color: #475569;
+            text-align: left;
+            padding: 7px 10px;
+            font-weight: 700;
+            font-size: 8pt;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            border-bottom: 1px solid #CBD5E1;
+        }
+        td {
+            padding: 7px 10px;
+            border-bottom: 1px solid #F1F5F9;
+        }
+        .badge {
+            display: inline-block;
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 7.5pt;
+            font-weight: 700;
+        }
+        .badge.completed { background-color: #DCFCE7; color: #166534; }
+        .badge.active { background-color: #FEF3C7; color: #92400E; }
+        .badge.type-story { background-color: #E0E7FF; color: #3730A3; }
+        .badge.type-bug { background-color: #FEE2E2; color: #991B1B; }
+        .badge.type-task { background-color: #F1F5F9; color: #334155; }
+        .progress-bar-bg {
+            width: 100%;
+            height: 7px;
+            background-color: #E2E8F0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+        .footer {
+            margin-top: 14px;
+            padding-top: 8px;
+            border-top: 1px solid #E2E8F0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 7.5pt;
+            color: #94A3B8;
+        }
+    </style>
+</head>
+<body>
+    <div style="background: #0F172A; color: #FFFFFF; padding: 10px 16px; margin: -14mm -14mm 16px -14mm; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #6366F1; font-family: -apple-system, sans-serif; font-size: 9pt;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="background: #6366F1; color: white; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 7.5pt; text-transform: uppercase;">Live Demo</span>
+            <span style="font-weight: 600; color: #E2E8F0;">Jira Weekly Executive Report Prototype (#40725359)</span>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <a href="./jira_weekly_executive_report.pdf" download="jira_weekly_executive_report.pdf" style="background: #10B981; color: #FFFFFF; padding: 5px 12px; border-radius: 5px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 5px;">
+                <span>Download Executive PDF (299 KB)</span>
+            </a>
+            <a href="/case-studies/data-analysis/jira-weekly-report-automation-40725359/" style="background: rgba(255,255,255,0.1); color: #E0E7FF; padding: 5px 12px; border-radius: 5px; text-decoration: none; font-weight: 600;">
+                <span>View 10-Step HLD Architecture &rarr;</span>
+            </a>
+        </div>
+    </div>
+    <div class="header">
+        <div class="header-title">
+            <h1>Weekly Developer Performance Report</h1>
+            <p><strong>Sprint 42 - Core Platform Modernization</strong> &bull; Goal: Finalize real-time analytics streaming, resolve critical security patches, and optimize edge response latencies.</p>
+        </div>
+        <div class="header-badge">Executive Delivery</div>
+    </div>
+
+    <div class="kpi-grid">
+        <div class="kpi-card">
+            <div class="kpi-label">Sprint Velocity</div>
+            <div class="kpi-value">31 / 45</div>
+            <div class="kpi-subtext">68.9% Target Accomplished</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Completed Tasks</div>
+            <div class="kpi-value">6 <span style="font-size: 10pt; color: #64748B;">/ 10</span></div>
+            <div class="kpi-subtext">+6 Issues Closed</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Total Time Spent</div>
+            <div class="kpi-value">130.0h</div>
+            <div class="kpi-subtext">Est: 136h (-6.0h variance)</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Active / In Review</div>
+            <div class="kpi-value">4</div>
+            <div class="kpi-subtext" style="color: #6366F1;">On Track for Sprint Close</div>
+        </div>
+    </div>
+
+    <div class="section-title">Sprint Burndown Progression</div>
+    <div class="burndown-container">
+        
+    <svg viewBox="0 0 500 180" class="chart-svg" xmlns="http://www.w3.org/2000/svg">
+        <line x1="40" y1="20.0" x2="480" y2="20.0" stroke="#E2E8F0" stroke-dasharray="3,3"/><text x="32" y="23.0" text-anchor="end" font-size="9" fill="#94A3B8">45</text><line x1="40" y1="63.3" x2="480" y2="63.3" stroke="#E2E8F0" stroke-dasharray="3,3"/><text x="32" y="66.3" text-anchor="end" font-size="9" fill="#94A3B8">30</text><line x1="40" y1="106.7" x2="480" y2="106.7" stroke="#E2E8F0" stroke-dasharray="3,3"/><text x="32" y="109.7" text-anchor="end" font-size="9" fill="#94A3B8">15</text><line x1="40" y1="150.0" x2="480" y2="150.0" stroke="#E2E8F0" stroke-dasharray="3,3"/><text x="32" y="153.0" text-anchor="end" font-size="9" fill="#94A3B8">0</text>
+        <!-- Ideal Burn line -->
+        <polyline points="40.0,20.0 113.3,42.0 186.7,64.2 260.0,85.0 333.3,107.0 406.7,129.2 480.0,150.0" fill="none" stroke="#94A3B8" stroke-width="2" stroke-dasharray="5,4" />
+        <!-- Actual Burn line -->
+        <polyline points="40.0,20.0 113.3,20.0 186.7,34.4 260.0,57.6 333.3,80.7 406.7,95.1 480.0,109.6" fill="none" stroke="#6366F1" stroke-width="3" stroke-linecap="round" />
+        <text x="40.0" y="172" text-anchor="middle" font-size="10" fill="#64748B">Mon</text><text x="113.3" y="172" text-anchor="middle" font-size="10" fill="#64748B">Tue</text><text x="186.7" y="172" text-anchor="middle" font-size="10" fill="#64748B">Wed</text><text x="260.0" y="172" text-anchor="middle" font-size="10" fill="#64748B">Thu</text><text x="333.3" y="172" text-anchor="middle" font-size="10" fill="#64748B">Fri</text><text x="406.7" y="172" text-anchor="middle" font-size="10" fill="#64748B">Sat</text><text x="480.0" y="172" text-anchor="middle" font-size="10" fill="#64748B">Sun</text>
+        <!-- Legend -->
+        <circle cx="340" cy="12" r="4" fill="#94A3B8" />
+        <text x="350" y="15" font-size="10" fill="#64748B">Ideal Burn</text>
+        <circle cx="420" cy="12" r="4" fill="#6366F1" />
+        <text x="430" y="15" font-size="10" fill="#1E293B" font-weight="600">Actual Remaining</text>
+    </svg>
+    
+    </div>
+
+    <div class="section-title">Developer Workload & Hours Logged</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Developer</th>
+                <th>Completed</th>
+                <th>In Progress</th>
+                <th>Logged vs Estimate</th>
+                <th>Capacity Allocation</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        <tr>
+            <td style="font-weight: 600; color: #1E293B;">Elena Rostova</td>
+            <td><span class="badge completed">1 Done</span></td>
+            <td><span class="badge active">1 Active</span></td>
+            <td style="font-family: monospace; font-weight: 600;">34.0h / 40.0h</td>
+            <td style="width: 140px;">
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: 85.0%; background-color: #10B981;"></div>
+                </div>
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight: 600; color: #1E293B;">Alex Morgan</td>
+            <td><span class="badge completed">2 Done</span></td>
+            <td><span class="badge active">1 Active</span></td>
+            <td style="font-family: monospace; font-weight: 600;">30.0h / 32.0h</td>
+            <td style="width: 140px;">
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: 94.0%; background-color: #10B981;"></div>
+                </div>
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight: 600; color: #1E293B;">Sarah Jenkins</td>
+            <td><span class="badge completed">1 Done</span></td>
+            <td><span class="badge active">1 Active</span></td>
+            <td style="font-family: monospace; font-weight: 600;">28.0h / 24.0h</td>
+            <td style="width: 140px;">
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: 100%; background-color: #F59E0B;"></div>
+                </div>
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight: 600; color: #1E293B;">David Chen</td>
+            <td><span class="badge completed">1 Done</span></td>
+            <td><span class="badge active">1 Active</span></td>
+            <td style="font-family: monospace; font-weight: 600;">22.0h / 24.0h</td>
+            <td style="width: 140px;">
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: 92.0%; background-color: #10B981;"></div>
+                </div>
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="font-weight: 600; color: #1E293B;">Marcus Vance</td>
+            <td><span class="badge completed">1 Done</span></td>
+            <td><span class="badge active">0 Active</span></td>
+            <td style="font-family: monospace; font-weight: 600;">16.0h / 16.0h</td>
+            <td style="width: 140px;">
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: 100.0%; background-color: #10B981;"></div>
+                </div>
+            </td>
+        </tr>
+        
+        </tbody>
+    </table>
+
+    <div class="section-title">Key Completed Deliverables</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Issue Key</th>
+                <th>Summary</th>
+                <th>Type</th>
+                <th>Assignee</th>
+                <th>Story Points</th>
+                <th>Time Spent</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        <tr>
+            <td style="font-family: monospace; font-weight: 700; color: #4338CA;">CORE-101</td>
+            <td style="color: #334155;">Implement Redis edge caching layer for dashboard API</td>
+            <td><span class="badge type-story">Story</span></td>
+            <td style="color: #475569;">Alex Morgan</td>
+            <td style="font-weight: 600; color: #0F172A;">5 pts</td>
+            <td style="font-family: monospace; color: #10B981; font-weight: 600;">14.5h</td>
+        </tr>
+        
+        <tr>
+            <td style="font-family: monospace; font-weight: 700; color: #4338CA;">CORE-102</td>
+            <td style="color: #334155;">Fix race condition in concurrent WebSocket sessions</td>
+            <td><span class="badge type-bug">Bug</span></td>
+            <td style="color: #475569;">Alex Morgan</td>
+            <td style="font-weight: 600; color: #0F172A;">3 pts</td>
+            <td style="font-family: monospace; color: #10B981; font-weight: 600;">9.0h</td>
+        </tr>
+        
+        <tr>
+            <td style="font-family: monospace; font-weight: 700; color: #4338CA;">CORE-103</td>
+            <td style="color: #334155;">Refactor navigation shell with responsive drawer component</td>
+            <td><span class="badge type-story">Story</span></td>
+            <td style="color: #475569;">Elena Rostova</td>
+            <td style="font-weight: 600; color: #0F172A;">8 pts</td>
+            <td style="font-family: monospace; color: #10B981; font-weight: 600;">22.0h</td>
+        </tr>
+        
+        <tr>
+            <td style="font-family: monospace; font-weight: 700; color: #4338CA;">CORE-104</td>
+            <td style="color: #334155;">Migrate Docker compose definitions to Helm chart templates</td>
+            <td><span class="badge type-task">Task</span></td>
+            <td style="color: #475569;">David Chen</td>
+            <td style="font-weight: 600; color: #0F172A;">5 pts</td>
+            <td style="font-family: monospace; color: #10B981; font-weight: 600;">15.0h</td>
+        </tr>
+        
+        <tr>
+            <td style="font-family: monospace; font-weight: 700; color: #4338CA;">CORE-105</td>
+            <td style="color: #334155;">Implement OAuth2 PKCE flow for mobile web integration</td>
+            <td><span class="badge type-story">Story</span></td>
+            <td style="color: #475569;">Sarah Jenkins</td>
+            <td style="font-weight: 600; color: #0F172A;">5 pts</td>
+            <td style="font-family: monospace; color: #10B981; font-weight: 600;">17.5h</td>
+        </tr>
+        
+        <tr>
+            <td style="font-family: monospace; font-weight: 700; color: #4338CA;">CORE-106</td>
+            <td style="color: #334155;">Automate end-to-end Cypress regression suite for checkout</td>
+            <td><span class="badge type-task">Task</span></td>
+            <td style="color: #475569;">Marcus Vance</td>
+            <td style="font-weight: 600; color: #0F172A;">5 pts</td>
+            <td style="font-family: monospace; color: #10B981; font-weight: 600;">16.0h</td>
+        </tr>
+        
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <div>Automated Jira Executive Pipeline &bull; Grounded in Deterministic Analytics</div>
+        <div>Generated for Stakeholder Review &bull; Confidential</div>
+    </div>
+</body>
+</html>
