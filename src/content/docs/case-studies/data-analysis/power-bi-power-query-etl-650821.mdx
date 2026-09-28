@@ -1,0 +1,98 @@
+---
+title: "Power BI & Power Query ETL Automation (#650821)"
+description: "Star-schema dimensional modeling, M-code query folding preservation, and automated DAX measures for high-performance enterprise dashboards."
+---
+
+| Parameter | Specification Detail |
+| :--- | :--- |
+| **Project Reference** | Truelancer Project #650821 |
+| **Deliverables** | M-Code ETL Pipeline, Star Schema Normalization, DAX Measure Optimization |
+| **Estimated Scope** | $25 - $35/hr or $250 Fixed / 3 Business Days |
+| **Pillar** | 4. Data Analysis |
+
+---
+
+## 1. Executive Summary
+
+Many Power BI reports suffer from memory crashes, slow report rendering, and scheduled refresh timeouts. In most business setups, these performance degradations stem from loading unnormalized flat spreadsheets directly into the data model rather than implementing a clean Star Schema with separated Fact and Dimension tables. Furthermore, unoptimized transformation steps break Query Folding, forcing Power BI to pull millions of unindexed raw rows into local memory.
+
+This blueprint details an automated ETL pipeline using Power Query M-code, robust Star Schema architecture, and optimized DAX calculations.
+
+---
+
+## 2. High-Level Design (HLD)
+
+```text
+[Raw Sources: Multi-Tab Excel / ERP Dumps]
+                │
+                │ (1. Ingestion via Power Query M-Engine)
+                ▼
+      [Query Folding Gate]
+     ├──> Database Views: Source-Level Filtering & Aggregation
+     └──> Excel/CSV: Buffered Lookups & Normalized Type Casting
+                │
+                │ (2. Star-Schema Dimensional Split)
+                ▼
+┌────────────────────────────────────────────────────────┐
+│                   Power BI VertiPaq Engine             │
+│                                                        │
+│   [Dim_Date]      [Dim_Customer]     [Dim_Product]     │
+│       │                 │                  │           │
+│       └───────────┬─────┴────────────┬─────┘           │
+│                   │ 1:Many (Single)  │                 │
+│                   ▼                  ▼                 │
+│              [Fact_Transactions / Financials]          │
+└────────────────────────────────────────────────────────┘
+                │
+                │ (3. Optimized DAX Measures)
+                ▼
+[Executive Interactive Visuals & Automated Scheduled Refresh]
+```
+
+---
+
+## 3. M-Code Optimization & Query Folding
+
+To prevent memory bloat during scheduled refresh, transformations must maintain query folding when connected to relational stores, or use buffer caching for Excel flat files:
+
+```powerquery
+let
+    Source = Sql.Database("production-db.internal", "AnalyticsDW", [Query="SELECT * FROM v_CleanTransactions WHERE TransactionDate >= '2024-01-01'"]),
+    #"Filtered Valid Rows" = Table.SelectRows(Source, each [TransactionAmount] <> null and [TransactionAmount] > 0),
+    #"Parsed Types" = Table.TransformColumnTypes(#"Filtered Valid Rows",{
+        {"TransactionID", Int64.Type}, 
+        {"CustomerID", Int64.Type}, 
+        {"TransactionDate", type date}, 
+        {"TransactionAmount", type number}
+    }),
+    #"Buffered Dim Join" = Table.Buffer(DimCustomerLookup)
+in
+    #"Parsed Types"
+```
+
+---
+
+## 4. Star-Schema DAX Architecture
+
+Instead of calculating row-by-row expressions using heavy iterators like `SUMX` over wide tables, DAX measures are structured using explicit filter transitions with `CALCULATE`:
+
+```dax
+Total Revenue YTD = 
+CALCULATE(
+    SUM(Fact_Transactions[TransactionAmount]),
+    DATESYTD(Dim_Date[Date])
+)
+
+Variance vs Prior Month = 
+VAR CurrentMonthRev = [Total Revenue]
+VAR PriorMonthRev = CALCULATE([Total Revenue], DATEADD(Dim_Date[Date], -1, MONTH))
+RETURN
+    DIVIDE(CurrentMonthRev - PriorMonthRev, PriorMonthRev, 0)
+```
+
+---
+
+## 5. Engineering & Review Contacts
+
+- **Email Direct:** `devapenseo@gmail.com`
+- **Truelancer Portal:** Direct engagement via the official project thread.

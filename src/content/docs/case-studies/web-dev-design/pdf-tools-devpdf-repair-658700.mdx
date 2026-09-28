@@ -1,0 +1,100 @@
+---
+title: "DevPDF.in Conversion Architecture & Repair (#658700)"
+description: "Server-side diagnostic harness, Ghostscript/LibreOffice dependency resolution, and async queue orchestration for DevPDF.in."
+---
+
+| Parameter | Specification Detail |
+| :--- | :--- |
+| **Project Reference** | Truelancer Project #658700 |
+| **Deliverables** | Binary Dependency Audit, Laravel Queue Worker Stabilization, Large File Streaming |
+| **Estimated Scope** | 2,000 INR / 2 Business Days |
+| **Pillar** | 1. Web Dev Design |
+
+---
+
+## 1. Executive Summary
+
+Online PDF conversion suites (such as DevPDF.in) handle high volumes of heterogeneous file uploads, including Office docs, raster images, and encrypted PDFs. When conversion tools fail or freeze, the root cause is almost never frontend JavaScript bugs. Instead, failures originate from:
+
+1. Server binary path mismatches or missing system packages (Ghostscript, Poppler `pdftoppm`, LibreOffice Headless, ImageMagick).
+2. Blocking execution inside web worker threads without asynchronous job queues, leading to HTTP 504 gateway timeouts on large files.
+3. Unpurged temporary files in `/tmp` exhausting disk inodes.
+4. Restrictive PHP memory and upload size constraints (`upload_max_filesize`, `post_max_size`).
+
+This blueprint provides a resilient architectural framework to diagnose, isolate, and stabilize all conversion endpoints on DevPDF.in.
+
+---
+
+## 2. High-Level Design (HLD)
+
+```text
+[User File Upload] 
+         │
+         ▼
+[Frontend: DevPDF.in UI]
+         │ (Chunked Multipart Upload + SHA-256 Checksum)
+         ▼
+[Laravel REST API Endpoint]
+         │
+         ├──> Validate MIME Type & Sanitize Filename
+         ├──> Store to Ephemeral Storage (/tmp/devpdf_uploads/)
+         └──> Dispatch Async Job to Queue Worker (Redis / Database)
+                     │
+                     ▼
+             [PDF Engine Worker]
+             ├── Office to PDF   ──> LibreOffice Headless (soffice --headless)
+             ├── PDF to Images   ──> Poppler pdftoppm (High Resolution)
+             ├── Compress PDF    ──> Ghostscript (-dPDFSETTINGS=/ebook)
+             └── OCR Scan        ──> Tesseract Engine
+                     │
+                     ▼
+             [Output Asset Generated]
+                     │
+                     ├──> Update Job Status to Ready with Signed URL
+                     └──> Schedule Cleanup Job (TTL: 60 minutes)
+```
+
+---
+
+## 3. Server-Side Health Audit Script
+
+Before modifying application code, our standalone diagnostic harness profiles the underlying Linux/cPanel environment to verify binary existence and execution privileges:
+
+```php
+<?php
+// devpdf_health_check.php excerpt
+$binaries_to_check = [
+    'ghostscript' => ['gs --version', 'gswin64c.exe -version'],
+    'pdftoppm'    => ['pdftoppm -v'],
+    'libreoffice' => ['libreoffice --version', 'soffice --version'],
+    'imagemagick' => ['magick -version', 'convert -version'],
+    'tesseract'   => ['tesseract --version'],
+];
+
+foreach ($binaries_to_check as $tool => $commands) {
+    $found = false;
+    foreach ($commands as $cmd) {
+        $exec_output = @shell_exec($cmd . ' 2>&1');
+        if ($exec_output && !stripos($exec_output, 'not found')) {
+            $found = true;
+            break;
+        }
+    }
+}
+```
+
+---
+
+## 4. Remediation Protocol
+
+1. **Step 1: Staging Environment Isolation.** Mirror codebase and database to a staging subdomain to prevent disruption to active users.
+2. **Step 2: Binary Dependency Verification.** Reinstall missing Poppler, Ghostscript, and LibreOffice binaries on the host server.
+3. **Step 3: Background Worker Stabilization.** Configure Laravel Queue Supervisor with process auto-restart and timeout thresholds.
+4. **Step 4: Automated File Purge.** Implement an automated cron cleanup routine removing conversion artifacts older than 1 hour.
+
+---
+
+## 5. Engineering & Review Contacts
+
+- **Email Direct:** `devapenseo@gmail.com`
+- **Truelancer Portal:** Confirm via the official client tender dashboard.

@@ -45,6 +45,7 @@ export default defineConfig({
             { label: 'Pillar Overview', link: '/case-studies/web-dev-design/' },
             { label: 'Gworky Edge Next.js Flagship', link: '/case-studies/web-dev-design/gworky-edge-web-app/' },
             { label: 'WooCommerce Rescue (#659829)', link: '/case-studies/web-dev-design/woocommerce-enhancement-659829/' },
+            { label: 'DevPDF.in Conversion Architecture (#658700)', link: '/case-studies/web-dev-design/pdf-tools-devpdf-repair-658700/' },
             { label: 'Modular Web App Architecture (#659861)', link: '/case-studies/web-dev-design/fullstack-custom-web-apps-659861/' },
             { label: 'Elementor JSON UI Architecture Engine', link: '/case-studies/web-dev-design/elementor-json-ui-engine/' },
           ],
@@ -73,6 +74,7 @@ export default defineConfig({
           label: '5. Data Analysis',
           items: [
             { label: 'Pillar Overview', link: '/case-studies/data-analysis/' },
+            { label: 'Power BI & Power Query ETL (#650821)', link: '/case-studies/data-analysis/power-bi-power-query-etl-650821/' },
             { label: 'Mathematical Modeling & Statistics (140 SKS)', link: '/case-studies/data-analysis/mathematical-modeling-and-statistics/' },
             { label: 'Psychometric & Survey Validation (Rasch/Aiken)', link: '/case-studies/data-analysis/psychometric-survey-validation-rasch/' },
             { label: 'Resilient CDP WebSocket Scraping Engine', link: '/case-studies/data-analysis/resilient-cdp-websocket-scraping/' },
