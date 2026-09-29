@@ -94,6 +94,20 @@ export default defineConfig({
             { label: 'Executive Data Storytelling Engine', link: '/case-studies/data-analysis/executive-data-storytelling-engine/' },
           ],
         },
+        {
+          label: '6. Monograf: Nalar di Balik Angka',
+          items: [
+            { label: 'Pengantar & Manifesto', link: '/monograf/nalar-di-balik-angka/' },
+            { label: 'Bab 1: Menghafal Rumus', link: '/monograf/nalar-di-balik-angka/bab-01-menghafal-rumus-buta-makna/' },
+            { label: 'Bab 2: Manipulasi Visual', link: '/monograf/nalar-di-balik-angka/bab-02-anatomi-manipulasi-visual/' },
+            { label: 'Bab 3: Epistemologi Tabayyun', link: '/monograf/nalar-di-balik-angka/bab-03-epistemologi-tabayyun-seni-menguji-klaim/' },
+            { label: 'Bab 4: Amanah & Tawazun', link: '/monograf/nalar-di-balik-angka/bab-04-amanah-dan-tawazun-etika-keseimbangan/' },
+            { label: 'Bab 5: Kertas Membekukan Nalar', link: '/monograf/nalar-di-balik-angka/bab-05-mengapa-kertas-membekukan-nalar/' },
+            { label: 'Bab 6: Laboratorium Visual', link: '/monograf/nalar-di-balik-angka/bab-06-laboratorium-visual-di-atas-layar/' },
+            { label: 'Bab 7: Nalar Kritis Sekolah & Rumah', link: '/monograf/nalar-di-balik-angka/bab-07-membimbing-nalar-kritis-di-sekolah-dan-rumah/' },
+            { label: 'Bab 8: Menavigasi Algoritma', link: '/monograf/nalar-di-balik-angka/bab-08-menavigasi-dunia-yang-dipenuhi-algoritma/' },
+          ],
+        },
       ],
       head: [
         {
