@@ -2,7 +2,7 @@
 title: "Bab 4: Amanah dan Tawazun: Etika Keseimbangan"
 description: "Paradoks Simpson kasus UC Berkeley, variabel perancu, serta nilai Amanah dan Tawazun dalam data."
 sidebar:
-  order: 5
+  order: 7
   label: "Bab 4: Amanah & Tawazun"
 head:
   - tag: meta
@@ -23,7 +23,7 @@ head:
 
 > *"Dan langit telah ditinggikan-Nya dan Dia ciptakan keseimbangan (tawazun), agar kamu jangan merusak keseimbangan itu. Dan tegakkanlah timbangan itu dengan adil dan janganlah kamu mengurangi neraca itu."* (QS. Ar-Rahman: 7-9)
 
-## Babak I: Jebakan Angka Tunggal di Meja Rapat
+## Jebakan Angka Tunggal di Meja Rapat
 
 Sebuah situasi menegangkan terjadi di ruang sidang pimpinan sebuah institusi pendidikan tinggi: sebuah laporan evaluasi program beasiswa baru saja dipaparkan di layar proyektor. Angka agregat di halaman depan menunjukkan kesimpulan yang mengejutkan: tingkat kelulusan tepat waktu mahasiswa penerima beasiswa jalur prestasi akademik tercatat sebesar 72%, sementara mahasiswa jalur reguler non-beasiswa mencatatkan tingkat kelulusan 81%.
 
@@ -41,7 +41,7 @@ Jawabannya terletak pada distribusi sebaran pilihan studi: mayoritas mahasiswa p
 
 Penggabungan data kasar tanpa menimbang bobot subkelompok telah menciptakan ilusi yang membalikkan fakta lapangan. Fenomena mengejutkan di mana sebuah tren berbalik arah ketika data dipecah ke dalam kategori-kategori penyusunnya dikenal luas dalam dunia sains sebagai Paradoks Simpson (*Simpson's Paradox*).
 
-## Babak II: Anatomi Sejarah, Membedah Kasus Klasik UC Berkeley
+## Anatomi Sejarah, Membedah Kasus Klasik UC Berkeley
 
 Untuk memahami mengapa fenomena ini begitu mengguncang dunia keilmuan modern, kita perlu menengok salah satu kasus investigasi data paling terkenal dalam sejarah: penerimaan mahasiswa pascasarjana di University of California, Berkeley, pada musim gugur tahun 1973 (Bickel et al., 1975).
 
@@ -105,7 +105,7 @@ Dengan kata lain:
 
 Ketika angka penerimaan dari kedua kelompok jurusan yang memiliki karakteristik daya tampung berbeda ini dilebur dan dirata-ratakan secara sembrono ke dalam satu angka agregat tunggal, terciptalah ilusi statistik yang memutarbalikkan fakta. Menyimpulkan bahwa universitas mendiskriminasi wanita adalah kekeliruan analisis yang fatal akibat mengabaikan konteks struktur subkelompok. Ketidakadilan sejati bukanlah terletak pada panitia seleksi universitas, melainkan pada ketimpangan struktural sosial yang menyebabkan wanita pada masa itu kurang terfasilitasi untuk mengakses pendidikan sains dan teknologi sejak jenjang pendidikan dasar dan menengah.
 
-## Babak III: Menghidupkan Nilai Tawazun dan Amanah dalam Analitik
+## Menghidupkan Nilai Tawazun dan Amanah dalam Analitik
 
 Pelajaran dari Paradoks Simpson memberikan renungan etis dan filosofis yang sangat mendalam bagi para ilmuwan, pendidik, profesional bisnis, hingga masyarakat awam. Di era informasi modern, data tidak cukup hanya dikumpulkan secara jujur; data harus ditimbang dengan timbangan yang seimbang dan proporsional.
 
@@ -128,7 +128,7 @@ Sebuah perusahaan yang ingin menutupi penurunan upah buruh dapat menggabungkan d
 
 Menyembunyikan variabel perancu yang relevan demi memaksakan sebuah narasi adalah bentuk pengkhianatan terhadap amanah keilmuan. Amanah menuntut penyaji data untuk membuka informasi secara utuh, transparan, dan tidak menyembunyikan variabel kontekstual yang berpotensi membalikkan kesimpulan publik.
 
-## Babak IV: Praksis Sehari-hari, Membongkar Paradoks di Lingkungan Kita
+## Praksis Sehari-hari, Membongkar Paradoks di Lingkungan Kita
 
 Bagaimana kita menerapkan nalar tawazun dan kewaspadaan terhadap Paradoks Simpson dalam rutinitas keseharian di tempat kerja, sekolah, maupun kehidupan bermasyarakat? Mari kita bedah tiga ranah penerapan konkret:
 
@@ -148,7 +148,7 @@ Di era kecerdasan buatan, banyak platform analisis data otomatis (*Automated Bus
 Sebagai manusia yang memegang kendali nalar dan nurani, kita tidak boleh menelan ringkasan otomatis mesin tersebut secara mentah-mentah. Kita wajib menginstruksikan sistem AI secara eksplisit: *"Ujilah apakah ada bias agregasi atau Paradoks Simpson dengan menampilkan tabulasi silang berdasarkan kategori ukuran transaksi dan jenis pelanggan."* Dengan cara ini, kita menjadikan kecerdasan buatan sebagai mitra analitik yang patuh pada prinsip kehati-hatian, bukan penentu tunggal yang menyesatkan arah kebijakan institusi. Kemampuan mengarahkan mesin untuk membongkar variabel perancu adalah keterampilan kepemimpinan data yang sangat vital di abad modern.
 
 
-> ### 📋 Audit Grafik Mandiri
+> ### Audit Grafik Mandiri
 >
 > Gunakan daftar periksa empat langkah ini setiap kali Anda berhadapan dengan laporan perbandingan dua kelompok besar:
 >
@@ -159,13 +159,13 @@ Sebagai manusia yang memegang kendali nalar dan nurani, kita tidak boleh menelan
 
 
 
-> ### 🔍 Refleksi Nilai: Tawazun dalam Menegakkan Keadilan
+> ### Refleksi Nilai: Tawazun dalam Menegakkan Keadilan
 >
 > Menegakkan keadilan kuantitatif membutuhkan timbangan yang seimbang (*tawazun*). Memaksakan kesimpulan terburu-buru dari satu angka agregat tunggal tanpa memeriksa keadilan distribusi di tingkat subgrup adalah bentuk kecerobohan yang dapat menzalimi pihak-pihak yang tidak bersalah. Perintah Allah dalam surat Ar-Rahman untuk menjaga neraca keseimbangan mengajarkan kepada kita bahwa kebenaran ilmiah selalu menuntut ketelitian, kesabaran, dan penghormatan terhadap keberagaman konteks ciptaan-Nya.
 
 
 
-> ### 🔭 Eksplorasi Visual
+> ### Eksplorasi Visual Mandiri
 >
 > Tantangan simulasi mandiri ini dapat Anda jalankan di atas kertas buram bersama rekan kerja atau di lembar kerja komputer:
 >

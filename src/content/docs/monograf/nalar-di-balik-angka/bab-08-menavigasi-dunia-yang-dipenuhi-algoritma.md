@@ -2,7 +2,7 @@
 title: "Bab 8: Menavigasi Dunia yang Dipenuhi Algoritma"
 description: "Filter bubble, model bias, projek P5 Kurikulum Merdeka, dan etika kecerdasan buatan."
 sidebar:
-  order: 9
+  order: 11
   label: "Bab 8: Menavigasi Algoritma"
 head:
   - tag: meta
@@ -23,7 +23,7 @@ head:
 
 > *"Di era kecerdasan buatan, tantangan terbesar kemanusiaan bukanlah bagaimana memproduksi lebih banyak data atau mempercepat algoritma komputasi, melainkan bagaimana memastikan bahwa hati nurani dan akal sehat manusia tetap memegang kendali atas arah masa depan peradaban."*
 
-## Babak I: Fajar Baru dan Banjir Otomatisasi
+## Fajar Baru dan Banjir Otomatisasi
 
 Kita sedang hidup di tengah fajar sebuah zaman baru yang belum pernah disaksikan oleh generasi-generasi sebelumnya. Kehadiran kecerdasan buatan generatif (*Generative AI*), model bahasa besar (*Large Language Models*), dan sistem automasi pintar telah mengubah wajah peradaban dalam sekejap mata. Aktivitas intelektual yang dahulunya membutuhkan kerja keras berpekan-pekan oleh tim analis senior kini dapat diselesaikan oleh algoritma komputer dalam hitungan detik.
 
@@ -35,7 +35,7 @@ Kita mulai mempercayai ringkasan otomatis mesin tanpa memeriksa dari mana data i
 
 Di titik persimpangan sejarah inilah, literasi data menemukan peran tertingginya. Literasi data bukan lagi sekadar keterampilan teknis berhitung bagi mahasiswa jurusan matematika atau ilmu komputer, melainkan benteng pertahanan terakhir bagi akal sehat manusia. Tanpa literasi data yang berakar pada nurani etika, manusia modern berisiko menjadi tawanan sukarela dari mesin yang mereka ciptakan sendiri.
 
-## Babak II: Membongkar Tiga Ilusi Algoritmik Modern
+## Membongkar Tiga Ilusi Algoritmik Modern
 
 Untuk menavigasi rimba digital yang semakin pekat, kita harus memiliki keberanian untuk menyingkap tabir di balik cara kerja algoritma. Ada tiga ilusi sistemik yang paling sering mengaburkan kejernihan pandang masyarakat di era kecerdasan buatan:
 
@@ -66,7 +66,7 @@ Sebagaimana diuraikan oleh matematikawan Cathy O'Neil dalam karyanya mengenai se
 
 Membekali generasi muda dengan literasi data adalah ikhtiar untuk melucuti opasitas kotak hitam tersebut dan mengembalikan transparansi ke dalam ruang publik.
 
-## Babak III: Lingkar Validasi Kritis Manusia
+## Lingkar Validasi Kritis Manusia
 
 Bagaimana kita memposisikan diri di hadapan tsunami otomatisasi ini? Jawabannya tegas: manusia tidak boleh menyerahkan kedaulatan nalar kepada mesin. Kita harus merebut kembali posisi luhur kita sebagai penjaga gawang kebenaran (*validation gatekeepers*).
 
@@ -97,7 +97,7 @@ Pada lapisan kedua, kita menguji keadilan sistemik dan struktur data:
 
 Hanya ketika sebuah analisis kuantitatif telah lolos dari uji tabayyun fakta dan uji tawazun keadilan, data tersebut layak dijadikan pijakan bagi pengambilan keputusan yang bermartabat di tengah masyarakat.
 
-## Babak IV: Integrasi Kurikulum Merdeka dan Projek Profil Pelajar Pancasila (P5)
+## Integrasi Kurikulum Merdeka dan Projek Profil Pelajar Pancasila (P5)
 
 Bagi dunia pendidikan nasional di Indonesia, tantangan disrupsi kecerdasan buatan ini bertepatan dengan momentum transformasi kurikulum melalui implementasi Kurikulum Merdeka. Salah satu pilar paling strategis dalam kurikulum ini adalah Projek Penguatan Profil Pelajar Pancasila (P5).
 
@@ -116,7 +116,7 @@ Siswa tingkat menengah diajak untuk mengamati linimasa akun media sosial masing-
 
 Ketika sekolah, madrasah, dan perguruan tinggi merancang projek P5 berbasis data riil, matematika dan etika bersatu padu. Belajar tidak lagi terasa laksana siksaan hafalan rumus, melainkan menjelma menjadi petualangan pengabdian yang memuliakan kehidupan masyarakat.
 
-## Babak V: Epilog, Menjaga Nurani di Balik Angka
+## Epilog, Menjaga Nurani di Balik Angka
 
 Perjalanan kita menelusuri delapan bab dalam buku ini membawa kita pada sebuah pemahaman pamungkas: angka, tabel, dan grafik pada hakikatnya hanyalah simbol-simbol visual yang diciptakan manusia untuk menangkap denyut kehidupan.
 
@@ -148,7 +148,7 @@ Ketika kita berdiri di hadapan layar monitor yang memancarkan grafik hasil racik
 Marilah kita melangkah ke masa depan dengan kepala tegak dan hati yang jernih. Jangan pernah silau oleh grafik yang gemerlap, jangan pernah gentar oleh formula yang tampak rumit, dan jangan pernah menyerahkan kedaulatan akal budi kita kepada ilusi mesin kecerdasan buatan. Jadilah generasi yang merdeka: generasi yang tidak sekadar pandai berhitung, melainkan generasi yang berani menegakkan kebenaran, keadilan, dan kasih sayang di balik setiap angka.
 
 
-> ### 📋 Audit Grafik Mandiri
+> ### Audit Grafik Mandiri
 >
 > Saat Anda mengevaluasi laporan analisis atau infografis yang dihasilkan oleh sistem kecerdasan buatan, terapkan protokol tiga lapis ini:
 >
@@ -158,13 +158,13 @@ Marilah kita melangkah ke masa depan dengan kepala tegak dan hati yang jernih. J
 
 
 
-> ### 🔍 Refleksi Nilai: Amanah Menjaga Integritas Peradaban
+> ### Refleksi Nilai: Amanah Menjaga Integritas Peradaban
 >
 > Kecerdasan buatan dan teknologi komputasi modern adalah amanah peradaban yang dititipkan kepada umat manusia. Menggunakan teknologi ini untuk memanipulasi persepsi publik, menyebarkan ketakutan dengan data palsu, atau mengambil keputusan zalim demi keuntungan pribadi adalah bentuk pengkhianatan amanah terbesar di era digital. Manusia yang beriman dan berakal budi dituntut untuk menjadi benteng kejujuran yang memastikan bahwa seluruh kemajuan teknologi selalu berkhidmat pada tegaknya nilai-nilai kebenaran, keadilan, dan kemaslahatan bersama.
 
 
 
-> ### 🔭 Eksplorasi Visual
+> ### Eksplorasi Visual Mandiri
 >
 > Tantangan penutup ini mengajak Anda menguji secara langsung batas kemampuan kecerdasan buatan dalam membedakan fakta dan ilusi:
 >

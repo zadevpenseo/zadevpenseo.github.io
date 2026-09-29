@@ -2,7 +2,7 @@
 title: "Bab 2: Anatomi Manipulasi Visual"
 description: "Taksonomi 6 distorsi grafik (sumbu Y terpotong, 3D, skala non-linear, cherry-picking, korelasi palsu, sumbu ganda)."
 sidebar:
-  order: 3
+  order: 5
   label: "Bab 2: Manipulasi Visual"
 head:
   - tag: meta
@@ -23,7 +23,7 @@ head:
 
 > *"Mata manusia dirancang oleh Sang Pencipta untuk mengagumi keindahan bentuk dan keserasian warna. Namun, ketika keindahan visual itu disalahgunakan untuk menyembunyikan cacat pada data, mata kita dengan mudah menjadi pintu masuk bagi kebohongan yang paling meyakinkan."*
 
-## Babak I: Pesona Visual dan Celah Persepsi
+## Pesona Visual dan Celah Persepsi
 
 Setiap awal pekan di sebuah sekolah menengah di Jawa Timur, papan pengumuman kayu di depan lobi utama selalu dikerumuni oleh para siswa dan guru. Papan itu memuat buletin mingguan yang dikelola oleh tim redaksi siswa. Di samping rubrik karya sastra dan artikel wawasan, ada satu pojok yang paling sering memicu perdebatan seru: pojok infografis evaluasi kelas.
 
@@ -41,7 +41,7 @@ Para perancang infografis media, konsultan pemasaran politik, dan pembuat lapora
 
 Di era media sosial yang digerakkan oleh algoritma rekomendasi umpan-klik (*clickbait algorithms*), distorsi visual ini mengalami amplifikasi yang luar biasa. Sebuah grafik yang dramatis, kontroversial, atau memicu kemarahan publik akan dibagikan puluhan ribu kali dalam hitungan menit, terlepas dari apakah grafik tersebut jujur atau culas. Untuk membentengi akal sehat kita, kita perlu membedah secara mendalam enam taksonomi manipulasi visual yang paling sering mengecoh nalar masyarakat.
 
-## Babak II: Enam Taksonomi Manipulasi Grafik
+## Enam Taksonomi Manipulasi Grafik
 
 ### 1. Pemotongan Sumbu Vertikal (Truncated Y-Axis)
 
@@ -122,7 +122,7 @@ Sebagaimana tampak pada Gambar 2.3, bahaya utama dari sumbu ganda terletak pada 
 
 Persilangan visual ini memicu ilusi kognitif yang sangat kuat: pembaca akan mengira bahwa ada peristiwa luar biasa yang terjadi di titik persilangan tersebut, di mana pendapatan melampaui keluhan, padahal titik potong itu adalah ilusi optik fiktif yang tercipta semata-mata karena pilihan pengaturan skala desainer. Dua variabel dengan satuan ukuran yang berbeda tidak memiliki titik temu fisik di alam nyata. Menggunakan grafik sumbu ganda untuk membuktikan korelasi erat adalah tindakan yang sangat tidak dianjurkan dalam standar visualisasi data ilmiah terkini.
 
-## Babak III: Menegakkan Timbangan di Era Kecerdasan Buatan
+## Menegakkan Timbangan di Era Kecerdasan Buatan
 
 Setelah kita membedah enam anatomi manipulasi visual di atas, sebuah pertanyaan mendasar muncul: mengapa praktik manipulasi ini terus bertahan dan bahkan semakin merajalela di era kecerdasan buatan saat ini?
 
@@ -143,7 +143,7 @@ Memotong sumbu vertikal grafik untuk membesar-besarkan prestasi pribadi, menyemb
 Ketika generasi muda terjun ke masyarakat, baik sebagai pendidik, pengurus yayasan, manajer bisnis, maupun pengambil kebijakan publik di instansi pemerintahan, mereka harus menjadi pelopor transparansi data. Mereka tidak boleh silau oleh visual yang gemerlap, tidak boleh gentar mengkritisi grafik yang tampak canggih, dan selalu memegang teguh prinsip bahwa kebenaran fakta harus disampaikan secara adil, proporsional, dan apa adanya. Kejujuran di atas selembar grafik adalah cermin dari ketakwaan dan integritas di dalam dada.
 
 
-> ### 📋 Audit Grafik Mandiri
+> ### Audit Grafik Mandiri
 >
 > Gunakan protokol audit visual lima langkah ini setiap kali Anda memeriksa laporan data, proposal bisnis, atau infografis media digital:
 >
@@ -155,13 +155,13 @@ Ketika generasi muda terjun ke masyarakat, baik sebagai pendidik, pengurus yayas
 
 
 
-> ### 🔍 Refleksi Nilai: Amanah dalam Timbangan Visual
+> ### Refleksi Nilai: Amanah dalam Timbangan Visual
 >
 > Integritas (*Amanah*) seorang penuntut ilmu diuji bukan saat ia berada di atas mimbar ceramah, melainkan saat ia menyajikan fakta di hadapan manusia. Menampilkan data yang dimanipulasi secara visual untuk memenangkan perdebatan atau menarik simpati publik adalah bentuk pengkhianatan terhadap amanah akal budi. Sikap ksatria dalam tradisi Islam menuntut kita untuk berani menampilkan data apa adanya: jika program kerja kita belum berhasil, tampilkan grafik yang melandai dengan jujur, lalu carilah solusi perbaikan secara tawaduk dan berbasis ilmu pengetahuan.
 
 
 
-> ### 🔭 Eksplorasi Visual
+> ### Eksplorasi Visual Mandiri
 >
 > Tantangan audit visual ini dirancang agar dapat Anda jalankan secara luring di meja kerja atau ruang belajar Anda maupun secara daring di komputer:
 >

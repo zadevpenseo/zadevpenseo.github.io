@@ -2,7 +2,7 @@
 title: "Bab 1: Menghafal Rumus, Buta Makna"
 description: "Dilema pemahaman instrumental vs relasional Skemp, potret PISA, dan akar kebutaan statistik."
 sidebar:
-  order: 2
+  order: 4
   label: "Bab 1: Menghafal Rumus"
 head:
   - tag: meta
@@ -23,7 +23,7 @@ head:
 
 > *"Dalam tradisi keilmuan yang luhur, kita diajarkan meneliti kesahihan sumber hingga ke perawi terjauh sebelum mempercayai sebuah kabar. Namun, ketika berhadapan dengan selembar grafik berangka di dunia modern, mengapa kita begitu mudah menelan kesimpulan tanpa menanyakan dari mana angka itu bermula?"*
 
-## Ki: Cahaya di Balik Meja Belajar
+## Cahaya di Balik Meja Belajar
 
 Malam telah larut di sebuah ruang belajar sekolah menengah di Jawa Timur. Suara deru angin malam yang menelusup dari sela jendela kayu menemani kesunyian meja belajar. Di sudut ruangan, seorang siswa kelas dua belas bernama Ahmad masih menekuri lembaran kertas bergaris di bawah pendar lampu neon yang temaram.
 
@@ -35,7 +35,7 @@ Bagi Ahmad, angka-angka itu adalah barisan prajurit yang patuh. Setiap variabel 
 
 Di lingkungan pendidikan yang mengagungkan kecepatan kalkulasi, kemampuan Ahmad menghafal rumus dan mengeksekusi prosedur aritmetika dipandang sebagai puncak kecerdasan kuantitatif. Namun, di balik meja belajar itu, sebuah tabir tebal sesungguhnya masih menutupi pandangannya. Ahmad sangat mahir menghitung angka, tetapi ia belum pernah diajak untuk mencurigai angka.
 
-## Shō: Ujian Tak Terduga di Meja Koperasi Sekolah
+## Ujian Tak Terduga di Meja Koperasi Sekolah
 
 Titik balik pemikiran itu datang beberapa bulan kemudian, ketika kepala sekolah memberikan sebuah amanah baru kepada Ahmad. Ia ditunjuk menjadi ketua tim pengelola unit usaha koperasi siswa yang melayani kebutuhan ratusan murid dan warga sekolah, mulai dari buku catatan, alat tulis, seragam, hingga makanan ringan.
 
@@ -51,7 +51,7 @@ Beberapa pekan kemudian, sebuah keganjilan mulai tampak di lapangan. Barang-bara
 
 Dada Ahmad berdegup kencang. Ia tertegun memandangi kertas itu. Bagaimana mungkin dirinya, seorang siswa berprestasi yang selalu meraih nilai sempurna dalam ujian matematika, bisa tertipu mentah-mentah oleh selembar gambar sederhana? Mengapa kemampuan menghitung rata-rata hingga tiga angka di belakang koma tidak menyelamatkannya dari jebakan manipulasi visual yang begitu kasat mata?
 
-## Ten: Membedah Ilusi, Richard Skemp dan Epistemologi Mantiq
+## Membedah Ilusi: Skemp dan Epistemologi Mantiq
 
 Pengalaman pahit yang dialami Ahmad di ruang koperasi santri bukanlah kegagalan personal, melainkan manifestasi dari kerapuhan sistemik dalam cara kita memandang ilmu matematika. Untuk memahami mengapa seseorang yang cerdas berhitung bisa buta terhadap makna, kita perlu menengok sebuah pemikiran klasik yang dicetuskan oleh psikolog dan pakar pendidikan matematika asal Inggris, Richard R. Skemp, pada tahun 1976 (Skemp, 1976).
 
@@ -100,7 +100,7 @@ Ketika anak-anak kita yang terbiasa meraih nilai tinggi pada soal-soal latihan r
 
 Kesenjangan literasi data (*Data Literacy Gap*) ini kemudian merembes ke ranah kepemimpinan publik dan dunia kerja profesional. Di kantor pemerintahan, ruang rapat perusahaan, lembaga filantropi Islam, hingga panggung dakwah media sosial, keputusan-keputusan strategis bernilai miliaran rupiah kerap diambil hanya berdasarkan infografis yang memanipulasi skala atau grafik korelasi palsu yang tidak memiliki dasar kausalitas ilmiah.
 
-## Ketsu: Literasi Data sebagai Bekal Tempur di Era Kecerdasan Buatan
+## Literasi Data di Era Kecerdasan Buatan
 
 Kebutuhan masyarakat kita, mulai dari pendidik, mahasiswa, orang tua, hingga praktisi profesional, untuk menguasai literasi data relasional kini berada pada titik paling genting dalam sejarah peradaban. Kita tidak lagi hidup di era ketika informasi bersifat langka dan sulit dicari. Sebaliknya, kita sedang berenang di tengah lautan data raksasa yang dipercepat oleh kehadiran kecerdasan buatan generatif (*Generative AI*) dan algoritma media sosial.
 
@@ -115,7 +115,7 @@ Literasi data bukan lagi sekadar ilmu hitung mekanis yang terpisah dari nilai ke
 Jalan menuju ke sana tidak harus dimulai dengan pengadaan laboratorium komputer canggih atau perangkat lunak berbayar yang mahal. Perjalanan ini bermula dari keberanian sederhana di ruang kelas, ruang kerja, dan ruang keluarga kita: keberanian untuk tidak lagi puas hanya dengan menghafal rumus, keberanian untuk menatap setiap grafik dengan rasa ingin tahu yang kritis, dan keteguhan untuk selalu menanyakan nalar dan nurani di balik angka.
 
 
-> ### 📋 Audit Grafik Mandiri
+> ### Audit Grafik Mandiri
 >
 > Setiap kali Anda menjumpai grafik atau diagram dalam selebaran berita, laporan keuangan yayasan, maupun unggahan media sosial, terapkan lima pertanyaan ceklis audit nalar ini:
 >
@@ -127,7 +127,7 @@ Jalan menuju ke sana tidak harus dimulai dengan pengadaan laboratorium komputer 
 
 
 
-> ### 🔍 Refleksi Nilai: Tabayyun dan Nalar Sanad
+> ### Refleksi Nilai: Tabayyun dan Nalar Sanad
 >
 > Tradisi keilmuan Islam memandang kepasifan intelektual di hadapan kabar burung sebagai bahaya moral yang besar. Allah Subhanahu wa Ta'ala mengingatkan kita dalam Kitab Suci:
 >
@@ -137,7 +137,7 @@ Jalan menuju ke sana tidak harus dimulai dengan pengadaan laboratorium komputer 
 
 
 
-> ### 🔭 Eksplorasi Visual
+> ### Eksplorasi Visual Mandiri
 >
 > Tantangan mandiri ini dirancang sepenuhnya agnostik terhadap alat, sehingga Anda dapat mempraktikkannya langsung di meja belajar atau ruang kerja Anda hanya dengan bermodalkan selembar kertas bergaris, pensil, dan penggaris:
 >

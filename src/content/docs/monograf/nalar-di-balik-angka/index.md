@@ -27,11 +27,6 @@ Buku ini lahir dari sebuah kegelisahan sederhana namun mendalam: di era ketika i
 
 Buku monograf ini, **Nalar di Balik Angka**, bukan buku teks rumus statistika yang menuntut Anda menghafal turunan kalkulus atau rumus deviasi standar yang rumit. Sebaliknya, buku ini adalah panduan nalar kritis (*habits of mind*) yang mengajak guru, orang tua, mahasiswa, dan masyarakat umum untuk melihat apa yang tersembunyi di balik angka.
 
-:::tip[Edisi Digital PDF]
-Naskah lengkap monograf ini tersedia dalam format PDF (65 halaman, ukuran ISO-B5) siap cetak dan baca luring:  
-📥 **[Unduh Naskah Lengkap PDF (1.2 MB)](/nalar-di-balik-angka.pdf)**
-:::
-
 ## Empat Pilar Penjelajahan
 
 Buku ini diorganisasikan ke dalam empat bagian yang saling bertautan:
@@ -49,6 +44,13 @@ Buku ini diorganisasikan ke dalam empat bagian yang saling bertautan:
    Menyediakan instrumen praktis bagi pendidik dan orang tua berupa *Tiga Tangga Literasi Data* di ruang kelas dan rumah, serta strategi menavigasi bias algoritma dan halusinasi data di era Generative AI selaras dengan semangat Projek Penguatan Profil Pelajar Pancasila (P5).
 
 Selamat membaca, berefleksi, dan menguji setiap angka dengan kejernihan akal dan hati nurani.
+
+
+> ### Edisi Digital PDF
+>
+> Naskah lengkap monograf ini tersedia dalam format PDF resolusi tinggi (75 halaman, ukuran ISO-B5) siap cetak dan baca luring:  
+> **[Unduh Naskah Lengkap PDF (1.2 MB)](/nalar-di-balik-angka.pdf)**
+
 
 
 

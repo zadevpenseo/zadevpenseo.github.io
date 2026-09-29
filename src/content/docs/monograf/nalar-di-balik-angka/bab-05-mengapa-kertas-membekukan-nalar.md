@@ -2,7 +2,7 @@
 title: "Bab 5: Mengapa Kertas Membekukan Nalar?"
 description: "Cognitive Load Theory John Sweller, efek pemisahan perhatian, dan batas komputasi lembar kertas."
 sidebar:
-  order: 6
+  order: 8
   label: "Bab 5: Mengapa Kertas Membekukan Nalar"
 head:
   - tag: meta
@@ -23,7 +23,7 @@ head:
 
 > *"Ketika seluruh daya memori kerja seorang siswa terkuras habis hanya untuk melakukan operasi hitung aritmetika manual di atas lembar kertas buram, tidak ada lagi ruang kognitif yang tersisa di otaknya untuk merenungkan makna dari angka yang ia hasilkan."*
 
-## Babak I: Tragedi Kertas Buram di Ruang Kelas
+## Tragedi Kertas Buram di Ruang Kelas
 
 Pemandangan ini barangkali merupakan salah satu kenangan paling membekas bagi siapa pun yang pernah duduk di bangku sekolah: deretan meja kayu yang dipenuhi lembaran kertas buram, suara gesekan pensil yang beradu cepat dengan waktu, dan desah napas lelah puluhan siswa yang sedang berjibaku menghitung tabel distribusi frekuensi.
 
@@ -41,7 +41,7 @@ Tragedi pedagogis ini telah berlangsung selama beberapa generasi dalam sistem pe
 
 Mengapa kertas buram dan metode kalkulasi manual begitu efektif dalam mematikan intuisi berpikir? Untuk menjawab pertanyaan mendasar ini, kita harus menyelami mekanisme biologis otak manusia melalui kacamata Teori Beban Kognitif (*Cognitive Load Theory*).
 
-## Babak II: Anatomi Memori Kerja dan Teori Beban Kognitif
+## Anatomi Memori Kerja dan Teori Beban Kognitif
 
 Pada akhir dekade 1980-an, seorang psikolog pendidikan terkemuka asal Australia, John Sweller, mempublikasikan sebuah kerangka teori revolusioner yang mengubah cara pandang dunia terhadap proses belajar manusia (Sweller, 1988). Teori tersebut berakar pada pemahaman mengenai arsitektur kognitif manusia, khususnya keterbatasan memori kerja (*working memory*).
 
@@ -68,7 +68,7 @@ Dalam pembelajaran yang ideal, guru dan perancang kurikulum bertugas meminimalka
 
 Sayangnya, dalam pembelajaran statistika tradisional berbasis kertas, yang terjadi justru sebaliknya: beban ekstrinsik mendominasi hampir sembilan puluh persen kapasitas memori kerja siswa. Otak mereka terlalu lelah untuk berpikir kritis karena tenaganya telah habis diperas oleh kalkulasi manual.
 
-## Babak III: Efek Pemisahan Perhatian (Split-Attention Effect)
+## Efek Pemisahan Perhatian (Split-Attention Effect)
 
 Salah satu sumber utama beban kognitif ekstrinsik yang paling merusak pada media cetak konvensional adalah efek pemisahan perhatian (*split-attention effect*). Efek ini terjadi ketika dua atau lebih sumber informasi yang saling melengkapi disajikan secara terpisah dalam ruang fisik atau rentang waktu, memaksa pembaca untuk terus-menerus membagi pandangan dan mengintegrasikannya secara mental di dalam otak.
 
@@ -93,7 +93,7 @@ Bandingkan dengan Panel B, di mana label teks ditempatkan langsung di ujung masi
 
 Media kertas secara fisik memiliki keterbatasan statis yang memperparah efek pemisahan perhatian ini. Di atas kertas, grafik tidak dapat bergerak, skala tidak dapat diubah secara langsung, dan hubungan dinamis antarparameter matematika terperangkap dalam simbol-simbol aljabar yang kaku.
 
-## Babak IV: Teori Representasi Jamak dan Kebutuhan Transisi Digital
+## Teori Representasi Jamak dan Kebutuhan Transisi Digital
 
 Mengapa transisi dari simbol aljabar statis menuju representasi visual dinamis begitu penting bagi perkembangan kecerdasan manusia? Filsuf dan psikolog pendidikan asal Prancis, Raymond Duval, merumuskan Teori Representasi Jamak (*Multiple Semiotic Representations*). Duval menegaskan bahwa pemahaman matematika yang sejati hanya dapat tercapai jika seorang pembelajar mampu melakukan koordinasi dan transformasi bolak-balik di antara setidaknya dua sistem representasi yang berbeda: sistem register simbolik aljabar dan sistem register visual geometris.
 
@@ -115,7 +115,7 @@ Rumus pangkat tiga di atas terasa sangat mengintimidasi dan dingin bagi sebagian
 
 Satu detik pandangan pada kurva visual dinamis mampu menyampaikan intuisi mendalam yang gagal dibangun oleh tiga puluh menit ceramah formula di papan tulis. Inilah yang dirumuskan oleh Allan Paivio dalam Teori Pengkodean Ganda (*Dual Coding Theory*): memori manusia bekerja paling tangguh ketika informasi linguistik verbal dipasangkan secara simultan dengan representasi visual non-verbal. Kertas statis memisahkan kedua jalur ini, sementara teknologi layar interaktif menyatukannya menjadi satu jembatan intuisi yang hidup.
 
-## Babak V: Desakan Pergeseran Kurikulum Pendidikan Dini
+## Desakan Pergeseran Kurikulum Pendidikan Dini
 
 Fakta-fakta psikologi kognitif di atas membawa kita pada sebuah kesimpulan yang tidak dapat ditawar lagi: sistem kurikulum pendidikan kita harus melakukan pergeseran haluan secara mendasar. Keterampilan berpikir komputasional (*computational thinking*) dan eksplorasi data interaktif tidak boleh lagi dianggap sebagai materi pelengkap yang baru diperkenalkan saat mahasiswa mengambil mata kuliah statistika tingkat lanjut di perguruan tinggi.
 
@@ -136,7 +136,7 @@ Kurikulum pendidikan modern harus berani memindahkan beban kerja kognitif mekani
 Kertas tidak perlu dibuang sepenuhnya dari peradaban sekolah. Kertas tetap memiliki fungsi luhur sebagai media sketsa bebas, sarana mencatat perenungan nurani, dan kanvas dialog santai. Namun, kertas harus dibebaskan dari fungsinya sebagai alat pasung nalar. Komputasi dan visualisasi layar harus mengambil alih beban kalkulasi, sehingga akal budi manusia dapat terbang bebas menjelajahi keindahan makna di balik angka.
 
 
-> ### 📋 Audit Grafik Mandiri
+> ### Audit Grafik Mandiri
 >
 > Saat Anda merancang salindia presentasi di tempat kerja, menyusun modul ajar di sekolah, atau memeriksa tugas anak di rumah, gunakan panduan reduksi beban kognitif ini:
 >
@@ -147,13 +147,13 @@ Kertas tidak perlu dibuang sepenuhnya dari peradaban sekolah. Kertas tetap memil
 
 
 
-> ### 🔍 Refleksi Nilai: Amanah Menjaga Potensi Akal Budi
+> ### Refleksi Nilai: Amanah Menjaga Potensi Akal Budi
 >
 > Akal budi, waktu belajar, dan memori kerja anak-anak kita adalah amanah mulia yang dianugerahkan oleh Allah Subhanahu wa Ta'ala. Membebani memori kerja generasi muda dengan hafalan prosedur mekanis yang tidak bermakna di era komputer adalah bentuk penyia-nyiaan terhadap potensi fitrah intelektual mereka. Pendidik dan orang tua memikul tanggung jawab moral (*Amanah Tarbawiyyah*) untuk membebaskan nalar anak dari belenggu hafalan buta, membimbing mereka memahami hakikat keteraturan ciptaan-Nya, dan mengasah kepekaan nalar kritis mereka demi kemaslahatan peradaban.
 
 
 
-> ### 🔭 Eksplorasi Visual
+> ### Eksplorasi Visual Mandiri
 >
 > Tantangan eksperimen kognitif ini dirancang agar dapat Anda praktikkan langsung di meja kerja kantor atau di meja belajar rumah:
 >

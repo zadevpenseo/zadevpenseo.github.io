@@ -2,7 +2,7 @@
 title: "Bab 7: Membimbing Nalar Kritis di Sekolah dan Rumah"
 description: "Tiga Tangga Literasi Data (Amanah, Tawazun, Tabayyun) dan panduan praktis guru serta orang tua."
 sidebar:
-  order: 8
+  order: 10
   label: "Bab 7: Nalar Kritis Sekolah & Rumah"
 head:
   - tag: meta
@@ -23,7 +23,7 @@ head:
 
 > *"Pendidikan terbaik bukanlah yang menjejalkan jawaban-jawaban siap saji ke kepala anak, melainkan yang dengan sabar membimbing mereka menyalakan lentera nalar dan mengajukan pertanyaan-pertanyaan yang tepat saat berhadapan dengan dunia nyata."*
 
-## Babak I: Percakapan di Meja Makan
+## Percakapan di Meja Makan
 
 Malam itu, di ruang tengah sebuah rumah keluarga sederhana, seorang anak perempuan kelas satu sekolah menengah pertama bernama Aisyah duduk termenung menatap buku pekerjaan rumah matematikanya. Di sampingnya, beberapa lembar kertas coretan berserakan dengan barisan angka yang telah dihapus berulang kali hingga kertasnya nyaris robek.
 
@@ -43,7 +43,7 @@ Tragedi pendidikan kita sering kali bermula ketika seorang anak yang memiliki ra
 
 Tugas kita sebagai orang tua di rumah dan pendidik di sekolah adalah mengubah arah haluan pertanyaan tersebut. Kita harus membimbing anak-anak kita melangkah dari pertanyaan hitungan mekanis menuju penyelidikan makna: *"Apa cerita sesungguhnya yang sedang disampaikan oleh angka-angka ini? Dan apa bagian cerita yang sengaja disembunyikan?"*.
 
-## Babak II: Lima Miskonsepsi Data yang Kerap Mengecoh Pelajar
+## Lima Miskonsepsi Data yang Kerap Mengecoh Pelajar
 
 Ketika mendampingi anak atau siswa belajar membaca grafik dan data kuantitatif, para pendidik dan orang tua kerap mendapati bahwa kekeliruan bernalar anak bukanlah disebabkan oleh ketidakmampuan berhitung aljabar, melainkan oleh bias kognitif alami. Ada lima miskonsepsi data yang paling sering mengecoh pikiran generasi muda:
 
@@ -89,7 +89,7 @@ Peluangnya kurang dari satu persen! Ketidakmampuan memperhitungkan kelangkaan la
 ### 5. Salah Membaca Arah Tren Akibat Sumbu yang Dipotong
 Ketika melihat grafik diagram batang yang sumbu vertikalnya dipotong di angka 95%, anak-anak dan bahkan para manajer di ruang rapat kantor sering kali berteriak cemas: *"Grafiknya anjlok ke jurang kehancuran!"*. Melatih anak untuk selalu memeriksa angka nol di sudut kiri bawah grafik adalah langkah pertama dalam membentuk imunitas visual terhadap manipulasi media dan kepanikan data di dunia kerja.
 
-## Babak III: Tiga Tangga Literasi Data untuk Ruang Kelas Kita
+## Tiga Tangga Literasi Data untuk Ruang Kelas Kita
 
 Bagaimana kita dapat menyusun sebuah panduan praktis yang mudah diterapkan oleh guru di sekolah dan orang tua di rumah untuk membimbing nalar kritis anak secara bertahap? 
 
@@ -132,7 +132,7 @@ Anak tangga tertinggi menuntut kemampuan evaluasi kritis tingkat tinggi terhadap
 - **Pilar Nilai Karakter:** **Tabayyun**  
   Anak dibekali dengan perisai skeptisisme ilmiah yang sehat dan keberanian moral untuk menginterogasi sebuah klaim. Mereka belajar untuk tidak menjadi korban propaganda digital, berani menuntut bukti metodologi yang sahih, dan senantiasa memverifikasi kebenaran sebelum menyebarkan sebuah informasi kepada khalayak ramai.
 
-## Babak IV: Seni Memfasilitasi Dialog Sokratik
+## Seni Memfasilitasi Dialog Sokratik
 
 Kunci keberhasilan membumikan Tiga Tangga Literasi Data ini tidak terletak pada penguasaan buku teks tebal, melainkan pada kemampuan pendidik dan orang tua dalam mempraktikkan dialog sokratik (*Socratic dialogue*). 
 
@@ -154,7 +154,7 @@ Mari kita perhatikan contoh cuplikan dialog sokratik antara seorang guru dan mur
 
 Dialog singkat di atas hanya membutuhkan waktu kurang dari tiga menit, namun dampak pembentukan nalar kritis yang tertanam di benak siswa jauh lebih abadi dibandingkan menghafalkan sepuluh definisi statistik di lembar ujian. Ketika anak dilatih untuk berpikir mandiri melalui pertanyaan penuntun, mereka sedang membangun imunitas kognitif yang akan melindungi masa depan mereka dari berbagai tipu daya informasi di era digital.
 
-## Babak V: Rumah dan Sekolah sebagai Ekosistem Integritas
+## Rumah dan Sekolah sebagai Ekosistem Integritas
 
 Membina nalar kritis anak pada hakikatnya adalah ikhtiar merawat masa depan peradaban. Di era ketika kecerdasan buatan dapat memproduksi ribuan grafik dan artikel meyakinkan dalam hitungan detik, anak-anak kita tidak lagi membutuhkan sekolah yang sekadar melatih kecepatan berhitung mekanis. Mereka membutuhkan ekosistem belajar yang menumbuhkan kejernihan nurani dan ketajaman akal sehat.
 
@@ -163,7 +163,7 @@ Ketika orang tua di meja makan rumah terbiasa mengajak anak berdiskusi mengenai 
 Kita sedang mempersiapkan generasi baru pemimpin bangsa yang tidak silau oleh retorika angka, tidak gentar menghadapi klaim data yang manipulatif, dan selalu memegang teguh prinsip bahwa setiap data kuantitatif harus dipertanggungjawabkan di hadapan kebenaran, keadilan, dan kemanusiaan.
 
 
-> ### 📋 Audit Grafik Mandiri
+> ### Audit Grafik Mandiri
 >
 > Saat Anda mendampingi anak mengerjakan tugas data di rumah atau memfasilitasi diskusi kelompok siswa di ruang kelas, gunakan protokol dialog tiga tangga ini:
 >
@@ -174,13 +174,13 @@ Kita sedang mempersiapkan generasi baru pemimpin bangsa yang tidak silau oleh re
 
 
 
-> ### 🔍 Refleksi Nilai: Tabayyun dalam Pengasuhan dan Pendidikan
+> ### Refleksi Nilai: Tabayyun dalam Pengasuhan dan Pendidikan
 >
 > Mendidik nalar kritis pada anak adalah wujud pelaksanaan perintah *Tabayyun* sejak usia dini. Rasulullah Shallallahu 'Alaihi Wasallam bersabda: *"Cukuplah seseorang dianggap berdusta apabila ia menceritakan setiap apa yang ia dengar (tanpa menyaringnya lebih dahulu)"* (HR. Muslim). Dalam konteks era digital, menceritakan kembali infografis palsu tanpa memverifikasi sumbernya adalah kelalaian moral yang merusak kepercayaan publik. Membiasakan anak untuk selalu menguji keabsahan informasi adalah sedekah intelektual terbaik dari orang tua demi menjaga kesucian akal dan akhlak generasi masa depan.
 
 
 
-> ### 🔭 Eksplorasi Visual
+> ### Eksplorasi Visual Mandiri
 >
 > Tantangan investigasi visual keluarga ini dirancang agar dapat dilakukan di rumah menggunakan bahan bacaan harian apa pun:
 >

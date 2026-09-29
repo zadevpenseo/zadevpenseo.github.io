@@ -2,7 +2,7 @@
 title: "Bab 3: Epistemologi Tabayyun: Seni Menguji Klaim"
 description: "Penerapan prinsip Tabayyun pada ukuran sampel, margin of error, dan filter verifikasi output Generative AI."
 sidebar:
-  order: 4
+  order: 6
   label: "Bab 3: Epistemologi Tabayyun"
 head:
   - tag: meta
@@ -23,7 +23,7 @@ head:
 
 > *"Angka persentase sering kali bekerja laksana mantra sihir modern. Ketika seseorang menyitir bahwa delapan puluh persen orang menyetujui sebuah pendapat, nalar kritis publik kerap seketika bungkam, seolah angka telah menghapuskan segala ruang untuk bertanya."*
 
-## Babak I: Ketika Angka Menjadi Mantra Penakluk
+## Ketika Angka Menjadi Mantra Penakluk
 
 Sebuah peristiwa lumrah kerap kita saksikan di ruang rapat kantor, seminar pendidikan, hingga perdebatan hangat di linimasa media sosial: seseorang memproyeksikan salindia presentasi dengan tulisan berukuran besar: *"Survei Membuktikan: 85% Publik Puas terhadap Layanan Kami"*. Di bawah angka tersebut, tercantum grafik lingkaran dengan warna-warna cerah yang memikat mata.
 
@@ -35,7 +35,7 @@ Ketika kita mulai mengajukan pertanyaan-pertanyaan ini, mantra penakluk itu perl
 
 Sikap kritis untuk tidak menelan mentah-mentah sebuah klaim sebelum menguji keabsahan sumbernya adalah inti dari apa yang kita sebut sebagai epistemologi *Tabayyun*. Dalam tradisi etika universal dan khazanah pemikiran Islam, tabayyun bukanlah kepasifan moral yang menuntut kita menutup mata dari realitas. Sebaliknya, tabayyun adalah disiplin penyelidikan kebenaran yang sangat aktif. Tabayyun adalah keberanian akal budi untuk menuntut bukti sahih, melacak asal-usul data, dan membedah metodologi di balik setiap angka yang disuguhkan ke hadapan publik.
 
-## Babak II: Komplikasi di Era Banjir Informasi dan Halusinasi AI
+## Komplikasi di Era Banjir Informasi dan Halusinasi AI
 
 Kebutuhan akan nalar tabayyun melonjak secara eksponensial di abad kedua puluh satu. Dahulu, informasi palsu menyebar melalui desas-desus lisan dari mulut ke mulut atau selebaran gelap di pinggir jalan yang mudah kita kenali kepalsuannya. Hari ini, klaim-klaim menyesatkan hadir dengan pakaian yang sangat anggun dan terhormat: infografis beresolusi tinggi, kutipan angka persentase desimal yang tampak presisi, dan istilah-istilah metodologi yang terdengar sangat meyakinkan.
 
@@ -47,7 +47,7 @@ Mesin dapat dengan sangat meyakinkan menciptakan angka persentase fiktif, mengut
 
 Untuk menjadi pembaca data yang merdeka di era kecerdasan buatan, kita harus memahami cara kerja inferensi statistik modern. Kita perlu menguasai dua pilar utama di balik setiap survei: teori penarikan sampel (*sampling theory*) dan perhitungan batas kesalahan (*margin of error*).
 
-## Babak III: Membedah Anatomi Sampel dan Galat Baku
+## Membedah Anatomi Sampel dan Galat Baku
 
 Bagaimana sesungguhnya ilmu statistika bekerja untuk memotret realitas masyarakat yang sangat luas? Bayangkan seorang koki ulung yang sedang memasak sepanci besar sup lezat untuk pesta ratusan orang. Apakah sang koki perlu meminum seluruh kuah di dalam panci besar itu hanya untuk memastikan apakah rasa asinnya sudah pas?
 
@@ -88,7 +88,7 @@ Dari pemahaman formula dan grafik kerucut ini, kita dapat menarik tiga kaidah ta
 2. **Kerapuhan Survei Skala Mikro:** Menilai preferensi ribuan siswa di sebuah sekolah hanya berdasarkan jajak pendapat terhadap dua puluh orang teman sekelas adalah tindakan ceroboh secara epistemologis, karena margin kesalahannya teramat besar.
 3. **Kualitas Keterwakilan Melampaui Jumlah Mutlak:** Seribu responden yang ditarik secara acak dan mewakili sebaran usia, jenis kelamin, serta status sosial ekonomi masyarakat jauh lebih sahih daripada sepuluh ribu responden yang mengisi angket sukarela di media sosial yang didominasi oleh kelompok tertentu saja.
 
-## Babak IV: Pelajaran Sejarah, Ketika Survei Raksasa Tumbang
+## Pelajaran Sejarah, Ketika Survei Raksasa Tumbang
 
 Untuk membuktikan bahwa ukuran data yang masif tidak menjamin kebenaran jika metodologinya cacat, sejarah mencatatkan salah satu kegagalan survei paling terkenal di dunia: pemilihan presiden Amerika Serikat tahun 1936.
 
@@ -106,7 +106,7 @@ Pada saat yang bersamaan, seorang pionir riset opini publik muda bernama George 
 
 Pelajaran dari peristiwa tahun 1936 ini abadi: dalam dunia data, satu sendok kuah sup yang diaduk dengan jujur jauh lebih berharga daripada sepanci sup penuh lemak yang diambil hanya dari permukaan atasnya. Ukuran data yang besar (*Big Data*) tidak pernah bisa menebus dosa dari metodologi pengambilan sampel yang bias.
 
-## Babak V: Tiga Rukun Uji Tabayyun dalam Kehidupan Nyata
+## Tiga Rukun Uji Tabayyun dalam Kehidupan Nyata
 
 Bagaimana kita mengamalkan epistemologi tabayyun saat membaca berita di koran pagi, laporan kinerja di tempat kerja, atau diskusi komite sekolah? Kita dapat menerapkan tiga rukun pemeriksaan data berikut:
 
@@ -123,7 +123,7 @@ Bentuk pertanyaan sangat menentukan jawaban yang dihasilkan. Perhatikan perbedaa
 
 Pertanyaan B secara eksplisit menggunakan kata-kata bernuansa emosional ("anak Anda", "birokrasi") yang menggiring responden untuk menjawab tidak setuju. Data kuantitatif yang dipanen dari pertanyaan yang manipulatif adalah data yang cacat sejak dari lahir.
 
-## Babak VI: Merawat Nurani dan Akal Sehat Bersama
+## Merawat Nurani dan Akal Sehat Bersama
 
 Pada akhirnya, epistemologi tabayyun bukan sekadar seperangkat rumus matematika di atas kertas. Tabayyun adalah perisai peradaban yang melindungi martabat manusia dari tirani kebohongan yang terstruktur. 
 
@@ -136,7 +136,7 @@ Nalar tabayyun mengingatkan kita pada pesan luhur dalam Kitab Suci:
 Telinga kita untuk menyimak penjelasan, mata kita untuk mengamati fakta, dan hati nurani kita untuk menimbang keadilan. Memadukan ketiganya saat membaca angka adalah wujud nyata dari penghormatan terhadap anugerah akal budi yang telah dianugerahkan kepada kita.
 
 
-> ### 📋 Audit Grafik Mandiri
+> ### Audit Grafik Mandiri
 >
 > Setiap kali Anda menjumpai klaim survei opini publik atau hasil analisis kuantitatif di berita daring atau presentasi rapat, gunakan lima langkah audit tabayyun ini:
 >
@@ -148,13 +148,13 @@ Telinga kita untuk menyimak penjelasan, mata kita untuk mengamati fakta, dan hat
 
 
 
-> ### 🔍 Refleksi Nilai: Tabayyun sebagai Perlindungan Akal Budi
+> ### Refleksi Nilai: Tabayyun sebagai Perlindungan Akal Budi
 >
 > Dalam khazanah etika peradaban, sikap tabayyun adalah pilar penjaga keadilan sosial. Menerima sebuah klaim kuantitatif secara membabi buta hanya karena angkanya mengonfirmasi prasangka kita adalah bentuk kemalasan intelektual. Sebaliknya, menolak data yang sahih hanya karena kita tidak menyukai kenyataan yang disajikannya adalah bentuk kesombongan berpikir. Tabayyun menuntun kita berdiri tegak di tengah: berani menguji setiap klaim dengan ketat, namun bersikap lapang dada menerima kebenaran faktual apa pun yang terbukti secara objektif.
 
 
 
-> ### 🔭 Eksplorasi Visual
+> ### Eksplorasi Visual Mandiri
 >
 > Tantangan eksperimen probabilitas ini dapat Anda lakukan secara langsung bersama keluarga di rumah atau rekan kerja di kantor menggunakan alat sederhana:
 >

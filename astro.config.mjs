@@ -98,6 +98,8 @@ export default defineConfig({
           label: '6. Monograf: Nalar di Balik Angka',
           items: [
             { label: 'Pengantar & Manifesto', link: '/monograf/nalar-di-balik-angka/' },
+            { label: 'Panduan Membaca & Peta Instrumen', link: '/monograf/nalar-di-balik-angka/panduan-membaca/' },
+            { label: 'Informasi Penerbitan & Hak Cipta', link: '/monograf/nalar-di-balik-angka/informasi-penerbitan/' },
             { label: 'Bab 1: Menghafal Rumus', link: '/monograf/nalar-di-balik-angka/bab-01-menghafal-rumus-buta-makna/' },
             { label: 'Bab 2: Manipulasi Visual', link: '/monograf/nalar-di-balik-angka/bab-02-anatomi-manipulasi-visual/' },
             { label: 'Bab 3: Epistemologi Tabayyun', link: '/monograf/nalar-di-balik-angka/bab-03-epistemologi-tabayyun-seni-menguji-klaim/' },
@@ -106,6 +108,9 @@ export default defineConfig({
             { label: 'Bab 6: Laboratorium Visual', link: '/monograf/nalar-di-balik-angka/bab-06-laboratorium-visual-di-atas-layar/' },
             { label: 'Bab 7: Nalar Kritis Sekolah & Rumah', link: '/monograf/nalar-di-balik-angka/bab-07-membimbing-nalar-kritis-di-sekolah-dan-rumah/' },
             { label: 'Bab 8: Menavigasi Algoritma', link: '/monograf/nalar-di-balik-angka/bab-08-menavigasi-dunia-yang-dipenuhi-algoritma/' },
+            { label: 'Glosarium Istilah', link: '/monograf/nalar-di-balik-angka/glosarium/' },
+            { label: 'Tentang Penulis', link: '/monograf/nalar-di-balik-angka/tentang-penulis/' },
+            { label: 'Kolofon & Catatan Produksi', link: '/monograf/nalar-di-balik-angka/kolofon/' },
           ],
         },
       ],
