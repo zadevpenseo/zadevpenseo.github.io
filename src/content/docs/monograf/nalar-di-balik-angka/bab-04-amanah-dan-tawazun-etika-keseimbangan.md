@@ -111,7 +111,7 @@ Pelajaran dari Paradoks Simpson memberikan renungan etis dan filosofis yang sang
 
 Di sinilah dua nilai universal yang dijunjung tinggi dalam peradaban manusia dan ajaran Islam menemukan relevansi praktisnya:
 
-### 1. Prinsip Tawazun (Proporsionalitas dan Keseimbangan Konteks)
+### Prinsip Tawazun (Proporsionalitas dan Keseimbangan Konteks)
 Kata *tawazun* berasal dari akar kata timbangan (*al-mizan*). Dalam Al-Quran surat Ar-Rahman ayat 7 hingga 9, Allah menegaskan bahwa alam semesta ditegakkan di atas pilar keseimbangan, dan manusia diperintahkan untuk menegakkan timbangan tersebut dengan adil tanpa menguranginya.
 
 Dalam analitik data, bersikap tawazun berarti menolak segala bentuk penyederhanaan yang gegabah (*oversimplification*). Seorang analis yang berjiwa tawazun tidak akan pernah puas hanya dengan menyajikan angka rata-rata tunggal nasional atau angka pertumbuhan gabungan perusahaan. Ia selalu menimbang konteks:
@@ -121,7 +121,7 @@ Dalam analitik data, bersikap tawazun berarti menolak segala bentuk penyederhana
 
 Tawazun menuntut kita untuk selalu memeriksa rincian lapisan data secara seimbang sebelum menjatuhkan vonis kebijakan.
 
-### 2. Prinsip Amanah (Integritas Representasi dan Pencegahan Framing Jahat)
+### Prinsip Amanah (Integritas Representasi dan Pencegahan Framing Jahat)
 Prinsip *Amanah* menuntut kejujuran intelektual mutlak. Di dunia korporat, pemasaran politik, dan advokasi sosial modern, Paradoks Simpson kerap dieksploitasi secara sengaja oleh konsultan komunikasi yang tidak bertanggung jawab.
 
 Sebuah perusahaan yang ingin menutupi penurunan upah buruh dapat menggabungkan data gaji manajer eksekutif ke dalam tabel upah umum, sehingga angka rata-rata pendapatan karyawan tampak meningkat. Sebaliknya, seorang politisi yang ingin menjatuhkan program layanan kesehatan pemerintah dapat sengaja menyembunyikan data subkelompok lansia untuk memperlihatkan bahwa angka kematian di rumah sakit rujukan seolah meningkat.
@@ -132,17 +132,17 @@ Menyembunyikan variabel perancu yang relevan demi memaksakan sebuah narasi adala
 
 Bagaimana kita menerapkan nalar tawazun dan kewaspadaan terhadap Paradoks Simpson dalam rutinitas keseharian di tempat kerja, sekolah, maupun kehidupan bermasyarakat? Mari kita bedah tiga ranah penerapan konkret:
 
-### 1. Evaluasi Kinerja Karyawan dan Guru
+### Evaluasi Kinerja Karyawan dan Guru
 Di sebuah perusahaan multinasional atau yayasan pendidikan swasta, manajemen kerap membandingkan kinerja penjualan antardivisi atau tingkat kelulusan ujian antarsekolah. Divisi A yang beroperasi di kota metropolitan dengan daya beli tinggi sering kali mencatatkan angka penjualan rata-rata lebih tinggi dibandingkan Divisi B yang beroperasi di kota kecil. 
 
 Seorang manajer yang bijak dan berkeadilan tidak akan langsung memberi bonus kepada Divisi A dan menghukum Divisi B. Ia akan memeriksa pangsa pasar lokal: bisa jadi Divisi B sesungguhnya berhasil merebut 80% pasar di kotanya (performa luar biasa), sementara Divisi A hanya merebut 20% pasar di kotanya meskipun nilai nominalnya besar. Menilai keberhasilan tanpa menimbang skala kapasitas lokal adalah kezaliman manajerial.
 
-### 2. Membaca Berita Kesehatan dan Uji Klinis Obat
+### Membaca Berita Kesehatan dan Uji Klinis Obat
 Di era pandemi atau pengujian vaksin baru, media massa sering memberitakan perbandingan angka kematian antara pasien yang divaksinasi dan yang tidak divaksinasi. Ada momen ketika angka mentah rumah sakit memperlihatkan bahwa jumlah pasien meninggal yang sudah divaksinasi tampak lebih banyak daripada yang belum divaksinasi.
 
 Bagi mereka yang buta terhadap Paradoks Simpson, angka ini segera dijadikan amunisi untuk menyebarkan teori konspirasi bahwa vaksin tidak berguna. Namun, ketika data tersebut dibedah berdasarkan kelompok usia, fakta sejati tersingkap: kelompok lansia di atas usia tujuh puluh tahun yang memiliki komorbid memang memiliki risiko kematian alami yang jauh lebih tinggi, dan hampir seluruh lansia tersebut telah divaksinasi sebagai kelompok prioritas. Di setiap kelompok umur yang sama, vaksinasi terbukti memangkas risiko kematian hingga lebih dari sembilan puluh persen. Mengabaikan variabel usia adalah kesalahan fatal yang membahayakan keselamatan kesehatan masyarakat.
 
-### 3. Pengambilan Keputusan Berbasis Generative AI
+### Pengambilan Keputusan Berbasis Generative AI
 Di era kecerdasan buatan, banyak platform analisis data otomatis (*Automated Business Intelligence*) yang merangkum data perusahaan secara instan menggunakan algoritma pembelajaran mesin. Ketika prompt dimasukkan: *"Bandingkan kepuasan pelanggan cabang timur dan cabang barat"*, sistem AI sering kali hanya menyajikan ringkasan rata-rata tunggal tanpa memverifikasi apakah ada fenomena Paradoks Simpson di tingkat kategori produk.
 
 Sebagai manusia yang memegang kendali nalar dan nurani, kita tidak boleh menelan ringkasan otomatis mesin tersebut secara mentah-mentah. Kita wajib menginstruksikan sistem AI secara eksplisit: *"Ujilah apakah ada bias agregasi atau Paradoks Simpson dengan menampilkan tabulasi silang berdasarkan kategori ukuran transaksi dan jenis pelanggan."* Dengan cara ini, kita menjadikan kecerdasan buatan sebagai mitra analitik yang patuh pada prinsip kehati-hatian, bukan penentu tunggal yang menyesatkan arah kebijakan institusi. Kemampuan mengarahkan mesin untuk membongkar variabel perancu adalah keterampilan kepemimpinan data yang sangat vital di abad modern.
@@ -178,6 +178,9 @@ Sebagai manusia yang memegang kendali nalar dan nurani, kita tidak boleh menelan
 >    - Sekarang, hitung total persentase kesembuhan keseluruhan: Rumah Sakit Sehat tampak memiliki angka kelulusan 85% (102 dari 120), sementara Rumah Sakit Utama tampak hanya 74% (89 dari 120)!
 >    - Tunjukkan tabel ini kepada rekan Anda untuk membuktikan bagaimana rumah sakit yang lebih kompeten bisa tampak lebih buruk hanya karena mayoritas pasiennya adalah kasus berat.
 >
-> 2. **Eksplorasi Digital Lanjutan (StatsLab Simpson's Explorer):**
->    - Kunjungi modul *Eksplorasi Paradoks Simpson* pada platform **StatsLab** melalui tautan rujukan buku ini.
+> 2. **Eksplorasi Digital Lanjutan (StatsLab DSI Simpson Explorer):**
+>    - Kunjungi modul *Eksplorasi Paradoks Simpson* pada platform **StatsLab DSI (Dasbor Statistika Interaktif)**[^statslab-dsi-b4] melalui tautan rujukan buku ini.
 >    - Gerakkan titik-titik data pada diagram pencar (*scatter plot*). Amati bagaimana garis regresi keseluruhan dapat bergradien negatif meluncur ke bawah, meskipun garis regresi di setiap klaster subkelompok bergradien positif menanjak ke atas. Saksikan sendiri bagaimana visualisasi interaktif mampu melenyapkan keraguan nalar Anda terhadap misteri Paradoks Simpson.
+
+
+[^statslab-dsi-b4]: StatsLab DSI (Dasbor Statistika Interaktif). Repo: github.com/zaditprodakwah/statslab. Demo: statslabmedia.vercel.app (diakses 30 September 2026). Dasbor dapat diperbarui setelah buku terbit; latihan kertas di kotak ini tetap sahih tanpa peramban.

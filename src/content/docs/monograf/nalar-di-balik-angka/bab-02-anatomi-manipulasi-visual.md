@@ -43,7 +43,7 @@ Di era media sosial yang digerakkan oleh algoritma rekomendasi umpan-klik (*clic
 
 ## Enam Taksonomi Manipulasi Grafik
 
-### 1. Pemotongan Sumbu Vertikal (Truncated Y-Axis)
+### Pemotongan Sumbu Vertikal (Truncated Y-Axis)
 
 Bentuk manipulasi paling klasik, paling sederhana, namun paling mematikan dalam sejarah visualisasi data adalah pemotongan sumbu vertikal ($y_{\min} \neq 0$). Diagram batang (*bar chart*) bekerja berdasarkan prinsip proporsionalitas luas bidang: mata kita menilai besaran kuantitas data berdasarkan tinggi batang relatif terhadap garis dasar (*baseline*).
 
@@ -60,7 +60,9 @@ Perhatikan perbandingan pada Gambar 2.1. Pada Panel A, sumbu tegak dimulai dari 
 
 Namun, ketika sumbu tegak dikembalikan ke titik nol objektif sebagaimana tampak pada Panel B, mata kita segera menangkap kenyataan yang sesungguhnya: tingkat kelulusan siswa pada kedua tahun tersebut sejatinya sudah berada di puncak performa yang luar biasa stabil. Selisih $1{,}2\%$ adalah peningkatan wajar yang tidak selayaknya digambarkan laksana ledakan spektakuler. Memotong sumbu pada diagram batang adalah pelanggaran berat terhadap etika geometri data, karena diagram batang mewajibkan keterikatan mutlak antara panjang fisik batang dengan rasio nilai aslinya.
 
-### 2. Distorsi Perspektif Tiga Dimensi (3D Perspective Distortion)
+Perlu satu nuansa agar kaidah ini tidak menjadi overgeneralisasi. Ketegasan titik nol di atas berlaku untuk diagram batang dan lingkaran yang dibaca lewat panjang atau luas. Untuk diagram garis deret waktu, komunitas praktisi (misalnya diskusi r/dataisbeautiful tentang *truncated axis* dan *dual axes*) dan literatur visualisasi (Cairo, 2019; Tufte, 1983) sepakat pada posisi kontekstual: memperbesar rentang sumbu garis untuk suhu global, harga saham harian, atau suhu turbin sekitar 900 Kelvin adalah sah selama sumbu diberi label jujur, diskala linear konsisten, dan anotasi menjelaskan pembesaran. Yang tetap dilarang adalah menyembunyikan pemotongan, mencampur dua satuan tak sepadan, atau memakai pembesaran untuk memanaskan emosi. Kaidahnya: batang dan pai wajib nol, garis boleh zoom dengan pengungkapan penuh (Chandler & Sweller, 1992; Sweller et al., 1998).
+
+### Distorsi Perspektif Tiga Dimensi (3D Perspective Distortion)
 
 Di ruang rapat kantor modern maupun selebaran promosi lembaga bimbingan belajar, kita kerap menjumpai diagram lingkaran (*pie chart*) dan diagram batang yang dihias dengan efek tiga dimensi (3D). Banyak orang mengira bahwa penambahan bayangan dan kemiringan sudut adalah upaya artistik untuk mempercantik laporan. Faktanya, dalam kaidah visualisasi data, efek 3D tanpa fungsi spasial riil adalah racun persepsi (Tufte, 1983).
 
@@ -68,7 +70,7 @@ Ketika sebuah diagram lingkaran dimiringkan secara perspektif, hukum optik proye
 
 Sebagai contoh, sebuah potongan data yang hanya bernilai 20% dapat tampak jauh lebih dominan dan perkasa daripada potongan data bernilai 35% hanya karena potongan 20% diletakkan di bagian depan dengan sudut kemiringan tajam. Di mata pembaca yang membaca sepintas, potongan depan itulah yang dianggap sebagai suara mayoritas. Menambahkan dimensi semu pada data datar dua dimensi adalah trik manipulasi yang mengeksploitasi keterbatasan sudut pandang manusia.
 
-### 3. Skala Non-Linear yang Menyesatkan (Non-Linear and Inconsistent Scaling)
+### Skala Non-Linear yang Menyesatkan (Non-Linear and Inconsistent Scaling)
 
 Sumbu koordinat adalah timbangan sebuah grafik. Timbangan yang adil mensyaratkan jarak fisik yang seragam untuk mewakili kenaikan nilai yang setara. Pada sumbu linear, jarak antara angka 10 ke 20 harus sama persis dengan jarak antara angka 20 ke 30.
 
@@ -76,7 +78,7 @@ Manipulasi terjadi ketika pembuat grafik mempermainkan interval sumbu secara sem
 
 Dengan cara ini, laju pertumbuhan utang atau perlambatan ekonomi yang sejatinya melandai dapat ditarik menjadi garis lurus yang tampak menanjak curam, atau sebaliknya. Ketika skala sumbu tidak konsisten, grafik kehilangan integritas geometrisnya dan berubah menjadi karikatur data.
 
-### 4. Pemilihan Rentang Waktu Terpilih (Cherry-Picking Time Intervals)
+### Pemilihan Rentang Waktu Terpilih (Cherry-Picking Time Intervals)
 
 Data deret waktu (*time-series*) adalah sasaran empuk bagi mereka yang ingin mengarang cerita sepihak. Sebuah fenomena ekonomi, suhu iklim, atau performa kepengurusan organisasi selalu mengalami fluktuasi siklikal: ada masa naik, ada masa turun, dan ada masa tenang.
 
@@ -84,7 +86,7 @@ Trik *cherry-picking* dilakukan dengan cara memotong jendela waktu pengamatan se
 
 Jika pengurus yayasan ingin menampilkan citra keberhasilan semu kepada para donatur, mereka cukup memotong rentang waktu grafik: mereka membuang data sembilan tahun sebelumnya, dan hanya menampilkan grafik dari bulan Syaban hingga bulan Syawal tahun lalu. Garis grafik akan tampak melesat ke langit, memberi kesan bahwa yayasan sedang berada dalam masa keemasan, padahal tren makro jangka panjangnya sedang berada di ambang kebangkrutan. Menilai tren tanpa melihat horizon waktu yang komprehensif adalah kekeliruan fatal yang kerap memicu salah langkah dalam pengambilan keputusan.
 
-### 5. Jebakan Korelasi Palsu (Spurious Correlations)
+### Jebakan Korelasi Palsu (Spurious Correlations)
 
 Di era komputasi modern, membandingkan ribuan deret data acak menggunakan perangkat lunak statistik sangatlah mudah. Jika kita memasukkan ratusan variabel acak ke dalam komputer, hukum peluang memastikan bahwa kita akan menemukan beberapa pasang variabel yang memiliki koefisien korelasi linear ($r$) sangat tinggi mendekati satu, murni karena faktor kebetulan matematis semata.
 
@@ -101,13 +103,13 @@ Formula di atas murni mengukur sejauh mana dua variabel bergerak bersama dalam p
 
 
 
-Perhatikan Gambar 2.2 yang mengadaptasi fenomena korelasi palsu terkenal. Kurva tingkat konsumsi keju per kapita bergerak beriringan secara sangat harmonis dengan kurva jumlah lulusan doktor teknik sipil ($r = 0{,}99$). Apakah ini berarti makan keju membuat seseorang menjadi ahli struktur jembatan? Ataukah belajar teknik sipil memicu kecanduan keju?
+Perhatikan Gambar 2.2 yang mengadaptasi fenomena korelasi palsu terkenal (data ilustratif yang disintesis menyerupai pola Tyler Vigen). Kurva tingkat konsumsi keju per kapita bergerak beriringan secara sangat harmonis dengan kurva jumlah lulusan doktor teknik sipil ($r = 0{,}99$, terhitung dari data yang diplot). Apakah ini berarti makan keju membuat seseorang menjadi ahli struktur jembatan? Ataukah belajar teknik sipil memicu kecanduan keju?
 
 Tentu saja tidak. Keduanya sama sekali tidak memiliki hubungan sebab-akibat (*causality*). Dalam tradisi filsafat Islam dan kaidah ushul fikih, para ulama membedakan secara tegas antara hubungan penyertaan kebiasaan (*iqtiran*) dengan hubungan sebab-akibat hakiki (*sababiyyah*). Hanya karena dua peristiwa terjadi bersamaan secara berulang, akal sehat kita tidak boleh secara serampangan menetapkan bahwa peristiwa pertama adalah penyebab bagi peristiwa kedua tanpa adanya bukti mekanisme kausalitas yang nyata dan rasional.
 
 Namun, di media massa, panggung seminar, dan lini masa media sosial, grafik semacam ini kerap dipamerkan untuk membenarkan teori-teori tak masuk akal. Seseorang bisa saja menghubungkan grafik peningkatan pengguna gawai pintar di sebuah kota dengan grafik penurunan angka kehadiran salat berjamaah di masjid, lalu menyimpulkan secara tergesa-gesa bahwa layar ponsel secara langsung merusak keimanan warga, tanpa meneliti variabel lain seperti perubahan jam kerja buruh atau pergeseran demografi permukiman. Mengacaukan korelasi dengan kausalitas adalah salah satu bentuk kebutaan nalar yang paling berbahaya di era banjir data.
 
-### 6. Jebakan Sumbu Ganda (Misleading Dual Y-Axes)
+### Jebakan Sumbu Ganda (Misleading Dual Y-Axes)
 
 Teknik manipulasi yang paling canggih dan sering lolos dari pengawasan para profesional di ruang rapat kantor adalah penggunaan sumbu ganda (*dual Y-axes*). Grafik sumbu ganda menempatkan dua variabel dengan satuan berbeda pada satu bidang gambar yang sama: sumbu Y sebelah kiri untuk variabel pertama (misalnya pendapatan dalam miliar rupiah), dan sumbu Y sebelah kanan untuk variabel kedua (misalnya jumlah keluhan pelanggan dalam satuan orang).
 
@@ -171,7 +173,10 @@ Ketika generasi muda terjun ke masyarakat, baik sebagai pendidik, pengurus yayas
 >    - Gunakan penggaris untuk mengukur tinggi batang fisik dalam satuan milimeter. Hitung rasio fisik antara batang tertinggi dan terendah.
 >    - Bandingkan rasio fisik tersebut dengan rasio nilai angka asli yang tertulis di atasnya. Jika angka aslinya hanya berbeda 5% tetapi tinggi fisik batangnya berbeda 300%, Anda baru saja menemukan contoh nyata manipulasi sumbu terpotong di lingkungan sekitar Anda. Bagikan temuan ini kepada rekan atau kawan Anda sebagai bahan diskusi nalar.
 >
-> 2. **Eksplorasi Digital Lanjutan (StatsLab Interactive):**
->    - Saat berada di depan komputer atau gawai digital, buka modul simulasi visualisasi interaktif pada platform **StatsLab** melalui tautan rujukan digital buku ini.
+> 2. **Eksplorasi Digital Lanjutan (StatsLab DSI Interactive):**
+>    - Saat berada di depan komputer atau gawai digital, buka modul simulasi visualisasi interaktif pada platform **StatsLab DSI (Dasbor Statistika Interaktif)**[^statslab-dsi-b2] melalui tautan rujukan digital buku ini.
 >    - Pilih menu *Manipulasi Sumbu*. Geser tombol interaktif untuk mengubah sudut kemiringan diagram lingkaran dari tampilan dua dimensi datar menjadi sudut kemiringan tiga dimensi enam puluh derajat.
 >    - Perhatikan bagaimana potongan data minoritas yang diletakkan di bagian depan perlahan membesar dan mendominasi layar pandang Anda, membuktikan secara langsung bagaimana manipulasi perspektif optik mampu mengelabui persepsi manusia secara sistemik.
+
+
+[^statslab-dsi-b2]: StatsLab DSI (Dasbor Statistika Interaktif). Repo: github.com/zaditprodakwah/statslab. Demo: statslabmedia.vercel.app (diakses 30 September 2026). Dasbor dapat diperbarui setelah buku terbit; latihan kertas di kotak ini tetap sahih tanpa peramban.

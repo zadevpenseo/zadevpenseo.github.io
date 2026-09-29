@@ -47,24 +47,24 @@ Tugas kita sebagai orang tua di rumah dan pendidik di sekolah adalah mengubah ar
 
 Ketika mendampingi anak atau siswa belajar membaca grafik dan data kuantitatif, para pendidik dan orang tua kerap mendapati bahwa kekeliruan bernalar anak bukanlah disebabkan oleh ketidakmampuan berhitung aljabar, melainkan oleh bias kognitif alami. Ada lima miskonsepsi data yang paling sering mengecoh pikiran generasi muda:
 
-### 1. Mencampuradukkan Korelasi dengan Hubungan Sebab-Akibat
+### Mencampuradukkan Korelasi dengan Hubungan Sebab-Akibat
 Ini adalah jebakan berpikir paling jamak di seluruh dunia. Ketika anak melihat dua garis grafik yang sama-sama menanjak naik, otak mereka secara otomatis menyimpulkan bahwa peristiwa pertama menyebabkan peristiwa kedua. 
 
 Sebagai contoh, jika sebuah grafik memperlihatkan bahwa anak-anak yang memiliki sepatu olahraga mahal memiliki nilai matematika lebih tinggi, seorang siswa akan mudah menyimpulkan bahwa membeli sepatu baru akan mendongkrak nilai ujiannya. 
 
 Melalui dialog sokratik, pendidik dapat membimbing anak mengajukan pertanyaan penuntun: *"Apakah sepatunya yang membuat anak pintar berhitung, ataukah ada faktor orang tua yang mampu membelikan sepatu mahal sekaligus mampu membiayai les belajar tambahan?"*. Pertanyaan ini melatih anak mencari variabel ketiga (*confounding factor*) yang menjadi akar penyebab sesungguhnya.
 
-### 2. Mengabaikan Ukuran Sampel (*Sample Size Neglect*)
+### Mengabaikan Ukuran Sampel (*Sample Size Neglect*)
 Siswa kerap menarik generalisasi semesta yang tergesa-gesa hanya berdasarkan segelintir pengamatan di lingkungan terdekatnya. Seorang murid dapat dengan percaya diri berkata: *"Semua anak di kota kita pasti tidak suka makan sayur bayam, karena tiga orang teman sebangku saya semuanya menolak makan sayur siang ini"*. 
 
 Pendidik dapat memfasilitasi anak memahami kelemahan kesimpulan ini dengan analogi sederhana: *"Jika kamu mengambil tiga tetes air dari pinggir pantai dan tidak menemukan ikan di dalam sendokmu, apakah itu membuktikan bahwa lautan luas tidak memiliki ikan?"*. Analogi ini menanamkan kesadaran intuitif mengenai kerapuhan sampel kecil.
 
-### 3. Terpaku pada Angka Absolut (*Anchoring on Absolute Numbers*)
+### Terpaku pada Angka Absolut (*Anchoring on Absolute Numbers*)
 Ketika membaca berita utama di media massa yang memberitakan: *"Tahun Ini Jumlah Pelanggaran Lalu Lintas di Kota A Naik Sebanyak Seribu Kasus, Sementara di Kota B Hanya Naik Seratus Kasus"*, siswa cenderung langsung menyimpulkan bahwa pengemudi di Kota A jauh lebih buruk moralnya dibandingkan Kota B. 
 
 Siswa lupa menanyakan proporsi: bagaimana jika Kota A memiliki penduduk sepuluh juta jiwa (kenaikan 0,01%), sementara Kota B hanya berpenduduk lima puluh ribu jiwa (kenaikan 0,2%)? Membimbing anak untuk selalu membagi angka absolut dengan total populasi adalah keterampilan dasar untuk menumbuhkan cara pandang yang adil dan proporsional.
 
-### 4. Mengabaikan Laju Dasar (*Base Rate Neglect*)
+### Mengabaikan Laju Dasar (*Base Rate Neglect*)
 Bayangkan sebuah tes kesehatan digital baru yang diklaim memiliki tingkat akurasi 99% dalam mendeteksi sebuah virus langka yang hanya menjangkiti 1 dari 10.000 orang di sebuah wilayah. Jika seorang siswa atau karyawan kantor dinyatakan positif oleh alat tes tersebut, berapa peluang sesungguhnya bahwa orang tersebut benar-benar tertular virus? 
 
 Hampir seluruh siswa dan bahkan orang dewasa profesional di dunia kerja akan menjawab spontan: *"Sembilan puluh sembilan persen pasti tertular!"*. 
@@ -86,7 +86,7 @@ $$P(\text{Sakit} \mid \text{Positif}) = \frac{1}{101} \approx 0{,}99\%$$
 
 Peluangnya kurang dari satu persen! Ketidakmampuan memperhitungkan kelangkaan laju dasar di populasi sering kali memicu kepanikan massal, diagnosis keliru, dan pemborosan anggaran yang luar biasa, baik di bidang medis, pengambilan keputusan korporat, maupun evaluasi program publik.
 
-### 5. Salah Membaca Arah Tren Akibat Sumbu yang Dipotong
+### Salah Membaca Arah Tren Akibat Sumbu yang Dipotong
 Ketika melihat grafik diagram batang yang sumbu vertikalnya dipotong di angka 95%, anak-anak dan bahkan para manajer di ruang rapat kantor sering kali berteriak cemas: *"Grafiknya anjlok ke jurang kehancuran!"*. Melatih anak untuk selalu memeriksa angka nol di sudut kiri bawah grafik adalah langkah pertama dalam membentuk imunitas visual terhadap manipulasi media dan kepanikan data di dunia kerja.
 
 ## Tiga Tangga Literasi Data untuk Ruang Kelas Kita
@@ -192,6 +192,9 @@ Kita sedang mempersiapkan generasi baru pemimpin bangsa yang tidak silau oleh re
 >    - Terakhir, gunakan spidol merah untuk menandai kata-kata judul berita yang bernada menghakimi, bombastis, atau manipulasi visual pada sumbu grafik.
 >    - Saksikan bagaimana anak Anda berubah menjadi "detektif data cilik" yang mampu melihat perbedaan antara fakta objektif dengan opini framing media.
 >
-> 2. **Eksplorasi Digital Lanjutan (StatsLab Misconception Deconstructor):**
->    - Kunjungi modul *Membongkar Miskonsepsi Data* pada platform **StatsLab** melalui tautan rujukan digital buku ini.
+> 2. **Eksplorasi Digital Lanjutan (StatsLab DSI Misconception Deconstructor):**
+>    - Kunjungi modul *Membongkar Miskonsepsi Data* pada platform **StatsLab DSI (Dasbor Statistika Interaktif)**[^statslab-dsi-b7] melalui tautan rujukan digital buku ini.
 >    - Buka studi kasus interaktif *Korelasi vs Kausalitas*. Ajak anak menggeser variabel-variabel acak di layar dan amati bagaimana komputer dapat menemukan korelasi semu yang lucu (misalnya jumlah konsumsi es krim dengan serangan hiu di pantai), membuktikan secara visual betapa pentingnya nalar manusia dalam mengendalikan analisis mesin.
+
+
+[^statslab-dsi-b7]: StatsLab DSI (Dasbor Statistika Interaktif). Repo: github.com/zaditprodakwah/statslab. Demo: statslabmedia.vercel.app (diakses 30 September 2026). Dasbor dapat diperbarui setelah buku terbit; latihan kertas di kotak ini tetap sahih tanpa peramban.

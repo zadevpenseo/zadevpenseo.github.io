@@ -39,26 +39,26 @@ Di titik persimpangan sejarah inilah, literasi data menemukan peran tertingginya
 
 Untuk menavigasi rimba digital yang semakin pekat, kita harus memiliki keberanian untuk menyingkap tabir di balik cara kerja algoritma. Ada tiga ilusi sistemik yang paling sering mengaburkan kejernihan pandang masyarakat di era kecerdasan buatan:
 
-### 1. Gelembung Filter dan Ruang Gema (*Filter Bubbles and Echo Chambers*)
+### Gelembung Filter dan Ruang Gema (*Filter Bubbles and Echo Chambers*)
 Algoritma linimasa media sosial dan mesin pencari modern tidak dirancang oleh para insinyur teknologi untuk mencerdaskan kehidupan bangsa atau menyajikan kebenaran objektif. Algoritma tersebut dirancang untuk satu tujuan komersial tunggal: memaksimalkan keterikatan pengguna (*user engagement*) agar durasi menatap layar semakin lama demi menjual ruang iklan.
 
 Untuk memikat perhatian kita, algoritma secara terus-menerus mempelajari riwayat klik, durasi tontonan, dan kecenderungan emosional kita. Algoritma kemudian menyajikan informasi dan grafik yang secara khusus mengonfirmasi keyakinan serta prasangka awal kita (*confirmation bias*). 
 
 Jika seseorang memiliki kecurigaan terhadap kelompok tertentu, layar ponselnya akan terus-menerus dibanjiri oleh infografis yang memojokkan kelompok tersebut, sementara bukti-bukti tandingan yang menyejukkan disembunyikan ke dasar jurang digital. Terciptalah ruang gema (*echo chamber*): manusia merasa bahwa seluruh dunia menyetujui pendapatnya, padahal ia sedang terkurung di dalam gelembung cermin yang direkayasa oleh kode perangkat lunak.
 
-### 2. Bias Data Latih (*Training Data Bias*)
+### Bias Data Latih (*Training Data Bias*)
 Banyak orang keliru menganggap bahwa kecerdasan buatan adalah hakim yang sepenuhnya netral dan bebas dari prasangka manusia. Faktanya, kecerdasan buatan tidak jatuh dari langit hampa; kecerdasan buatan dilatih menggunakan tumpukan data historis yang ditulis oleh manusia di internet selama puluhan tahun terakhir.
 
 Jika data historis tersebut memuat prasangka rasial, ketimpangan gender, bias geografis, atau diskriminasi sosial ekonomi, maka sistem AI akan menyerap, mereplikasi, dan mengamplifikasi ketidakadilan tersebut dalam bentuk rekomendasi kuantitatif yang tampak objektif. 
 
 Sebagai contoh nyata, sebuah algoritma pemeringkat kredit bank atau penyaring lamaran kerja di negara maju terbukti secara konsisten memberi skor lebih rendah kepada pelamar dari kelompok minoritas atau perempuan, bukan karena mereka kurang kompeten, melainkan karena data historis masa lalu mencatat ketimpangan peluang yang dialami kelompok tersebut. Menelan rekomendasi algoritma tanpa memeriksa keadilan data latihnya adalah bentuk kezaliman modern yang berkedok efisiensi teknologi.
 
-### 3. Halusinasi Statistik dan Kepalsuan yang Fasih (*Fluent Hallucinations*)
+### Halusinasi Statistik dan Kepalsuan yang Fasih (*Fluent Hallucinations*)
 Kelemahan paling berbahaya dari model bahasa besar saat ini adalah ketidakmampuannya membedakan fakta empiris dari kebenaran probabilitas bahasa. Model AI dirancang untuk memprediksi kata-kata berikutnya yang terdengar paling masuk akal secara tata bahasa (*plausible output*), bukan untuk melakukan verifikasi kebenaran lapangan.
 
 Ketika ditanyai sebuah pertanyaan sulit mengenai data yang tidak diketahuinya, sistem AI tidak akan menjawab jujur: *"Saya tidak tahu"*. Sistem AI akan cenderung mengarang data: menciptakan persentase survei fiktif, mengutip nama jurnal ilmiah yang tidak pernah terbit, dan menyajikan grafik yang tampak meyakinkan dari angka-angka yang murni merupakan produk imajinasi mesin. Kepalsuan yang disampaikan dengan nada bicara yang sopan dan fasih adalah bentuk kebohongan yang paling sulit dideteksi oleh mata awam.
 
-### 4. Triad Kerusakan Algoritmik: Opasitas, Skala, dan Dampak
+### Triad Kerusakan Algoritmik: Opasitas, Skala, dan Dampak
 Sebagaimana diuraikan oleh matematikawan Cathy O'Neil dalam karyanya mengenai senjata kehancuran matematis, sebuah model algoritma yang berbahaya selalu memiliki tiga ciri khas:
 1. **Opasitas (*Opacity*):** Cara kerja dan pembobotan variabel di dalam model tertutup rapat dalam kotak hitam (*black box*), sehingga publik atau korban keputusan algoritma tidak dapat menuntut penjelasan rasional mengapa skor mereka rendah.
 2. **Skala (*Scale*):** Model tersebut diterapkan secara masif kepada jutaan orang sekaligus melalui sistem komputasi awan, sehingga kekeliruan kecil pada satu baris kode dapat merugikan hajat hidup orang banyak dalam tempo sekejap.
@@ -105,13 +105,13 @@ Selama ini, banyak pihak masih memandang literasi kuantitatif sebagai urusan mat
 
 Pendidikan literasi data etis dapat diintegrasikan secara organik ke dalam dua dimensi utama Profil Pelajar Pancasila melalui tiga tema projek nyata:
 
-### 1. Tema Gaya Hidup Berkelanjutan: Audit Jejak Karbon Sekolah
+### Tema Gaya Hidup Berkelanjutan: Audit Jejak Karbon Sekolah
 Siswa tidak sekadar membaca teori perubahan iklim, melainkan mengumpulkan data riil mengenai timbulan sampah plastik di kantin sekolah atau penggunaan energi listrik harian. Siswa belajar membuat grafik sebaran waktu, mengidentifikasi jam-jam pemborosan energi, dan mempresentasikan solusi berbasis bukti kepada kepala sekolah. Dalam projek ini, dimensi bernalar kritis diasah seraya menumbuhkan rasa tanggung jawab menjaga bumi ciptaan Tuhan.
 
-### 2. Tema Suara Demokrasi: Menyelenggarakan Jajak Pendapat Osis yang Adil
+### Tema Suara Demokrasi: Menyelenggarakan Jajak Pendapat Osis yang Adil
 Ketika sekolah menyelenggarakan pemilihan ketua OSIS atau evaluasi ekstrakurikuler, siswa dilatih untuk merancang survei opini publik yang memenuhi kaidah representasi acak (*stratified random sampling*). Siswa mempraktikkan bagaimana merumuskan pertanyaan kuesioner yang netral tanpa bias penggiringan, menghitung margin kesalahan, dan menyajikan hasil jajak pendapat dengan diagram batang berbasis nol. Mereka belajar bahwa demokrasi yang sehat membutuhkan kejujuran data (*Amanah*) dan kehati-hatian dalam mempublikasikan klaim (*Tabayyun*).
 
-### 3. Tema Rekayasa dan Teknologi: Membedah Bias Algoritma Media Sosial
+### Tema Rekayasa dan Teknologi: Membedah Bias Algoritma Media Sosial
 Siswa tingkat menengah diajak untuk mengamati linimasa akun media sosial masing-masing, mencatat jenis konten dan iklan yang disodorkan oleh algoritma, lalu mendiskusikan mengapa rekomendasi untuk setiap siswa sangat berbeda. Projek ini membuka mata generasi muda mengenai keberadaan gelembung filter (*filter bubbles*) dan melatih mereka untuk secara sadar mencari sudut pandang tandingan agar nalar mereka tidak terpenjara oleh keseragaman algoritma.
 
 Ketika sekolah, madrasah, dan perguruan tinggi merancang projek P5 berbasis data riil, matematika dan etika bersatu padu. Belajar tidak lagi terasa laksana siksaan hafalan rumus, melainkan menjelma menjadi petualangan pengabdian yang memuliakan kehidupan masyarakat.

@@ -57,7 +57,7 @@ Pengalaman pahit yang dialami Ahmad di ruang koperasi santri bukanlah kegagalan 
 
 Dalam risalahnya yang berjudul *Relational Understanding and Instrumental Understanding*, Skemp membedakan dua bentuk pemahaman manusia yang tampak serupa di permukaan namun memiliki jurang pemisah yang sangat dalam pada struktur kognitifnya:
 
-### 1. Pemahaman Instrumental (*Instrumental Understanding*)
+### Pemahaman Instrumental (*Instrumental Understanding*)
 Pemahaman instrumental adalah penguasaan "aturan tanpa alasan" (*rules without reasons*). Seseorang yang memiliki pemahaman instrumental tahu langkah-langkah mekanis untuk mencapai sebuah jawaban benar, tetapi tidak memahami jaringan konseptual yang menopang rumus tersebut. 
 
 Ketika seorang murid diajarkan bahwa rata-rata hitung sampel ($n$) diperoleh dengan membagi jumlah seluruh nilai pengamatan dengan ukuran sampel:
@@ -66,7 +66,7 @@ $$\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$$
 
 Ia menghafal urutan tombol kalkulator atau urutan goresan pena di kertas. Jika kita mengubah sedikit bentuk soalnya, atau jika kita bertanya mengapa nilai rata-rata sangat rentan terdistorsi oleh satu angka pencilan (*outlier*) yang ekstrem, pemahaman instrumentalnya akan runtuh seketika. Siswa tersebut layaknya orang asing yang menghafal peta belokan gang di sebuah kota kuno: ia tahu harus belok kanan setelah pohon beringin dan belok kiri di depan pos ronda, tetapi jika ada jalan yang ditutup, ia tersesat total karena tidak memiliki gambaran menyeluruh tentang tata ruang kota tersebut.
 
-### 2. Pemahaman Relasional (*Relational Understanding*)
+### Pemahaman Relasional (*Relational Understanding*)
 Sebaliknya, pemahaman relasional adalah kemampuan mengetahui apa yang harus dilakukan dan mengapa hal itu dilakukan (*knowing both what to do and why*). Dalam ranah relasional, matematika dipahami sebagai jalinan makna yang hidup. 
 
 Pembelajar yang memiliki pemahaman relasional tidak sekadar menghitung angka rata-rata, melainkan memahami bahwa rata-rata hanyalah salah satu cara untuk meringkas pusat gravitasi data. Ketika ia melihat data pendapatan penduduk suatu wilayah atau data pengeluaran operasional sebuah komunitas, ia secara kritis mempertimbangkan apakah rata-rata adalah ukuran yang adil, ataukah nilai median jauh lebih jujur untuk menggambarkan realitas karena adanya jurang ketimpangan yang lebar.
@@ -149,5 +149,8 @@ Jalan menuju ke sana tidak harus dimulai dengan pengadaan laboratorium komputer 
 >    - Tunjukkan kedua gambar tersebut kepada rekan atau kawan Anda yang belum membaca bab ini, lalu tanyakan kesan visual pertama mereka. Saksikan bagaimana ilusi skala mampu mengelabui mata sebelum nalar sempat memeriksa angka.
 >
 > 2. **Opsi Komparasi Digital (Gawai atau Komputer):**
->    - Jika Anda memiliki akses ke gawai digital atau komputer, bukalah peramban web dan kunjungi modul eksplorasi visual interaktif mandiri seperti **StatsLab** melalui tautan rujukan buku ini.
+>    - Jika Anda memiliki akses ke gawai digital atau komputer, bukalah peramban web dan kunjungi modul eksplorasi visual interaktif mandiri seperti **StatsLab DSI (Dasbor Statistika Interaktif)**[^statslab-dsi-b1] melalui tautan rujukan buku ini.
 >    - Pada modul pengantar visualisasi, geser tuas batas bawah sumbu vertikal bolak-balik antara nilai 0 hingga nilai mendekati rata-rata data. Rasakan bagaimana sebuah tren data yang tenang dapat seketika meledak menjadi kepanikan visual hanya dengan sekali gesekan kursor.
+
+
+[^statslab-dsi-b1]: StatsLab DSI (Dasbor Statistika Interaktif). Repo: github.com/zaditprodakwah/statslab. Demo: statslabmedia.vercel.app (diakses 30 September 2026). Dasbor dapat diperbarui setelah buku terbit; latihan kertas di kotak ini tetap sahih tanpa peramban.

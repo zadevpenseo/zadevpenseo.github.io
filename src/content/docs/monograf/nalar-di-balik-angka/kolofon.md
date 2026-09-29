@@ -26,7 +26,7 @@ Naskah monograf sains populer **Nalar di Balik Angka** dirancang dan dikompilasi
 ---
 
 ### Tipografi & Rupa Huruf
-*   **Teks Utama (Body Text):** *Linux Libertine* (10.5 pt dengan jarak antar-baris `leading: 0.75em`). Rupa huruf serif klasik ini dirancang oleh Philipp H. Poll sebagai alternatif berlisensi bebas yang sangat elegan, memiliki proporsi goresan halus yang memudahkan pembacaan naskah panjang (*long-form readability*) tanpa melelahkan mata.
+*   **Teks Utama (Body Text):** *Linux Libertine* (11 pt dengan jarak antar-baris `leading: 0.78em`, selaras token `_brand.yml`). Rupa huruf serif klasik ini dirancang oleh Philipp H. Poll sebagai alternatif berlisensi bebas yang sangat elegan, memiliki proporsi goresan halus yang memudahkan pembacaan naskah panjang (*long-form readability*) tanpa melelahkan mata.
 *   **Judul & Elemen Antarmuka:** *Libertinus Sans* dan *Libertinus Mono* digunakan untuk penegasan judul bab, label kotak instrumen mandiri, serta representasi ekspresi notasi komputasi.
 *   **Notasi Matematika:** Di-typeset murni menggunakan sintaks LaTeX dengan konversi mesin tipografi Typst berpresisi tinggi.
 

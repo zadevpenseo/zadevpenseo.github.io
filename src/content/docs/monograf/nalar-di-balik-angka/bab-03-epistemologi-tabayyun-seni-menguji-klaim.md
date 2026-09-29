@@ -110,13 +110,13 @@ Pelajaran dari peristiwa tahun 1936 ini abadi: dalam dunia data, satu sendok kua
 
 Bagaimana kita mengamalkan epistemologi tabayyun saat membaca berita di koran pagi, laporan kinerja di tempat kerja, atau diskusi komite sekolah? Kita dapat menerapkan tiga rukun pemeriksaan data berikut:
 
-### 1. Periksa Sanad dan Kredibilitas Pengumpul Data
+### Periksa Sanad dan Kredibilitas Pengumpul Data
 Setiap kali membaca hasil survei, telusuri siapa lembaga yang melakukannya. Apakah mereka memiliki rekam jejak independensi ilmiah, ataukah mereka konsultan bayaran yang disewa oleh pihak yang berkepentingan untuk membentuk persepsi publik? Jika sebuah perusahaan rokok merilis data survei yang menyatakan bahwa rokok tidak berbahaya bagi kesehatan, atau sebuah pengembang perumahan merilis data yang menyatakan bahwa warga kota sangat membutuhkan reklamasi pantai, nalar tabayyun menuntut kita untuk mencurigai adanya benturan kepentingan (*conflict of interest*).
 
-### 2. Periksa Keterhubungan Metodologi Penarikan Sampel
+### Periksa Keterhubungan Metodologi Penarikan Sampel
 Ajukan pertanyaan kritis: Bagaimana responden dipilih? Apakah setiap orang memiliki kesempatan yang sama untuk diwawancarai, ataukah survei hanya disebarkan secara daring di portal berita tertentu yang pembacanya memiliki kecenderungan politik seragam? Waspadai fenomena *voluntary response bias*, di mana orang yang mau meluangkan waktu mengisi angket biasanya adalah orang-orang yang memiliki emosi ekstrem (sangat marah atau sangat antusias), sementara mayoritas warga yang bersikap tenang memilih untuk tidak bersuara.
 
-### 3. Periksa Redaksi Pertanyaan terhadap Jebakan Penggiringan
+### Periksa Redaksi Pertanyaan terhadap Jebakan Penggiringan
 Bentuk pertanyaan sangat menentukan jawaban yang dihasilkan. Perhatikan perbedaan dua redaksi pertanyaan berikut:
 - *Pertanyaan A:* "Apakah Anda setuju dengan kebijakan pemotongan anggaran fasilitas sekolah demi efisiensi?"
 - *Pertanyaan B:* "Apakah Anda rela anggaran fasilitas sekolah anak Anda dipotong demi penghematan birokrasi?"
@@ -164,6 +164,9 @@ Telinga kita untuk menyimak penjelasan, mata kita untuk mengamati fakta, dan hat
 >    - Sekarang, gunakan sendok sayur besar (sampel berukuran sekitar 200 butir). Ambil campuran dan hitung kembali persentasenya. Perhatikan bagaimana persentase pada sendok besar ini menjadi jauh lebih stabil dan sangat dekat dengan rasio asli tiga puluh persen.
 >    - Diskusikan bersama rekan atau keluarga Anda bagaimana eksperimen sederhana ini menjelaskan mengapa survei dengan sampel representatif mampu membaca suara jutaan penduduk dengan presisi tinggi.
 >
-> 2. **Eksplorasi Digital Lanjutan (StatsLab Sampling Simulator):**
->    - Kunjungi modul simulasi visual interaktif pada platform **StatsLab** melalui tautan rujukan digital buku ini.
+> 2. **Eksplorasi Digital Lanjutan (StatsLab DSI Sampling Simulator):**
+>    - Kunjungi modul simulasi visual interaktif pada platform **StatsLab DSI (Dasbor Statistika Interaktif)**[^statslab-dsi-b3] melalui tautan rujukan digital buku ini.
 >    - Pada modul *Distribusi Sampel*, ubah ukuran sampel ($n$) dari angka 20 menjadi angka 1.000 dengan menggeser tuas interaktif. Saksikan secara langsung bagaimana lonceng kurva distribusi mengerucut menyempit, membuktikan Hukum Bilangan Besar dan meredam ketidakpastian data di depan mata Anda.
+
+
+[^statslab-dsi-b3]: StatsLab DSI (Dasbor Statistika Interaktif). Repo: github.com/zaditprodakwah/statslab. Demo: statslabmedia.vercel.app (diakses 30 September 2026). Dasbor dapat diperbarui setelah buku terbit; latihan kertas di kotak ini tetap sahih tanpa peramban.

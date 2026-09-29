@@ -66,12 +66,12 @@ Bagi mereka yang hanya membaca formula aljabar di atas kertas, teks matematika t
 
 Sebagaimana tampak jelas pada Gambar 6.1, grafik tersebut membagi realitas data ke dalam dua zona kognitif yang sangat kontras:
 
-### 1. Zona Turbulensi Skala Kecil ($n < 50$)
+### Zona Turbulensi Skala Kecil ($n < 50$)
 Pada fase awal pelemparan koin (di mana probabilitas teoretis sisi gambar adalah $p = 0{,}5$), garis rata-rata kumulatif melompat liar dari angka $0{,}2$ ke $0{,}8$. Di zona ini, faktor keacakan murni (*pure random noise*) memegang kendali penuh. 
 
 Seorang pengamat yang tergesa-gesa menarik kesimpulan pada tahap ini akan tertipu mentah-mentah. Jika koin kebetulan menghasilkan sisi angka empat kali berturut-turut, ia akan menyimpulkan secara salah bahwa koin tersebut telah dimanipulasi. Di dunia bisnis rintisan atau evaluasi program baru di sekolah, kepanikan manajemen paling sering terjadi di zona turbulensi kecil ini: pimpinan buru-buru membatalkan inovasi bagus hanya karena hasil pada dua pekan pertama memperlihatkan fluktuasi yang mengecewakan.
 
-### 2. Zona Konvergensi Keseimbangan ($n > 500$)
+### Zona Konvergensi Keseimbangan ($n > 500$)
 Namun, perhatikan apa yang terjadi ketika jumlah pengamatan terus bertambah menembus ratusan dan ribuan kali. Gelombang liar itu perlahan melandai, merapat, dan akhirnya berbaring tenang tepat di atas garis merah probabilitas teoretis $0{,}5$. Tidak ada kekuatan gaib yang memaksa koin tersebut untuk seimbang; keteraturan makro lahir secara alamiah dari agregasi independensi mikro.
 
 ### Membongkar Sesat Pikir Penjudi (*Gambler's Fallacy*)
@@ -90,18 +90,18 @@ Keseimbangan jangka panjang pada Gambar 6.1 tidak tercapai karena alam mengompen
 
 Mengapa kehadiran layar interaktif mampu meruntuhkan hambatan belajar yang selama ini mengurung ruang kelas tradisional? Ada tiga pilar pedagogis yang membuat simulasi digital begitu unggul dalam membangun pemahaman relasional:
 
-### 1. Umpan Balik Visual Seketika (*Instant Visual Feedback*)
+### Umpan Balik Visual Seketika (*Instant Visual Feedback*)
 Di atas kertas, ada jurang waktu yang sangat lebar antara tindakan menulis rumus dengan mengetahui apakah hasil akhirnya masuk akal. Di layar digital, hubungan tersebut terjadi secara seketika (*real-time*). 
 
 Ketika seorang pembelajar menggeser sebuah tuas pengatur (*slider*) untuk menambah ukuran sampel, memperlebar simpangan baku, atau mengubah kemiringan garis regresi, bentuk grafik di depannya langsung bereaksi dalam hitungan milidetik. Koneksi sebab-akibat langsung ini menstimulasi sirkuit pembelajaran saraf di otak, memungkinkan pembelajar membangun model mental yang dinamis mengenai perilaku sistem matematika.
 
-### 2. Kebebasan Bereksperimen Tanpa Takut Berbuat Salah (*Low-Stakes Sandbox*)
+### Kebebasan Bereksperimen Tanpa Takut Berbuat Salah (*Low-Stakes Sandbox*)
 Kertas buram menuntut kerapian dan kehati-hatian, karena kesalahan hitung di baris kedua akan merusak seluruh halaman dan menghabiskan waktu penghapusan. Tuntutan kesempurnaan prosedural ini menciptakan kecemasan matematika (*math anxiety*). 
 
 Sebaliknya, layar digital adalah arena bermain bebas risiko (*sandbox*). Pembelajar dapat memasukkan angka-angka ekstrem yang mustahil, mengubah parameter secara radikal, dan melihat apa yang terjadi jika asumsi dilanggar, semuanya tanpa rasa takut dihukum nilai jelek. Kreativitas dan penemuan ilmiah selalu lahir dari kebebasan bereksperimen.
 
-### 3. Demokratisasi Akses terhadap Data Nyata
-Teknologi peramban web modern memungkinkan siapa saja mengakses kumpulan data nyata berukuran gigabita tanpa memerlukan komputer berspesifikasi mahal. Salah satu contoh eksplorasi laboratorium visual terbuka yang dapat diakses oleh publik adalah platform pendamping digital mandiri seperti **StatsLab** (yang tautan penjelajahannya disematkan pada kode QR di bagian penutup buku ini). 
+### Demokratisasi Akses terhadap Data Nyata
+Teknologi peramban web modern memungkinkan siapa saja mengakses kumpulan data nyata berukuran gigabita tanpa memerlukan komputer berspesifikasi mahal. Salah satu contoh eksplorasi laboratorium visual terbuka yang dapat diakses oleh publik adalah platform pendamping digital mandiri seperti **StatsLab DSI (Dasbor Statistika Interaktif)**[^statslab-dsi-b6] (yang tautan penjelajahannya disematkan pada kode QR dinamis di bagian penutup buku ini). 
 
 Melalui antarmuka visual yang intuitif, siapa pun, baik guru sekolah dasar, aktivis komunitas, mahasiswa, maupun orang tua di rumah, dapat memanipulasi parameter distribusi, menguji Hukum Bilangan Besar, dan membongkar ilusi grafik secara mandiri tanpa harus menulis satu baris pun kode pemrograman komputer yang rumit. Teknologi ditempatkan pada posisi luhurnya: sebagai jembatan yang menghubungkan akal budi manusia dengan kompleksitas realitas.
 
@@ -109,22 +109,22 @@ Melalui antarmuka visual yang intuitif, siapa pun, baik guru sekolah dasar, akti
 
 Keterampilan membaca keteraturan di balik ketidakpastian acak bukan sekadar materi ujian sekolah, melainkan bekal bertahan hidup di abad modern. Di dunia profesional dan kehidupan pribadi, orang-orang yang tidak memahami Hukum Bilangan Besar sangat rentan mengalami disorientasi emosional:
 
-### 1. Manajemen Bisnis dan Kepemimpinan Organisasi
+### Manajemen Bisnis dan Kepemimpinan Organisasi
 Di sebuah perusahaan rintisan (*startup*) atau divisi bisnis baru, seorang manajer pemula sering kali mengalami serangan panik ketika angka penjualan pada pekan pertama peluncuran produk mengalami penurunan. Sebaliknya, manajer tersebut bisa mengalami euforia berlebihan ketika pada hari ketiga ada sepuluh pelanggan besar yang memesan sekaligus. 
 
 Pemimpin yang matang secara statistik memahami bahwa data skala kecil ($n < 30$) adalah kabut fluktuasi acak. Ia tidak akan mengubah haluan strategi organisasi secara drastis hanya berdasarkan reaksi segelintir pelanggan pertama. Ia bersabar mengumpulkan volume sampel yang memadai, membiarkan Hukum Bilangan Besar bekerja menyaring sinyal sejati dari kebisingan acak (*separating signal from noise*).
 
-### 2. Membaca Ulasan Konsumen di Pasar Digital
+### Membaca Ulasan Konsumen di Pasar Digital
 Saat kita berbelanja di lokapasar daring (*e-commerce*), kita kerap dihadapkan pada dua pilihan produk: Produk A memiliki nilai kepuasan bintang 5,0 sempurna tetapi baru diulas oleh 3 orang pembeli, sedangkan Produk B memiliki nilai bintang 4,8 berdasarkan ulasan dari 2.500 orang pembeli. 
 
 Konsumen yang buta terhadap prinsip ukuran sampel akan memilih Produk A karena tergiur oleh angka lima bulat di layar. Konsumen yang berakal kritis memahami bahwa bintang 5,0 dari tiga orang pembeli berada di zona turbulensi liar: bisa jadi ketiga pengulas tersebut adalah keluarga atau teman dekat sang penjual! Sebaliknya, bintang 4,8 dari 2.500 ulasan independen adalah sinyal kualitas yang sangat kokoh dan telah teruji oleh Hukum Bilangan Besar.
 
-### 3. Menghadapi Keputusan Medis dan Asuransi Kesehatan
+### Menghadapi Keputusan Medis dan Asuransi Kesehatan
 Ketika seseorang didiagnosis menderita sebuah penyakit langka dan dokter menyebutkan bahwa tingkat kesembuhan obat tertentu adalah 70%, pasien yang tidak terbiasa berpikir probabilistik kerap menuntut kepastian mutlak: *"Dokter, saya ini pasti sembuh atau pasti meninggal?"*. 
 
 Pemikiran probabilistik mengajarkan kita untuk menerima bahwa hidup manusia di alam materi beroperasi di bawah payung ketidakpastian. Angka 70% bukan ramalan nasib individu, melainkan proporsi keseimbangan jangka panjang dalam populasi. Pemahaman ini melahirkan ketenangan batin: manusia berusaha menempuh ikhtiar medis terbaik berdasarkan bukti empiris terandal, seraya menyerahkan hasil akhirnya kepada ketetapan Sang Penguasa Takdir.
 
-### 4. Menguji Simulasi dan Output Model Kecerdasan Buatan
+### Menguji Simulasi dan Output Model Kecerdasan Buatan
 Di era kecerdasan buatan, pemahaman mengenai Hukum Bilangan Besar menjadi semakin krusial dalam mengevaluasi luaran model bahasa besar (*Large Language Models*) dan algoritma pembelajaran mesin. Banyak sistem kecerdasan buatan modern mengandalkan metode simulasi stokastik berbasis Monte Carlo untuk memprediksi tren pasar, cuaca, atau risiko kredit.
 
 Model kecerdasan buatan bekerja dengan cara mengambil sampel berulang-ulang dari distribusi probabilitas kata atau angka. Jika kita meminta sistem AI menjalankan simulasi hanya dengan sepuluh kali percobaan, hasil yang disajikan akan sangat acak dan rentan memicu halusinasi statistik. 
@@ -169,6 +169,9 @@ Prinsip *Tawazun* (keseimbangan) yang ditanamkan dalam kosmos memperlihatkan bah
 >    - Lanjutkan pelemparan secara bergiliran hingga mencapai 30 kali, lalu 60 kali. Gambarlah garis rata-rata kumulatifnya pada secarik kertas berpetak.
 >    - Amati bagaimana garis grafik tersebut perlahan mendekat dan merapat stabil di sekitar garis horizontal 3,5. Saksikan bagaimana Hukum Bilangan Besar bekerja nyata di atas meja ruang tamu Anda.
 >
-> 2. **Eksplorasi Digital Lanjutan (StatsLab LLN Interactive Simulator):**
->    - Kunjungi modul *Simulasi Hukum Bilangan Besar* pada platform **StatsLab** melalui tautan rujukan digital buku ini.
+> 2. **Eksplorasi Digital Lanjutan (StatsLab DSI LLN Simulator):**
+>    - Kunjungi modul *Simulasi Hukum Bilangan Besar* pada platform **StatsLab DSI** melalui tautan rujukan digital buku ini.
 >    - Klik tombol *Simulasikan 10.000 Pelemparan*. Geser kecepatan animasi dari lambat ke instan. Amati bagaimana ribuan garis lintasan acak yang semula saling bertabrakan secara liar perlahan berkonvergensi membentuk satu pita tebal yang menyatu di garis keseimbangan teoritis.
+
+
+[^statslab-dsi-b6]: StatsLab DSI (Dasbor Statistika Interaktif). Repo: github.com/zaditprodakwah/statslab. Demo: statslabmedia.vercel.app (diakses 30 September 2026). Dasbor dapat diperbarui setelah buku terbit; latihan kertas di kotak ini tetap sahih tanpa peramban.

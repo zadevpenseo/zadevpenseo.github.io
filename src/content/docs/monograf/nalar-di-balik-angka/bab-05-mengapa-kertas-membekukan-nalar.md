@@ -55,13 +55,13 @@ Jika informasi baru yang masuk melampaui batas empat bongkahan ini, memori kerja
 
 Berdasarkan keterbatasan arsitektur ini, Sweller membagi beban kerja kognitif yang dialami seseorang saat belajar ke dalam tiga kategori utama:
 
-### 1. Beban Kognitif Intrinsik (*Intrinsic Cognitive Load*)
+### Beban Kognitif Intrinsik (*Intrinsic Cognitive Load*)
 Beban intrinsik adalah tingkat kesulitan inheren yang melekat pada materi pelajaran itu sendiri. Memahami konsep simpangan baku secara alami memang lebih rumit dibandingkan memahami konsep penjumlahan bilangan bulat, karena simpangan baku melibatkan banyak elemen yang saling berinteraksi secara simultan (titik tengah, rata-rata, selisih kuadrat, dan pembagian akar). Beban intrinsik tidak dapat dihilangkan begitu saja tanpa menyederhanakan konsep intinya.
 
-### 2. Beban Kognitif Ekstrinsik (*Extraneous Cognitive Load*)
+### Beban Kognitif Ekstrinsik (*Extraneous Cognitive Load*)
 Beban ekstrinsik adalah beban mental yang sia-sia, tidak produktif, dan menguras energi otak akibat cara penyajian materi yang buruk, desain media yang membingungkan, atau aktivitas belajar yang tidak relevan dengan tujuan pemahaman. Menghabiskan waktu setengah jam untuk menghitung perkalian desimal bersusun panjang di atas kertas buram adalah contoh sempurna dari beban kognitif ekstrinsik murni. Aktivitas tersebut memeras memori kerja siswa, namun sama sekali tidak memberikan sumbangan apa pun terhadap pemahaman konsep variabilitas data.
 
-### 3. Beban Kognitif Erat (*Germane Cognitive Load*)
+### Beban Kognitif Erat (*Germane Cognitive Load*)
 Beban erat adalah usaha mental yang produktif dan bermanfaat, yaitu energi otak yang dialokasikan khusus untuk mengintegrasikan informasi baru dengan skema pengetahuan lama yang ada di memori jangka panjang. Ketika seorang siswa merenungkan mengapa pencilan ekstrem mempengaruhi rata-rata tetapi tidak mempengaruhi median, siswa tersebut sedang mengerahkan beban kognitif erat untuk membangun intuisi konseptual yang mendalam.
 
 Dalam pembelajaran yang ideal, guru dan perancang kurikulum bertugas meminimalkan beban ekstrinsik serendah mungkin, mengelola beban intrinsik secara bertahap, sehingga sebagian besar kapasitas memori kerja siswa dapat dialokasikan sepenuhnya untuk beban kognitif erat. 
@@ -163,6 +163,9 @@ Kertas tidak perlu dibuang sepenuhnya dari peradaban sekolah. Kertas tetap memil
 >    - Tuliskan nama masing-masing kategori tepat di samping ujung garis data atau tepat di atas masing-masing batang grafik (*direct labeling*).
 >    - Tunjukkan kedua grafik tersebut kepada rekan kerja atau anak Anda secara bergantian. Mintalah mereka menyebutkan nama kategori yang sedang melonjak. Catat berapa detik perbedaan waktu yang mereka butuhkan untuk menjawab. Anda akan menyaksikan secara nyata bagaimana label terintegrasi melipatgandakan kecepatan pemrosesan kognitif otak manusia.
 >
-> 2. **Eksplorasi Digital Lanjutan (StatsLab Interactive Sandbox):**
->    - Kunjungi modul *Eksplorasi Beban Kognitif dan Desain Grafik* pada platform **StatsLab** melalui tautan rujukan digital buku ini.
+> 2. **Eksplorasi Digital Lanjutan (StatsLab DSI Interactive Sandbox):**
+>    - Kunjungi modul *Eksplorasi Beban Kognitif dan Desain Grafik* pada platform **StatsLab DSI (Dasbor Statistika Interaktif)**[^statslab-dsi-b5] melalui tautan rujukan digital buku ini.
 >    - Uji fitur penyesuaian tata letak dinamis: aktifkan dan nonaktifkan opsi *Label Terintegrasi* dan *Mode Kontras Tinggi*. Amati bagaimana visualisasi digital interaktif mampu mengarahkan fokus perhatian mata kita secara seketika menuju wawasan data yang paling krusial.
+
+
+[^statslab-dsi-b5]: StatsLab DSI (Dasbor Statistika Interaktif). Repo: github.com/zaditprodakwah/statslab. Demo: statslabmedia.vercel.app (diakses 30 September 2026). Dasbor dapat diperbarui setelah buku terbit; latihan kertas di kotak ini tetap sahih tanpa peramban.
