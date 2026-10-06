@@ -78,6 +78,7 @@ export default defineConfig({
             { label: 'Executive Pitch Decks (JCG Partnership)', link: '/case-studies/writer/executive-pitch-decks-jcg-partnership/' },
             { label: 'Business Feasibility & Financial Models', link: '/case-studies/writer/business-feasibility-financial-models/' },
             { label: 'Peer-Reviewed Empirical Research (APA 7th)', link: '/case-studies/writer/peer-reviewed-empirical-publishing/' },
+            { label: 'Evidence-Based Medical Writing Sample', link: '/case-studies/writer/medical-health-writing-sample/' },
             { label: 'Cinematic 3D Direction & Narrative', link: '/case-studies/writer/cinematic-3d-birthday-video-659866/' },
           ],
         },
