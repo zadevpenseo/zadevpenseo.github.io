@@ -439,6 +439,80 @@
       margin-top: 0.15rem;
     }
 
+    /* Delivery SLA Selector Card */
+    .sla-selector-card {
+      padding: 0.85rem 1.25rem;
+      background: #0d1424;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .sla-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.55rem;
+    }
+    .sla-badge {
+      font-size: 0.68rem;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: #38bdf8;
+      letter-spacing: 0.05em;
+    }
+    .sla-cadence {
+      font-size: 0.72rem;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+    .sla-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+    .sla-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 7px;
+      padding: 0.55rem 0.65rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: var(--text-main);
+    }
+    .sla-btn:hover {
+      border-color: #38bdf8;
+    }
+    .sla-btn.active {
+      border-color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.15);
+    }
+    .sla-btn-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .sla-btn.active .sla-btn-title {
+      color: #38bdf8;
+    }
+    .sla-btn-price {
+      font-size: 0.95rem;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: #fff;
+      margin: 0.1rem 0;
+    }
+    .sla-days {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #34d399;
+    }
+    .sla-btn-desc {
+      font-size: 0.67rem;
+      color: #64748b;
+    }
+
     /* Interactive View Toggles */
     .toggle-bar {
       padding: 0.75rem 1.25rem;
@@ -914,6 +988,26 @@
         </div>
       </div>
 
+      <!-- Delivery SLA Interactive Selector -->
+      <div class="sla-selector-card">
+        <div class="sla-header">
+          <span class="sla-badge">PRODUCTION SLA OPTIONS</span>
+          <span class="sla-cadence">Ongoing: $150–$175 / Post</span>
+        </div>
+        <div class="sla-buttons">
+          <button class="sla-btn active" id="slaBtnStandard">
+            <div class="sla-btn-title">Standard SLA</div>
+            <div class="sla-btn-price">$350 USD <span class="sla-days">· 3 Days</span></div>
+            <div class="sla-btn-desc">48h Draft + 24h Final Polish</div>
+          </button>
+          <button class="sla-btn" id="slaBtnExpress">
+            <div class="sla-btn-title">Priority Sprint</div>
+            <div class="sla-btn-price">$500 USD <span class="sla-days">· 24 Hours</span></div>
+            <div class="sla-btn-desc">Immediate Fast-Track Delivery</div>
+          </button>
+        </div>
+      </div>
+
       <!-- Interactive Highlight Toggles -->
       <div class="toggle-bar">
         <button class="toggle-chip active" id="toggleKwHighlight">
@@ -1177,6 +1271,20 @@
         }
       });
     });
+
+    // SLA Buttons Handler
+    const btnSlaStd = document.getElementById('slaBtnStandard');
+    const btnSlaExp = document.getElementById('slaBtnExpress');
+    if (btnSlaStd && btnSlaExp) {
+      btnSlaStd.addEventListener('click', () => {
+        btnSlaStd.classList.add('active');
+        btnSlaExp.classList.remove('active');
+      });
+      btnSlaExp.addEventListener('click', () => {
+        btnSlaExp.classList.add('active');
+        btnSlaStd.classList.remove('active');
+      });
+    }
 
     // Download / Print PDF Handler
     const btnPdf = document.getElementById('btnDownloadPdf');
