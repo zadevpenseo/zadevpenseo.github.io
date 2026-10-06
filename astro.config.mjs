@@ -57,6 +57,7 @@ export default defineConfig({
             { label: 'High-Performance Animated Landing Engine', link: '/case-studies/web-dev-design/animated-landing-page-659928/' },
             { label: 'Modular Fullstack Web Architecture', link: '/case-studies/web-dev-design/fullstack-custom-web-apps-659861/' },
             { label: 'Elementor JSON UI Architecture Engine', link: '/case-studies/web-dev-design/elementor-json-ui-engine/' },
+            { label: 'Client-Side TXT Novel Editing Engine', link: '/case-studies/web-dev-design/open-source-txt-novel-editor/' },
           ],
         },
         {
@@ -92,6 +93,7 @@ export default defineConfig({
             { label: 'DocuMorph PDF & Table Extraction Pipeline', link: '/case-studies/data-analysis/documorph-pdf-table-extraction/' },
             { label: 'Jira Performance & NL Ticket Pipeline', link: '/case-studies/data-analysis/jira-weekly-report-automation-40725359/' },
             { label: 'Executive Data Storytelling Engine', link: '/case-studies/data-analysis/executive-data-storytelling-engine/' },
+            { label: 'Google Sheets CRM & Apps Script Engine', link: '/case-studies/data-analysis/google-sheets-crm-automation/' },
           ],
         },
         {

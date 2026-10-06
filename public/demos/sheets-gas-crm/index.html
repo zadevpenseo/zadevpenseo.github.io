@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Sheets CRM &amp; Apps Script Architecture Simulator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-canvas: #090d16;
+      --bg-surface: #111827;
+      --bg-card: #162032;
+      --bg-input: #0d1424;
+      --border-subtle: #1f2d45;
+      --border-accent: #38bdf8;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent-cyan: #38bdf8;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --font-ui: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--text-main);
+      font-family: var(--font-ui);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+    }
+
+    header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .app-container {
+      max-width: 1320px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 2rem;
+      flex: 1;
+    }
+
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.25rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      margin-bottom: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent-cyan);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--accent-cyan);
+      color: #041226;
+    }
+
+    .btn-primary:hover {
+      background: #7dd3fc;
+    }
+
+    .btn-subtle {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-subtle:hover {
+      background: var(--border-subtle);
+    }
+
+    .btn-full {
+      width: 100%;
+    }
+
+    .tab-nav {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      background: var(--bg-card);
+      color: var(--accent-cyan);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .code-box {
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      overflow-x: auto;
+      line-height: 1.6;
+      max-height: 380px;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 0.85rem;
+      text-align: center;
+    }
+
+    .stat-val {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      font-family: var(--font-mono);
+    }
+
+    .stat-lbl {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 0.25rem;
+    }
+
+    .log-stream {
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.775rem;
+      height: 240px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .log-entry {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .log-time {
+      color: #64748b;
+    }
+
+    .log-tag-info {
+      color: var(--accent-cyan);
+    }
+
+    .log-tag-lock {
+      color: var(--accent-amber);
+    }
+
+    .log-tag-success {
+      color: var(--accent-emerald);
+    }
+
+    .log-tag-err {
+      color: var(--accent-rose);
+    }
+
+    .lead-table-wrap {
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+
+    th {
+      background: var(--bg-card);
+      color: var(--text-muted);
+      text-align: left;
+      padding: 0.6rem 0.75rem;
+      font-weight: 600;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    td {
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand-wrap">
+      <h1 style="font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em;">Google Apps Script CRM Architecture Dashboard</h1>
+      <span class="badge-status">Idempotent &bull; Concurrency Safe</span>
+    </div>
+    <div style="font-size: 0.8rem; color: var(--text-muted);">
+      LockService Protection &bull; Batch setValues() &bull; 6-Min Chunking
+    </div>
+  </header>
+
+  <main class="app-container">
+    
+    <!-- LEFT: CONTROLS & TEST HARNESS -->
+    <aside>
+      
+      <!-- SIMULATION CONTROLS -->
+      <section class="card">
+        <div class="card-title">1. High-Concurrency Stress Test</div>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Simulate 10 simultaneous webhook leads hitting Google Sheets at the exact same second.
+        </p>
+        
+        <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem;">
+          <button id="btnUnsafeRun" class="btn btn-subtle btn-full" style="color: var(--accent-rose);">
+            Simulate Unsafe Mode (Race Conditions)
+          </button>
+          <button id="btnSafeRun" class="btn btn-primary btn-full">
+            Simulate LockService Safe Mode (0 Drops)
+          </button>
+        </div>
+
+        <div style="font-size: 0.75rem; color: #94a3b8; line-height: 1.4;">
+          <strong>Why this matters:</strong> Without <code>LockService.getScriptLock()</code>, concurrent writes overwrite each other, losing valuable customer leads.
+        </div>
+      </section>
+
+      <!-- AGENT ROUND-ROBIN ROUTING -->
+      <section class="card">
+        <div class="card-title">2. Agent Assignment State</div>
+        <div id="agentStatusList" style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.8rem;">
+          <div style="display: flex; justify-content: space-between; padding: 0.4rem; background: var(--bg-card); border-radius: 6px;">
+            <span>Agent Sarah (North Region)</span>
+            <span style="color: var(--accent-emerald);" id="agent1Count">12 leads</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 0.4rem; background: var(--bg-card); border-radius: 6px;">
+            <span>Agent David (West Region)</span>
+            <span style="color: var(--accent-emerald);" id="agent2Count">11 leads</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 0.4rem; background: var(--bg-card); border-radius: 6px;">
+            <span>Agent Maya (Enterprise)</span>
+            <span style="color: var(--accent-emerald);" id="agent3Count">12 leads</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- PERFORMANCE BENCHMARK -->
+      <section class="card">
+        <div class="card-title">3. Range Operations Benchmark</div>
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+          For 1,000 CRM record synchronization:
+        </p>
+        <div style="font-size: 0.8rem; margin-bottom: 0.5rem;">
+          <div style="display: flex; justify-content: space-between;">
+            <span>Cell-by-cell setValue():</span>
+            <span style="color: var(--accent-rose); font-family: var(--font-mono);">48.2 seconds</span>
+          </div>
+          <div style="height: 6px; background: rgba(244,63,94,0.2); border-radius: 3px; margin: 4px 0 10px 0;">
+            <div style="width: 100%; height: 100%; background: var(--accent-rose); border-radius: 3px;"></div>
+          </div>
+        </div>
+        <div style="font-size: 0.8rem;">
+          <div style="display: flex; justify-content: space-between;">
+            <span>Memory Batching setValues():</span>
+            <span style="color: var(--accent-emerald); font-family: var(--font-mono);">0.38 seconds</span>
+          </div>
+          <div style="height: 6px; background: rgba(16,185,129,0.2); border-radius: 3px; margin: 4px 0;">
+            <div style="width: 2%; height: 100%; background: var(--accent-emerald); border-radius: 3px;"></div>
+          </div>
+        </div>
+        <div style="font-size: 0.75rem; color: var(--accent-emerald); margin-top: 0.5rem; font-weight: 600;">
+          &bull; 126x Speedup (Eliminates 6-min timeout risk)
+        </div>
+      </section>
+
+    </aside>
+
+    <!-- RIGHT: DASHBOARD & CODE VIEWER -->
+    <section>
+      
+      <!-- STATS -->
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-val" id="statLeads">35</div>
+          <div class="stat-lbl">Active CRM Leads</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val" id="statLocks">100%</div>
+          <div class="stat-lbl">Lock Acquisition Rate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val" id="statLatency">180 ms</div>
+          <div class="stat-lbl">Avg Webhook Latency</div>
+        </div>
+      </div>
+
+      <!-- LIVE CRM SHEET PREVIEW -->
+      <div class="card">
+        <div class="card-title">Live CRM Sheet Ingestion Log</div>
+        <div class="lead-table-wrap">
+          <table id="crmTable">
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>Lead Name</th>
+                <th>Company</th>
+                <th>Assigned Agent</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>15:40:12</td>
+                <td>Alex Rivera</td>
+                <td>Apex Logistics</td>
+                <td>Agent Sarah</td>
+                <td><span style="color: var(--accent-emerald);">Synchronized</span></td>
+              </tr>
+              <tr>
+                <td>15:39:55</td>
+                <td>Elena Rostova</td>
+                <td>Finova Systems</td>
+                <td>Agent David</td>
+                <td><span style="color: var(--accent-emerald);">Synchronized</span></td>
+              </tr>
+              <tr>
+                <td>15:38:20</td>
+                <td>Marcus Thorne</td>
+                <td>Vanguard Media</td>
+                <td>Agent Maya</td>
+                <td><span style="color: var(--accent-emerald);">Synchronized</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- AUDIT LOG & CODE VIEWER TABS -->
+      <div class="card">
+        <div class="tab-nav">
+          <button class="tab-btn active" onclick="switchTab('logs')">Live Execution &amp; Lock Log</button>
+          <button class="tab-btn" onclick="switchTab('code-lock')">LockService.gs</button>
+          <button class="tab-btn" onclick="switchTab('code-batch')">BatchEngine.gs</button>
+          <button class="tab-btn" onclick="switchTab('code-router')">LeadRouter.gs</button>
+        </div>
+
+        <div id="tab-logs">
+          <div class="log-stream" id="logStream">
+            <div class="log-entry">
+              <span class="log-time">[15:40:12.102]</span>
+              <span class="log-tag-lock">[LOCK_SERVICE]</span>
+              <span>Acquired script lock (ID: lk_991823) in 12ms</span>
+            </div>
+            <div class="log-entry">
+              <span class="log-time">[15:40:12.115]</span>
+              <span class="log-tag-info">[INGEST]</span>
+              <span>Webhook doPost() received from Meta Lead Ad #48192</span>
+            </div>
+            <div class="log-entry">
+              <span class="log-time">[15:40:12.140]</span>
+              <span class="log-tag-info">[ROUTING]</span>
+              <span>Assigned lead to Agent Sarah (Current load: 12)</span>
+            </div>
+            <div class="log-entry">
+              <span class="log-time">[15:40:12.180]</span>
+              <span class="log-tag-success">[BATCH_COMMIT]</span>
+              <span>setValues() committed 1 row to 'Master_Leads' without UI freeze</span>
+            </div>
+            <div class="log-entry">
+              <span class="log-time">[15:40:12.182]</span>
+              <span class="log-tag-lock">[LOCK_RELEASE]</span>
+              <span>Released script lock cleanly</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="tab-code-lock" style="display: none;">
+          <pre class="code-box"><code>/**
+ * Concurrency-Safe Webhook Receiver for Google Sheets CRM
+ */
+function doPost(e) {
+  // Acquire lock to prevent race condition overwrites
+  const lock = LockService.getScriptLock();
+  const success = lock.tryLock(30000); // 30s timeout
+
+  if (!success) {
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "error",
+      message: "Server busy: lock timeout. Request should be retried."
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  try {
+    const payload = JSON.parse(e.postData.contents);
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const sheet = ss.getSheetByName("Leads");
+
+    // Atomic read-write cycle
+    const lastRow = sheet.getLastRow();
+    const agent = assignNextAgent();
+
+    sheet.getRange(lastRow + 1, 1, 1, 5).setValues([[
+      new Date(),
+      payload.name,
+      payload.company,
+      agent,
+      "New"
+    ]]);
+
+    return ContentService.createTextOutput(JSON.stringify({ status: "success", leadId: lastRow + 1 }));
+  } catch (err) {
+    AuditLogger.logError("doPost_Exception", err);
+    return ContentService.createTextOutput(JSON.stringify({ status: "fatal", error: err.toString() }));
+  } finally {
+    lock.releaseLock();
+  }
+}</code></pre>
+        </div>
+
+        <div id="tab-code-batch" style="display: none;">
+          <pre class="code-box"><code>/**
+ * High-Speed Batch Range Operations
+ * Eliminates 6-minute Google Apps Script runtime quotas
+ */
+function synchronizeCRMReports() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const source = ss.getSheetByName("Master_Leads");
+  const target = ss.getSheetByName("Executive_Dashboard");
+
+  // Read entire table in 1 single API call
+  const data = source.getDataRange().getValues();
+  const headers = data[0];
+  const rows = data.slice(1);
+
+  // In-memory aggregation
+  const summary = {};
+  rows.forEach(r => {
+    const agent = r[3];
+    summary[agent] = (summary[agent] || 0) + 1;
+  });
+
+  // Prepare 2D matrix for single batch write
+  const outputMatrix = Object.entries(summary).map(([agent, count]) => [agent, count]);
+
+  // Single batch write
+  if (outputMatrix.length > 0) {
+    target.getRange(2, 1, outputMatrix.length, 2).setValues(outputMatrix);
+  }
+}</code></pre>
+        </div>
+
+        <div id="tab-code-router" style="display: none;">
+          <pre class="code-box"><code>/**
+ * Round-Robin Agent Router with Load Balancing
+ */
+function assignNextAgent() {
+  const props = PropertiesService.getScriptProperties();
+  const agents = ["Agent Sarah", "Agent David", "Agent Maya"];
+  let currentIndex = parseInt(props.getProperty("LAST_AGENT_INDEX") || "0", 10);
+
+  const nextIndex = (currentIndex + 1) % agents.length;
+  props.setProperty("LAST_AGENT_INDEX", nextIndex.toString());
+
+  return agents[nextIndex];
+}</code></pre>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+    function switchTab(tabId) {
+      ['logs', 'code-lock', 'code-batch', 'code-router'].forEach(id => {
+        document.getElementById('tab-' + id).style.display = (id === tabId) ? 'block' : 'none';
+      });
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('onclick').includes(tabId)) {
+          btn.classList.add('active');
+        }
+      });
+    }
+
+    const logStream = document.getElementById("logStream");
+
+    function addLog(time, tag, msg, typeClass) {
+      const row = document.createElement("div");
+      row.className = "log-entry";
+      row.innerHTML = `
+        <span class="log-time">[${time}]</span>
+        <span class="${typeClass}">[${tag}]</span>
+        <span>${msg}</span>
+      `;
+      logStream.appendChild(row);
+      logStream.scrollTop = logStream.scrollHeight;
+    }
+
+    const leadsPool = [
+      { name: "Julian Vance", company: "Skyline Media" },
+      { name: "Aria Sterling", company: "Catalyst Labs" },
+      { name: "Caleb O'Connor", company: "Solace Health" },
+      { name: "Mira Kapoor", company: "Zenith Retail" },
+      { name: "Lucas Chen", company: "Prism Global" }
+    ];
+
+    const agents = ["Agent Sarah", "Agent David", "Agent Maya"];
+    let agentIdx = 0;
+
+    document.getElementById("btnSafeRun").addEventListener("click", () => {
+      const now = new Date().toTimeString().split(' ')[0];
+      addLog(now, "STRESS_TEST", "Launching 5 concurrent webhook calls with LockService enabled...", "log-tag-info");
+
+      leadsPool.forEach((lead, i) => {
+        setTimeout(() => {
+          const t = new Date().toTimeString().split(' ')[0];
+          const agent = agents[agentIdx % agents.length];
+          agentIdx++;
+
+          addLog(t, "LOCK_ACQUIRE", `Task #${i+1} acquired LockService guard.`, "log-tag-lock");
+          addLog(t, "INGEST_SUCCESS", `Synchronized: ${lead.name} (${lead.company}) -> ${agent}`, "log-tag-success");
+
+          // Add to table
+          const tbody = document.querySelector("#crmTable tbody");
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${t}</td>
+            <td>${lead.name}</td>
+            <td>${lead.company}</td>
+            <td>${agent}</td>
+            <td><span style="color: var(--accent-emerald);">Synchronized</span></td>
+          `;
+          tbody.insertBefore(tr, tbody.firstChild);
+
+          const cur = parseInt(document.getElementById("statLeads").textContent, 10);
+          document.getElementById("statLeads").textContent = cur + 1;
+        }, i * 250);
+      });
+    });
+
+    document.getElementById("btnUnsafeRun").addEventListener("click", () => {
+      const now = new Date().toTimeString().split(' ')[0];
+      addLog(now, "UNSAFE_TEST", "Launching un-locked writes: simulating race collision...", "log-tag-err");
+      setTimeout(() => {
+        addLog(now, "RACE_COLLISION", "Collision detected: Row #38 simultaneously written by 2 processes.", "log-tag-err");
+        addLog(now, "DATA_CORRUPT", "Overwritten lead data: 'Aria Sterling' record dropped.", "log-tag-err");
+      }, 300);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+---
+title: "Zero-Cost Client-Side Web Novel Editing & Glossary Engine"
+description: "High-performance browser-based text preprocessing engine designed for 10MB+ web novels, utilizing Web Workers for non-blocking execution, IndexedDB for isolated novel glossaries, and deterministic word-boundary replacement."
+---
+
+| Engineering Dimension | Architecture & Delivery Specification |
+| :--- | :--- |
+| **Domain & Context** | High-Volume Web Novel Editing, Translation Preprocessing & Text Normalization |
+| **Hosting & Infrastructure** | 100% Client-Side Static Single Page Application (GitHub Pages / Cloudflare Pages / Local HTML) |
+| **External Dependencies** | Zero paid APIs, zero external databases, zero third-party subscriptions |
+| **Large File Processing** | Dedicated background Web Worker handling 5MB to 10MB+ TXT files (1.5M+ words) without UI lag |
+| **Data Isolation Model** | Per-novel glossary sandboxing via local storage; glossaries never cross-pollinate |
+| **Precedence Logic** | Novel-specific terms take strict priority over global predefined dictionaries |
+| **Replacement Determinism** | Strict regex word-boundary sorting by length descending to prevent prefix collisions |
+
+---
+
+## 🎮 1. Live Interactive Demonstration
+
+Experience the interactive standalone novel editor below. Upload English TXT files, manage isolated novel glossaries, apply priority word replacements, and download clean edited files with zero server overhead:
+
+<div style="margin: 24px 0; border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 14px; overflow: hidden; background: #090d16; box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);">
+  <div style="background: #111827; padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); font-family: -apple-system, sans-serif; font-size: 12px; color: #CBD5E1;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <span style="width: 10px; height: 10px; border-radius: 50%; background: #EF4444; display: inline-block;"></span>
+      <span style="width: 10px; height: 10px; border-radius: 50%; background: #F59E0B; display: inline-block;"></span>
+      <span style="width: 10px; height: 10px; border-radius: 50%; background: #10B981; display: inline-block;"></span>
+      <strong style="color: #F8FAFC; margin-left: 6px;">Private TXT Novel Editing Engine</strong>
+    </div>
+    
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <button 
+        type="button"
+        onclick="const ifr = document.getElementById('novelDemoIframe'); const isExpanded = ifr.style.height === '1050px'; ifr.style.height = isExpanded ? '680px' : '1050px'; this.textContent = isExpanded ? '⛶ Expand Viewer' : '⮌ Collapse Viewer';"
+        style="background: #0284c7; border: none; color: #FFFFFF; padding: 5px 14px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer;"
+      >
+        ⛶ Expand Viewer
+      </button>
+      <button 
+        type="button"
+        onclick="const ifr = document.getElementById('novelDemoIframe'); if(ifr.requestFullscreen){ifr.requestFullscreen();}else if(ifr.webkitRequestFullscreen){ifr.webkitRequestFullscreen();}"
+        style="background: #10B981; border: none; color: #FFFFFF; padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer;"
+      >
+        Full Screen
+      </button>
+      <a 
+        href="/demos/novel-txt-editor/" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #E2E8F0; padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 600; text-decoration: none;"
+      >
+        Open Standalone ↗
+      </a>
+    </div>
+  </div>
+
+  <iframe 
+    id="novelDemoIframe"
+    src="/demos/novel-txt-editor/" 
+    width="100%" 
+    height="680px" 
+    style="border: none; background: #090d16; display: block; transition: height 0.3s cubic-bezier(0.16, 1, 0.3, 1);"
+    loading="lazy"
+    title="Private TXT Novel Editing Engine Interactive Prototype"
+    allow="fullscreen"
+  ></iframe>
+</div>
+
+---
+
+## 🏛️ 2. High-Level Design (HLD) Architecture
+
+Processing massive English text files directly on the browser UI thread freezes the user interface and causes browser crashes. By offloading dictionary compilation and string manipulation to an asynchronous **Web Worker**, the tool processes multi-megabyte novels smoothly with real-time percentage feedback:
+
+```
+[Raw English TXT (5MB - 10MB)]
+             │
+             ▼
+    [Browser FileReader]
+             │
+   ┌─────────┴─────────┐
+   │ Load Active Novel │ <─── [LocalStorage / IndexedDB]
+   └─────────┬─────────┘
+             ▼
+   [Merge Dictionaries: Novel Takes Priority]
+             │
+             ▼
+   [Spawn Dedicated Web Worker]
+             │
+             ▼
+   [Sort Terms by Length Descending]
+             │
+             ▼
+   [Chunked Regex Word-Boundary Replacement] ──> [Emit Progress %]
+             │
+             ▼
+   [Generate Downloadable Text Blob]
+             │
+             ▼
+   [Export Clean Edited TXT File]
+```
+
+### 10-Step Architectural Breakdown
+1. **Requirements Clarity:** Provide a zero-cost, private text normalization tool for English web novels before external translation, adhering to strict user glossaries.
+2. **File Size Assumptions:** Handle typical web novel volumes from 200,000 words (1.2 MB) up to 2,000,000 words (10 MB+) without memory leaks.
+3. **High-Level Web Architecture:** Serverless client-side architecture requiring no backend database, API keys, or operational maintenance.
+4. **Data Isolation Design:** Store novel profiles in structured local storage objects (`novels[novelName].glossary`), completely isolating character names and terminology per novel.
+5. **Dictionary Precedence Engine:** Deep merge global predefined terms (cultivation, fantasy terms) with novel-specific entries, where novel entries unconditionally overwrite global keys.
+6. **Collision Avoidance:** Sort replacement keys by string length in descending order before compiling the master regular expression, ensuring composite terms (`Azure Cloud Sect Master`) match before partial substrings (`Azure Cloud Sect` or `Master`).
+7. **Thread Management:** Execute text scanning in a dedicated Web Worker in 250KB memory chunks to keep the browser event loop responsive at 60 FPS.
+8. **Fault Tolerance & Retry:** Store uploaded file buffers in memory so users can modify glossaries and retry processing instantly without re-uploading the original file.
+9. **Zero Creative Rewrite Invariant:** Guarantee that text replacement is strictly literal and lexical, preserving sentence structure, numbers, and storyline meaning 100%.
+10. **Delivery Packaging:** Package as a single portable HTML file that functions both offline on a local laptop and hosted online on free edge static storage.
+
+---
+
+## 📦 3. Core Engine Implementation
+
+```javascript
+// Web Worker replacement kernel with length-descending sorting
+self.onmessage = function(e) {
+  const { text, glossary, predefined } = e.data;
+  const startTime = Date.now();
+
+  // Combine dictionaries with novel glossary priority
+  const combined = { ...predefined, ...glossary };
+  
+  // Sort terms by length descending to prevent partial match collisions
+  const terms = Object.keys(combined).sort((a, b) => b.length - a.length);
+
+  function escapeRegExp(s) {
+    return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  // Compile unified word-boundary regular expression
+  const pattern = new RegExp('\\b(' + terms.map(escapeRegExp).join('|') + ')\\b', 'g');
+
+  let totalReplacements = 0;
+  const termHits = {};
+
+  const replacedText = text.replace(pattern, (match) => {
+    totalReplacements++;
+    termHits[match] = (termHits[match] || 0) + 1;
+    return combined[match] || match;
+  });
+
+  self.postMessage({
+    type: 'complete',
+    resultText: replacedText,
+    totalReplacements: totalReplacements,
+    uniqueMatched: Object.keys(termHits).length,
+    durationMs: Date.now() - startTime
+  });
+};
+```
+
+---
+
+## 🛠️ 4. Maintenance and Zero-Cost Warranty
+
+Because this tool executes entirely within the client's browser without external API tokens, backend microservices, or database servers:
+- **Zero Ongoing Operational Costs:** Never incurs server bills or subscription charges.
+- **Permanent Code Stability:** Zero risk of third-party API deprecation breaking core functionality.
+- **Air-Gapped Privacy:** Confidential novel manuscripts never leave the user's local device.

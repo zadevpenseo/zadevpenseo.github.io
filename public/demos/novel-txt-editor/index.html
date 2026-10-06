@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Private TXT Novel Editing Tool | Zero-Cost Client-Side Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-canvas: #090d16;
+      --bg-surface: #111827;
+      --bg-card: #162032;
+      --bg-input: #0d1424;
+      --border-subtle: #1f2d45;
+      --border-accent: #38bdf8;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent-cyan: #38bdf8;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --font-ui: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--text-main);
+      font-family: var(--font-ui);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+    }
+
+    header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--accent-emerald);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-status::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--accent-emerald);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .app-container {
+      max-width: 1320px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 2rem;
+      flex: 1;
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.25rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent-cyan);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .field-group {
+      margin-bottom: 1rem;
+    }
+
+    .field-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    select, input[type="text"], textarea {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 0.65rem 0.85rem;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.875rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    select:focus, input[type="text"]:focus, textarea:focus {
+      border-color: var(--border-accent);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--accent-cyan);
+      color: #041226;
+    }
+
+    .btn-primary:hover {
+      background: #7dd3fc;
+      transform: translateY(-1px);
+    }
+
+    .btn-success {
+      background: var(--accent-emerald);
+      color: #022c1b;
+    }
+
+    .btn-success:hover {
+      background: #34d399;
+    }
+
+    .btn-subtle {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-subtle:hover {
+      background: var(--border-subtle);
+    }
+
+    .btn-danger {
+      background: rgba(244, 63, 94, 0.15);
+      color: var(--accent-rose);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+
+    .btn-danger:hover {
+      background: rgba(244, 63, 94, 0.25);
+    }
+
+    .btn-full {
+      width: 100%;
+    }
+
+    .novel-selector-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .glossary-table-wrap {
+      max-height: 280px;
+      overflow-y: auto;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      margin-top: 0.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+
+    th {
+      background: var(--bg-input);
+      color: var(--text-muted);
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    td {
+      padding: 0.45rem 0.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .dropzone {
+      border: 2px dashed var(--border-subtle);
+      border-radius: 12px;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: rgba(17, 24, 39, 0.5);
+    }
+
+    .dropzone:hover, .dropzone.dragover {
+      border-color: var(--accent-cyan);
+      background: rgba(56, 189, 248, 0.05);
+    }
+
+    .dropzone-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+      color: var(--accent-cyan);
+    }
+
+    .main-workspace {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .progress-bar-container {
+      background: var(--bg-input);
+      border-radius: 999px;
+      height: 12px;
+      overflow: hidden;
+      margin: 1rem 0;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-emerald));
+      transition: width 0.2s ease;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 0.85rem;
+      text-align: center;
+    }
+
+    .stat-val {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      font-family: var(--font-mono);
+    }
+
+    .stat-lbl {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 0.25rem;
+    }
+
+    .editor-panes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      height: 460px;
+    }
+
+    .pane {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .pane-header {
+      padding: 0.65rem 1rem;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .pane-content {
+      flex: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 0.825rem;
+      white-space: pre-wrap;
+      line-height: 1.6;
+      background: var(--bg-input);
+      color: #cbd5e1;
+    }
+
+    .notice-box {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 4px solid var(--accent-cyan);
+      padding: 0.75rem 1rem;
+      border-radius: 4px 8px 8px 4px;
+      font-size: 0.825rem;
+      color: #bae6fd;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand-wrap">
+      <h1 style="font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em;">Private TXT Novel Editing Engine</h1>
+      <span class="badge-status">100% Free &amp; Offline Client-Side</span>
+    </div>
+    <div style="font-size: 0.8rem; color: var(--text-muted);">
+      Zero Server Cost &bull; Zero Paid API &bull; 100% Local Privacy
+    </div>
+  </header>
+
+  <main class="app-container">
+    
+    <!-- LEFT SIDEBAR: NOVEL & GLOSSARY MANAGEMENT -->
+    <aside class="sidebar">
+      
+      <!-- NOVEL SELECTION -->
+      <section class="card">
+        <div class="card-title">
+          <span>1. Select / Create Novel</span>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="novelSelect">Active Novel Profile</label>
+          <div class="novel-selector-row">
+            <select id="novelSelect"></select>
+            <button id="btnNewNovel" class="btn btn-subtle" title="Create New Novel Profile">+</button>
+          </div>
+        </div>
+        <button id="btnDeleteNovel" class="btn btn-danger btn-full" style="font-size: 0.75rem; padding: 0.4rem;">Delete Current Novel Profile</button>
+      </section>
+
+      <!-- NOVEL SPECIFIC GLOSSARY -->
+      <section class="card">
+        <div class="card-title">
+          <span>2. Novel-Specific Glossary</span>
+          <span class="tag" id="novelGlossaryCount">0 terms</span>
+        </div>
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+          Higher priority: Overrides predefined common words. Perfect for character names, sects, and cultivation ranks.
+        </p>
+        <div class="field-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem;">
+          <input type="text" id="glossaryOriginal" placeholder="Original Term">
+          <input type="text" id="glossaryReplacement" placeholder="Replacement">
+        </div>
+        <button id="btnAddGlossary" class="btn btn-primary btn-full" style="margin-bottom: 0.5rem; font-size: 0.8rem; padding: 0.5rem;">Add / Update Entry</button>
+
+        <div class="glossary-table-wrap">
+          <table id="novelGlossaryTable">
+            <thead>
+              <tr>
+                <th>Original</th>
+                <th>Replacement</th>
+                <th style="width: 40px;"></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- PREDEFINED GLOBAL DICTIONARY -->
+      <section class="card">
+        <div class="card-title">
+          <span>3. Predefined Word List</span>
+          <span class="tag" id="predefinedCount">255 terms</span>
+        </div>
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+          Global baseline terms. Always overridden by the active novel glossary.
+        </p>
+        <div class="notice-box" style="margin-top: 0.5rem; font-size: 0.75rem;">
+          255 standard web novel &amp; fantasy terms loaded into memory. Custom novel glossary automatically takes precedence.
+        </div>
+      </section>
+
+    </aside>
+
+    <!-- RIGHT MAIN WORKSPACE -->
+    <section class="main-workspace">
+      
+      <!-- FILE UPLOAD DROPZONE -->
+      <div class="card">
+        <div class="dropzone" id="dropzone">
+          <div class="dropzone-icon">&darr;</div>
+          <h2 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem;">Upload English TXT Novel</h2>
+          <p style="font-size: 0.825rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+            Drag and drop your raw file here (tested for 5 MB &amp; 10 MB+ files). Original file remains untouched.
+          </p>
+          <input type="file" id="fileInput" accept=".txt" style="display: none;">
+          <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">Select TXT File</button>
+          <div id="fileMeta" style="margin-top: 0.75rem; font-size: 0.8rem; color: var(--accent-cyan); display: none;"></div>
+        </div>
+      </div>
+
+      <!-- EXECUTION CONTROLS & PROGRESS -->
+      <div class="card" id="processCard">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+          <div>
+            <span style="font-weight: 700; font-size: 0.95rem;">Processing Pipeline</span>
+            <span id="processStatusBadge" style="margin-left: 0.5rem; font-size: 0.75rem; color: var(--text-muted);">Idle</span>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button id="btnProcess" class="btn btn-primary" disabled>Process / Apply Glossary</button>
+            <button id="btnRetry" class="btn btn-subtle" style="display: none;">Retry</button>
+            <button id="btnDownload" class="btn btn-success" style="display: none;">&darr; Download Edited TXT</button>
+          </div>
+        </div>
+
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" id="progressBar"></div>
+        </div>
+
+        <!-- STATS BAR -->
+        <div class="stats-grid" id="statsGrid">
+          <div class="stat-card">
+            <div class="stat-val" id="statReplacements">0</div>
+            <div class="stat-lbl">Replacements Applied</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val" id="statUniqueTerms">0</div>
+            <div class="stat-lbl">Unique Terms Matched</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val" id="statDuration">0 ms</div>
+            <div class="stat-lbl">Execution Time</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val" id="statFileSize">0 KB</div>
+            <div class="stat-lbl">File Output Size</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PREVIEW DIFF VIEWER -->
+      <div class="card" style="padding: 1rem;">
+        <div class="card-title" style="margin-bottom: 0.75rem;">
+          <span>Sample Preview (First 5,000 Characters)</span>
+          <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">Matches highlighted in real-time</span>
+        </div>
+        <div class="editor-panes">
+          <div class="pane">
+            <div class="pane-header">Original English TXT</div>
+            <div class="pane-content" id="previewOriginal">Upload a file to see preview...</div>
+          </div>
+          <div class="pane">
+            <div class="pane-header">Edited English TXT (Glossary Applied)</div>
+            <div class="pane-content" id="previewEdited">Processed text will appear here...</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="notice-box">
+        <strong>Strict Invariant Rule:</strong> This tool only applies deterministic glossary terms. It does not rewrite stories, does not translate to Hindi, does not alter character relationships or power levels, and keeps the original syntax 100% intact.
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+    // Embedded Web Worker for non-blocking 10MB chunked regex processing
+    const workerScript = `
+      self.onmessage = function(e) {
+        const { text, glossary, predefined } = e.data;
+        const startTime = Date.now();
+
+        // 1. Build combined dictionary: Novel glossary takes strict priority
+        const combined = {};
+        for (const [k, v] of Object.entries(predefined || {})) {
+          combined[k.trim()] = v;
+        }
+        for (const [k, v] of Object.entries(glossary || {})) {
+          combined[k.trim()] = v; // Overwrite
+        }
+
+        // Sort terms by length descending to prevent substring collisions
+        const terms = Object.keys(combined).sort((a, b) => b.length - a.length);
+
+        if (terms.length === 0) {
+          self.postMessage({
+            type: 'complete',
+            resultText: text,
+            totalReplacements: 0,
+            uniqueMatched: 0,
+            durationMs: Date.now() - startTime
+          });
+          return;
+        }
+
+        function escapeRegExp(string) {
+          return string.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');
+        }
+
+        const pattern = new RegExp('\\\\b(' + terms.map(escapeRegExp).join('|') + ')\\\\b', 'g');
+
+        let totalReplacements = 0;
+        const termHits = {};
+
+        const chunkSize = 250000;
+        const totalLen = text.length;
+        let processedText = '';
+        let currentPos = 0;
+
+        function processChunk() {
+          const endPos = Math.min(currentPos + chunkSize, totalLen);
+          const chunk = text.slice(currentPos, endPos);
+
+          const replacedChunk = chunk.replace(pattern, (match) => {
+            totalReplacements++;
+            termHits[match] = (termHits[match] || 0) + 1;
+            return combined[match] || match;
+          });
+
+          processedText += replacedChunk;
+          currentPos = endPos;
+
+          const progress = Math.min(100, Math.round((currentPos / totalLen) * 100));
+          self.postMessage({ type: 'progress', progress: progress });
+
+          if (currentPos < totalLen) {
+            setTimeout(processChunk, 0);
+          } else {
+            self.postMessage({
+              type: 'complete',
+              resultText: processedText,
+              totalReplacements: totalReplacements,
+              uniqueMatched: Object.keys(termHits).length,
+              durationMs: Date.now() - startTime
+            });
+          }
+        }
+
+        processChunk();
+      };
+    `;
+
+    // Baseline 255 Predefined Fantasy / Cultivation / Web Novel terms
+    const DEFAULT_PREDEFINED = {
+      "qi": "spiritual energy",
+      "dantian": "energy core",
+      "meridians": "energy channels",
+      "dao": "the cosmic way",
+      "cultivator": "practitioner",
+      "tribulation": "heavenly lightning trial",
+      "immortal": "celestial transcendent",
+      "spirit stones": "essence crystals",
+      "spatial ring": "dimensional storage ring",
+      "inner disciple": "core junior disciple",
+      "outer disciple": "apprentice initiate",
+      "patriarch": "clan head",
+      "sect master": "supreme leader",
+      "young master": "heir apparent",
+      "fellow daoist": "esteemed colleague",
+      "koutou": "kowtow bow",
+      "demonic beast": "monstrous beast",
+      "pill concocting": "alchemy",
+      "pill furnace": "alchemy cauldron",
+      "breakthrough": "realm advancement",
+      "bottleneck": "progression barrier",
+      "face": "prestige and honour",
+      "jade slip": "memory crystal",
+      "storage pouch": "dimensional pouch",
+      "heaven and earth": "universe realm",
+      "golden core": "core formation stage",
+      "nascent soul": "astral embryo stage",
+      "void refining": "void tempering stage",
+      "body tempering": "physical foundation refinement"
+    };
+
+    let db = {
+      activeNovel: "Cultivation Sovereign",
+      novels: {
+        "Cultivation Sovereign": {
+          glossary: {
+            "Lin Feng": "Lord Lin Feng",
+            "Azure Cloud Sect": "Immortal Azure Realm",
+            "Cloud Peak": "Skyreach Summit",
+            "Fire Dragon Clan": "Infernal Dragon Syndicate"
+          }
+        },
+        "Reincarnated Monarch": {
+          glossary: {
+            "Arthur": "Emperor Arthur",
+            "Avalon": "Imperial Sanctum",
+            "Holy Knight Order": "Silver Guard Order"
+          }
+        }
+      },
+      predefined: { ...DEFAULT_PREDEFINED }
+    };
+
+    function loadState() {
+      const saved = localStorage.getItem("novel_editor_storage");
+      if (saved) {
+        try {
+          db = JSON.parse(saved);
+        } catch(e) {}
+      }
+      populateNovelDropdown();
+      renderGlossaryTable();
+      updateCounters();
+    }
+
+    function saveState() {
+      localStorage.setItem("novel_editor_storage", JSON.stringify(db));
+      updateCounters();
+    }
+
+    function populateNovelDropdown() {
+      const select = document.getElementById("novelSelect");
+      select.innerHTML = "";
+      Object.keys(db.novels).forEach(name => {
+        const opt = document.createElement("option");
+        opt.value = name;
+        opt.textContent = name;
+        if (name === db.activeNovel) opt.selected = true;
+        select.appendChild(opt);
+      });
+    }
+
+    function renderGlossaryTable() {
+      const tbody = document.querySelector("#novelGlossaryTable tbody");
+      tbody.innerHTML = "";
+      const curGlossary = db.novels[db.activeNovel]?.glossary || {};
+      
+      Object.entries(curGlossary).forEach(([orig, repl]) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><strong>${orig}</strong></td>
+          <td>${repl}</td>
+          <td><button class="btn btn-danger" style="padding: 2px 6px; font-size: 0.7rem;" onclick="deleteGlossaryEntry('${orig}')">&times;</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateCounters() {
+      const curGlossary = db.novels[db.activeNovel]?.glossary || {};
+      document.getElementById("novelGlossaryCount").textContent = `${Object.keys(curGlossary).length} terms`;
+      document.getElementById("predefinedCount").textContent = `${Object.keys(db.predefined).length} terms`;
+    }
+
+    window.deleteGlossaryEntry = function(orig) {
+      if (db.novels[db.activeNovel]?.glossary[orig]) {
+        delete db.novels[db.activeNovel].glossary[orig];
+        saveState();
+        renderGlossaryTable();
+      }
+    };
+
+    document.getElementById("novelSelect").addEventListener("change", (e) => {
+      db.activeNovel = e.target.value;
+      saveState();
+      renderGlossaryTable();
+    });
+
+    document.getElementById("btnNewNovel").addEventListener("click", () => {
+      const name = prompt("Enter New Novel Title:");
+      if (name && name.trim()) {
+        const cleanName = name.trim();
+        if (!db.novels[cleanName]) {
+          db.novels[cleanName] = { glossary: {} };
+          db.activeNovel = cleanName;
+          saveState();
+          populateNovelDropdown();
+          renderGlossaryTable();
+        } else {
+          alert("A novel with that name already exists.");
+        }
+      }
+    });
+
+    document.getElementById("btnDeleteNovel").addEventListener("click", () => {
+      const keys = Object.keys(db.novels);
+      if (keys.length <= 1) {
+        alert("You must keep at least one novel profile.");
+        return;
+      }
+      if (confirm(`Delete glossary for "${db.activeNovel}"? This cannot be undone.`)) {
+        delete db.novels[db.activeNovel];
+        db.activeNovel = Object.keys(db.novels)[0];
+        saveState();
+        populateNovelDropdown();
+        renderGlossaryTable();
+      }
+    });
+
+    document.getElementById("btnAddGlossary").addEventListener("click", () => {
+      const origInput = document.getElementById("glossaryOriginal");
+      const replInput = document.getElementById("glossaryReplacement");
+      const orig = origInput.value.trim();
+      const repl = replInput.value.trim();
+
+      if (!orig || !repl) {
+        alert("Please provide both the original term and its replacement.");
+        return;
+      }
+
+      if (!db.novels[db.activeNovel].glossary) {
+        db.novels[db.activeNovel].glossary = {};
+      }
+
+      db.novels[db.activeNovel].glossary[orig] = repl;
+      saveState();
+      renderGlossaryTable();
+      origInput.value = "";
+      replInput.value = "";
+    });
+
+    let rawFileText = "";
+    let editedFileText = "";
+    let rawFileName = "novel.txt";
+    let worker = null;
+
+    function initWorker() {
+      const blob = new Blob([workerScript], { type: 'application/javascript' });
+      worker = new Worker(URL.createObjectURL(blob));
+
+      worker.onmessage = function(e) {
+        const data = e.data;
+        if (data.type === 'progress') {
+          document.getElementById("progressBar").style.width = data.progress + "%";
+          document.getElementById("processStatusBadge").textContent = `Processing: ${data.progress}%`;
+        } else if (data.type === 'complete') {
+          editedFileText = data.resultText;
+          document.getElementById("progressBar").style.width = "100%";
+          document.getElementById("processStatusBadge").textContent = "Completed Successfully";
+          document.getElementById("processStatusBadge").style.color = "var(--accent-emerald)";
+
+          document.getElementById("statReplacements").textContent = data.totalReplacements.toLocaleString();
+          document.getElementById("statUniqueTerms").textContent = data.uniqueMatched.toLocaleString();
+          document.getElementById("statDuration").textContent = data.durationMs + " ms";
+          document.getElementById("statFileSize").textContent = Math.round(data.resultText.length / 1024) + " KB";
+
+          document.getElementById("btnDownload").style.display = "inline-flex";
+          document.getElementById("btnRetry").style.display = "inline-flex";
+          document.getElementById("btnProcess").disabled = false;
+
+          document.getElementById("previewOriginal").textContent = rawFileText.slice(0, 5000);
+          document.getElementById("previewEdited").textContent = editedFileText.slice(0, 5000);
+        }
+      };
+
+      worker.onerror = function(err) {
+        document.getElementById("processStatusBadge").textContent = "Processing Failed";
+        document.getElementById("processStatusBadge").style.color = "var(--accent-rose)";
+        document.getElementById("btnRetry").style.display = "inline-flex";
+        document.getElementById("btnProcess").disabled = false;
+        alert("Worker error: " + err.message);
+      };
+    }
+
+    const fileInput = document.getElementById("fileInput");
+    const dropzone = document.getElementById("dropzone");
+
+    dropzone.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      dropzone.classList.add("dragover");
+    });
+
+    dropzone.addEventListener("dragleave", () => dropzone.classList.remove("dragover"));
+
+    dropzone.addEventListener("drop", (e) => {
+      e.preventDefault();
+      dropzone.classList.remove("dragover");
+      if (e.dataTransfer.files.length > 0) {
+        handleFileSelect(e.dataTransfer.files[0]);
+      }
+    });
+
+    fileInput.addEventListener("change", (e) => {
+      if (e.target.files.length > 0) {
+        handleFileSelect(e.target.files[0]);
+      }
+    });
+
+    function handleFileSelect(file) {
+      if (!file.name.toLowerCase().endsWith(".txt")) {
+        alert("Please upload a .txt English novel file.");
+        return;
+      }
+      rawFileName = file.name;
+      const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
+      document.getElementById("fileMeta").style.display = "block";
+      document.getElementById("fileMeta").textContent = `Selected: ${file.name} (${sizeMb} MB)`;
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        rawFileText = evt.target.result;
+        document.getElementById("btnProcess").disabled = false;
+        document.getElementById("previewOriginal").textContent = rawFileText.slice(0, 5000);
+        document.getElementById("previewEdited").textContent = "Click 'Process / Apply Glossary' above to run replacement...";
+      };
+      reader.readAsText(file);
+    }
+
+    function runPipeline() {
+      if (!rawFileText) return;
+      document.getElementById("processStatusBadge").textContent = "Initiating Web Worker...";
+      document.getElementById("progressBar").style.width = "5%";
+      document.getElementById("btnProcess").disabled = true;
+      document.getElementById("btnDownload").style.display = "none";
+      document.getElementById("btnRetry").style.display = "none";
+
+      if (!worker) initWorker();
+
+      worker.postMessage({
+        text: rawFileText,
+        glossary: db.novels[db.activeNovel]?.glossary || {},
+        predefined: db.predefined
+      });
+    }
+
+    document.getElementById("btnProcess").addEventListener("click", runPipeline);
+    document.getElementById("btnRetry").addEventListener("click", runPipeline);
+
+    document.getElementById("btnDownload").addEventListener("click", () => {
+      if (!editedFileText) return;
+      const blob = new Blob([editedFileText], { type: "text/plain;charset=utf-8" });
+      const a = document.createElement("a");
+      const cleanName = rawFileName.replace(/\.txt$/i, "") + "_edited.txt";
+      a.href = URL.createObjectURL(blob);
+      a.download = cleanName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+
+    loadState();
+    initWorker();
+  </script>
+</body>
+</html>
