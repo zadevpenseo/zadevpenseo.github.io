@@ -679,6 +679,53 @@
         height: auto;
       }
     }
+    @media print {
+      header, .inspector-pane, .meta-tag-row {
+        display: none !important;
+      }
+      body, .workspace-container, .article-pane {
+        background: #fff !important;
+        color: #111827 !important;
+        height: auto !important;
+        overflow: visible !important;
+        padding: 0 !important;
+      }
+      .article-sheet {
+        max-width: 100% !important;
+        color: #111827 !important;
+        font-family: Georgia, serif !important;
+        font-size: 11pt !important;
+        line-height: 1.6 !important;
+      }
+      .article-title {
+        color: #041324 !important;
+        font-size: 20pt !important;
+      }
+      .article-sheet h2 {
+        color: #041324 !important;
+        font-size: 14pt !important;
+      }
+      .takeaway-card {
+        background: #f8fafc !important;
+        border-left: 4px solid #0284c7 !important;
+        color: #1e293b !important;
+      }
+      .takeaway-title {
+        color: #0284c7 !important;
+      }
+      .references-section {
+        border-top: 1px solid #e2e8f0 !important;
+        color: #475569 !important;
+      }
+      .references-section a {
+        color: #0284c7 !important;
+        text-decoration: underline !important;
+      }
+      .hl-target-kw {
+        background: transparent !important;
+        border: none !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -705,6 +752,10 @@
     </div>
 
     <div class="header-actions">
+      <button class="btn-action" id="btnDownloadPdf">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        Download PDF
+      </button>
       <button class="btn-action" id="btnCopyDocs">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
         Copy Word Text
@@ -1126,6 +1177,14 @@
         }
       });
     });
+
+    // Download / Print PDF Handler
+    const btnPdf = document.getElementById('btnDownloadPdf');
+    if (btnPdf) {
+      btnPdf.addEventListener('click', () => {
+        window.print();
+      });
+    }
 
     // Copy Article Text
     const btnCopy = document.getElementById('btnCopyDocs');
