@@ -1324,10 +1324,10 @@ Bug     CORE-110  Investigate memory leak on client report service    Sarah Jenk
                 return;
             }
 
-            if (lower.includes('mcp__atlassian__searchjiraisssuesusingjql') || lower.includes('searchjiraisssues') || lower.includes('jql')) {
+            if (lower.includes('jira_search_issues') || lower.includes('searchjiraisssues') || lower.includes('jql')) {
                 appendTermLine(`
 <div style="color: #E2E8F0; margin-top: 4px; background: rgba(30, 41, 59, 0.6); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
-<span style="color: #F59E0B;">[MCP Tool Response: mcp__atlassian__searchJiraIssuesUsingJql]</span>
+<span style="color: #F59E0B;">[Agile Query Response: Jira.searchIssuesByJQL]</span>
 {
   "total": 1,
   "maxResults": 1,
