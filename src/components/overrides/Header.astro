@@ -48,18 +48,21 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
     </a>
   </div>
 
-  <!-- Mobile hamburger toggle -->
-  <button
-    class="zd-nav-toggle md:sl-hidden print:hidden"
-    id="zdNavToggle"
-    aria-label="Toggle navigation"
-    aria-expanded="false"
-    aria-controls="zdMobileNav"
-  >
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
+  <!-- Mobile actions: ThemeSelect + animated hamburger toggle -->
+  <div class="sl-flex md:sl-hidden print:hidden zd-mobile-actions">
+    <ThemeSelect />
+    <button
+      class="zd-nav-toggle"
+      id="zdNavToggle"
+      aria-label="Toggle navigation"
+      aria-expanded="false"
+      aria-controls="zdMobileNav"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
 </div>
 
 <!-- Mobile nav dropdown (injected after header row) -->
@@ -111,14 +114,21 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
 
   // Ensure dynamic search inputs from Pagefind have explicit id and name attributes
   const ensureInputAttrs = () => {
-    document.querySelectorAll('.pagefind-ui__search-input').forEach(input => {
+    const inputs = document.querySelectorAll('.pagefind-ui__search-input');
+    inputs.forEach(input => {
       if (!input.hasAttribute('id')) input.setAttribute('id', 'pagefind-search-input');
       if (!input.hasAttribute('name')) input.setAttribute('name', 'search_query');
     });
+    return inputs.length > 0;
   };
-  ensureInputAttrs();
-  const searchObserver = new MutationObserver(ensureInputAttrs);
-  searchObserver.observe(document.body, { childList: true, subtree: true });
+  if (!ensureInputAttrs()) {
+    const searchObserver = new MutationObserver((_, observer) => {
+      if (ensureInputAttrs()) {
+        observer.disconnect();
+      }
+    });
+    searchObserver.observe(document.body, { childList: true, subtree: true });
+  }
 </script>
 
 <style>
@@ -278,15 +288,38 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
     color: var(--zd-primary-blue);
   }
 
-  /* ─── Hamburger ─── */
+  /* ─── Mobile Actions Cluster (ThemeSelect + Hamburger) ─── */
+  .zd-mobile-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  /* ─── Hamburger Toggle ─── */
   .zd-nav-toggle {
     display: none;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 5px;
     background: transparent;
-    border: none;
+    border: 1px solid var(--zd-border-subtle);
+    border-radius: var(--zd-radius-md);
     cursor: pointer;
-    padding: 6px;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    padding: 0;
+    transition: all var(--zd-duration-fast);
+  }
+  .zd-nav-toggle:hover {
+    border-color: var(--zd-primary-blue);
+    box-shadow: var(--zd-shadow-card);
+  }
+  .zd-nav-toggle:active {
+    transform: translateY(1px) scale(0.96);
   }
   .zd-nav-toggle span {
     display: block;
@@ -294,7 +327,18 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
     height: 2px;
     background: var(--zd-text-primary);
     border-radius: 2px;
-    transition: all var(--zd-duration-base);
+    transition: transform var(--zd-duration-base) var(--zd-ease-spring), opacity var(--zd-duration-base) var(--zd-ease-spring);
+    transform-origin: center;
+  }
+  .zd-nav-toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .zd-nav-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .zd-nav-toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
   }
 
   /* ─── Mobile nav dropdown ─── */
@@ -308,13 +352,15 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
     right: 0;
     background: var(--zd-bg-glass);
     backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--zd-border-subtle);
     padding: 1rem 1.5rem;
     z-index: 200;
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
   }
   .zd-mobile-nav[hidden] { display: none; }
   .zd-mobile-nav a {
-    padding: 0.7rem 0;
+    padding: 0.75rem 0.5rem;
     font-size: 0.95rem;
     font-weight: 600;
     color: var(--zd-text-secondary);
@@ -322,19 +368,28 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
     border-bottom: 1px solid var(--zd-border-subtle);
     font-family: var(--zd-font-sans);
     transition: color var(--zd-duration-fast);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
   }
   .zd-mobile-nav a:hover { color: var(--zd-primary-navy); }
+  :root[data-theme='dark'] .zd-mobile-nav a:hover { color: var(--zd-primary-blue); }
   .zd-mobile-nav a:last-child { border-bottom: none; }
   .zd-mobile-cta {
     color: var(--zd-primary-navy) !important;
     font-weight: 700 !important;
     margin-top: 0.5rem;
   }
+  :root[data-theme='dark'] .zd-mobile-cta { color: var(--zd-primary-blue) !important; }
 
   /* ─── Responsive ─── */
   @media (max-width: 50rem) {
     .zd-nav-toggle { display: flex !important; }
-    .zd-search-wrap { max-width: 200px; }
+    .zd-search-wrap { max-width: 180px; }
+  }
+  @media (max-width: 380px) {
+    .zd-logo-badge { display: none; }
+    .zd-search-wrap { max-width: 130px; }
   }
 
   @media (min-width: 50rem) {

@@ -33,6 +33,7 @@ export default defineConfig({
         PageTitle: './src/components/overrides/PageTitle.astro',
         ThemeSelect: './src/components/overrides/ThemeSelect.astro',
         Head: './src/components/overrides/Head.astro',
+        ThemeProvider: './src/components/overrides/ThemeProvider.astro',
       },
       tableOfContents: {
         minHeadingLevel: 2,

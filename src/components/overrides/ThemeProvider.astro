@@ -1,0 +1,53 @@
+---
+/**
+ * src/components/overrides/ThemeProvider.astro
+ * Canonical Starlight ThemeProvider override for Academic White default.
+ * Prevents FOUC and guarantees consistent Academic White theme on first visit across all docs routes.
+ */
+import { Icon } from '@astrojs/starlight/components';
+---
+
+{/* This is intentionally inlined in <head> to avoid FOUC. */}
+<script is:inline>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const getPreferredColorScheme = () =>
+			matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+		
+		let theme;
+		if (storedTheme === 'auto') {
+			theme = getPreferredColorScheme();
+		} else if (storedTheme === 'dark' || storedTheme === 'light') {
+			theme = storedTheme;
+		} else {
+			// First-time visitor default: Academic White
+			theme = 'light';
+		}
+
+		document.documentElement.dataset.theme = theme;
+
+		return {
+			updatePickers(pickerTheme = storedTheme || 'light') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = pickerTheme;
+					const tmpl = document.querySelector('#theme-icons');
+					const newIcon = tmpl && tmpl.content.querySelector('.' + pickerTheme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script>
+
+<template id="theme-icons">
+	<Icon name="sun" class="light" />
+	<Icon name="moon" class="dark" />
+	<Icon name="laptop" class="auto" />
+</template>

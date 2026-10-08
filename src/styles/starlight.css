@@ -491,19 +491,27 @@ a[href='#_top'].sl-skip-link,
 }
 a[href='#_top'].sl-skip-link:focus,
 .skip-link:focus { top: 0; }
-button, [role='button'] { min-height: 36px; }
+button, [role='button'] { min-height: 40px; }
+.sl-sidebar a { min-height: 40px; }
 
 /* ── Mobile ── */
 @media (max-width: 48rem) {
   :root { --zd-text-base: 0.9375rem; }
   h1, h1#_top, .content-panel h1, .sl-markdown-content h1 {
     font-size: clamp(var(--zd-text-2xl), 7vw, var(--zd-text-3xl));
+    text-wrap: balance;
   }
-  .sl-markdown-content h2 { font-size: var(--zd-text-xl); margin-top: var(--zd-space-8); }
-  .sl-markdown-content h3 { font-size: var(--zd-text-base); margin-top: var(--zd-space-6); }
-  .sl-markdown-content table { display: block; overflow-x: auto; white-space: nowrap; }
+  .sl-markdown-content h2 { font-size: var(--zd-text-xl); margin-top: var(--zd-space-8); text-wrap: balance; }
+  .sl-markdown-content h3 { font-size: var(--zd-text-base); margin-top: var(--zd-space-6); text-wrap: balance; }
+  .sl-markdown-content table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    margin: var(--zd-space-5) 0;
+  }
   .sl-markdown-content table th,
-  .sl-markdown-content table td { white-space: normal; min-width: 120px; }
+  .sl-markdown-content table td { white-space: normal; min-width: 130px; }
   .sl-markdown-content pre { font-size: var(--zd-text-xs); }
 }
 @media (min-width: 80rem) {
