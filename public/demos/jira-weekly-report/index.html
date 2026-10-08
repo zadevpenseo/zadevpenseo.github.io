@@ -576,6 +576,31 @@
             }
         }
 
+        @media (max-width: 500px) {
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+            .report-sheet {
+                padding: 16px 12px;
+            }
+            .canvas-wrapper {
+                padding: 12px 6px;
+            }
+            .demo-navbar {
+                padding: 10px 14px;
+            }
+            .view-mode-toggle {
+                width: 100%;
+                display: flex;
+            }
+            .tab-btn {
+                flex: 1;
+                justify-content: center;
+                padding: 6px 8px;
+                font-size: 11px;
+            }
+        }
+
         /* Bidirectional View Switcher */
         .view-mode-toggle {
             display: inline-flex;
@@ -742,7 +767,7 @@
             <span class="badge-live">Live Prototype</span>
             <div>
                 <div class="navbar-title">Jira Weekly Executive Report Pipeline (#40725359)</div>
-                <div class="navbar-subtitle">Sprint 42 &bull; Automated Data Extraction &bull; Playwright PDF Compiler</div>
+                <div class="navbar-subtitle">Sprint 42 &bull; Rekap Kinerja Otomatis &bull; Format Eksekutif Siap Direksi</div>
             </div>
         </div>
         <div class="navbar-actions">
@@ -751,7 +776,7 @@
                     <span>📊 Executive Report</span>
                 </button>
                 <button id="btn-tab-console" class="tab-btn" onclick="switchMainView('console')">
-                    <span>⚡ Bidirectional CLI/MCP</span>
+                    <span>⚡ Live Action & Status Update</span>
                 </button>
             </div>
             <button class="btn btn-print" onclick="window.print()" title="Print or Save as PDF via Browser">
@@ -1148,37 +1173,36 @@
                 </div>
                 <div class="term-title">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-                    <span>jira-agent@agile-ops: ~ (backend: dual Jira CLI & Atlassian MCP)</span>
+                    <span>Smart Agile Operations Assistant &bull; Direct Ticket Actions</span>
                 </div>
-                <div style="font-family: var(--font-mono); font-size: 11px; color: #10B981;">● Latency: 12ms</div>
+                <div style="font-family: var(--font-mono); font-size: 11px; color: #10B981;">● Status: Connected</div>
             </div>
 
             <!-- Quick Action Command Pills -->
             <div class="term-pill-strip">
-                <span class="term-label">Quick Commands:</span>
-                <button class="cmd-pill" onclick="executeCommand('jira issue list -s&quot;In Progress&quot;')">jira issue list -s"In Progress"</button>
-                <button class="cmd-pill" onclick="executeCommand('jira issue move CORE-107 &quot;Done&quot;')">jira issue move CORE-107 "Done" ⚡</button>
-                <button class="cmd-pill" onclick="executeCommand('mcp__atlassian__searchJiraIssuesUsingJql')">mcp__atlassian__searchJiraIssuesUsingJql</button>
-                <button class="cmd-pill" onclick="executeCommand('ai: triage unassigned sprint backlog')">ai: triage unassigned backlog</button>
-                <button class="cmd-pill" onclick="executeCommand('jira issue view CORE-101')">jira issue view CORE-101</button>
-                <button class="cmd-pill" onclick="executeCommand('clear')">clear</button>
+                <span class="term-label">Quick Actions:</span>
+                <button class="cmd-pill" onclick="executeCommand('jira issue list -s&quot;In Progress&quot;')">List In-Progress Tasks</button>
+                <button class="cmd-pill" onclick="executeCommand('jira issue move CORE-107 &quot;Done&quot;')">Mark CORE-107 as Done ⚡</button>
+                <button class="cmd-pill" onclick="executeCommand('ai: find blocked tickets in sprint')">Find Blocked Tickets</button>
+                <button class="cmd-pill" onclick="executeCommand('ai: triage unassigned sprint backlog')">Triage Unassigned Backlog</button>
+                <button class="cmd-pill" onclick="executeCommand('jira issue view CORE-101')">View CORE-101 Details</button>
+                <button class="cmd-pill" onclick="executeCommand('clear')">Clear</button>
             </div>
 
             <!-- Terminal Output Body -->
             <div class="term-body" id="terminalOutput">
                 <div style="color: #94A3B8; margin-bottom: 12px;">
-                    <div>[SYSTEM INITIALIZING] Loading Agile Operations Agent Toolkit...</div>
-                    <div>[BACKEND 1] Jira CLI v1.5.0 detected at /usr/local/bin/jira &bull; Authenticated as $(jira me): zadit@prismakreatif.com</div>
-                    <div>[BACKEND 2] Atlassian MCP Server connected via stdio &bull; 9 tools active (search, transitions, worklogs)</div>
-                    <div>[SPRINT 42] Active Scope: 48 pts &bull; 10 issues &bull; Target Date: Sep 28, 2026</div>
-                    <div style="color: #6366F1; margin-top: 6px;">Type a command below or click a quick action pill above to test bidirectional execution:</div>
+                    <div>[SYSTEM ONLINE] Agile Operations Assistant Connected...</div>
+                    <div>[DATA SYNC] Active Project: Core Platform Modernization &bull; Sprint 42</div>
+                    <div>[STATUS] 10 Issues Tracked &bull; 48 Story Points in Current Cycle</div>
+                    <div style="color: #6366F1; margin-top: 6px;">Click a quick action button above or type an instruction to test live updates:</div>
                 </div>
             </div>
 
             <!-- Command Input Line -->
             <div class="term-input-row">
-                <span class="term-prompt">jira-agent@sprint-42:~$</span>
-                <input type="text" id="terminalInput" class="term-input" placeholder="Enter CLI or MCP command (e.g. jira issue move CORE-107 'Done')..." autocomplete="off" spellcheck="false">
+                <span class="term-prompt">agile-assistant:~$</span>
+                <input type="text" id="terminalInput" class="term-input" placeholder="Type a task command (e.g. mark CORE-107 as done, list in-progress tasks)..." autocomplete="off" spellcheck="false">
             </div>
         </section>
     </main>

@@ -294,6 +294,43 @@
       border-radius: 4px;
       font-size: 0.725rem;
     }
+
+    @media (max-width: 900px) {
+      .app-container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 1.25rem;
+      }
+      .stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 0.85rem 1rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .stat-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+      }
+      .lead-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .tab-nav {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+      .tab-btn {
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+    }
   </style>
 </head>
 <body>

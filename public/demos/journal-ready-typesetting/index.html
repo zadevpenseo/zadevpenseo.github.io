@@ -193,7 +193,7 @@
     /* Studio Tabs */
     .tabs-bar {
       display: flex;
-      gap: 4px;
+      gap: 6px;
       border-bottom: 2px solid var(--border-subtle);
       margin-bottom: 20px;
       background-color: var(--bg-surface);
@@ -201,6 +201,10 @@
       border-radius: 8px 8px 0 0;
       border: 1px solid var(--border-subtle);
       border-bottom: 2px solid var(--border-subtle);
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
     }
 
     .tab-btn {
@@ -217,6 +221,8 @@
       gap: 8px;
       margin-bottom: -2px;
       transition: all 0.2s ease;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .tab-btn:hover {
@@ -470,6 +476,139 @@
         grid-template-columns: 1fr;
       }
     }
+
+    @media (max-width: 768px) {
+      .top-nav {
+        padding: 10px 14px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .brand-title {
+        font-size: 0.88rem;
+      }
+      .brand-tag {
+        font-size: 0.7rem;
+        padding: 2px 7px;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .nav-controls {
+        display: flex;
+        gap: 8px;
+        width: 100%;
+      }
+      .schema-select {
+        flex: 1;
+        min-width: 0;
+        font-size: 0.8rem;
+        padding: 6px 8px;
+      }
+      .validate-btn {
+        flex-shrink: 0;
+        font-size: 0.8rem;
+        padding: 6px 12px;
+        white-space: nowrap;
+      }
+
+      .main-container {
+        margin: 14px auto;
+        padding: 0 12px;
+      }
+
+      .tab-pane {
+        padding: 18px 12px;
+        min-height: auto;
+      }
+
+      .html-preview-frame {
+        padding: 16px 12px;
+      }
+
+      .code-container {
+        padding: 12px;
+        font-size: 0.78rem;
+        max-height: 480px;
+      }
+
+      .pdf-simulation {
+        padding: 12px 6px;
+      }
+      .a4-sheet {
+        padding: 20px 14px;
+        font-size: 9pt;
+        line-height: 1.4;
+      }
+      .a4-header {
+        flex-direction: column;
+        gap: 4px;
+        text-align: center;
+        margin-bottom: 16px;
+      }
+      .a4-title {
+        font-size: 13pt;
+        line-height: 1.25;
+        margin-bottom: 8px;
+      }
+      .a4-authors {
+        font-size: 9pt;
+      }
+      .a4-affiliations {
+        font-size: 7.5pt;
+        margin-bottom: 12px;
+      }
+      .a4-abstract-box {
+        padding: 10px 12px;
+        font-size: 8pt;
+        margin-bottom: 16px;
+      }
+      .a4-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        font-size: 7.5pt;
+      }
+      .a4-formula {
+        flex-direction: column;
+        gap: 6px;
+        font-size: 8pt;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .metric-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+      .metric-card {
+        padding: 12px 14px;
+      }
+      .metric-value {
+        font-size: 1.2rem;
+      }
+      .tab-btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+      }
+      .qa-card {
+        padding: 14px;
+      }
+      .qa-item {
+        font-size: 0.8rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -479,7 +618,7 @@
     <div class="nav-brand">
       <a href="/case-studies/writer/journal-ready-xml-pdf-typesetting/" class="back-btn">&larr; Case Study</a>
       <span class="brand-title">Academic Typesetting Studio</span>
-      <span class="brand-tag">Single-Source JATS Engine</span>
+      <span class="brand-tag">Indexing Compliant (PubMed / Scopus)</span>
     </div>
     <div class="nav-controls">
       <select id="schemaSelect" class="schema-select">
@@ -490,7 +629,7 @@
       </select>
       <button id="validateBtn" class="validate-btn" onclick="runValidationGate()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-        Validate Schema Gate
+        Verify Schema Compliance
       </button>
     </div>
   </header>
@@ -500,36 +639,36 @@
     <!-- Metrics Bar -->
     <div class="metric-grid">
       <div class="metric-card">
-        <div class="metric-label">Schema Conformance</div>
+        <div class="metric-label">Indexing Conformance</div>
         <div class="metric-value">
           100.0%
-          <span class="badge-clean">xmllint 0 errors</span>
+          <span class="badge-clean">0 Metadata Errors</span>
         </div>
-        <div class="metric-sub">Validated against NLM JATS v1.3</div>
+        <div class="metric-sub">Validated against NLM JATS v1.3 & Crossref</div>
       </div>
       <div class="metric-card">
-        <div class="metric-label">Source Drift Rate</div>
+        <div class="metric-label">Manuscript Consistency</div>
         <div class="metric-value">
-          0.00%
-          <span class="badge-clean">Synchronized</span>
+          100%
+          <span class="badge-clean">Zero Drift</span>
         </div>
-        <div class="metric-sub">JATS XML as Single Source of Truth</div>
+        <div class="metric-sub">Word, XML, and PDF stay perfectly aligned</div>
       </div>
       <div class="metric-card">
-        <div class="metric-label">Press PDF Latency</div>
+        <div class="metric-label">Turnaround Speed</div>
         <div class="metric-value">
-          0.42s
-          <span class="badge-clean">Typst CLI</span>
+          Instant
+          <span class="badge-clean">Camera-Ready</span>
         </div>
-        <div class="metric-sub">Sub-second incremental builds</div>
+        <div class="metric-sub">Immediate publication-ready proofs</div>
       </div>
       <div class="metric-card">
-        <div class="metric-label">Memory Footprint</div>
+        <div class="metric-label">Production Reliability</div>
         <div class="metric-value">
-          26.4 MB
-          <span class="badge-clean">Low-TDP</span>
+          Verified
+          <span class="badge-clean">Archival Standard</span>
         </div>
-        <div class="metric-sub">Host cache & RAM footprint</div>
+        <div class="metric-sub">Embedded fonts & vector math equations</div>
       </div>
     </div>
 
@@ -537,9 +676,9 @@
     <div class="tabs-bar">
       <button class="tab-btn active" onclick="switchTab('tab-source', this)">1. Author Manuscript (.docx)</button>
       <button class="tab-btn" onclick="switchTab('tab-xml', this)">2. Validated JATS XML</button>
-      <button class="tab-btn" onclick="switchTab('tab-pdf', this)">3. Press-Ready PDF (Typst)</button>
-      <button class="tab-btn" onclick="switchTab('tab-html', this)">4. Responsive HTML View</button>
-      <button class="tab-btn" onclick="switchTab('tab-qa', this)">5. Preflight QA Audit</button>
+      <button class="tab-btn" onclick="switchTab('tab-pdf', this)">3. Camera-Ready PDF</button>
+      <button class="tab-btn" onclick="switchTab('tab-html', this)">4. Web Article (OJS)</button>
+      <button class="tab-btn" onclick="switchTab('tab-qa', this)">5. Quality & Integrity Audit</button>
     </div>
 
     <!-- Tab 1: Source Word Manuscript -->
@@ -876,11 +1015,11 @@
     function runValidationGate() {
       const btn = document.getElementById('validateBtn');
       const originalText = btn.innerHTML;
-      btn.innerHTML = 'Validating Schema...';
+      btn.innerHTML = 'Verifying Metadata...';
       btn.style.backgroundColor = '#d97706';
 
       setTimeout(() => {
-        btn.innerHTML = '&check; Schema Passed (0 errors)';
+        btn.innerHTML = '&check; 100% Indexing Compliant';
         btn.style.backgroundColor = '#059669';
         setTimeout(() => {
           btn.innerHTML = originalText;
@@ -890,7 +1029,7 @@
     }
 
     function downloadArtifacts() {
-      alert("Preflight QA Manifest Verified. Output assets: article.xml, article_press.pdf, article.html generated with 0 validation errors.");
+      alert("Verification Complete: Package includes validated JATS XML, camera-ready PDF, and web article files ready for editorial deposit.");
     }
   </script>
 </body>

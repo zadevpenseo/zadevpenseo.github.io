@@ -753,6 +753,25 @@
         height: auto;
       }
     }
+    @media (max-width: 640px) {
+      header {
+        padding: 10px 14px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .header-pills {
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: flex-start;
+      }
+      .article-pane {
+        padding: 1rem 0.75rem;
+      }
+      .inspector-pane {
+        padding: 1rem 0.75rem;
+      }
+    }
     @media print {
       header, .inspector-pane, .meta-tag-row {
         display: none !important;

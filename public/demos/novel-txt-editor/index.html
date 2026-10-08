@@ -379,6 +379,40 @@
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
     }
+
+    @media (max-width: 900px) {
+      .app-container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 1.25rem;
+      }
+      .editor-panes {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+      .pane {
+        height: 350px;
+      }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 0.85rem 1rem;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+      }
+      .dropzone {
+        padding: 1.5rem 1rem;
+      }
+    }
   </style>
 </head>
 <body>
