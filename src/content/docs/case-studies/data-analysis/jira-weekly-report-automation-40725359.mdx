@@ -17,7 +17,7 @@ description: "Serverless data engineering and agentic operations pipeline: aggre
 
 ---
 
-## 🎮 1. Live Interactive Demonstration
+## 1. Live Interactive Demonstration
 
 Experience the interactive standalone preview below. You can toggle between the **📊 Executive Report** (compiled A4 print layout with SVG burndown charts, developer workload capacity bars, and deliverable status badges) and the **⚡ Bidirectional CLI/MCP** console (simulating real-time Jira CLI commands and Atlassian MCP tool execution that dynamically mutates deliverables state and velocity metrics):
 
@@ -77,7 +77,7 @@ Experience the interactive standalone preview below. You can toggle between the 
 
 ---
 
-## 📦 2. Downloadable Prototype Assets & Artifact Vault
+## 2. Downloadable Prototype Assets & Artifact Vault
 
 Every component of this prototype is fully implemented, verified, and available for direct download and code inspection:
 
@@ -92,7 +92,7 @@ Every component of this prototype is fully implemented, verified, and available 
 
 ---
 
-## 📸 3. Feature & Visual Metric Hierarchy
+## 3. Feature & Visual Metric Hierarchy
 
 | Visual Quadrant | Business Objective | Data Engineering Mechanism |
 | :--- | :--- | :--- |
@@ -103,7 +103,7 @@ Every component of this prototype is fully implemented, verified, and available 
 
 ---
 
-## 🏛️ 3. Comprehensive 10-Step High-Level System Design (HLD)
+## 3. Comprehensive 10-Step High-Level System Design (HLD)
 
 ```mermaid
 flowchart TD
@@ -303,7 +303,7 @@ The pipeline transitions from passive read-only reporting to an active **Bidirec
 
 ---
 
-## 💻 4. Production Code Architecture
+## 4. Production Code Architecture
 
 ### 1. Dual-Mode Jira Connector (`jira_client.py`)
 ```python
@@ -353,7 +353,7 @@ jobs:
 
 ---
 
-## 🎯 5. Production Deployment, Security & Maintenance
+## 5. Production Deployment, Security & Maintenance
 
 ### 1. Zero-Trust Credential Isolation
 Atlassian API access tokens, Jira user credentials, and SMTP distribution secrets are isolated within repository-level encrypted secrets (`${{ secrets.JIRA_API_TOKEN }}`). The execution runner never persists credentials to disk, logs are masked against token leakage, and Jira permissions follow the principle of least privilege (read-only project and issue access).

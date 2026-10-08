@@ -15,7 +15,7 @@ description: "High-concurrency business automation engine stabilizing legacy Goo
 
 ---
 
-## 🎮 1. Live Interactive Demonstration
+## 1. Live Interactive Demonstration
 
 Experience the interactive CRM diagnostic showcase below. Test simultaneous lead ingestion under un-locked vs `LockService` safe modes, verify round-robin agent distribution, and inspect production Google Apps Script modules:
 
@@ -68,7 +68,7 @@ Experience the interactive CRM diagnostic showcase below. Test simultaneous lead
 
 ---
 
-## 🏛️ 2. High-Level Design (HLD) Architecture
+## 2. High-Level Design (HLD) Architecture
 
 Spreadsheet-based CRMs often suffer from race collisions when multiple webhooks or staff members update records simultaneously, alongside severe performance bottlenecks caused by cell-by-cell loops. Our stabilized architecture follows a strict 10-step design:
 
@@ -112,7 +112,7 @@ Spreadsheet-based CRMs often suffer from race collisions when multiple webhooks 
 
 ---
 
-## 📦 3. Production Code Modules
+## 3. Production Code Modules
 
 ### Concurrency Guarded Ingress (`WebhookReceiver.gs`)
 ```javascript
@@ -167,7 +167,7 @@ function doPost(e) {
 
 ---
 
-## 🛠️ 4. Production Deployment & Maintenance Strategy
+## 4. Production Deployment & Maintenance Strategy
 
 - **Zero Downtime Staging:** Audit and refactor functions inside a copy-linked test spreadsheet before pushing updates to the live CRM.
 - **Trigger Sanitization:** Eliminate orphaned time-driven triggers that cause duplicate executions or quota starvation.

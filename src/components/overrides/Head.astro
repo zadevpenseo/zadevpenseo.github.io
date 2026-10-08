@@ -8,6 +8,8 @@ import Default from '@astrojs/starlight/components/Head.astro';
 const { entry, siteTitle } = Astro.locals.starlightRoute;
 const { data } = entry;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site || 'https://zadevpenseo.github.io').href;
+const ogSlug = entry.id ? entry.id : 'index';
+const ogImageUrl = new URL(`/og/${ogSlug}.png`, Astro.site || 'https://zadevpenseo.github.io').href;
 
 // Construct BreadcrumbList for SERP navigation and search engines
 const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
@@ -86,6 +88,7 @@ const schemaGraph = {
       "headline": data.title,
       "description": data.description || "Verified engineering case study and system architecture blueprint.",
       "url": canonicalUrl,
+      "image": ogImageUrl,
       "inLanguage": "en",
       "author": {
         "@id": "https://zadevpenseo.github.io/#author"
@@ -106,6 +109,26 @@ const schemaGraph = {
 
 <Default><slot /></Default>
 
+<!-- Dynamic Open Graph & Twitter Social Card Meta Directives -->
+<meta property="og:type" content="article" />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={data.title} />
+<meta property="og:description" content={data.description || "Verified engineering case study and system architecture blueprint."} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:alt" content={data.title} />
+<meta property="og:site_name" content="Zadit // Systems & Blueprints" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@zadevpenseo" />
+<meta name="twitter:creator" content="@zadevpenseo" />
+<meta name="twitter:title" content={data.title} />
+<meta name="twitter:description" content={data.description || "Verified engineering case study and system architecture blueprint."} />
+<meta name="twitter:image" content={ogImageUrl} />
+<meta name="twitter:image:alt" content={data.title} />
+
 <!-- Hreflang & International SEO Lang Graph -->
 <link rel="alternate" hreflang="en" href={canonicalUrl} />
 <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
@@ -116,8 +139,6 @@ const schemaGraph = {
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large" />
-<meta name="twitter:creator" content="@zadevpenseo" />
-<meta name="twitter:site" content="@zadevpenseo" />
 
 <!-- Structured Data Knowledge Graph (JSON-LD) -->
 <script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />

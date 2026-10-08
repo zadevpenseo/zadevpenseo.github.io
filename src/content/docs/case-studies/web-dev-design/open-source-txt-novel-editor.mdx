@@ -15,7 +15,7 @@ description: "High-performance browser-based text preprocessing engine designed 
 
 ---
 
-## 🎮 1. Live Interactive Demonstration
+## 1. Live Interactive Demonstration
 
 Experience the interactive standalone novel editor below. Upload English TXT files, manage isolated novel glossaries, apply priority word replacements, and download clean edited files with zero server overhead:
 
@@ -68,7 +68,7 @@ Experience the interactive standalone novel editor below. Upload English TXT fil
 
 ---
 
-## 🏛️ 2. High-Level Design (HLD) Architecture
+## 2. High-Level Design (HLD) Architecture
 
 Processing massive English text files directly on the browser UI thread freezes the user interface and causes browser crashes. By offloading dictionary compilation and string manipulation to an asynchronous **Web Worker**, the tool processes multi-megabyte novels smoothly with real-time percentage feedback:
 
@@ -114,7 +114,7 @@ Processing massive English text files directly on the browser UI thread freezes 
 
 ---
 
-## 📦 3. Core Engine Implementation
+## 3. Core Engine Implementation
 
 ```javascript
 // Web Worker replacement kernel with length-descending sorting
@@ -156,7 +156,7 @@ self.onmessage = function(e) {
 
 ---
 
-## 🛠️ 4. Maintenance and Zero-Cost Warranty
+## 4. Maintenance and Zero-Cost Warranty
 
 Because this tool executes entirely within the client's browser without external API tokens, backend microservices, or database servers:
 - **Zero Ongoing Operational Costs:** Never incurs server bills or subscription charges.
