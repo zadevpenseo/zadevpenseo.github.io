@@ -11,6 +11,6 @@
 ## Verification Checklist
 - [ ] **Build Validation:** `npm run build` completed locally with exit code 0.
 - [ ] **MDX Syntax:** No unescaped raw HTML comments (`<!-- ... -->`) present in `.mdx` files.
-- [ ] **Zero Em-Dash:** No em-dashes (`—`) in user-facing copy or case study blueprints.
+- [ ] **Zero Em-Dash:** No em-dashes (`--`) in user-facing copy or case study blueprints.
 - [ ] **Public Portfolio Separation:** No internal bidding proposal copies, platform tender IDs, or budget rates included.
 - [ ] **Accessibility & Web-Perf:** Proper semantic heading hierarchy and image dimensions defined.

@@ -785,7 +785,7 @@
 												
 	
 1.	A reducer takes state and action as arguments, and it always returns a new state. It is
-	important to see that this is the only role of the reducer. It has no side effects — it
+	important to see that this is the only role of the reducer. It has no side effects -- it
 	never calls an API endpoint and it never has any hidden surprises. The reducer is simply 
 	a pure function that takes state and action, then returns new state.
 

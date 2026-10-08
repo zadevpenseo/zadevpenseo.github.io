@@ -178,14 +178,14 @@
 </br>	Every element within a document is structured as a rectangular box inside the document layout, the size and "onion layers" of which 		can be tweaked using some specific CSS properties.
 </br>
 </br>  width and height
-</br>	The width and height properties set the width and height of the content box, which is the area in which the content of the box is 		displayed — this content includes both text content set inside the box, and other boxes representing nested child elements.
+</br>	The width and height properties set the width and height of the content box, which is the area in which the content of the box is 		displayed -- this content includes both text content set inside the box, and other boxes representing nested child elements.
 </br>
 </br>
 </br>  Padding
-</br>	Padding refers to the inner margin of a CSS box — between the outer edge of the content box and the inner edge of the border. The size 		of this layer can be set on all four sides at once with the padding shorthand property, or one side at a time with the padding-top, 		padding-right, padding-bottom and padding-left properties.
+</br>	Padding refers to the inner margin of a CSS box -- between the outer edge of the content box and the inner edge of the border. The size 		of this layer can be set on all four sides at once with the padding shorthand property, or one side at a time with the padding-top, 		padding-right, padding-bottom and padding-left properties.
 </br>
 </br>  Border
-</br>	The border of a CSS box sits between the outer edge of the padding and the inner edge of the margin. By default the border has a size 		of 0 — making it invisible — but you can set the thickness, style and color of the border to make it appear. The border shorthand 		property allows you to set all of these on all four sides at once, for example border: 1px solid black. 
+</br>	The border of a CSS box sits between the outer edge of the padding and the inner edge of the margin. By default the border has a size 		of 0 -- making it invisible -- but you can set the thickness, style and color of the border to make it appear. The border shorthand 		property allows you to set all of these on all four sides at once, for example border: 1px solid black. 
 </br> 
 </br>  Margin
 </br>	The margin surrounds a CSS box, and pushes up against other CSS boxes in the layout. It behaves rather like padding; the shorthand 		property is margin and the individual properties are margin-top, margin-right, margin-bottom, and margin-left.
@@ -204,7 +204,7 @@
 </br>
 </br>	An inline box is the opposite of a block box: it flows with the document's text (i.e. it will appear on the same line as surrounding 		text and other inline elements, and its content will break with the flow of the text, like lines of text in a paragraph.) Width and 		height settings have no effect on inline boxes; any padding, margin and border set on inline boxes will update the position of 		surrounding text, but will not affect the position of surrounding block boxes.
 </br>	
-</br>	An inline-block box is something in between the first two: It flows with surrounding text and other inline elements without creating 		line breaks before and after it unlike a block box, but it can be sized using width and height and maintains its block integrity like 		a block box. It won't be broken across paragraph lines like an inline box. In the below example the inline-block box goes onto the 2nd 		line of text while keeping the shape of a box as there is not enough space for it on the first line, whereas inline box does break on 		multiple lines if there is not enough space — it loses the shape of a box.
+</br>	An inline-block box is something in between the first two: It flows with surrounding text and other inline elements without creating 		line breaks before and after it unlike a block box, but it can be sized using width and height and maintains its block integrity like 		a block box. It won't be broken across paragraph lines like an inline box. In the below example the inline-block box goes onto the 2nd 		line of text while keeping the shape of a box as there is not enough space for it on the first line, whereas inline box does break on 		multiple lines if there is not enough space -- it loses the shape of a box.
 </br>
 </br>	Note: By default, block level elements have display: block; set on them, and inline elements have display: inline; set on them.
 </br></p>
@@ -518,7 +518,7 @@
 </br>
 </br>Function Expressions
 </br>
-</br>A function expression produces a value—a function object. For example:
+</br>A function expression produces a value--a function object. For example:
 </br>
 </br>var add = function (x, y) { return x + y }; console.log(add(2, 3)); // 5
 </br>
@@ -1464,7 +1464,7 @@
         </br>	this series of commands will rebase the bugFix branch as a linear line of changes in master branch and on merge from master it will
         </br>	do a simple fast forwarding merge. 	
         </br>
-        </br>	Note that the snapshot pointed to by the final commit you end up with, whether it’s the last of the rebased commits for a rebase or 		the final merge commit after a merge, is the same snapshot — it’s only the history that is different. Rebasing replays changes from one 		line of work onto another in the order they were introduced, whereas merging takes the endpoints and merges them together
+        </br>	Note that the snapshot pointed to by the final commit you end up with, whether it’s the last of the rebased commits for a rebase or 		the final merge commit after a merge, is the same snapshot -- it’s only the history that is different. Rebasing replays changes from one 		line of work onto another in the order they were introduced, whereas merging takes the endpoints and merges them together
         </br>	
         </br>	git rebase --onto master server client
         </br>	This basically says, “Take the client branch, figure out the patches since it diverged from the server branch, and replay these 	patches in the client branch as if it was based directly off the master branch instead.” It’s a bit complex, but the result is pretty 		cool.
@@ -1487,7 +1487,7 @@
         </br>	a) submissions should not contain any whitespace errors. 
         </br>	b) Make one commit per issue with useful message per commit.
         </br>	
-        </br>	The last thing to keep in mind is the commit message. Getting in the habit of creating quality commit messages makes using and 		collaborating with Git a lot easier. As a general rule, your messages should start with a single line that’s no more than about 50 		characters and that describes the changeset concisely, followed by a blank line, followed by a more detailed explanation. The Git 		project requires that the more detailed explanation include your motivation for the change and contrast its implementation with 	previous behavior — this is a good guideline to follow. Write your commit message in the imperative: "Fix bug" and not "Fixed bug" or 		"Fixes bug." 
+        </br>	The last thing to keep in mind is the commit message. Getting in the habit of creating quality commit messages makes using and 		collaborating with Git a lot easier. As a general rule, your messages should start with a single line that’s no more than about 50 		characters and that describes the changeset concisely, followed by a blank line, followed by a more detailed explanation. The Git 		project requires that the more detailed explanation include your motivation for the change and contrast its implementation with 	previous behavior -- this is a good guideline to follow. Write your commit message in the imperative: "Fix bug" and not "Fixed bug" or 		"Fixes bug." 
         </br>	i)   Separate subject from body with a blank line
         </br>	ii)  Limit the subject line to 50 characters
         </br>	iii) Capitalize the subject line
@@ -1529,7 +1529,7 @@
         </br>		git stash drop	stash@{0}		for deleting a particular mentioned stash
         </br></p>
         </br><p class="support-text">26) Issues
-        </br>	Issues are a great way to keep track of tasks, enhancements, and bugs for your projects. They’re kind of like email—except they can be 		shared and discussed with the rest of your team. Most software projects have a bug tracker of some kind. GitHub’s tracker is called 		Issues, and has its own section in every repository.
+        </br>	Issues are a great way to keep track of tasks, enhancements, and bugs for your projects. They’re kind of like email--except they can be 		shared and discussed with the rest of your team. Most software projects have a bug tracker of some kind. GitHub’s tracker is called 		Issues, and has its own section in every repository.
         </br>	-Milestones are groups of issues that correspond to a project, feature, or time period. People use them in many different ways in 	  software development,ex:- 
         </br>	  -Beta Launch 
         </br>	  -October Sprint

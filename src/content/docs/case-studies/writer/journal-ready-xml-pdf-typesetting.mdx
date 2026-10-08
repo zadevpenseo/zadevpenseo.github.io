@@ -1,0 +1,97 @@
+---
+title: "Journal-Ready XML & PDF Typesetting Pipeline"
+description: "Single-source document engineering converting Word manuscripts into validated JATS XML v1.3, Typst press-ready PDFs, and responsive HTML with zero cross-format drift."
+---
+
+| Parameter | Publication Engineering Specification |
+| :--- | :--- |
+| **Target Standards** | NLM/NCBI JATS XML v1.3, Crossref DOI Schema v5.3, DTD/XSD Conformance |
+| **Layout & Compilation** | Typst 0.15 Native CLI, Pandoc AST, Python OpenXML (`python-docx`) |
+| **Verification Gate** | Automated `xmllint` DTD Validation, PyMuPDF Vector Font & Geometry Preflight |
+| **Pillar** | 4. Writer (Publishing & Editorial Engineering) |
+| **Live Studio Demo** | [Open Interactive Typesetting Studio](/demos/journal-ready-typesetting/) |
+
+---
+
+## 1. The Core Law of Single-Source Academic Typesetting
+
+In academic journal publishing, authors submit raw manuscripts in Microsoft Word format (`.docx`). Modern publishers demand three distinct deliverables for every accepted paper:
+
+1. **JATS XML (Journal Archiving and Interchange Tag Suite):** The non-negotiable standard required by PubMed Central, Crossref, and indexing databases.
+2. **Press-Ready PDF:** Millimeter-accurate two-column layouts matching strict journal geometry, font leading, running headers, and vector equation rendering.
+3. **Responsive HTML:** Semantic web articles with accessible tables and inter-document citation hyperlinks.
+
+Traditional publishing desks treat these targets as three disconnected conversion tasks. When an author requests a late proof correction, the editor updates the PDF, but the modification quietly fails to reach the archived XML data. This defect, known as **Source Drift**, corrupts indexing metadata and compromises empirical replicability.
+
+Our pipeline resolves this systemic failure by enforcing a **Single Source of Truth (SSOT)**: the Word manuscript is normalized into canonical JATS XML v1.3 first, and all downstream assets (press PDF and responsive HTML) are compiled directly from this validated master.
+
+---
+
+## 2. The 4-Stage Deterministic Pipeline Architecture
+
+```
+Author Word Manuscript (.docx)
+            │
+            ▼
+[Stage 1: Ingestion & Structural AST Extraction]
+  - Headings, abstract, keywords, and affiliation trees
+  - Math blocks (OMML normalized to MathML)
+  - Tabular data models and bibliographic entries
+            │
+            ▼
+[Stage 2: Canonical JATS XML v1.3 Master (SSOT)]
+  - Semantic tagging: <article-meta>, <table-wrap>, <disp-formula>
+  - Automated schema gate via xmllint and lxml
+  - Zero-defect validation against official journal DTD
+            │
+            ├─────────────────────────────────┐
+            ▼                                 ▼
+[Stage 3A: Typst Layout Engine]     [Stage 3B: HTML5 Semantic Compiler]
+  - Sub-second compilation (<0.5s)    - Responsive viewport wrapping
+  - 100% embedded vector fonts        - Anchored cross-reference jumps
+  - ISO A4 two-column academic grid   - Accessible academic table styles
+  - Output: article_press.pdf         - Output: article.html
+            │                                 │
+            └────────────────┬────────────────┘
+                             ▼
+              [Stage 4: Automated Preflight QA]
+                - PyMuPDF font & geometry audit
+                - Parity check between XML and PDF
+                - Packaged client hand-off manifest
+```
+
+---
+
+## 3. High-Performance Compilation via Typst CLI
+
+Unlike legacy LaTeX systems that require heavy distributions (often exceeding 2 GB of disk space and consuming significant memory), our PDF compilation pipeline utilizes **Typst 0.15**:
+
+- **Ultra-Low Memory Footprint:** Consumes less than 30 MB RAM during document generation, operating comfortably within low-power workstations.
+- **Sub-Second Compilation Latency:** Generates complete press-ready PDFs in approximately 0.42 seconds, enabling real-time preview during editorial reviews.
+- **Vector Typography Integrity:** Embeds scalable Type 1 and TrueType font metrics (Times New Roman, Arial, New Computer Modern Math) with zero rasterization artifacts.
+- **Deterministic Pagination:** Enforces strict widow and orphan suppression across balanced two-column body text.
+
+---
+
+## 4. Automated Preflight Quality Assurance
+
+Every generated publication package clears three deterministic quality gates before client delivery:
+
+1. **JATS Schema Gate (`lxml` / `xmllint`):** Confirms well-formedness, valid root `<article>` hierarchy, complete metadata, and zero unresolved cross-reference citation IDs.
+2. **Press PDF Audit (`PyMuPDF`):** Analyzes page dimensions, confirms unencrypted standard delivery, and validates that 100% of body text renders via embedded vector fonts.
+3. **HTML Responsive Parity:** Verifies valid stylesheet linkages, horizontal table overflow containment on mobile viewports, and functional intra-document jump anchors.
+
+---
+
+## 5. Interactive Studio Demo
+
+Explore the live typesetting pipeline in our interactive browser studio, featuring side-by-side manuscript inspection, real-time JATS XML syntax tree analysis, press PDF simulation, and schema validation triggers:
+
+👉 **[Launch Academic Typesetting Studio](/demos/journal-ready-typesetting/)**
+
+---
+
+## 6. Contact Principal Publishing Engineer
+
+- **Direct Inquiries:** `devapenseo@gmail.com`
+- **Engagement Scope:** Journal XML conversion, automated typesetting pipelines, Typst journal templates, and DTD/XSD schema compliance audits.
