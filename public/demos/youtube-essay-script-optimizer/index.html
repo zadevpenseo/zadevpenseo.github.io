@@ -572,8 +572,8 @@
         </div>
 
         <div class="view-toggle">
-          <button class="toggle-btn active" id="splitViewBtn" onclick="switchView('split')">Split Diff</button>
-          <button class="toggle-btn" id="teleViewBtn" onclick="switchView('tele')">Teleprompter Mode</button>
+          <button class="toggle-btn active" id="splitViewBtn" onclick="switchView('split')">Compare Script</button>
+          <button class="toggle-btn" id="teleViewBtn" onclick="switchView('tele')">Launch Prompter</button>
         </div>
       </div>
     </div>
@@ -633,8 +633,8 @@
             <span class="badge-opt">Teleprompter-Ready</span>
           </div>
           <div class="column-actions">
-            <button class="action-btn" onclick="copyCleanScript()">Copy Clean Copy</button>
-            <button class="action-btn primary" onclick="downloadTeleprompterTxt()">Export .txt</button>
+            <button class="action-btn" id="copyBtn" onclick="copyCleanScript()">Copy Clean Script</button>
+            <button class="action-btn primary" onclick="downloadTeleprompterTxt()">Download Text</button>
           </div>
         </div>
         <div class="column-content" id="optimizedScriptContent">
@@ -647,8 +647,8 @@
     <div class="teleprompter-view" id="teleprompterArea">
       <div class="teleprompter-controls">
         <div class="tele-control-group">
-          <button class="action-btn primary" id="playBtn" onclick="toggleTeleprompter()">▶ Start Autoscroll</button>
-          <button class="action-btn" onclick="resetTeleprompter()">↺ Reset Top</button>
+          <button class="action-btn primary" id="playBtn" onclick="toggleTeleprompter()">▶ Start Prompter</button>
+          <button class="action-btn" onclick="resetTeleprompter()">↺ Reset Prompter</button>
         </div>
 
         <div class="tele-control-group">
@@ -662,7 +662,7 @@
         </div>
 
         <div class="tele-control-group">
-          <button class="action-btn" id="mirrorBtn" onclick="toggleMirror()">⇄ Mirror Screen</button>
+          <button class="action-btn" id="mirrorBtn" onclick="toggleMirror()">⇄ Mirror Display</button>
         </div>
       </div>
 
