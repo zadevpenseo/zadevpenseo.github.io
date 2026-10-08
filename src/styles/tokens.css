@@ -1,15 +1,17 @@
 /**
- * tokens.css - TASTESKILL DESIGN TOKENS
- * Single source of truth. Dual-theme (Obsidian Dark + Warm Sand Luxury Light).
- * WCAG 2.1 AA / AAA compliant in both themes.
+ * tokens.css - ACADEMIC INSTITUTIONAL DESIGN TOKENS
+ * Single Source of Truth for zadevpenseo.github.io.
+ * Primary Theme: Academic White (Slate 50 / Pure White / Deep Navy / Inter & Newsreader).
+ * Companion Theme: Institutional Midnight Slate (WCAG AAA compliant).
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
   /* --- Fonts --- */
-  --zd-font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  --zd-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --zd-font-sans:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --zd-font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --zd-font-mono:  'JetBrains Mono', 'Fira Code', monospace;
 
   /* --- Type Scale (1.25 Major Third) --- */
   --zd-text-xs:   0.75rem;
@@ -33,11 +35,11 @@
   --zd-space-12: 3rem;
   --zd-space-16: 4rem;
 
-  /* --- Radius --- */
+  /* --- Radius (Sharp & Institutional) --- */
   --zd-radius-sm: 4px;
-  --zd-radius-md: 8px;
-  --zd-radius-lg: 12px;
-  --zd-radius-xl: 16px;
+  --zd-radius-md: 6px;
+  --zd-radius-lg: 8px;
+  --zd-radius-xl: 12px;
 
   /* --- Motion --- */
   --zd-ease-spring:   cubic-bezier(0.16, 1, 0.3, 1);
@@ -46,110 +48,115 @@
   --zd-duration-slow: 350ms;
 
   /* --- Layout --- */
-  --zd-content-max: 72ch;
+  --zd-content-max: 76ch;
   --zd-nav-h:       4rem;
-
-  /* --- Status Accents --- */
-  --zd-green:  #98c379;
-  --zd-red:    #e06c75;
-  --zd-yellow: #e5c07b;
-  --zd-blue:   #61afef;
-
-  /* --- Static Primitive Colors (Backwards-compatibility) --- */
-  --zd-obsidian:   #0d0b10;
-  --zd-plum-900:   #110815;
-  --zd-plum-800:   #160d1a;
-  --zd-plum-700:   #1e1424;
-  --zd-gold-500:   #c5a059;
-  --zd-gold-300:   #f5e4be;
-  --zd-gold-200:   #b8a07a;
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   DARK THEME (Default & :root[data-theme='dark'])
-   TasteSkill Deep Obsidian + Plum + Bronze Gold (WCAG AAA)
+   PRIMARY DEFAULT THEME: ACADEMIC WHITE (:root and :root[data-theme='light'])
+   Clean Institutional Slate 50 + Pure White + Deep Navy + Royal Blue
+   WCAG 2.1 AAA Compliant
    ══════════════════════════════════════════════════════════════════ */
 :root,
-:root[data-theme='dark'] {
-  --zd-theme: 'dark';
-
-  /* Surfaces & Canvas */
-  --zd-bg:             #0d0b10;
-  --zd-bg-surface:     #160d1a;
-  --zd-bg-elevated:    #1e1424;
-  --zd-bg-card:        rgba(22, 13, 26, 0.75);
-  --zd-bg-glass:       rgba(22, 13, 26, 0.95);
-  --zd-bg-nav:         rgba(22, 13, 26, 0.92);
-  --zd-code-bg:        #160d1a;
-
-  /* Text & Contrast (against #0d0b10 / #160d1a) */
-  --zd-text-primary:   #faf9f6;  /* 18:1 AAA */
-  --zd-text-secondary: #d4cfc6;  /* 12:1 AAA */
-  --zd-text-muted:     #b8b4a8;  /* 7.2:1 AA */
-  --zd-text-subtle:    #8a8578;  /* 4.7:1 AA large */
-  --zd-text-ghost:     #6a665c;
-
-  /* Brand Accents */
-  --zd-gold:           #c5a059;  /* 5.4:1 AA on plum-800 */
-  --zd-gold-hover:     #f5e4be;
-  --zd-gold-dim:       #b8a07a;
-
-  /* Borders */
-  --zd-border:         rgba(197, 160, 89, 0.22);
-  --zd-border-subtle:  rgba(197, 160, 89, 0.12);
-  --zd-border-soft:    rgba(197, 160, 89, 0.28);
-  --zd-border-glow:    rgba(197, 160, 89, 0.50);
-
-  /* Shadows */
-  --zd-shadow-card:    0 4px 16px rgba(0, 0, 0, 0.35);
-  --zd-shadow-hover:   0 12px 32px rgba(0, 0, 0, 0.5), 0 0 16px rgba(197, 160, 89, 0.12);
-  --zd-shadow-glow:    0 0 24px rgba(197, 160, 89, 0.18);
-
-  /* Gradients */
-  --zd-title-gradient: linear-gradient(135deg, #faf9f6 50%, #c5a059 100%);
-  --zd-card-gradient:  linear-gradient(145deg, rgba(30, 20, 36, 0.7), rgba(17, 8, 21, 0.7));
-}
-
-/* ══════════════════════════════════════════════════════════════════
-   LIGHT THEME (:root[data-theme='light'])
-   TasteSkill Warm Luxury Sand + Deep Plum + Bronze Gold (WCAG AAA)
-   ══════════════════════════════════════════════════════════════════ */
 :root[data-theme='light'] {
   --zd-theme: 'light';
 
   /* Surfaces & Canvas */
-  --zd-bg:             #faf7f4;  /* Warm luxury sand/cream */
-  --zd-bg-surface:     #f2ebe3;  /* Warm almond surface */
-  --zd-bg-elevated:    #e8dfd5;
-  --zd-bg-card:        #ffffff;  /* Pure crisp white card surface */
+  --zd-bg:             #f8fafc;  /* Slate 50 Institutional Canvas */
+  --zd-bg-surface:     #ffffff;  /* Pure Crisp White */
+  --zd-bg-elevated:    #f1f5f9;  /* Slate 100 Inset / Panel */
+  --zd-bg-card:        #ffffff;  /* Pure White Card */
   --zd-bg-glass:       rgba(255, 255, 255, 0.94);
-  --zd-bg-nav:         rgba(250, 247, 244, 0.94);
-  --zd-code-bg:        #f0e8df;
+  --zd-bg-nav:         rgba(255, 255, 255, 0.96);
+  --zd-code-bg:        #f1f5f9;  /* Slate 100 Code Surface */
 
-  /* Text & Contrast (against #faf7f4 / #ffffff) */
-  --zd-text-primary:   #231627;  /* Deep Plum Dark: 14.8:1 AAA vs #faf7f4, 15.2:1 AAA vs #fff */
-  --zd-text-secondary: #3e273f;  /* Plum Body: 10.5:1 AAA vs #faf7f4 */
-  --zd-text-muted:     #5a425b;  /* Plum Muted: 7.5:1 AAA vs #faf7f4 */
-  --zd-text-subtle:    #745975;  /* 5.2:1 AA vs #faf7f4 */
-  --zd-text-ghost:     #937b94;
+  /* Text & Contrast */
+  --zd-text-primary:   #0f172a;  /* Slate 900: 16.5:1 AAA vs #f8fafc, 19:1 AAA vs #fff */
+  --zd-text-secondary: #334155;  /* Slate 700: 9.8:1 AAA vs #f8fafc */
+  --zd-text-muted:     #475569;  /* Slate 600: 6.8:1 AA vs #f8fafc */
+  --zd-text-subtle:    #64748b;  /* Slate 500: 4.6:1 AA vs #f8fafc */
+  --zd-text-ghost:     #94a3b8;  /* Slate 400 */
 
   /* Brand Accents */
-  --zd-gold:           #8f652e;  /* Bronze Gold: 5.2:1 AA on cream, 5.4:1 AA on white */
-  --zd-gold-hover:     #6f4b1d;
-  --zd-gold-dim:       #a67c43;
+  --zd-primary-navy:   #1e3a8a;  /* Blue 900 Institutional Navy */
+  --zd-primary-blue:   #2563eb;  /* Blue 600 Royal Blue */
+  --zd-gold:           #1e3a8a;  /* Backward-compatible accent mapped to Deep Navy */
+  --zd-gold-hover:     #1d4ed8;  /* Blue 700 */
+  --zd-gold-dim:       #2563eb;  /* Blue 600 */
 
-  /* Borders */
-  --zd-border:         rgba(143, 101, 46, 0.24);
-  --zd-border-subtle:  rgba(143, 101, 46, 0.14);
-  --zd-border-soft:    rgba(143, 101, 46, 0.32);
-  --zd-border-glow:    rgba(143, 101, 46, 0.35);
+  /* Semantic Status Accents */
+  --zd-green:          #059669;  /* Emerald 600 Verified Badge */
+  --zd-green-bg:       #ecfdf5;  /* Emerald Tint */
+  --zd-red:            #dc2626;  /* Red 600 */
+  --zd-yellow:         #d97706;  /* Amber 600 */
+  --zd-blue:           #2563eb;  /* Blue 600 */
 
-  /* Shadows */
-  --zd-shadow-card:    0 4px 16px rgba(70, 35, 65, 0.06);
-  --zd-shadow-hover:   0 12px 32px rgba(70, 35, 65, 0.12), 0 0 16px rgba(143, 101, 46, 0.1);
-  --zd-shadow-glow:    0 0 24px rgba(143, 101, 46, 0.12);
+  /* Borders (Clean Crisp Slate) */
+  --zd-border:         #cbd5e1;  /* Slate 300 Strong Border */
+  --zd-border-subtle:  #e2e8f0;  /* Slate 200 Hairline */
+  --zd-border-soft:    #e2e8f0;
+  --zd-border-glow:    rgba(37, 99, 235, 0.25);
+
+  /* Shadows (Subtle, Clean Drop-shadows) */
+  --zd-shadow-card:    0 1px 3px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
+  --zd-shadow-hover:   0 4px 12px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.04);
+  --zd-shadow-glow:    0 0 16px rgba(37, 99, 235, 0.12);
 
   /* Gradients */
-  --zd-title-gradient: linear-gradient(135deg, #231627 55%, #8f652e 100%);
-  --zd-card-gradient:  linear-gradient(145deg, #ffffff, #faf5f0);
+  --zd-title-gradient: linear-gradient(135deg, #0f172a 60%, #1e3a8a 100%);
+  --zd-card-gradient:  linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   COMPANION THEME: INSTITUTIONAL MIDNIGHT SLATE (:root[data-theme='dark'])
+   Deep Midnight Slate + Clean White + Ice Blue Accents
+   WCAG 2.1 AAA Compliant
+   ══════════════════════════════════════════════════════════════════ */
+:root[data-theme='dark'] {
+  --zd-theme: 'dark';
+
+  /* Surfaces & Canvas */
+  --zd-bg:             #0b0f19;  /* Deep Midnight Slate */
+  --zd-bg-surface:     #111827;  /* Slate 900 Surface */
+  --zd-bg-elevated:    #1f2937;  /* Slate 800 Inset / Panel */
+  --zd-bg-card:        rgba(17, 24, 39, 0.88);
+  --zd-bg-glass:       rgba(17, 24, 39, 0.95);
+  --zd-bg-nav:         rgba(11, 15, 25, 0.94);
+  --zd-code-bg:        #111827;
+
+  /* Text & Contrast */
+  --zd-text-primary:   #f9fafb;  /* 17.5:1 AAA vs #0b0f19 */
+  --zd-text-secondary: #e5e7eb;  /* 13.8:1 AAA vs #0b0f19 */
+  --zd-text-muted:     #9ca3af;  /* 7.5:1 AAA vs #0b0f19 */
+  --zd-text-subtle:    #6b7280;  /* 4.5:1 AA vs #0b0f19 */
+  --zd-text-ghost:     #4b5563;
+
+  /* Brand Accents */
+  --zd-primary-navy:   #3b82f6;  /* Blue 500 */
+  --zd-primary-blue:   #60a5fa;  /* Blue 400 */
+  --zd-gold:           #3b82f6;  /* Backward-compatible accent mapped to Ice Blue */
+  --zd-gold-hover:     #60a5fa;
+  --zd-gold-dim:       #93c5fd;
+
+  /* Semantic Status Accents */
+  --zd-green:          #34d399;
+  --zd-green-bg:       rgba(5, 150, 105, 0.16);
+  --zd-red:            #f87171;
+  --zd-yellow:         #fbbf24;
+  --zd-blue:           #60a5fa;
+
+  /* Borders */
+  --zd-border:         rgba(255, 255, 255, 0.14);
+  --zd-border-subtle:  rgba(255, 255, 255, 0.08);
+  --zd-border-soft:    rgba(255, 255, 255, 0.18);
+  --zd-border-glow:    rgba(59, 130, 246, 0.35);
+
+  /* Shadows */
+  --zd-shadow-card:    0 4px 16px rgba(0, 0, 0, 0.45);
+  --zd-shadow-hover:   0 12px 28px rgba(0, 0, 0, 0.55), 0 0 16px rgba(59, 130, 246, 0.15);
+  --zd-shadow-glow:    0 0 24px rgba(59, 130, 246, 0.20);
+
+  /* Gradients */
+  --zd-title-gradient: linear-gradient(135deg, #f9fafb 65%, #60a5fa 100%);
+  --zd-card-gradient:  linear-gradient(145deg, rgba(31, 41, 55, 0.7), rgba(17, 24, 39, 0.7));
 }

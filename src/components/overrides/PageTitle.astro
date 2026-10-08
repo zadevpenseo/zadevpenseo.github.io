@@ -2,7 +2,7 @@
 /**
  * src/components/overrides/PageTitle.astro
  * Styled page title for Starlight docs pages.
- * Renders the H1 with TasteSkill typography + semantic token gradient.
+ * Renders the H1 with Academic Editorial Newsreader typography.
  */
 const { title } = Astro.locals.starlightRoute.entry.data;
 ---
@@ -15,20 +15,16 @@ const { title } = Astro.locals.starlightRoute.entry.data;
   .zd-page-title {
     margin-bottom: 1.75rem;
     padding-bottom: 1.25rem;
-    border-bottom: 1px solid var(--zd-border);
+    border-bottom: 1px solid var(--zd-border-subtle);
   }
 
   .zd-page-title h1 {
-    font-size: clamp(1.85rem, 4.2vw, 2.65rem);
-    font-weight: 800;
-    letter-spacing: -0.022em;
+    font-size: clamp(2rem, 4.4vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
     line-height: 1.2;
     color: var(--zd-text-primary);
-    font-family: var(--zd-font-sans);
-    background: var(--zd-title-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-family: var(--zd-font-serif), Georgia, 'Times New Roman', serif;
     margin: 0;
   }
 </style>

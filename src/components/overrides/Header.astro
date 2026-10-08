@@ -146,24 +146,34 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
     font-weight: 800;
     font-size: 1.05rem;
     letter-spacing: 0.05em;
-    color: var(--zd-gold);
+    color: var(--zd-primary-navy);
     text-decoration: none;
     white-space: nowrap;
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--zd-font-sans);
     transition: color var(--zd-duration-fast);
   }
-  .zd-logo:hover { color: var(--zd-gold-hover); }
+  :root[data-theme='dark'] .zd-logo {
+    color: var(--zd-text-primary);
+  }
+  .zd-logo:hover {
+    color: var(--zd-primary-blue);
+  }
 
   .zd-logo-badge {
     font-size: 0.62rem;
     padding: 0.16rem 0.5rem;
-    border-radius: 4px;
-    background: var(--zd-border-subtle);
-    border: 1px solid var(--zd-border);
-    color: var(--zd-gold-dim);
-    font-family: 'JetBrains Mono', monospace;
+    border-radius: 9999px;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+    color: var(--zd-primary-blue);
+    font-family: var(--zd-font-mono);
     letter-spacing: 0.06em;
-    font-weight: 500;
+    font-weight: 600;
+  }
+  :root[data-theme='dark'] .zd-logo-badge {
+    background: rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.3);
+    color: #93c5fd;
   }
 
   /* ─── Search wrap ─── */
@@ -189,14 +199,20 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
     color: var(--zd-text-secondary);
     text-decoration: none;
     transition: color var(--zd-duration-fast);
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--zd-font-sans);
   }
   .zd-nav-links a:hover {
-    color: var(--zd-gold);
+    color: var(--zd-primary-navy);
+  }
+  :root[data-theme='dark'] .zd-nav-links a:hover {
+    color: var(--zd-primary-blue);
   }
   .zd-nav-links a[aria-current="page"] {
-    color: var(--zd-gold);
+    color: var(--zd-primary-navy);
     position: relative;
+  }
+  :root[data-theme='dark'] .zd-nav-links a[aria-current="page"] {
+    color: var(--zd-primary-blue);
   }
   .zd-nav-links a[aria-current="page"]::after {
     content: '';
@@ -205,9 +221,11 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
     left: 15%;
     right: 15%;
     height: 2px;
-    background: var(--zd-gold);
+    background: var(--zd-primary-navy);
     border-radius: 2px;
-    box-shadow: 0 0 8px rgba(197, 160, 89, 0.5);
+  }
+  :root[data-theme='dark'] .zd-nav-links a[aria-current="page"]::after {
+    background: var(--zd-primary-blue);
   }
 
   /* ─── CTA Button ─── */
@@ -215,29 +233,34 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
     display: inline-flex;
     align-items: center;
     padding: 0.45rem 1rem;
-    border-radius: 6px;
-    background: var(--zd-gold);
-    color: var(--zd-bg) !important;
-    font-weight: 700;
+    border-radius: var(--zd-radius-md);
+    background: var(--zd-primary-navy);
+    color: #ffffff !important;
+    font-weight: 600;
     font-size: 0.84rem;
     text-decoration: none !important;
     transition: all var(--zd-duration-base);
     white-space: nowrap;
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--zd-font-sans);
   }
   .zd-btn-nav:hover {
-    background: var(--zd-gold-hover);
+    background: #1e40af;
     transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+  }
+  :root[data-theme='dark'] .zd-btn-nav {
+    background: var(--zd-primary-navy);
+    color: #ffffff !important;
   }
 
   /* ─── GitHub Icon Button ─── */
   .zd-github-btn {
     background: var(--zd-bg-card);
-    border: 1px solid var(--zd-border);
-    color: var(--zd-gold);
+    border: 1px solid var(--zd-border-subtle);
+    color: var(--zd-text-secondary);
     width: 36px;
     height: 36px;
-    border-radius: 6px;
+    border-radius: var(--zd-radius-md);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -246,10 +269,13 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
     flex-shrink: 0;
   }
   .zd-github-btn:hover {
-    border-color: var(--zd-gold);
-    color: var(--zd-gold-hover);
+    border-color: var(--zd-primary-blue);
+    color: var(--zd-primary-navy);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(197, 160, 89, 0.2);
+    box-shadow: var(--zd-shadow-card);
+  }
+  :root[data-theme='dark'] .zd-github-btn:hover {
+    color: var(--zd-primary-blue);
   }
 
   /* ─── Hamburger ─── */
@@ -266,7 +292,7 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
     display: block;
     width: 20px;
     height: 2px;
-    background: var(--zd-gold);
+    background: var(--zd-text-primary);
     border-radius: 2px;
     transition: all var(--zd-duration-base);
   }
@@ -282,7 +308,7 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
     right: 0;
     background: var(--zd-bg-glass);
     backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--zd-border);
+    border-bottom: 1px solid var(--zd-border-subtle);
     padding: 1rem 1.5rem;
     z-index: 200;
   }
@@ -294,13 +320,13 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
     color: var(--zd-text-secondary);
     text-decoration: none;
     border-bottom: 1px solid var(--zd-border-subtle);
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--zd-font-sans);
     transition: color var(--zd-duration-fast);
   }
-  .zd-mobile-nav a:hover { color: var(--zd-gold); }
+  .zd-mobile-nav a:hover { color: var(--zd-primary-navy); }
   .zd-mobile-nav a:last-child { border-bottom: none; }
   .zd-mobile-cta {
-    color: var(--zd-gold) !important;
+    color: var(--zd-primary-navy) !important;
     font-weight: 700 !important;
     margin-top: 0.5rem;
   }

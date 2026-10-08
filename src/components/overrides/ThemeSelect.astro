@@ -16,13 +16,13 @@ const selectId = `theme-select-${Math.random().toString(36).substring(2, 8)}`;
 		<select
 			id={selectId}
 			name="theme_selection"
-			value="auto"
+			value="light"
 			autocomplete="off"
 			aria-label={Astro.locals.t('themeSelect.accessibleLabel')}
 		>
+			<option value="light" selected>{Astro.locals.t('themeSelect.light')}</option>
 			<option value="dark">{Astro.locals.t('themeSelect.dark')}</option>
-			<option value="light">{Astro.locals.t('themeSelect.light')}</option>
-			<option value="auto" selected>{Astro.locals.t('themeSelect.auto')}</option>
+			<option value="auto">{Astro.locals.t('themeSelect.auto')}</option>
 		</select>
 		<svg aria-hidden="true" class="icon caret" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
 			<path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/>
@@ -41,10 +41,10 @@ const selectId = `theme-select-${Math.random().toString(36).substring(2, 8)}`;
 	const storageKey = 'starlight-theme';
 
 	const parseTheme = (theme: unknown): Theme =>
-		theme === 'auto' || theme === 'dark' || theme === 'light' ? theme : 'auto';
+		theme === 'auto' || theme === 'dark' || theme === 'light' ? theme : 'light';
 
 	const loadTheme = (): Theme =>
-		parseTheme(typeof localStorage !== 'undefined' && localStorage.getItem(storageKey));
+		parseTheme(typeof localStorage !== 'undefined' && localStorage.getItem(storageKey) || 'light');
 
 	function storeTheme(theme: Theme): void {
 		if (typeof localStorage !== 'undefined') {
@@ -53,7 +53,7 @@ const selectId = `theme-select-${Math.random().toString(36).substring(2, 8)}`;
 	}
 
 	const getPreferredColorScheme = (): Theme =>
-		matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+		matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 
 	function onThemeChange(theme: Theme): void {
 		StarlightThemeProvider.updatePickers(theme);
@@ -92,7 +92,10 @@ const selectId = `theme-select-${Math.random().toString(36).substring(2, 8)}`;
 	}
 
 	label:hover {
-		color: var(--zd-gold);
+		color: var(--zd-primary-navy);
+	}
+	:root[data-theme='dark'] label:hover {
+		color: var(--zd-primary-blue);
 	}
 
 	.icon {

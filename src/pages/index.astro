@@ -45,9 +45,9 @@ import '../styles/homepage.css';
   <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
   <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large" />
 
-  <!-- Instant Theme Sync (Prevent FOUC) -->
+  <!-- Instant Theme Sync (Prevent FOUC - Academic White Default) -->
   <script is:inline>
-    const savedTheme = localStorage.getItem('starlight-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    const savedTheme = localStorage.getItem('starlight-theme') || 'light';
     document.documentElement.dataset.theme = savedTheme;
   </script>
 
