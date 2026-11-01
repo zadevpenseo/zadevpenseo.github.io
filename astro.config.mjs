@@ -97,6 +97,7 @@ export default defineConfig({
             { label: 'Jira Performance & NL Ticket Pipeline', link: '/case-studies/data-analysis/jira-weekly-report-automation-40725359/' },
             { label: 'Executive Data Storytelling Engine', link: '/case-studies/data-analysis/executive-data-storytelling-engine/' },
             { label: 'Google Sheets CRM & Apps Script Engine', link: '/case-studies/data-analysis/google-sheets-crm-automation/' },
+            { label: 'Hierarchical Time Series & SARIMAX Forecasting', link: '/case-studies/data-analysis/hierarchical-time-series-and-sarimax-forecasting/' },
           ],
         },
       ],
